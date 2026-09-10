@@ -1,0 +1,651 @@
+'use client'
+
+import { useState, useRef, useEffect } from 'react'
+import { Send, Lock, User, Bot, Check, X } from 'lucide-react'
+import { sendMessage, setAuthToken } from '@/lib/api'
+
+interface Message {
+  id: string
+  content: string
+  role: 'user' | 'assistant'
+  timestamp: Date
+}
+
+export default function Home() {
+  const [messages, setMessages] = useState<Message[]>([])
+  const [input, setInput] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [password, setPassword] = useState('')
+  const [showPasswordForm, setShowPasswordForm] = useState(true)
+  const [currentCompany, setCurrentCompany] = useState<string | null>(null)
+  const [currentJobRole, setCurrentJobRole] = useState<any>(null)
+  const [showWelcomeScreen, setShowWelcomeScreen] = useState(false)
+  const [welcomeMessage, setWelcomeMessage] = useState('')
+  const [suggestionKey, setSuggestionKey] = useState(0) // Force re-render of suggestions
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const getSuggestedQuestions = () => {
+    // Fun personality questions that rotate
+    const funQuestions = [
+      "Tell me about Brant's Christmas sweater competition streak",
+      "What's the story behind Brant's space bees video game?",
+      "How did Brant convince his school to adopt an app in 2015?",
+      "Tell me about Brant's cross country experience",
+      "What's Brant's secret to winning 17 competitions?",
+      "Tell me about Brant's spell-casting attempts for chores",
+      "What's the story behind Brant's 25+ all-nighters?",
+      "Tell me about Brant's theatre and musical performances",
+      "What's Brant's approach to building team culture?",
+      "Tell me about Brant's creative problem-solving methods"
+    ]
+
+    // Professional questions based on job description
+    const getJobSpecificQuestions = () => {
+      if (!currentJobRole) return []
+      
+      const questions = []
+      const requirements = currentJobRole.requirements?.toLowerCase() || ''
+      const responsibilities = currentJobRole.responsibilities?.toLowerCase() || ''
+      const keySkills = currentJobRole.keySkills?.toLowerCase() || ''
+      const combinedText = `${requirements} ${responsibilities} ${keySkills}`
+      
+      // User Growth & Adoption questions
+      if (combinedText.includes('user growth') || combinedText.includes('adoption') || 
+          combinedText.includes('retention') || combinedText.includes('engagement')) {
+        questions.push(
+          `How has Brant driven user growth and adoption in his previous roles?`,
+          `What's Brant's approach to increasing user retention and engagement?`,
+          `How does Brant measure and optimize user adoption metrics?`
+        )
+      }
+      
+      // Data & Analytics questions
+      if (combinedText.includes('data') || combinedText.includes('analytics') || 
+          combinedText.includes('metrics') || combinedText.includes('tracking')) {
+        questions.push(
+          `What's Brant's experience with data analysis and user behavior tracking?`,
+          `How does Brant use data to make product decisions?`,
+          `What analytics tools and frameworks does Brant work with?`
+        )
+      }
+      
+      // Product Strategy questions
+      if (combinedText.includes('product strategy') || combinedText.includes('roadmap') || 
+          combinedText.includes('planning') || combinedText.includes('vision')) {
+        questions.push(
+          `How does Brant approach product strategy and roadmap planning?`,
+          `What's Brant's process for prioritizing product features?`,
+          `How does Brant align product strategy with business goals?`
+        )
+      }
+      
+      // Cross-functional & Leadership questions
+      if (combinedText.includes('cross-functional') || combinedText.includes('collaboration') || 
+          combinedText.includes('leadership') || combinedText.includes('team')) {
+        questions.push(
+          `What's Brant's experience leading cross-functional teams?`,
+          `How does Brant collaborate with engineering, design, and marketing teams?`,
+          `What's Brant's approach to stakeholder management?`
+        )
+      }
+      
+      // AI & Technology questions
+      if (combinedText.includes('ai') || combinedText.includes('machine learning') || 
+          combinedText.includes('technology') || combinedText.includes('innovation')) {
+        questions.push(
+          `How does Brant work with AI and machine learning technologies?`,
+          `What's Brant's experience with emerging technologies?`,
+          `How does Brant stay current with tech trends and innovations?`
+        )
+      }
+      
+      // Startup & Fast-paced environment questions
+      if (combinedText.includes('startup') || combinedText.includes('fast-paced') || 
+          combinedText.includes('agile') || combinedText.includes('scrappy')) {
+        questions.push(
+          `How does Brant handle fast-paced startup environments?`,
+          `What's Brant's experience with rapid iteration and agile development?`,
+          `How does Brant manage uncertainty and changing priorities?`
+        )
+      }
+      
+      // Marketing & Growth questions
+      if (combinedText.includes('marketing') || combinedText.includes('growth') || 
+          combinedText.includes('acquisition') || combinedText.includes('campaign')) {
+        questions.push(
+          `What's Brant's experience with growth marketing and user acquisition?`,
+          `How does Brant approach go-to-market strategies?`,
+          `What's Brant's experience with A/B testing and experimentation?`
+        )
+      }
+      
+      // User Research & UX questions
+      if (combinedText.includes('user research') || combinedText.includes('ux') || 
+          combinedText.includes('user experience') || combinedText.includes('usability')) {
+        questions.push(
+          `What's Brant's approach to user research and understanding user needs?`,
+          `How does Brant conduct user interviews and usability testing?`,
+          `What's Brant's experience with user journey mapping?`
+        )
+      }
+      
+      // Financial & Business Impact questions
+      if (combinedText.includes('revenue') || combinedText.includes('roi') || 
+          combinedText.includes('budget') || combinedText.includes('financial')) {
+        questions.push(
+          `How does Brant measure and drive business impact and ROI?`,
+          `What's Brant's experience with budget management and financial planning?`,
+          `How does Brant balance user needs with business objectives?`
+        )
+      }
+      
+      // Fallback questions if no specific requirements match
+      if (questions.length === 0) {
+        questions.push(
+          `What makes Brant a great fit for ${currentJobRole.position}?`,
+          `How does Brant's experience align with ${currentJobRole.company}'s needs?`,
+          `What unique value does Brant bring to this role?`
+        )
+      }
+      
+      return questions
+    }
+
+    // Get job-specific questions
+    const jobQuestions = getJobSpecificQuestions()
+    
+    // Select 3-4 job-specific questions and 1-2 fun questions
+    const selectedJobQuestions = jobQuestions.slice(0, 3)
+    const randomFunQuestions = [
+      funQuestions[Math.floor(Math.random() * funQuestions.length)],
+      funQuestions[Math.floor(Math.random() * funQuestions.length)]
+    ].filter((q, i, arr) => arr.indexOf(q) === i) // Remove duplicates
+    
+    if (currentJobRole) {
+      return [
+        ...selectedJobQuestions,
+        ...randomFunQuestions.slice(0, 2)
+      ].slice(0, 5) // Limit to 5 total questions
+    } else if (currentCompany && currentCompany !== 'admin') {
+      return [
+        `How does Brant's experience relate to ${currentCompany.toUpperCase()}?`,
+        `What makes Brant a good fit for this company?`,
+        `What unique value does Brant bring to ${currentCompany.toUpperCase()}?`,
+        ...randomFunQuestions.slice(0, 2)
+      ].slice(0, 5)
+    } else {
+      return [
+        "Tell me about Brant's product management experience",
+        "What are Brant's key strengths and achievements?",
+        "What makes Brant unique as a product manager?",
+        ...randomFunQuestions.slice(0, 2)
+      ].slice(0, 5)
+    }
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
+
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    try {
+      const response = await fetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      })
+      
+      if (response.ok) {
+        const data = await response.json()
+        setAuthToken(data.token)
+        setCurrentCompany(data.company)
+        
+        // Check if this is a job-specific access code
+        const savedJobs = localStorage.getItem('brantchat_jobs')
+        if (savedJobs && data.company === 'jobrole') {
+          const jobs = JSON.parse(savedJobs)
+          const jobRole = jobs.find((job: any) => job.accessCode === password)
+          if (jobRole) {
+            setCurrentJobRole(jobRole)
+            setCurrentCompany(jobRole.company)
+          } else {
+            // Job role not found, but access code was accepted
+            setCurrentCompany('Unknown Company')
+          }
+        }
+        
+        setIsAuthenticated(true)
+        setShowPasswordForm(false)
+        
+        // Set up welcome message
+        let welcomeMsg = "Hello there! What questions can I help you answer about Brant?"
+        
+        // Check if this is a job-specific access code first
+        if (savedJobs && data.company === 'jobrole') {
+          const jobs = JSON.parse(savedJobs)
+          const jobRole = jobs.find((job: any) => job.accessCode === password)
+          if (jobRole) {
+            welcomeMsg = `Hello there! Brant is excited about working at ${jobRole.company}. What questions can I help you answer about Brant?`
+          } else {
+            welcomeMsg = `Hello there! Brant is excited about working at this company. What questions can I help you answer about Brant?`
+          }
+        } else if (data.company && data.company !== 'admin') {
+          welcomeMsg = `Hello there! Brant is excited about working at ${data.company.toUpperCase()}. What questions can I help you answer about Brant?`
+        }
+        
+        setWelcomeMessage(welcomeMsg)
+        setShowWelcomeScreen(true)
+      } else {
+        alert('Invalid access code')
+      }
+    } catch (error) {
+      alert('Access denied')
+    }
+  }
+
+  const handleSuggestedQuestion = (question: string) => {
+    // Transition to chat interface
+    setShowWelcomeScreen(false)
+    
+    // Add the suggested question as a user message
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      content: question,
+      role: 'user',
+      timestamp: new Date()
+    }
+    
+    setMessages([userMessage])
+    
+    // Send the question to the AI
+    handleSuggestedQuestionSubmit(question)
+  }
+
+  const handleSuggestedQuestionSubmit = async (question: string) => {
+    setIsLoading(true)
+
+    try {
+      const response = await sendMessage(question, currentJobRole)
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: response.message,
+        role: 'assistant',
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, assistantMessage])
+      setSuggestionKey(prev => prev + 1) // Refresh suggestions after response
+    } catch (error) {
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: 'Sorry, I encountered an error. Please try again.',
+        role: 'assistant',
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, errorMessage])
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!input.trim() || isLoading) return
+
+    // Transition to chat interface if on welcome screen
+    if (showWelcomeScreen) {
+      setShowWelcomeScreen(false)
+    }
+
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      content: input,
+      role: 'user',
+      timestamp: new Date()
+    }
+
+    setMessages(prev => [...prev, userMessage])
+    setInput('')
+    setIsLoading(true)
+
+    try {
+      const response = await sendMessage(input, currentJobRole)
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: response.message,
+        role: 'assistant',
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, assistantMessage])
+      setSuggestionKey(prev => prev + 1) // Refresh suggestions after response
+    } catch (error) {
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: 'Sorry, I encountered an error. Please try again.',
+        role: 'assistant',
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, errorMessage])
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  if (showPasswordForm) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-white via-purple-50 to-pink-100 flex items-center justify-center">
+        <div className="bg-white/80 backdrop-blur-sm p-8 rounded-3xl shadow-2xl max-w-md w-full mx-4 border border-white/20">
+          <div className="text-center mb-8">
+            <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+              <Bot className="w-8 h-8 text-white" />
+            </div>
+            <h1 className="text-3xl font-bold text-gray-800 mb-2">BrantChat</h1>
+            <p className="text-gray-600">Enter your access code to begin</p>
+          </div>
+          <form onSubmit={handlePasswordSubmit} className="space-y-6">
+            <input
+              type="text"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Access Code"
+              className="w-full px-4 py-4 bg-white/60 backdrop-blur-sm border border-white/20 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent shadow-sm"
+              required
+            />
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              Enter Chat
+            </button>
+          </form>
+        </div>
+      </div>
+    )
+  }
+
+  if (showWelcomeScreen) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-white via-purple-50 to-pink-100">
+        {/* Fixed Header - No background, positioned at edges */}
+        <div className="fixed top-0 left-0 right-0 z-50 p-6">
+          <div className="flex items-center">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
+                <Bot className="w-6 h-6 text-white" />
+              </div>
+              <h1 className="text-2xl font-bold text-gray-800">BrantChat</h1>
+            </div>
+          </div>
+        </div>
+
+        {/* Welcome Message */}
+        <div className="pt-24 pb-40 min-h-screen flex items-center justify-center p-6">
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+              <Bot className="w-10 h-10 text-white" />
+            </div>
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">Welcome to BrantChat</h2>
+            <p className="text-lg text-gray-600 leading-relaxed mb-8">
+              {welcomeMessage}
+            </p>
+          </div>
+        </div>
+
+        {/* Gradient fade effect above input */}
+        <div className="fixed bottom-0 left-0 right-0 z-40 h-32 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none"></div>
+        
+        {/* Fixed Input Bar - Clean design like OpenAI */}
+        <div className="fixed bottom-0 left-0 right-0 z-50 p-6">
+          <div className="max-w-4xl mx-auto">
+            <form onSubmit={handleSubmit} className="flex space-x-4">
+              <div className="flex-1 relative">
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder={currentJobRole ? `Ask me anything about how Brant fits ${currentJobRole.company}` : currentCompany && currentCompany !== 'admin' ? `Ask me anything about how Brant fits ${currentCompany.toUpperCase()}` : "Ask me anything about how Brant fits your organization"}
+                  className="w-full bg-white border border-gray-200 rounded-2xl px-6 py-4 text-sm text-gray-800 placeholder-gray-500 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent shadow-lg"
+                  disabled={isLoading}
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={isLoading || !input.trim()}
+                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white p-4 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
+              >
+                <Send className="w-5 h-5" />
+              </button>
+            </form>
+            
+            {/* Suggested Questions */}
+            <div className="mt-6" key={suggestionKey}>
+              <p className="text-sm text-gray-600 mb-4 font-medium">Suggestions on what to ask BrantChat</p>
+              <div className="flex flex-wrap gap-3">
+                {getSuggestedQuestions().map((question, index) => (
+                  <button
+                    key={`${suggestionKey}-${index}`}
+                    onClick={() => handleSuggestedQuestion(question)}
+                    className="bg-white/80 backdrop-blur-sm hover:bg-white text-gray-700 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 border border-white/20 shadow-sm hover:shadow-md"
+                  >
+                    {question}
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            {/* Job Role Info below input */}
+            <div className="mt-3 text-center">
+              <p className="text-xs text-gray-500">
+                {currentJobRole ? (
+                  <>Role: <span className="text-purple-600 font-medium">{currentJobRole.position} at {currentJobRole.company}</span></>
+                ) : currentCompany && currentCompany !== 'admin' ? (
+                  <>Accessing from <span className="text-purple-600 font-medium">{currentCompany.toUpperCase()}</span></>
+                ) : (
+                  'Ask me anything about Brant Johnson'
+                )}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-white via-purple-50 to-pink-100">
+      {/* Fixed Header - No background, positioned at edges */}
+      <div className="fixed top-0 left-0 right-0 z-50 p-6">
+        <div className="flex items-center">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
+              <Bot className="w-6 h-6 text-white" />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-800">BrantChat</h1>
+          </div>
+        </div>
+      </div>
+
+      {/* Messages Container with padding for fixed header and input */}
+      <div className="pt-24 pb-40 min-h-screen">
+        <div className="max-w-4xl mx-auto px-6 space-y-4">
+          {messages.map((message) => (
+            <div
+              key={message.id}
+              className={`flex items-start space-x-4 ${
+                message.role === 'user' ? 'justify-end' : 'justify-start'
+              }`}
+            >
+              {message.role === 'assistant' && (
+                <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <Bot className="w-6 h-6 text-white" />
+                </div>
+              )}
+              <div
+                className={`max-w-[80%] rounded-2xl px-6 py-2 ${
+                  message.role === 'user'
+                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
+                    : 'bg-white/90 backdrop-blur-sm text-gray-800 shadow-lg border border-white/20'
+                }`}
+              >
+                    <div className="prose prose-sm max-w-none text-sm">
+                      <div className="whitespace-pre-wrap leading-[1.75]" dangerouslySetInnerHTML={{
+                        __html: (() => {
+                          let content = message.content;
+                          
+                          // Process headers first
+                          content = content.replace(/^### (.*$)/gim, '<h3 class="text-base font-semibold mt-6 mb-3 text-gray-800">$1</h3>');
+                          content = content.replace(/^## (.*$)/gim, '<h2 class="text-lg font-semibold mt-7 mb-4 text-gray-800">$1</h2>');
+                          content = content.replace(/^# (.*$)/gim, '<h1 class="text-xl font-bold mt-8 mb-5 text-gray-800">$1</h1>');
+                          
+                          // Process bullet points and group them
+                          const lines = content.split('\n');
+                          let inList = false;
+                          let listItems = [];
+                          let processedLines = [];
+                          
+                          for (let i = 0; i < lines.length; i++) {
+                            const line = lines[i];
+                            
+                            if (line.match(/^\- /)) {
+                              if (!inList) {
+                                inList = true;
+                                listItems = [];
+                              }
+                              listItems.push(line.replace(/^\- (.*)$/, '<li class="ml-4 my-1">$1</li>'));
+                            } else if (line.match(/^\d+\. /)) {
+                              if (!inList) {
+                                inList = true;
+                                listItems = [];
+                              }
+                              listItems.push(line.replace(/^\d+\. (.*)$/, '<li class="ml-4 list-decimal my-1">$1</li>'));
+                            } else {
+                              if (inList && listItems.length > 0) {
+                                const listType = listItems[0].includes('list-decimal') ? 'ol' : 'ul';
+                                const listClass = listType === 'ol' ? 'list-decimal ml-6 my-3 space-y-1' : 'list-disc ml-6 my-3 space-y-1';
+                                processedLines.push(`<${listType} class="${listClass}">${listItems.join('')}</${listType}>`);
+                                listItems = [];
+                                inList = false;
+                              }
+                              processedLines.push(line);
+                            }
+                          }
+                          
+                          // Handle any remaining list items
+                          if (inList && listItems.length > 0) {
+                            const listType = listItems[0].includes('list-decimal') ? 'ol' : 'ul';
+                            const listClass = listType === 'ol' ? 'list-decimal ml-6 my-3 space-y-1' : 'list-disc ml-6 my-3 space-y-1';
+                            processedLines.push(`<${listType} class="${listClass}">${listItems.join('')}</${listType}>`);
+                          }
+                          
+                          content = processedLines.join('\n');
+                          
+                          // Process bold and italic
+                          content = content.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold">$1</strong>');
+                          content = content.replace(/\*(.*?)\*/g, '<em class="italic">$1</em>');
+                          
+                          // Process code
+                          content = content.replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1.5 py-0.5 rounded text-xs font-mono text-gray-700">$1</code>');
+                          
+                          // Wrap remaining text in paragraphs with equal top/bottom spacing
+                          content = content.replace(/\n\n/g, '</p><p class="my-2">');
+                          content = content.replace(/^(?!<[h|u|o])/gm, '<p class="my-2">');
+                          
+                          return content;
+                        })()
+                      }} />
+                    </div>
+              </div>
+              {message.role === 'user' && (
+                <div className="w-10 h-10 bg-gradient-to-r from-gray-400 to-gray-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <User className="w-6 h-6 text-white" />
+                </div>
+              )}
+            </div>
+            
+            {/* Show suggestion buttons after assistant messages */}
+            {message.role === 'assistant' && (
+              <div className="flex justify-start mt-3 mb-6" key={`suggestions-${message.id}`}>
+                <div className="max-w-[80%]">
+                  <p className="text-xs text-gray-500 mb-2 font-medium">Continue exploring:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {getSuggestedQuestions().slice(0, 3).map((question, index) => (
+                      <button
+                        key={`${message.id}-${index}`}
+                        onClick={() => handleSuggestedQuestion(question)}
+                        className="bg-white/80 backdrop-blur-sm hover:bg-white text-gray-700 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border border-white/20 shadow-sm hover:shadow-md"
+                      >
+                        {question}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+            </div>
+          ))}
+          {isLoading && (
+            <div className="flex items-start space-x-4">
+              <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                <Bot className="w-6 h-6 text-white" />
+              </div>
+              <div className="bg-white/90 backdrop-blur-sm text-gray-800 rounded-2xl px-6 py-4 shadow-lg border border-white/20">
+                <div className="flex space-x-2">
+                  <div className="w-3 h-3 bg-purple-400 rounded-full animate-bounce"></div>
+                  <div className="w-3 h-3 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                  <div className="w-3 h-3 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                </div>
+              </div>
+            </div>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
+      </div>
+
+      {/* Gradient fade effect above input */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 h-32 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none"></div>
+      
+      {/* Fixed Input Bar - Clean design like OpenAI */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 px-6 pt-4 pb-4">
+        <div className="max-w-4xl mx-auto">
+          <form onSubmit={handleSubmit} className="flex space-x-4">
+            <div className="flex-1 relative">
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder={currentJobRole ? `Ask me anything about how Brant fits ${currentJobRole.company}` : currentCompany && currentCompany !== 'admin' ? `Ask me anything about how Brant fits ${currentCompany.toUpperCase()}` : "Ask me anything about how Brant fits your organization"}
+                className="w-full bg-white border border-gray-200 rounded-2xl px-6 py-4 text-sm text-gray-800 placeholder-gray-500 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent shadow-lg"
+                disabled={isLoading}
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={isLoading || !input.trim()}
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white p-4 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              <Send className="w-5 h-5" />
+            </button>
+          </form>
+          
+          {/* Job Role Info below input */}
+          <div className="mt-1 text-center">
+            <p className="text-xs text-gray-500">
+              {currentJobRole ? (
+                <>Role: <span className="text-purple-600 font-medium">{currentJobRole.position} at {currentJobRole.company}</span></>
+              ) : currentCompany && currentCompany !== 'admin' ? (
+                <>Accessing from <span className="text-purple-600 font-medium">{currentCompany.toUpperCase()}</span></>
+              ) : (
+                'Ask me anything about Brant Johnson'
+              )}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}

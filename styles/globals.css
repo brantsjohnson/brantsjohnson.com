@@ -1,0 +1,23 @@
+/* ============================================
+   WHAT THIS FILE DOES (plain English):
+   This is the main stylesheet the whole site loads.
+   It pulls in design tokens and Tailwind layers, then sets a few
+   base page rules. Page-specific looks do not live here.
+   ============================================ */
+
+@import "./tokens.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* THIS SECTION DOES: make the page fill the screen and use token colors */
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+}

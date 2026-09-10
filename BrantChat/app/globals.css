@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2a2b32;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #565869;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6b6c7a;
+}
+
+/* Chat message animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-animation {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Prevent mobile zoom on input focus - Comprehensive approach */
+input[type="text"], input[type="email"], input[type="password"], textarea, select {
+  font-size: 16px !important;
+  -webkit-appearance: none;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  border-radius: 1rem !important; /* Force rounded corners on mobile */
+  -webkit-border-radius: 1rem !important;
+}
+
+/* Ensure proper mobile viewport behavior */
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Allow text selection in input fields */
+input, textarea {
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Prevent zoom on input focus for iOS - More specific targeting */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
+    font-size: 16px !important;
+    -webkit-appearance: none;
+    border-radius: 1rem !important;
+    -webkit-border-radius: 1rem !important;
+  }
+}
+
+/* Additional iOS Safari zoom prevention */
+@supports (-webkit-touch-callout: none) {
+  input[type="text"], input[type="email"], input[type="password"], textarea, select {
+    font-size: 16px !important;
+    -webkit-appearance: none;
+    border-radius: 1rem !important;
+    -webkit-border-radius: 1rem !important;
+  }
+}
+
+/* Force 16px font size on all form elements */
+input, textarea, select {
+  font-size: 16px !important;
+  min-height: 44px; /* iOS recommended touch target size */
+  border-radius: 1rem !important;
+  -webkit-border-radius: 1rem !important;
+}
+
+/* Floating input container styling */
+.floating-container {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  z-index: 50;
+}
+
+/* Ensure proper mobile viewport handling for floating elements */
+@supports (padding: max(0px)) {
+  .floating-container {
+    bottom: max(1.5rem, calc(1.5rem + env(safe-area-inset-bottom)));
+  }
+}
+
+/* Mobile-specific adjustments for floating container */
+@media screen and (max-width: 768px) {
+  .floating-container {
+    bottom: max(1rem, calc(1rem + env(safe-area-inset-bottom)));
+    left: 1rem;
+    right: 1rem;
+  }
+}

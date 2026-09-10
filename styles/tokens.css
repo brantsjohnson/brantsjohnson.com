@@ -1,0 +1,39 @@
+/* ============================================
+   WHAT THIS FILE DOES (plain English):
+   This file holds the shared colors, text colors, and motion numbers
+   for the whole site (design tokens). Components should use these
+   names. Exact brand colors are placeholders until you lock them in.
+   ============================================ */
+
+:root {
+  /* THIS SECTION DOES: set light-mode surface colors (placeholders) */
+  --color-bg: #f7f7f5; /* base page background */
+  --color-surface: #ffffff; /* solid panel fill before glass */
+  --color-glass: rgba(255, 255, 255, 0.72); /* see-through glass overlay */
+  --color-border-subtle: rgba(0, 0, 0, 0.08); /* thin border on glass panels */
+
+  /* THIS SECTION DOES: set text colors */
+  --color-text-primary: #121212; /* main headings and body */
+  --color-text-secondary: #5c5c5c; /* captions and supporting copy */
+
+  /* THIS SECTION DOES: set the single accent color (replace when brand is final) */
+  --color-accent: #1a5cff; /* primary buttons and links */
+  --color-accent-muted: #4d7fff; /* softer accent for hover */
+
+  /* THIS SECTION DOES: set shared motion numbers */
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1); /* soft Apple-like easing */
+  --motion-duration: 500ms; /* default reveal length */
+  --glass-blur: 16px; /* blur strength for glass panels */
+}
+
+/* THIS SECTION DOES: swap to dark-mode placeholders when the device prefers dark */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0b0b0c;
+    --color-surface: #161618;
+    --color-glass: rgba(22, 22, 24, 0.72);
+    --color-border-subtle: rgba(255, 255, 255, 0.1);
+    --color-text-primary: #f5f5f5;
+    --color-text-secondary: #a3a3a3;
+  }
+}
