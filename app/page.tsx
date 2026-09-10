@@ -15,6 +15,10 @@ import { site } from "@/content/site";
  * copy comes from content modules so this file stays about layout only.
  */
 export default function HomePage() {
+  // Pull out the featured project (Intro) so it can lead the projects section.
+  const featured = projects.items.find((p) => p.featured);
+  const rest = projects.items.filter((p) => !p.featured);
+
   return (
     <>
       {/* Hero */}
@@ -82,19 +86,46 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Projects preview */}
+      {/* Projects preview — Intro is featured as the primary current build. */}
       <section className="mt-24 sm:mt-32">
         <Container>
           <div className="flex items-baseline justify-between gap-4">
             <h2 className="font-serif text-2xl font-semibold text-ink sm:text-3xl">
-              Projects
+              What I&apos;m building
             </h2>
             <Link href="/projects" className="link text-sm font-medium">
               View all
             </Link>
           </div>
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {projects.items.map((project) => (
+
+          {featured && (
+            <a
+              href={featured.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-8 block rounded-2xl border border-ink/10 bg-white p-8 transition-shadow hover:shadow-md sm:p-10"
+            >
+              <span className="text-xs font-medium uppercase tracking-widest text-accent">
+                Currently building
+              </span>
+              <h3 className="mt-3 font-serif text-3xl font-semibold text-ink">
+                {featured.name}
+              </h3>
+              <p className="mt-1 text-lg font-medium text-accent">
+                {featured.tagline}
+              </p>
+              <p className="mt-4 max-w-2xl text-ink-soft">
+                {featured.description}
+              </p>
+              <span className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-accent underline decoration-accent/30 underline-offset-4 group-hover:decoration-accent">
+                {featured.linkLabel ?? "Visit"}
+                <span aria-hidden="true">↗</span>
+              </span>
+            </a>
+          )}
+
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            {rest.map((project) => (
               <ProjectCard key={project.name} project={project} />
             ))}
           </div>

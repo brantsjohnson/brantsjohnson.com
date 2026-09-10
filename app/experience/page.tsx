@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { PageHeader } from "@/components/PageHeader";
+import { Timeline } from "@/components/Timeline";
 import { experience } from "@/content/experience";
+import { assets } from "@/content/site";
 
 /**
  * Experience page.
  *
- * Purpose: renders the work timeline as a simple vertical list. Each entry
- * shows the role, organization, date range, and a short summary, with an
- * optional link out. Content lives in content/experience.ts.
+ * Purpose: renders the full work history as a vertical timeline (via the shared
+ * Timeline component) and offers a CV download when one is available. Content
+ * lives in content/experience.ts.
  */
 export const metadata: Metadata = {
   title: "Experience",
@@ -21,34 +23,26 @@ export default function ExperiencePage() {
       <PageHeader title={experience.heading} intro={experience.intro} />
 
       <Container className="pb-8">
-        <ol className="mt-4 space-y-10 border-l border-ink/10 pl-6">
-          {experience.entries.map((entry, i) => (
-            <li key={i} className="relative">
-              {/* Timeline dot */}
-              <span
-                aria-hidden="true"
-                className="absolute -left-[1.6rem] top-1.5 h-3 w-3 rounded-full border-2 border-accent bg-paper"
-              />
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-                <h2 className="font-serif text-xl font-semibold text-ink">
-                  {entry.role} · {entry.org}
-                </h2>
-                <span className="text-sm text-ink-muted">{entry.period}</span>
-              </div>
-              <p className="mt-2 max-w-2xl text-ink-soft">{entry.summary}</p>
-              {entry.href && (
-                <a
-                  href={entry.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="link mt-2 inline-block text-sm font-medium"
-                >
-                  Learn more ↗
-                </a>
-              )}
-            </li>
-          ))}
-        </ol>
+        {/* CV link — shows a real download when set, otherwise an honest note. */}
+        <div className="mb-10">
+          {assets.cvUrl ? (
+            <a
+              href={assets.cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent"
+            >
+              Download full CV (PDF) ↓
+            </a>
+          ) : (
+            <p className="text-sm text-ink-muted">
+              {/* TODO(brant): add the CV PDF and set assets.cvUrl in content/site.ts */}
+              Full CV (PDF) coming soon.
+            </p>
+          )}
+        </div>
+
+        <Timeline entries={experience.entries} />
       </Container>
     </>
   );

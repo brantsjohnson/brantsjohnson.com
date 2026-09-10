@@ -25,12 +25,23 @@ export default function ServicePage() {
           {service.items.map((item) => (
             <article
               key={item.title}
-              className="rounded-2xl border border-ink/10 bg-white p-6"
+              className="flex flex-col rounded-2xl border border-ink/10 bg-white p-6"
             >
               <h2 className="font-serif text-xl font-semibold text-ink">
                 {item.title}
               </h2>
-              <p className="mt-3 text-ink-soft">{item.summary}</p>
+              <p className="mt-1 text-sm font-medium text-accent">
+                {item.role}
+              </p>
+              <p className="text-xs uppercase tracking-wide text-ink-muted">
+                {item.period}
+              </p>
+              <p className="mt-3 flex-1 text-ink-soft">{item.summary}</p>
+              {item.note && (
+                <p className="mt-4 rounded-lg bg-ink/5 px-4 py-3 text-sm text-ink-soft">
+                  {item.note}
+                </p>
+              )}
               {item.href && (
                 <a
                   href={item.href}

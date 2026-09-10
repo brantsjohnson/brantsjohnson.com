@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/Container";
 import { PageHeader } from "@/components/PageHeader";
 import { about } from "@/content/about";
+import { assets, site } from "@/content/site";
 
 /**
  * About page.
@@ -28,6 +30,26 @@ export default function AboutPage() {
         </div>
 
         <aside className="h-fit rounded-2xl border border-ink/10 bg-white p-6">
+          {/* Headshot — real photo when provided, otherwise a placeholder. */}
+          {assets.headshot ? (
+            <Image
+              src={assets.headshot}
+              alt={`Portrait of ${site.name}`}
+              width={640}
+              height={640}
+              className="mb-6 aspect-square w-full rounded-xl object-cover"
+              priority
+            />
+          ) : (
+            <div
+              className="mb-6 flex aspect-square w-full items-center justify-center rounded-xl bg-ink/5 text-ink-muted"
+              aria-hidden="true"
+            >
+              {/* TODO(brant): add a headshot and set assets.headshot in content/site.ts */}
+              <span className="text-sm">Headshot coming soon</span>
+            </div>
+          )}
+
           <h2 className="text-sm font-semibold uppercase tracking-widest text-ink-muted">
             Quick facts
           </h2>

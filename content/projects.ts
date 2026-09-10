@@ -18,6 +18,8 @@ export type Project = {
   linkLabel?: string;
   // Small tags rendered as badges.
   tags: string[];
+  // Marks the current primary build so it can be highlighted on the home page.
+  featured?: boolean;
 };
 
 const items: Project[] = [
@@ -29,6 +31,7 @@ const items: Project[] = [
       href: "https://intro.events",
       linkLabel: "intro.events",
       tags: ["Events", "Networking", "Product"],
+      featured: true,
     },
     {
       name: "Bridger",

@@ -18,6 +18,22 @@ export const site = {
 };
 
 /**
+ * Asset placeholders.
+ *
+ * Purpose: holds paths/links for the headshot photo and CV that aren't
+ * available yet. Both are intentionally empty so the UI can show a tasteful
+ * placeholder until Brant provides the real files.
+ *
+ * TODO(brant): drop a headshot in /public (e.g. /public/headshot.jpg) and set
+ * `headshot` to "/headshot.jpg". Add the CV PDF (e.g. /public/brant-johnson-cv.pdf)
+ * and set `cvUrl` to "/brant-johnson-cv.pdf" (or an external link).
+ */
+export const assets: { headshot: string | null; cvUrl: string | null } = {
+  headshot: null,
+  cvUrl: null,
+};
+
+/**
  * Primary navigation.
  *
  * Purpose: drives the header menu and is reused for the footer. Add, remove, or
@@ -26,6 +42,7 @@ export const site = {
 export const nav: { href: string; label: string }[] = [
   { href: "/about", label: "About" },
   { href: "/experience", label: "Experience" },
+  { href: "/leadership", label: "Leadership" },
   { href: "/projects", label: "Projects" },
   { href: "/service", label: "Service" },
   { href: "/contact", label: "Contact" },

@@ -23,8 +23,9 @@ Content is separated from layout on purpose. Copy lives in `content/`; the visua
 app/                     # Routes (App Router). One folder per page.
   layout.tsx             # Shared shell: fonts, metadata, header, footer
   page.tsx               # Home / hero
-  about/page.tsx         # About
-  experience/page.tsx    # Experience timeline
+  about/page.tsx         # About (verbatim migrated statement)
+  experience/page.tsx    # Full work-history timeline + CV link
+  leadership/page.tsx    # Leadership & volunteer timeline
   projects/page.tsx      # Projects (Intro, Bridger, Filibusters)
   service/page.tsx       # Service (Uintah Resilience Archway, Resilient Scholarship)
   contact/page.tsx       # Contact (me@brantsjohnson.com)
@@ -36,15 +37,17 @@ components/              # Reusable UI, no page-specific copy
   Footer.tsx             # Footer with contact + links
   Container.tsx          # Consistent max width + padding
   PageHeader.tsx         # Title block for interior pages
+  Timeline.tsx           # Shared timeline (Experience + Leadership)
   ProjectCard.tsx        # A single project card
   BrantChat.tsx          # Commented placeholder for a FUTURE, separate
                          # "brantchat" app (not built here)
 
 content/                 # Plain-text copy — edit these to change wording
-  site.ts                # Name, tagline, contact email, navigation
+  site.ts                # Name, tagline, contact email, nav, headshot/CV assets
   home.ts                # Hero + highlights
-  about.ts               # About page copy
-  experience.ts          # Experience entries
+  about.ts               # About page copy (verbatim)
+  experience.ts          # Full work history + bullets
+  leadership.ts          # Leadership & volunteer history
   projects.ts            # Project descriptions and links
   service.ts             # Service work
 ```
@@ -57,7 +60,11 @@ To change wording, edit the matching file in `content/`. For example:
 - Add a job to the timeline in `content/experience.ts`
 - Add or edit a project in `content/projects.ts`
 
-Anything marked `TODO` in those files is an honest placeholder waiting for real detail (for example, dates on the experience timeline and the Filibusters YouTube URL). Search the repo for `TODO` to find them all.
+Anything marked `TODO` in those files is an honest placeholder waiting for real detail. Search the repo for `TODO` to find them all. The main ones right now:
+
+- **Headshot** — drop a photo in `/public` and set `assets.headshot` in `content/site.ts`.
+- **CV (PDF)** — add the PDF to `/public` and set `assets.cvUrl` in `content/site.ts`; the Experience page shows a download button once it's set.
+- **Filibusters** — add the YouTube channel URL in `content/projects.ts`.
 
 ## Run locally
 

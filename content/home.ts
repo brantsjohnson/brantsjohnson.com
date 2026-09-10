@@ -12,7 +12,7 @@ export const home = {
 
   // One or two sentences under the headline. Honest and human, not a slogan.
   heroSubhead:
-    "I'm a product-minded founder. My work keeps circling back to the same question: how do we help people find each other, build community, and follow through in real life?",
+    "I'm a product-minded entrepreneur and community builder. I've worked across product, AI, media, and government, and I keep coming back to one belief: technology should be a bridge to real human connection, not a replacement for it.",
 
   // Short interest areas rendered as chips/badges on the home page.
   interests: ["Product", "AI", "Media", "Government"],
@@ -20,16 +20,16 @@ export const home = {
   // A few themed cards that summarize what I do and point deeper into the site.
   highlights: [
     {
-      title: "Connection & community",
-      body: "Most of what I build is aimed at the same thing: turning strangers into the right conversations, and one-off moments into real relationships.",
+      title: "Connection is the antidote",
+      body: "I believe connection is the antidote to loneliness, and the foundation of any thriving society. Most of what I build turns strangers into the right conversations and moments into real relationships.",
     },
     {
-      title: "Product-minded",
-      body: "I like starting from a sharp problem, shipping something small, and letting real use tell me what to build next.",
+      title: "Technology as a bridge",
+      body: "I don't see technology as the end goal. I see it as a bridge to stronger friendships, better communities, and more meaningful lives.",
     },
     {
-      title: "Media & government",
-      body: "I'm curious about how policy and public conversation actually work, and I make media that tries to explain it honestly.",
+      title: "Product, AI, media & government",
+      body: "My work spans startups, media, and public service. Across all of it, the throughline is the same: build tools, spaces, and stories that bring people together.",
     },
   ],
 };
