@@ -1,24 +1,41 @@
 /* ============================================
    WHAT THIS FILE DOES (plain English):
-   This file holds the shared colors, text colors, and motion numbers
-   for the whole site (design tokens). Components should use these
-   names. Exact brand colors are placeholders until you lock them in.
+   This file holds the shared colors, text colors, fonts, corner
+   rounding, shadows, and motion numbers for the whole site (design
+   tokens). Components should always use these names instead of typing
+   raw color or size values. Change a value here and it updates
+   everywhere at once. The hex values match the approved Magic Patterns
+   design for this site.
    ============================================ */
 
 :root {
-  /* THIS SECTION DOES: set light-mode surface colors (placeholders) */
-  --color-bg: #f7f7f5; /* base page background */
-  --color-surface: #ffffff; /* solid panel fill before glass */
+  /* THIS SECTION DOES: set light-mode surface colors */
+  --color-bg: #f7f7f5; /* base page background (a soft off-white) */
+  --color-surface: #ffffff; /* solid panel fill before the glass effect */
   --color-glass: rgba(255, 255, 255, 0.72); /* see-through glass overlay */
-  --color-border-subtle: rgba(0, 0, 0, 0.08); /* thin border on glass panels */
+  --color-border-subtle: rgba(0, 0, 0, 0.08); /* thin hairline border on glass panels */
+  --color-border-strong: rgba(0, 0, 0, 0.16); /* slightly stronger border on hover */
 
   /* THIS SECTION DOES: set text colors */
-  --color-text-primary: #121212; /* main headings and body */
+  --color-text-primary: #121212; /* main headings and body text */
   --color-text-secondary: #5c5c5c; /* captions and supporting copy */
 
-  /* THIS SECTION DOES: set the single accent color (replace when brand is final) */
+  /* THIS SECTION DOES: set the single brand accent color */
   --color-accent: #1a5cff; /* primary buttons and links */
-  --color-accent-muted: #4d7fff; /* softer accent for hover */
+  --color-accent-muted: #4d7fff; /* softer accent used on hover */
+  --color-on-accent: #ffffff; /* text that sits on the accent color */
+
+  /* THIS SECTION DOES: name the two typefaces (loaded in app/layout.tsx via the geist package) */
+  --font-heading: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif; /* headings and body */
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace; /* small eyebrow labels and metadata */
+
+  /* THIS SECTION DOES: set the two corner-rounding values used site-wide */
+  --radius-panel: 20px; /* large glass panels and cards */
+  --radius-control: 12px; /* buttons, inputs, small chips */
+
+  /* THIS SECTION DOES: set the two soft shadow depths */
+  --shadow-glass: 0 1px 2px rgba(0, 0, 0, 0.03), 0 12px 40px -20px rgba(0, 0, 0, 0.14); /* resting depth */
+  --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.04), 0 24px 60px -28px rgba(0, 0, 0, 0.2); /* raised on hover */
 
   /* THIS SECTION DOES: set shared motion numbers */
   --ease-brand: cubic-bezier(0.22, 1, 0.36, 1); /* soft Apple-like easing */
@@ -26,13 +43,14 @@
   --glass-blur: 16px; /* blur strength for glass panels */
 }
 
-/* THIS SECTION DOES: swap to dark-mode placeholders when the device prefers dark */
+/* THIS SECTION DOES: swap to dark-mode colors when the device prefers dark */
 @media (prefers-color-scheme: dark) {
   :root {
     --color-bg: #0b0b0c;
     --color-surface: #161618;
     --color-glass: rgba(22, 22, 24, 0.72);
     --color-border-subtle: rgba(255, 255, 255, 0.1);
+    --color-border-strong: rgba(255, 255, 255, 0.2);
     --color-text-primary: #f5f5f5;
     --color-text-secondary: #a3a3a3;
   }
