@@ -30,7 +30,7 @@ export function GlassReveal({ children, delay = 0, className = "" }: GlassReveal
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, scale: 0.98, filter: "blur(10px)" }}
+      initial={{ opacity: 1, scale: 0.98 }}
       whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
       viewport={{ once: true, margin: "-8% 0px" }}
       transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
