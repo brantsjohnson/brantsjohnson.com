@@ -82,7 +82,8 @@ export function Button(props: ButtonProps) {
 
   // THIS SECTION DOES: use a Next.js link for internal pages, a normal link for email/external, or a real button
   if (props.href !== undefined) {
-    const { href, ...anchorRest } = rest as AnchorHTMLAttributes<HTMLAnchorElement>;
+    const href = props.href;
+    const { href: _ignoredHref, ...anchorRest } = rest as AnchorHTMLAttributes<HTMLAnchorElement>;
     const isInternal = href.startsWith("/") && !href.startsWith("//");
 
     if (isInternal) {
