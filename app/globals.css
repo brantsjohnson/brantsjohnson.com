@@ -1,0 +1,42 @@
+/*
+ * Global styles.
+ *
+ * Purpose: loads Tailwind's layers and sets a few base defaults (page
+ * background, default text color, smooth focus styles for accessibility, and
+ * comfortable typography for long-form prose). Most styling lives in component
+ * classes; this file only sets the baseline everything else builds on.
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper text-ink antialiased;
+  }
+
+  /* Visible, consistent focus ring for keyboard users across the site. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-paper;
+  }
+}
+
+@layer components {
+  /* Simple long-form text styling used on content-heavy pages. */
+  .prose-simple p {
+    @apply text-lg leading-relaxed text-ink-soft;
+  }
+
+  .prose-simple p + p {
+    @apply mt-5;
+  }
+
+  /* Inline text link style with an accessible underline. */
+  .link {
+    @apply text-accent underline decoration-accent/30 underline-offset-4 transition-colors hover:decoration-accent;
+  }
+}
