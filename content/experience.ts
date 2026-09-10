@@ -17,7 +17,7 @@ export type ExperienceEntry = {
   orgNote?: string;
   // Optional location — omitted where the source didn't reliably provide one.
   location?: string;
-  // Human-readable date range, e.g. "Oct. 2024 – Present".
+  // Human-readable date range, e.g. "Oct. 2024 – Nov. 2025".
   period: string;
   bullets: string[];
   // Optional link to the org/project.
@@ -29,7 +29,7 @@ const entries: ExperienceEntry[] = [
     role: "Account Executive",
     org: "Utah Business Magazine",
     location: "Salt Lake City, UT",
-    period: "Oct. 2024 – Present",
+    period: "Oct. 2024 – Nov. 2025",
     bullets: [
       "Built expertise across 25+ marketing products (print, digital, SEO, custom publications, billboards, TV, and radio), consulting clients on the right mix to meet their goals",
       "Partnered with agency teams to design and execute integrated campaigns, providing front-line insight into what businesses actually spend money on and what drives results",
