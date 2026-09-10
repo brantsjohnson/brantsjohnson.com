@@ -1,18 +1,19 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the Home "proof" spotlight for Crew Finance. It is a
-// scannable glass panel with three real numbers from the CV: the
-// funded startup, the design cost kept in house, and the hours saved
-// by teaching myself illustration. It is not a project card.
+// scannable glass panel with the real numbers and chips from the CV:
+// the funded startup, self-taught and hand-drawn art, dark mode, the
+// design cost kept in house, and the hours saved. It is not a project card.
 // ============================================
 
 import { crewSpotlight } from "@/content/home";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
+import { Tag } from "@/components/ui/Tag";
 import { GlassPanel } from "@/components/ui/GlassPanel";
 import { FadeInOnScroll } from "@/components/motion/FadeInOnScroll";
 
-// THIS SECTION DOES: render the proof panel with a short story and three stats
+// THIS SECTION DOES: render the proof panel with a short story, three stats, and keyword chips
 export function CrewSpotlight() {
   return (
     <section aria-labelledby="proof-heading" className="pb-16 md:pb-24">
@@ -46,6 +47,15 @@ export function CrewSpotlight() {
                 </div>
               ))}
             </dl>
+
+            {/* THIS SECTION DOES: the scannable proof chips for people who skip the paragraph */}
+            <ul className="mt-8 flex flex-wrap gap-2">
+              {crewSpotlight.chips.map((chip) => (
+                <li key={chip}>
+                  <Tag>{chip}</Tag>
+                </li>
+              ))}
+            </ul>
           </GlassPanel>
         </FadeInOnScroll>
       </Container>

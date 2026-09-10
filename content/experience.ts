@@ -60,7 +60,7 @@ const entries: ExperienceEntry[] = [
     ],
   },
   {
-    role: "Product Analytics, Pendo",
+    role: "Product Management Analyst",
     org: "Divvy Pay",
     orgNote: "A Bill.com company",
     location: "Draper, UT",
@@ -73,7 +73,7 @@ const entries: ExperienceEntry[] = [
     ],
   },
   {
-    role: "Product Manager and Entrepreneur",
+    role: "Founder and Product Manager",
     org: "BackLocal",
     orgNote: "Sandbox technology incubator",
     location: "Provo, UT",

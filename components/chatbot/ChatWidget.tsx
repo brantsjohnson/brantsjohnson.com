@@ -26,7 +26,7 @@ export function ChatWidget() {
           type="button"
           onClick={() => setOpen(true)}
           aria-expanded={open}
-          aria-label="Open chat"
+          aria-label="Ask about my work"
           data-track="button:open_chat:global"
           className="focus-ring group flex items-center gap-3 rounded-panel border border-line bg-glass px-4 py-3 shadow-lift backdrop-blur-glass transition-transform duration-300 hover:-translate-y-0.5"
         >

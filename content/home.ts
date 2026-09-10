@@ -37,9 +37,18 @@ export const crewSpotlight = {
     "For a startup that raised about $2.5M, I owned the branding and illustration end to end. Self-taught with no art classes, I hand-drew the visual language, added animation and a full dark mode, and internalized design work a studio would normally bill for.",
   stats: [
     { value: "$2.5M", label: "Raised by the startup I helped brand" },
-    { value: "$110k", label: "Design cost internalized" },
+    { value: "~$110k", label: "Design cost internalized" },
     { value: "350+ hrs", label: "Saved by keeping design in house" },
   ] satisfies SpotlightStat[],
+  // Short chips so a scanner can catch the proof without reading the paragraph.
+  chips: [
+    "$2.5M",
+    "Self-taught art",
+    "Hand-drawn",
+    "Dark mode",
+    "~$110k internalized",
+    "350+ hrs",
+  ],
 };
 
 // THIS SECTION DOES: the small heading above the featured project block on the home page

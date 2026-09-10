@@ -7,8 +7,8 @@
 
 // THIS SECTION DOES: the launcher pill and the preview panel copy
 export const chat = {
-  launcherLabel: "Chat",
-  launcherHint: "Ask about my work.",
+  launcherLabel: "Ask about my work.",
+  launcherHint: "Preview",
   panelTitle: "BrantChat",
   panelSubtitle: "Preview",
   welcome:

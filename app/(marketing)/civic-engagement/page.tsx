@@ -1,17 +1,17 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the Civic Engagement page. It is about how democracy and
-// government systems work as an interest, not a party platform.
-// Service work (the Archway and the scholarship) lives on About. This
-// page is the systems-and-process framing, plus a pointer to Filibusters.
+// This is the Civic Engagement page. It is a stub: a systems-and-process
+// framing sentence, an honest empty state, and a pointer to Filibusters.
+// It is about how democracy and government systems work as an interest,
+// not a party platform. Service work lives on About.
 // ============================================
 
 import type { Metadata } from "next";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Landmark } from "lucide-react";
 import { civic } from "@/content/civic";
 import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/sections/PageHeader";
-import { CivicPillars } from "@/components/sections/CivicPillars";
+import { EmptyState } from "@/components/ui/EmptyState";
 import { GlassPanel } from "@/components/ui/GlassPanel";
 import { Button } from "@/components/ui/Button";
 import { FadeInOnScroll } from "@/components/motion/FadeInOnScroll";
@@ -21,13 +21,20 @@ export const metadata: Metadata = {
   description: civic.intro,
 };
 
-// THIS SECTION DOES: render the framing, the three pillars, and the Filibusters resource
+// THIS SECTION DOES: render the framing, the empty state, and the Filibusters pointer
 export default function CivicEngagementPage() {
   return (
     <section className="pb-24 pt-14 md:pb-32 md:pt-20">
       <Container>
         <PageHeader eyebrow={civic.eyebrow} title={civic.heading} description={civic.intro} />
-        <CivicPillars />
+
+        <div className="mt-10">
+          <EmptyState
+            title={civic.emptyTitle}
+            description={civic.emptyDescription}
+            icon={<Landmark className="h-5 w-5" aria-hidden="true" />}
+          />
+        </div>
 
         <FadeInOnScroll className="mt-10">
           <GlassPanel padding="lg">
