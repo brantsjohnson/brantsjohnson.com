@@ -34,3 +34,12 @@ coverage/
 
 # Editor / agent local state
 .cursor/
+
+# BrantChat is kept live as its own deployment (brantchat.brantsjohnson.com).
+# It keeps its own install, build, deploy, and git metadata out of this repo.
+BrantChat/node_modules/
+BrantChat/.next/
+BrantChat/.vercel/
+BrantChat/.git/
+BrantChat/.git.backup/
+BrantChat/.DS_Store

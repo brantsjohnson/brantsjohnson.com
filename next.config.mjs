@@ -4,8 +4,10 @@
 // It also holds the "forwarding address" list: when someone visits an old
 // Wix web address, we send them to the matching new page here so old links
 // and Google search results still work after the move off Wix.
-// The old BrantChat app has been integrated into this site (the chat now
-// lives at /chat), so there is no longer a separate folder to exclude.
+// The in-site chat now lives at /chat and shares BrantChat's knowledge base.
+// The original BrantChat app stays in the BrantChat/ folder (kept live at
+// brantchat.brantsjohnson.com as its own deployment), so this build ignores
+// that folder while watching for file changes.
 // ============================================
 
 // --- THIS SECTION DOES: list every old Wix address and the new page it should go to ---
@@ -45,6 +47,16 @@ const nextConfig = {
       destination: next, // the new page, e.g. /about
       statusCode: 301, // classic "moved permanently" (kept for SEO)
     }));
+  },
+
+  // THIS SECTION DOES: ignore the separate BrantChat app while this app
+  // watches for file changes, so the two do not interfere during builds
+  webpack: (config) => {
+    config.watchOptions = {
+      ...config.watchOptions,
+      ignored: ["**/BrantChat/**", "**/node_modules/**"],
+    };
+    return config;
   },
 };
 
