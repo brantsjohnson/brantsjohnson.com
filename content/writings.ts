@@ -35,6 +35,7 @@ export const writings = {
   },
   poetry: {
     heading: "Poetry",
+    sectionNote: "Poetry is kept apart from the blog so it can be read at a slower pace.",
     emptyTitle: "No poems yet",
     emptyDescription: "Poems will appear here, kept apart from the blog on purpose.",
   },

@@ -23,4 +23,6 @@ export const photography = {
   intro: "A place for the photos worth slowing down for. Collections are on the way.",
   emptyTitle: "No collections yet",
   emptyDescription: "Photo collections will appear here once the first set is ready.",
+  collectionEmptyTitle: "No photos yet",
+  collectionEmptyDescription: "Photos for this collection have not been added.",
 };

@@ -12,6 +12,7 @@ import { collections, photography } from "@/content/photography";
 import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { FadeInOnScroll } from "@/components/motion/FadeInOnScroll";
 
 export const metadata: Metadata = {
   title: "Photography",
@@ -23,33 +24,42 @@ export default function PhotographyPage() {
   return (
     <section className="pb-24 pt-14 md:pb-32 md:pt-20">
       <Container>
-        <PageHeader
-          eyebrow={photography.eyebrow}
-          title={photography.heading}
-          description={photography.intro}
-        />
+        {/* THIS SECTION DOES: render the page heading from the content module */}
+        <FadeInOnScroll>
+          <PageHeader
+            eyebrow={photography.eyebrow}
+            title={photography.heading}
+            description={photography.intro}
+          />
+        </FadeInOnScroll>
+
+        {/* THIS SECTION DOES: show either loaded collections or the honest empty state */}
         <div className="mt-10">
           {collections.length === 0 ? (
-            <EmptyState
-              title={photography.emptyTitle}
-              description={photography.emptyDescription}
-              icon={<Camera className="h-5 w-5" aria-hidden="true" />}
-            />
+            <FadeInOnScroll delay={0.06}>
+              <EmptyState
+                title={photography.emptyTitle}
+                description={photography.emptyDescription}
+                icon={<Camera className="h-5 w-5" aria-hidden="true" />}
+              />
+            </FadeInOnScroll>
           ) : (
-            <ul className="grid gap-6 sm:grid-cols-2">
-              {collections.map((collection) => (
-                <li key={collection.slug}>
-                  <Link
-                    href={`/photography/${collection.slug}`}
-                    data-track={`card:open_collection:photography-${collection.slug}`}
-                    className="focus-ring block rounded-panel border border-line bg-glass p-6"
-                  >
-                    <h2 className="font-heading text-h3 font-medium text-ink">{collection.title}</h2>
-                    <p className="mt-2 text-sm text-ink-soft">{collection.description}</p>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <FadeInOnScroll delay={0.06}>
+              <ul className="grid gap-6 sm:grid-cols-2">
+                {collections.map((collection) => (
+                  <li key={collection.slug}>
+                    <Link
+                      href={`/photography/${collection.slug}`}
+                      data-track={`card:open_collection:photography-${collection.slug}`}
+                      className="focus-ring block rounded-panel border border-line bg-glass p-6"
+                    >
+                      <h2 className="font-heading text-h3 font-medium text-ink">{collection.title}</h2>
+                      <p className="mt-2 text-sm text-ink-soft">{collection.description}</p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </FadeInOnScroll>
           )}
         </div>
       </Container>

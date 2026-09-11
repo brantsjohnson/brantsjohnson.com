@@ -8,6 +8,7 @@
 import type { Metadata } from "next";
 import { contact } from "@/content/contact";
 import { ContactBlock } from "@/components/sections/ContactBlock";
+import { FadeInOnScroll } from "@/components/motion/FadeInOnScroll";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -18,7 +19,10 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <section aria-labelledby="contact-heading" className="flex min-h-[70vh] items-center justify-center px-5 py-24">
-      <ContactBlock />
+      {/* THIS SECTION DOES: fade the contact card in so this page matches the motion language of the site */}
+      <FadeInOnScroll>
+        <ContactBlock />
+      </FadeInOnScroll>
     </section>
   );
 }

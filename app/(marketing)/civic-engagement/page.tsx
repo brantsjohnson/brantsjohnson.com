@@ -26,17 +26,22 @@ export default function CivicEngagementPage() {
   return (
     <section className="pb-24 pt-14 md:pb-32 md:pt-20">
       <Container>
-        <PageHeader eyebrow={civic.eyebrow} title={civic.heading} description={civic.intro} />
+        {/* THIS SECTION DOES: show the systems-and-process framing at the top */}
+        <FadeInOnScroll>
+          <PageHeader eyebrow={civic.eyebrow} title={civic.heading} description={civic.intro} />
+        </FadeInOnScroll>
 
-        <div className="mt-10">
+        {/* THIS SECTION DOES: keep the page honest while long-form civic writing is still in progress */}
+        <FadeInOnScroll delay={0.06} className="mt-10">
           <EmptyState
             title={civic.emptyTitle}
             description={civic.emptyDescription}
             icon={<Landmark className="h-5 w-5" aria-hidden="true" />}
           />
-        </div>
+        </FadeInOnScroll>
 
-        <FadeInOnScroll className="mt-10">
+        {/* THIS SECTION DOES: point people to Filibusters as related work, not as a replacement for this page */}
+        <FadeInOnScroll delay={0.1} className="mt-10">
           <GlassPanel padding="lg">
             <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-soft">
               {civic.resource.title}

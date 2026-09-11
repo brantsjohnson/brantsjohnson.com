@@ -33,9 +33,11 @@ export function ChatWidget() {
           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black/[0.05]">
             <MessageCircle className="h-4 w-4 text-ink" strokeWidth={1.6} aria-hidden="true" />
           </span>
-          <span className="hidden text-left sm:block">
-            <span className="block font-heading text-[13.5px] font-medium text-ink">{chat.launcherLabel}</span>
-            <span className="block font-heading text-[12px] text-ink-soft">{chat.launcherHint}</span>
+          <span className="max-w-[148px] text-left">
+            <span className="block truncate font-heading text-[13.5px] font-medium leading-tight text-ink">
+              {chat.launcherLabel}
+            </span>
+            <span className="hidden font-heading text-[12px] text-ink-soft sm:block">{chat.launcherHint}</span>
           </span>
         </button>
       )}

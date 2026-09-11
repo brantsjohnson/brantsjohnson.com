@@ -24,7 +24,9 @@ export default function WritingsPage() {
   return (
     <section className="pb-24 pt-14 md:pb-32 md:pt-20">
       <Container>
-        <PageHeader eyebrow={writings.eyebrow} title={writings.heading} description={writings.intro} />
+        <FadeInOnScroll>
+          <PageHeader eyebrow={writings.eyebrow} title={writings.heading} description={writings.intro} />
+        </FadeInOnScroll>
 
         <FadeInOnScroll className="mt-12">
           <h2 id="blog" className="font-heading text-h2 font-semibold tracking-tight text-ink">
@@ -50,7 +52,7 @@ export default function WritingsPage() {
             {writings.poetry.heading}
           </h2>
           <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-ink-soft">
-            Poetry is kept apart from the blog so it can be read at a slower pace.
+            {writings.poetry.sectionNote}
           </p>
           <div className="mt-6">
             {poems.length === 0 ? (
