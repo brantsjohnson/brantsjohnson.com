@@ -6,15 +6,15 @@
 
 ## 1. What changed
 
-The old `BrantChat/` folder was a second, separate Next.js app that this build excluded. It is now integrated into this one site so production builds from the repo root for the Vercel project `brantsjohnson-com`. There is no longer a second app to maintain.
+The in-site chat is now wired into the main site so the marketing pages can use it directly, and it reuses BrantChat's existing brain (knowledge base + system prompt) rather than a new one. The original `BrantChat/` app is **kept in the repo and stays live** at `brantchat.brantsjohnson.com` as its own deployment (embed/link alias). The root build ignores the `BrantChat/` folder (webpack watch-ignore + tsconfig exclude), so the two do not interfere.
 
-- **Chat page:** `app/(chatbot)/chat/page.tsx` renders at `/chat`.
+- **In-site bubble (primary UX):** `components/chatbot/ChatLauncher.tsx` is a floating chat button mounted in the marketing layout, so chat is available on every public page including the apex/home. It opens `components/chatbot/ChatWidget.tsx`.
+- **Chat page:** `app/(chatbot)/chat/page.tsx` renders at `/chat` (also used by the subdomain alias).
 - **Company links:** `app/(chatbot)/chat/[company]/page.tsx` renders at `/chat/<company>` (for example `/chat/google`) and tailors answers to that employer. The company name is used only as light context; there is no access code and no separate jobs database.
-- **Chat UI:** `components/chatbot/ChatWidget.tsx` (message list, input, starter chips) and `components/chatbot/MessageContent.tsx` (safe light-markdown rendering).
-- **Server endpoint:** `app/api/chatbot/route.ts` streams the answer using the AI SDK.
-- **Grounding:** `lib/ai/knowledge-base.ts` loads `data/brant-knowledge.json` and turns it into text; `lib/ai/prompt.ts` builds the system prompt (grounding rules + facts + optional company/role).
-- **Home entry:** the home page has a "Chat with BrantChat" button to `/chat`.
-- **Subdomain alias:** `middleware.ts` rewrites the historical host `brantchat.brantsjohnson.com` root to `/chat`. This does **not** change DNS; it only takes effect once CoS points that subdomain at this Vercel project (see §5).
+- **Server endpoint (shared API):** `app/api/chatbot/route.ts` streams the answer using the AI SDK.
+- **Shared brain:** `lib/ai/knowledge-base.ts` is BrantChat's own knowledge-base serialization ported verbatim; `lib/ai/prompt.ts` is BrantChat's own system prompt ported. Both are `server-only`, so the knowledge base never ships to the browser. `data/brant-knowledge.json` is the source of truth for the in-site chat (the standalone app keeps its own copy at `BrantChat/data/`).
+- **Home entry:** the home page also has a "Chat with BrantChat" button to `/chat`.
+- **Subdomain alias:** `middleware.ts` rewrites the historical host `brantchat.brantsjohnson.com` root to `/chat`. This does **not** change DNS; it only takes effect if/when CoS points that subdomain at this Vercel project (see §5). Until then, the subdomain keeps serving the standalone `BrantChat/` deployment.
 
 ## 2. How a question flows
 
@@ -34,7 +34,7 @@ All in `app/api/chatbot/route.ts` and `lib/utils/rate-limit.ts`:
 
 ## 4. Updating what the chatbot knows
 
-Edit `data/brant-knowledge.json` and open a pull request. The serializer walks whatever keys exist, so new sections show up automatically. No secrets live in that file. (No live admin editor ships in this pass; a future admin could edit this behind env-based auth per `docs/11`, since serverless file writes do not persist.)
+Edit `data/brant-knowledge.json` and open a pull request; `lib/ai/knowledge-base.ts` reads it. No secrets live in that file. The standalone BrantChat app keeps its own copy at `BrantChat/data/brant-knowledge.json`; keep the two in sync when facts change (they are separate deployments). A future step could make both read a single shared source. (No new admin editor ships in this pass; a future admin could edit this behind env-based auth per `docs/11`, since serverless file writes do not persist.)
 
 ## 5. Environment variables CoS must set in Vercel
 

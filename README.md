@@ -32,4 +32,6 @@ Start with `docs/00-MASTER-README.md`. Before connecting Supabase, fill in the o
 
 ## Chat (BrantChat)
 
-The BrantChat app has been integrated into this site. The chat now lives at `/chat` (and `/chat/[company]` for employer-tailored links), streams answers from `app/api/chatbot`, and is grounded in `data/brant-knowledge.json`. See `docs/15-CHAT-INTEGRATION.md` for how it is wired and the required environment variables.
+The chat is wired into this site: a floating chat bubble on every marketing page, plus a `/chat` page (and `/chat/[company]` for employer-tailored links). It streams answers from `app/api/chatbot` and reuses BrantChat's own knowledge base and system prompt (the shared "brain") from `lib/ai`, grounded in `data/brant-knowledge.json`.
+
+The original BrantChat app stays in `BrantChat/` and remains live at `brantchat.brantsjohnson.com` as its own deployment; the root build ignores that folder. See `docs/15-CHAT-INTEGRATION.md` for how it is wired and the required environment variables.
