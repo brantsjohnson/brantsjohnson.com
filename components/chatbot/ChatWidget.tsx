@@ -17,11 +17,14 @@ import { cn } from "@/lib/utils/cn";
 import { MessageContent } from "@/components/chatbot/MessageContent";
 
 // THIS SECTION DOES: describe the optional context the widget can carry.
-// "company" and "role" tailor answers; "suggestions" seeds the starter chips.
+// "company" and "role" tailor answers; "suggestions" seeds the starter chips;
+// "configured" is false when the server has no AI key set, so we can show a
+// clear "not set up yet" message instead of letting the visitor hit an error.
 interface ChatWidgetProps {
   company?: string;
   role?: string;
   suggestions?: string[];
+  configured?: boolean;
 }
 
 // A few safe, general starter questions shown before the visitor types
@@ -41,7 +44,28 @@ function messageText(parts: { type: string; text?: string }[]): string {
     .join("");
 }
 
-export function ChatWidget({ company, role, suggestions }: ChatWidgetProps) {
+export function ChatWidget({ company, role, suggestions, configured = true }: ChatWidgetProps) {
+  // THIS SECTION DOES: if the server has no AI key, show a clear, honest
+  // "not set up yet" screen instead of a chat box that would only error out
+  if (!configured) {
+    return (
+      <div className="mx-auto flex h-full max-w-md flex-col items-center justify-center px-6 text-center">
+        <h1 className="text-h3 font-semibold text-text-primary">Chat is not set up yet</h1>
+        <p className="mt-3 text-body text-text-secondary">
+          The assistant needs an OpenAI API key before it can answer. Once the
+          site owner adds it, this chat will work here automatically.
+        </p>
+      </div>
+    );
+  }
+
+  return <ConfiguredChatWidget company={company} role={role} suggestions={suggestions} />;
+}
+
+// THIS SECTION DOES: the real chat surface, only mounted when chat is set up.
+// Kept as its own component so the chat connection (useChat) is not created at
+// all in the "not set up yet" case above.
+function ConfiguredChatWidget({ company, role, suggestions }: Omit<ChatWidgetProps, "configured">) {
   // THIS SECTION DOES: connect to the chat server. The transport sends the
   // optional company/role along with every message so answers can be tailored.
   const { messages, sendMessage, status, error } = useChat({

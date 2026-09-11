@@ -12,9 +12,21 @@
 import { useEffect, useState } from "react";
 import { MessageCircle, X } from "lucide-react";
 import { ChatWidget } from "@/components/chatbot/ChatWidget";
+import { OPEN_CHAT_EVENT } from "@/components/chatbot/chat-events";
 
-export function ChatLauncher() {
+// THIS SECTION DOES: "configured" tells the panel whether the server has an
+// AI key set, so the chat can show a clear "not set up yet" message instead
+// of a confusing error when it is missing.
+export function ChatLauncher({ configured = true }: { configured?: boolean }) {
   const [open, setOpen] = useState(false);
+
+  // THIS SECTION DOES: open the panel when any "Ask about my work" style
+  // button sends the open-chat signal
+  useEffect(() => {
+    const onOpen = () => setOpen(true);
+    window.addEventListener(OPEN_CHAT_EVENT, onOpen);
+    return () => window.removeEventListener(OPEN_CHAT_EVENT, onOpen);
+  }, []);
 
   // THIS SECTION DOES: let people close the panel by pressing the Escape key
   useEffect(() => {
@@ -45,7 +57,7 @@ export function ChatLauncher() {
               </button>
             </div>
             <div className="min-h-0 flex-1">
-              <ChatWidget />
+              <ChatWidget configured={configured} />
             </div>
           </div>
         </div>

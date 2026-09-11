@@ -22,5 +22,11 @@ export default function ChatPage({
 }: {
   searchParams: { company?: string; role?: string };
 }) {
-  return <ChatWidget company={searchParams.company} role={searchParams.role} />;
+  return (
+    <ChatWidget
+      company={searchParams.company}
+      role={searchParams.role}
+      configured={Boolean(process.env.OPENAI_API_KEY)}
+    />
+  );
 }
