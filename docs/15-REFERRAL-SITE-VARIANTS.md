@@ -61,6 +61,7 @@ The home page reads query params first on the same request, then the cookie, via
 | Piece | Location |
 |---|---|
 | Copy | `content/referral-variants.ts` |
+| Content-locked security lines | `content/security-site-lines.ts` |
 | Resolve source and variant | `lib/cms/referral-variant.ts` |
 | Server read for pages | `lib/cms/get-active-referral-variant.ts` |
 | Cookies and `/from/*` redirect | `middleware.ts` |
