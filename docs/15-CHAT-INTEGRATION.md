@@ -47,6 +47,10 @@ For the `brantsjohnson-com` project (names only, no values in the repo):
 
 Not required for chat, but present in `.env.example` for other/site features: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, analytics ids, and admin auth (`ADMIN_PASSWORD_HASH`, `JWT_SECRET`).
 
+### Env vars for the separate BrantChat subdomain deployment
+
+The `brantchat.brantsjohnson.com` app is its own Vercel project and keeps its own env vars (names only, values in that project's settings): `OPENAI_API_KEY`, `JWT_SECRET`, Supabase (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`) for its chat logging and job questions, and optionally `KV_REST_API_URL` / `KV_REST_API_TOKEN` so admin-edited job roles persist across deploys. The apex `/chat` does not use these.
+
 ### DNS / subdomain alias (handled separately by CoS, not in this PR)
 
 - To make `brantchat.brantsjohnson.com` show the chat: add that domain to the `brantsjohnson-com` Vercel project and point its DNS there. The middleware alias then rewrites its home to `/chat`. No DNS is changed by this repo.
