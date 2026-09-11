@@ -7,6 +7,7 @@
 
 import { Hero } from "@/components/sections/Hero";
 import { Now } from "@/components/sections/Now";
+import { SecurityFocus } from "@/components/sections/SecurityFocus";
 import { getActiveReferralVariant } from "@/lib/cms/get-active-referral-variant";
 import { getReferralVariantContent } from "@/lib/cms/referral-variant";
 import { getBridgerInterests } from "@/lib/integrations/bridger";
@@ -25,6 +26,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   return (
     <>
       <Hero copy={heroCopy} />
+      <SecurityFocus copy={heroCopy} />
       <Now interests={interests} />
     </>
   );
