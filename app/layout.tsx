@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     default: "Brant S. Johnson",
     template: "%s | Brant S. Johnson",
   },
-  description: "Personal site foundation. Content and design land in later passes.",
+  description: "Brant S. Johnson is a customer focused product manager who has owned KYC, onboarding, and analytics, and who sells what he ships.",
   robots: {
     index: false, // do not show unfinished pages in Google yet
     follow: false,

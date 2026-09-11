@@ -1,8 +1,10 @@
 /* ============================================
    WHAT THIS FILE DOES (plain English):
    This is the main stylesheet the whole site loads.
-   It pulls in design tokens and Tailwind layers, then sets a few
-   base page rules. Page-specific looks do not live here.
+   It pulls in the design tokens and Tailwind layers, then sets a
+   few base page rules (background, text color, default font, and a
+   reusable centered content shell). Page-specific looks do not live
+   here; they live in their own components.
    ============================================ */
 
 @import "./tokens.css";
@@ -11,13 +13,58 @@
 @tailwind components;
 @tailwind utilities;
 
-/* THIS SECTION DOES: make the page fill the screen and use token colors */
+/* THIS SECTION DOES: make the page fill the screen and use the token colors and body font */
 html,
 body {
   min-height: 100%;
 }
 
+html {
+  scroll-behavior: smooth; /* gentle jump when clicking in-page anchors */
+}
+
 body {
   background: var(--color-bg);
   color: var(--color-text-primary);
+  font-family: var(--font-sans); /* neutral, legible body font */
+  font-size: var(--body-size, 1.0625rem);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* THIS SECTION DOES: give every heading the serif typeface so the name and titles feel editorial */
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+}
+
+/* --- ACCESSIBILITY: keep a clearly visible focus ring for keyboard users --- */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* THIS SECTION DOES: turn off nonessential motion when the visitor asks their device for less movement */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@layer components {
+  /* THIS SECTION DOES: one reusable centered content shell so every section lines up */
+  .shell {
+    width: 100%;
+    max-width: var(--shell-max);
+    margin-inline: auto;
+    padding-inline: var(--page-gutter);
+  }
 }

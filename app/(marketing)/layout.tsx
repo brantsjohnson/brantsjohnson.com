@@ -1,27 +1,29 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is a shared wrapper for all public pages (home, about, projects,
-// and the rest). It holds the main content area and mounts the floating
-// chat button (ChatLauncher) so visitors can ask about Brant from any page.
-// Admin pages and API routes do not use this wrapper.
+// This is the shared wrapper for all public pages (home, about,
+// experience, and the rest). It puts the sticky header on top, the
+// page content in the middle, the footer at the bottom, and the
+// BrantChat launcher floating in the corner. Admin pages and API
+// routes do not use this wrapper.
 // ============================================
 
 import { ChatLauncher } from "@/components/chatbot/ChatLauncher";
+import { SiteFooter } from "@/components/sections/SiteFooter";
+import { SiteHeader } from "@/components/sections/SiteHeader";
 
-// THIS SECTION DOES: wrap public page content and add the floating chat button
+// THIS SECTION DOES: place the header, page content, footer, and chat launcher around every public page
 export default function MarketingLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // THIS SECTION DOES: check on the server whether the AI key is set, so the
-  // chat can show a clear "not set up yet" message instead of an error
   const chatConfigured = Boolean(process.env.OPENAI_API_KEY);
 
   return (
     <>
+      <SiteHeader />
       <main>{children}</main>
-      {/* THIS SECTION DOES: show the in-site chat bubble on every public page */}
+      <SiteFooter />
       <ChatLauncher configured={chatConfigured} />
     </>
   );

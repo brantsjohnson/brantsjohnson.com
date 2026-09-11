@@ -1,26 +1,27 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is a button that opens the in-site chat panel when clicked (for
-// example the home page "Ask about my work" button). It does not draw the
-// chat itself; it just sends the "open chat" signal, and the floating
-// ChatLauncher panel hears it and opens.
+// This is a button that opens the BrantChat panel when clicked. It
+// is used anywhere on the site that wants to invite someone to ask
+// a question (the home hero, project cards, and so on). It reuses
+// the shared Button look, so it matches every other button.
 // ============================================
 
 "use client";
 
-import { openChat } from "@/components/chatbot/chat-events";
+import type { ReactNode } from "react";
+import { Button } from "@/components/ui/Button";
+import { openBrantChat } from "@/components/chatbot/chat-events";
 
-// THIS SECTION DOES: render a button that, when clicked, opens the chat panel
-export function OpenChatButton({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
+type OpenChatButtonProps = {
+  children: ReactNode;
+  variant?: "primary" | "ghost";
   className?: string;
-}) {
+};
+
+export function OpenChatButton({ children, variant = "primary", className }: OpenChatButtonProps) {
   return (
-    <button type="button" onClick={openChat} className={className}>
+    <Button variant={variant} onClick={openBrantChat} className={className} ariaLabel="Open BrantChat">
       {children}
-    </button>
+    </Button>
   );
 }
