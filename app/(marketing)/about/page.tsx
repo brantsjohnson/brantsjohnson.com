@@ -1,20 +1,19 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the About page. It is the longer, first person version of
-// the home page: who Brant is, what he likes about product work, and
-// where he studied. The words come from content/site-content.ts so
-// copy lives in one place.
+// the home page, plus the security and compliance emphasis block from
+// the referral site work. Words come from content modules, not inline.
 // ============================================
 
 import type { Metadata } from "next";
-import { PageIntro } from "@/components/sections/PageIntro";
 import { FadeInOnScroll } from "@/components/motion/FadeInOnScroll";
+import { PageIntro } from "@/components/sections/PageIntro";
+import { aboutSecurityFocus } from "@/content/about-security";
 import { about } from "@/content/site-content";
 
-// THIS SECTION DOES: set this page's browser tab title
 export const metadata: Metadata = { title: "About" };
 
-// THIS SECTION DOES: draw the intro and the about paragraphs in a narrow reading column
+// THIS SECTION DOES: draw the intro, about paragraphs, and security focus
 export default function AboutPage() {
   return (
     <>
@@ -27,6 +26,16 @@ export default function AboutPage() {
             </p>
           ))}
         </div>
+
+        <h2 className="mt-12 text-h2 text-text-primary">{aboutSecurityFocus.title}</h2>
+        <p className="mt-4 text-body text-text-secondary">{aboutSecurityFocus.intro}</p>
+        <ul className="mt-6 flex flex-col gap-3">
+          {aboutSecurityFocus.lines.map((line) => (
+            <li key={line} className="text-body text-text-primary before:mr-2 before:content-['•']">
+              {line}
+            </li>
+          ))}
+        </ul>
       </FadeInOnScroll>
     </>
   );
