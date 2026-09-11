@@ -8,12 +8,12 @@ Foundation only, matching `docs/01-ARCHITECTURE.md`:
 
 - Next.js 14 App Router + TypeScript + Tailwind
 - Route stubs for marketing sections, admin portal, and API endpoints
-- `lib/` stubs for AI, CMS, and integrations
+- `lib/` for AI (chatbot), CMS, and integrations
 - Design token placeholders in `styles/tokens.css`
 - Initial Supabase `site` schema migration (not applied yet)
-- `BrantChat/` kept as a sibling reference for later chatbot integration
+- Integrated chatbot at `/chat` (see `docs/15-CHAT-INTEGRATION.md`)
 
-No real UI, brand polish, or content yet.
+No full brand polish or marketing content yet.
 
 ## Quick start
 
@@ -30,6 +30,8 @@ Open [http://localhost:3000](http://localhost:3000).
 
 Start with `docs/00-MASTER-README.md`. Before connecting Supabase, fill in the open questions in `docs/12-EXISTING-INFRA-MIGRATION.md`.
 
-## BrantChat
+## Chat (BrantChat)
 
-The existing BrantChat app lives in `BrantChat/` and is excluded from this Next.js build. It stays untouched until we integrate the chatbot into this site.
+The chat is wired into this site: a floating chat bubble on every marketing page, plus a `/chat` page (and `/chat/[company]` for employer-tailored links). It streams answers from `app/api/chatbot` and reuses BrantChat's own knowledge base and system prompt (the shared "brain") from `lib/ai`, grounded in `data/brant-knowledge.json`.
+
+The original BrantChat app stays in `BrantChat/` and remains live at `brantchat.brantsjohnson.com` as its own deployment; the root build ignores that folder. See `docs/15-CHAT-INTEGRATION.md` for how it is wired and the required environment variables.

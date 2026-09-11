@@ -1,9 +1,8 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// Edge middleware runs before pages load. It handles referral links:
-// /from/ig sends people to home and remembers the social variant.
-// ?src= or ?utm_source= on any marketing URL also sets that memory.
-// Admin routes are unchanged for now (auth checks come later).
+// Edge middleware runs before pages load. It handles referral links
+// (/from/ig and query params), and rewrites the BrantChat subdomain
+// root to the in-site /chat page when that host points here.
 // ============================================
 
 import { NextResponse } from "next/server";
@@ -17,7 +16,6 @@ import {
   resolveReferralVariantFromSource,
 } from "@/lib/cms/referral-variant";
 
-// THIS SECTION DOES: write variant cookies on the response
 function applyReferralCookies(response: NextResponse, source: string) {
   const variant = resolveReferralVariantFromSource(source);
   response.cookies.set(REFERRAL_VARIANT_COOKIE, variant, {
@@ -34,11 +32,18 @@ function applyReferralCookies(response: NextResponse, source: string) {
   });
 }
 
-// THIS SECTION DOES: route requests and set referral state when needed
 export function middleware(request: NextRequest) {
+  const host = request.headers.get("host") ?? "";
+  const isBrantChatHost = host.startsWith("brantchat.");
+
+  if (isBrantChatHost && request.nextUrl.pathname === "/") {
+    const url = request.nextUrl.clone();
+    url.pathname = "/chat";
+    return NextResponse.rewrite(url);
+  }
+
   const { pathname } = request.nextUrl;
 
-  // --- REFERRAL: /from/threads style paths land on home with the right variant ---
   const pathSource = referralSourceFromPathname(pathname);
   if (pathSource) {
     const url = request.nextUrl.clone();
@@ -56,11 +61,9 @@ export function middleware(request: NextRequest) {
     return response;
   }
 
-  // --- SECURITY: admin auth checks will live here later ---
   return NextResponse.next();
 }
 
-// THIS SECTION DOES: run on marketing and admin paths, skip static assets
 export const config = {
   matcher: [
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",

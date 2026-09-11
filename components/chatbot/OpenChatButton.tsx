@@ -12,14 +12,12 @@ import type { ReactNode } from "react";
 import { Button } from "@/components/ui/Button";
 import { openBrantChat } from "@/components/chatbot/chat-events";
 
-// THIS SECTION DOES: describe the options this button accepts
 type OpenChatButtonProps = {
   children: ReactNode;
   variant?: "primary" | "ghost";
   className?: string;
 };
 
-// THIS SECTION DOES: render a button that opens the chat panel on click
 export function OpenChatButton({ children, variant = "primary", className }: OpenChatButtonProps) {
   return (
     <Button variant={variant} onClick={openBrantChat} className={className} ariaLabel="Open BrantChat">

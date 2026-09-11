@@ -1,198 +1,206 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the BrantChat bubble people see on every public page. It
-// sits in the bottom-right corner. Clicking it (or the "BrantChat"
-// nav item, or the home "Ask about my work" button) opens a glass
-// chat panel. The visitor types a question, and it is sent to the
-// server at /api/chatbot. Private notes never load in the browser;
-// only the server's answer comes back. The panel has one close
-// control, keeps keyboard focus inside while open, and closes on
-// the Escape key.
+// This is the chat screen people actually use. It shows the conversation,
+// an input box, and a few suggested questions. It talks to the server at
+// /api/chatbot and streams Brant's answer back live. It never loads any
+// private facts in the browser; it only sends the visitor's questions and
+// shows the answers the server streams back.
 // ============================================
 
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { MessageCircle, X, Send } from "lucide-react";
-import { OPEN_CHAT_EVENT } from "@/components/chatbot/chat-events";
+import { useEffect, useRef, useState } from "react";
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
+import { Send } from "lucide-react";
+import { cn } from "@/lib/utils/cn";
+import { MessageContent } from "@/components/chatbot/MessageContent";
 
-// THIS SECTION DOES: describe one line in the conversation
-type ChatMessage = {
-  from: "you" | "brantchat";
-  text: string;
-};
+// THIS SECTION DOES: describe the optional context the widget can carry.
+// "company" and "role" tailor answers; "suggestions" seeds the starter chips;
+// "configured" is false when the server has no AI key set, so we can show a
+// clear "not set up yet" message instead of letting the visitor hit an error.
+interface ChatWidgetProps {
+  company?: string;
+  role?: string;
+  suggestions?: string[];
+  configured?: boolean;
+}
 
-// A short, human welcome so the panel is never empty (docs/03 empty-state rule).
-const WELCOME: ChatMessage = {
-  from: "brantchat",
-  text: "Hi, I am BrantChat. Ask me about Brant's product work, his projects, or how he thinks.",
-};
+// A few safe, general starter questions shown before the visitor types
+const DEFAULT_SUGGESTIONS = [
+  "Tell me about Brant's experience.",
+  "What are Brant's strengths as a product manager?",
+  "What is Brant's greatest accomplishment?",
+  "What is Brant's experience with AI?",
+];
 
-export function ChatWidget() {
-  // THIS SECTION DOES: remember whether the panel is open, the typed question, and the conversation
-  const [open, setOpen] = useState(false);
-  const [draft, setDraft] = useState("");
-  const [messages, setMessages] = useState<ChatMessage[]>([WELCOME]);
-  const [sending, setSending] = useState(false);
+// THIS SECTION DOES: pull the plain text out of an AI message, which arrives
+// as a list of "parts" (the current AI SDK message shape)
+function messageText(parts: { type: string; text?: string }[]): string {
+  return parts
+    .filter((part) => part.type === "text" && typeof part.text === "string")
+    .map((part) => part.text as string)
+    .join("");
+}
 
-  const reduceMotion = useReducedMotion();
-  const launcherRef = useRef<HTMLButtonElement>(null);
-  const inputRef = useRef<HTMLTextAreaElement>(null);
+export function ChatWidget({ company, role, suggestions, configured = true }: ChatWidgetProps) {
+  // THIS SECTION DOES: if the server has no AI key, show a clear, honest
+  // "not set up yet" screen instead of a chat box that would only error out
+  if (!configured) {
+    return (
+      <div className="mx-auto flex h-full max-w-md flex-col items-center justify-center px-6 text-center">
+        <h1 className="text-h3 font-semibold text-text-primary">Chat is not set up yet</h1>
+        <p className="mt-3 text-body text-text-secondary">
+          The assistant needs an OpenAI API key before it can answer. Once the
+          site owner adds it, this chat will work here automatically.
+        </p>
+      </div>
+    );
+  }
 
-  // THIS SECTION DOES: listen for the shared "please open the chat" announcement from other buttons
+  return <ConfiguredChatWidget company={company} role={role} suggestions={suggestions} />;
+}
+
+// THIS SECTION DOES: the real chat surface, only mounted when chat is set up.
+// Kept as its own component so the chat connection (useChat) is not created at
+// all in the "not set up yet" case above.
+function ConfiguredChatWidget({ company, role, suggestions }: Omit<ChatWidgetProps, "configured">) {
+  // THIS SECTION DOES: connect to the chat server. The transport sends the
+  // optional company/role along with every message so answers can be tailored.
+  const { messages, sendMessage, status, error } = useChat({
+    transport: new DefaultChatTransport({
+      api: "/api/chatbot",
+      body: { company, role },
+    }),
+  });
+
+  const [input, setInput] = useState("");
+  const endRef = useRef<HTMLDivElement>(null);
+  const isBusy = status === "submitted" || status === "streaming";
+  const starters = suggestions && suggestions.length > 0 ? suggestions : DEFAULT_SUGGESTIONS;
+
+  // THIS SECTION DOES: keep the newest message in view as answers stream in
   useEffect(() => {
-    const openHandler = () => setOpen(true);
-    window.addEventListener(OPEN_CHAT_EVENT, openHandler);
-    return () => window.removeEventListener(OPEN_CHAT_EVENT, openHandler);
-  }, []);
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isBusy]);
 
-  // --- ACCESSIBILITY: move focus into the panel when it opens, and close on Escape ---
-  useEffect(() => {
-    if (open) {
-      inputRef.current?.focus();
-      const escHandler = (e: KeyboardEvent) => {
-        if (e.key === "Escape") setOpen(false);
-      };
-      window.addEventListener("keydown", escHandler);
-      return () => window.removeEventListener("keydown", escHandler);
-    }
-    // When closing, send focus back to the launcher so keyboard users are not lost.
-    launcherRef.current?.focus();
-  }, [open]);
+  // THIS SECTION DOES: send whatever the visitor typed, then clear the box
+  const submit = (text: string) => {
+    const trimmed = text.trim();
+    if (!trimmed || isBusy) return;
+    sendMessage({ text: trimmed });
+    setInput("");
+  };
 
-  // THIS SECTION DOES: send the typed question to the server and show the answer
-  const send = useCallback(async () => {
-    const question = draft.trim();
-    if (!question || sending) return;
-
-    setMessages((prev) => [...prev, { from: "you", text: question }]);
-    setDraft("");
-    setSending(true);
-
-    try {
-      // --- PRIVACY: only the question goes out; the server keeps private notes and returns just the answer ---
-      const res = await fetch("/api/chatbot", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: question }),
-      });
-      const data = await res.json().catch(() => null);
-      const reply =
-        data?.answer ||
-        data?.message ||
-        "BrantChat is not fully wired up yet. Check back soon.";
-      setMessages((prev) => [...prev, { from: "brantchat", text: reply }]);
-    } catch {
-      // A plain, useful error, per the copy rules in docs/03.
-      setMessages((prev) => [
-        ...prev,
-        { from: "brantchat", text: "That did not go through. Try again in a moment." },
-      ]);
-    } finally {
-      setSending(false);
-    }
-  }, [draft, sending]);
+  const hasMessages = messages.length > 0;
 
   return (
-    <>
-      {/* THIS SECTION DOES: the always-visible launcher in the bottom-right corner */}
-      <button
-        ref={launcherRef}
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-label={open ? "Close BrantChat" : "Open BrantChat"}
-        aria-expanded={open}
-        className="fixed bottom-6 right-6 z-modal flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-glass transition-transform duration-[120ms] ease-brand hover:scale-[1.05] focus-visible:outline-none"
-      >
-        {/* The icon is paired with an accessible name above, since a sparkle or bubble alone is ambiguous (docs/14 §7). */}
-        {open ? <X size={22} /> : <MessageCircle size={22} />}
-      </button>
-
-      {/* THIS SECTION DOES: the docked chat panel, revealed when open */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            role="dialog"
-            aria-label="BrantChat"
-            initial={reduceMotion ? false : { opacity: 0, y: 16, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16, scale: 0.98 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-24 right-6 z-modal flex h-[70vh] max-h-[560px] w-[calc(100vw-48px)] max-w-[400px] flex-col overflow-hidden rounded-panel border border-border-subtle bg-glass shadow-glass backdrop-blur-glass"
-          >
-            {/* Panel header: title plus the one close control (docs/14 §6.1) */}
-            <div className="flex items-center justify-between border-b border-border-subtle px-6 py-4">
-              <span className="font-serif text-h3">BrantChat</span>
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                aria-label="Close BrantChat"
-                className="flex h-9 w-9 items-center justify-center rounded-control text-text-secondary hover:text-text-primary focus-visible:outline-none"
-              >
-                <X size={20} />
-              </button>
-            </div>
-
-            {/* Message list */}
-            <div className="flex-1 space-y-4 overflow-y-auto px-6 py-4">
-              {messages.map((m, i) => (
-                <div
-                  key={i}
-                  className={m.from === "you" ? "text-right" : "text-left"}
-                >
-                  <span
-                    className={
-                      m.from === "you"
-                        ? "inline-block rounded-control bg-accent px-4 py-2 text-body text-white"
-                        : "inline-block rounded-control bg-surface px-4 py-2 text-body text-text-primary"
-                    }
-                  >
-                    {m.text}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Composer: one labeled input plus a send button */}
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                void send();
-              }}
-              className="flex items-end gap-2 border-t border-border-subtle px-4 py-3"
-            >
-              <label htmlFor="brantchat-input" className="sr-only">
-                Ask BrantChat a question
-              </label>
-              <textarea
-                id="brantchat-input"
-                ref={inputRef}
-                value={draft}
-                onChange={(e) => setDraft(e.target.value)}
-                onKeyDown={(e) => {
-                  // Enter sends; Shift plus Enter makes a new line.
-                  if (e.key === "Enter" && !e.shiftKey) {
-                    e.preventDefault();
-                    void send();
-                  }
-                }}
-                rows={1}
-                placeholder="Ask about my work"
-                className="max-h-28 flex-1 resize-none rounded-control border border-border-subtle bg-surface px-4 py-2 text-body text-text-primary focus-visible:outline-none"
-              />
-              <button
-                type="submit"
-                disabled={sending}
-                aria-label="Send question"
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-control bg-accent text-white transition-transform duration-[120ms] ease-brand hover:scale-[1.05] disabled:opacity-60 focus-visible:outline-none"
-              >
-                <Send size={18} />
-              </button>
-            </form>
-          </motion.div>
+    <div className="mx-auto flex h-full w-full max-w-3xl flex-col">
+      {/* THIS SECTION DOES: show the conversation, or a friendly intro first */}
+      <div className="flex-1 space-y-4 overflow-y-auto px-4 py-6">
+        {!hasMessages && (
+          <div className="mx-auto max-w-xl pt-8 text-center">
+            <h1 className="text-h2 font-semibold text-text-primary">Ask about Brant</h1>
+            <p className="mt-3 text-body text-text-secondary">
+              {company
+                ? `A quick way for the ${company} team to get to know Brant's work.`
+                : "It is like a mini interview. Ask anything about his experience, skills, or interests."}
+            </p>
+          </div>
         )}
-      </AnimatePresence>
-    </>
+
+        {messages.map((message) => {
+          const isUser = message.role === "user";
+          return (
+            <div
+              key={message.id}
+              className={cn("flex", isUser ? "justify-end" : "justify-start")}
+            >
+              <div
+                className={cn(
+                  "max-w-[85%] rounded-2xl px-4 py-3 shadow-sm",
+                  isUser
+                    ? "bg-accent text-white"
+                    : "border border-border-subtle bg-surface text-text-primary"
+                )}
+              >
+                {isUser ? (
+                  <p className="whitespace-pre-wrap text-body">{messageText(message.parts)}</p>
+                ) : (
+                  <MessageContent text={messageText(message.parts)} />
+                )}
+              </div>
+            </div>
+          );
+        })}
+
+        {/* THIS SECTION DOES: show a "thinking" hint while the first words load */}
+        {status === "submitted" && (
+          <div className="flex justify-start">
+            <div className="rounded-2xl border border-border-subtle bg-surface px-4 py-3 text-text-secondary">
+              <span className="inline-flex gap-1">
+                <span className="h-2 w-2 animate-bounce rounded-full bg-text-secondary" />
+                <span className="h-2 w-2 animate-bounce rounded-full bg-text-secondary [animation-delay:0.15s]" />
+                <span className="h-2 w-2 animate-bounce rounded-full bg-text-secondary [animation-delay:0.3s]" />
+              </span>
+            </div>
+          </div>
+        )}
+
+        {error && (
+          <div className="flex justify-start">
+            <div className="rounded-2xl border border-border-subtle bg-surface px-4 py-3 text-text-secondary">
+              Sorry, something went wrong. Please try again.
+            </div>
+          </div>
+        )}
+
+        <div ref={endRef} />
+      </div>
+
+      {/* THIS SECTION DOES: the input area, with starter chips before first ask */}
+      <div className="border-t border-border-subtle bg-glass px-4 py-4 backdrop-blur">
+        {!hasMessages && (
+          <div className="mb-3 flex flex-wrap justify-center gap-2">
+            {starters.map((question) => (
+              <button
+                key={question}
+                type="button"
+                onClick={() => submit(question)}
+                disabled={isBusy}
+                className="rounded-full border border-border-subtle bg-surface px-3 py-1.5 text-caption text-text-secondary transition-colors hover:border-accent hover:text-accent disabled:opacity-50"
+              >
+                {question}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            submit(input);
+          }}
+          className="mx-auto flex max-w-3xl items-center gap-2"
+        >
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Ask me anything about Brant"
+            aria-label="Ask a question about Brant"
+            className="flex-1 rounded-xl border border-border-subtle bg-surface px-4 py-3 text-body text-text-primary outline-none focus:border-accent"
+          />
+          <button
+            type="submit"
+            disabled={isBusy || !input.trim()}
+            aria-label="Send message"
+            className="rounded-xl bg-accent p-3 text-white transition-colors hover:bg-accent-muted disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <Send className="h-5 w-5" />
+          </button>
+        </form>
+      </div>
+    </div>
   );
 }
