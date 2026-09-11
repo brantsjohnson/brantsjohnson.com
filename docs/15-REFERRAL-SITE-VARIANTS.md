@@ -61,13 +61,18 @@ The home page reads query params first on the same request, then the cookie, via
 | Piece | Location |
 |---|---|
 | Copy | `content/referral-variants.ts` |
+| Content-locked security lines | `content/security-site-lines.ts` |
 | Resolve source and variant | `lib/cms/referral-variant.ts` |
 | Server read for pages | `lib/cms/get-active-referral-variant.ts` |
 | Cookies and `/from/*` redirect | `middleware.ts` |
 | Hero UI | `components/sections/Hero.tsx` |
+| Security / privacy block | `components/sections/SecurityFocus.tsx` (copy in `securityFocus` on each variant) |
 | Wired on home | `app/(marketing)/page.tsx` |
+| About page security narrative | `content/about-security.ts` on `/about` |
 
 The hero root element exposes `data-referral-variant` for future analytics or styling. Do not add variant-specific photos (for example, do not invent a Mitt photo for social).
+
+**Security and compliance copy:** `default` and `linkedin_x` use technical security language (SOC 2 aligned controls, encryption, auditability, and for `linkedin_x` AI data protections). `social` uses privacy and trust wording only. Do not claim a completed SOC 2 certification unless an authoritative source elsewhere on the site proves it. Prefer aligned controls, readiness, and operating practices.
 
 ---
 

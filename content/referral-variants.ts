@@ -1,3 +1,8 @@
+import {
+  defaultAndLinkedInSecurityLines,
+  socialSecurityLines,
+} from "@/content/security-site-lines";
+
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // Hero and focus copy for each referral-based home page variant.
@@ -11,6 +16,11 @@
 
 export type ReferralVariantId = "default" | "social" | "linkedin_x";
 
+export type ReferralSecurityFocus = {
+  title: string;
+  lines: string[];
+};
+
 export type ReferralVariantCopy = {
   id: ReferralVariantId;
   /** Short label for analytics or admin, not shown as a page title */
@@ -18,6 +28,8 @@ export type ReferralVariantCopy = {
   heroHeadline: string;
   heroBody: string;
   focusLines: string[];
+  /** Home page security, compliance, or privacy and trust block */
+  securityFocus?: ReferralSecurityFocus;
 };
 
 // THIS SECTION DOES: hold every variant's words in one place
@@ -33,6 +45,10 @@ export const referralVariantContent: Record<ReferralVariantId, ReferralVariantCo
       "Bridger and Intro help people connect around shared tastes, not endless feeds.",
       "Civic systems and co-ops remind me that good products serve communities.",
     ],
+    securityFocus: {
+      title: "Security and compliance in product work",
+      lines: [...defaultAndLinkedInSecurityLines],
+    },
   },
   social: {
     id: "social",
@@ -46,6 +62,10 @@ export const referralVariantContent: Record<ReferralVariantId, ReferralVariantCo
       "Shared tastes and introductions, not another algorithmic feed.",
       "Systems thinking from Filibuster and cooperative models I trust.",
     ],
+    securityFocus: {
+      title: "Privacy and trust",
+      lines: [...socialSecurityLines],
+    },
   },
   linkedin_x: {
     id: "linkedin_x",
@@ -58,5 +78,9 @@ export const referralVariantContent: Record<ReferralVariantId, ReferralVariantCo
       "PM and founder lens on what to automate versus what to keep human.",
       "Bridger and Intro as products, not demos.",
     ],
+    securityFocus: {
+      title: "Security and compliance in product work",
+      lines: [...defaultAndLinkedInSecurityLines],
+    },
   },
 };
