@@ -1,16 +1,26 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the Home page. Right now it is only a placeholder so
-// visitors (and you) can confirm the site boots. Real hero, copy,
-// and sections come in a later design pass.
+// This is the Home page. It stacks the pieces of the home experience:
+// the name hero with the "Ask about my work" chat invite, a row of
+// proof stats (starting with the Crew Finance chip), a photo mosaic,
+// and doorway cards into the main sections. The order gives a first
+// time visitor a fast, honest picture of who Brant is and where to go
+// next (docs/08 §1, docs/12).
 // ============================================
 
-// THIS SECTION DOES: show a temporary Brant S. Johnson title until real content exists
+import { Hero } from "@/components/sections/Hero";
+import { ProofChips } from "@/components/sections/ProofChips";
+import { PhotoMosaic } from "@/components/sections/PhotoMosaic";
+import { HomeSections } from "@/components/sections/HomeSections";
+
+// THIS SECTION DOES: assemble the home page from its sections, top to bottom
 export default function HomePage() {
   return (
-    <section>
-      <h1>Brant S. Johnson</h1>
-      <p>Site foundation is running. Content and UI come next.</p>
-    </section>
+    <>
+      <Hero />
+      <ProofChips />
+      <PhotoMosaic />
+      <HomeSections />
+    </>
   );
 }
