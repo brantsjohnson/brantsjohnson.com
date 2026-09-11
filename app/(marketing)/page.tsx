@@ -1,30 +1,30 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the Home page. It still shows the temporary title while the
-// real hero and design land later, and it now also shows the "Now"
-// section: a live look at the tastes Brant shares from Bridger.
-//
-// The page fetches those tastes on the server and hands them to the
-// Now section. If Bridger is not set up or is private, the section
-// shows a short placeholder, so the page always renders.
+// This is the Home page. The hero changes based on how someone arrived
+// (social link, LinkedIn, default, and so on). The "Now" section below
+// still shows tastes from Bridger when they are available.
 // ============================================
 
-import { getBridgerInterests } from "@/lib/integrations/bridger";
+import { Hero } from "@/components/sections/Hero";
 import { Now } from "@/components/sections/Now";
+import { getActiveReferralVariant } from "@/lib/cms/get-active-referral-variant";
+import { getReferralVariantContent } from "@/lib/cms/referral-variant";
+import { getBridgerInterests } from "@/lib/integrations/bridger";
 
-// THIS SECTION DOES: show a temporary Brant S. Johnson title, then the Now section
-export default async function HomePage() {
-  // Read the shared tastes on the server. This returns nothing when Bridger
-  // is off, not configured, or opted out, and the Now section handles that.
+type HomePageProps = {
+  searchParams?: Readonly<Record<string, string | string[] | undefined>>;
+};
+
+// THIS SECTION DOES: hero for the visitor's referral variant, then Now
+export default async function HomePage({ searchParams }: HomePageProps) {
+  const variantId = await getActiveReferralVariant(searchParams);
+  const heroCopy = getReferralVariantContent(variantId);
+
   const interests = await getBridgerInterests();
 
   return (
     <>
-      <section>
-        <h1>Brant S. Johnson</h1>
-        <p>Site foundation is running. Content and UI come next.</p>
-      </section>
-
+      <Hero copy={heroCopy} />
       <Now interests={interests} />
     </>
   );

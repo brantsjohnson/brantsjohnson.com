@@ -24,6 +24,7 @@ Every document in this folder governs one layer of the project. When you are abo
 | `12-EXISTING-INFRA-MIGRATION.md` | Reusing the existing Supabase project, migrating off Wix | Before the first line of infrastructure code is written |
 | `13-JOB-APPLICATION-ASSISTANT.md` | The admin-only tool that drafts a tailored resume/cover letter via Claude from a pasted job posting | Building or touching the job assistant tool |
 | `14-UIUX-RESEARCH-BEST-PRACTICES.md` | The full research-backed UI/UX standards document (breakpoints, type scale, spacing, motion timing, accessibility, navigation logic), with citations | Building or reviewing any UI, alongside `02` and `09` |
+| `15-REFERRAL-SITE-VARIANTS.md` | Home hero variants by `src`, `utm_source`, or `/from/*` paths (default, social, LinkedIn/X) | Changing referral links, hero copy per channel, or middleware cookies |
 
 Read `01`, `04`, `12`, and `14` fully before writing any code. The rest can be consulted as needed.
 
