@@ -1,16 +1,31 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the Home page. Right now it is only a placeholder so
-// visitors (and you) can confirm the site boots. Real hero, copy,
-// and sections come in a later design pass.
+// This is the Home page: the first look at who I am, a proof spotlight
+// from Crew Finance, and the projects I am building now. Copy lives
+// in content/. Layout pieces live in components/sections/.
 // ============================================
 
-// THIS SECTION DOES: show a temporary Brant S. Johnson title until real content exists
+import type { Metadata } from "next";
+import { site } from "@/content/site";
+import { getFeaturedProject, getSupportingProjects } from "@/content/projects";
+import { Hero } from "@/components/sections/Hero";
+import { CrewSpotlight } from "@/components/sections/CrewSpotlight";
+import { CurrentlyBuilding } from "@/components/sections/CurrentlyBuilding";
+
+export const metadata: Metadata = {
+  description: site.tagline,
+};
+
+// THIS SECTION DOES: assemble the three Home blocks from content
 export default function HomePage() {
+  const featured = getFeaturedProject();
+  const supporting = getSupportingProjects();
+
   return (
-    <section>
-      <h1>Brant S. Johnson</h1>
-      <p>Site foundation is running. Content and UI come next.</p>
-    </section>
+    <>
+      <Hero />
+      <CrewSpotlight />
+      {featured && <CurrentlyBuilding featured={featured} supporting={supporting} />}
+    </>
   );
 }

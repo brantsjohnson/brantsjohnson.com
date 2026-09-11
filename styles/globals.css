@@ -1,8 +1,9 @@
 /* ============================================
    WHAT THIS FILE DOES (plain English):
    This is the main stylesheet the whole site loads.
-   It pulls in design tokens and Tailwind layers, then sets a few
-   base page rules. Page-specific looks do not live here.
+   It pulls in design tokens and Tailwind layers, sets a few base page
+   rules, and defines two small reusable helpers: the glass panel look
+   and the keyboard focus ring. Page-specific looks do not live here.
    ============================================ */
 
 @import "./tokens.css";
@@ -11,7 +12,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* THIS SECTION DOES: make the page fill the screen and use token colors */
+/* THIS SECTION DOES: make the page fill the screen, use token colors, and turn on smooth anchor scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   min-height: 100%;
@@ -20,4 +25,44 @@ body {
 body {
   background: var(--color-bg);
   color: var(--color-text-primary);
+  font-family: var(--font-heading);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* THIS SECTION DOES: tint the text-selection highlight with the brand color */
+::selection {
+  background-color: rgba(26, 92, 255, 0.14);
+}
+
+@layer components {
+  /* THIS SECTION DOES: the shared "glass" surface (see-through fill plus soft blur).
+     Used by the nav, cards, the chat launcher, and modals so glass looks identical everywhere. */
+  .glass {
+    background: var(--color-glass);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+  }
+
+  /* --- ACCESSIBILITY: a single consistent focus outline for keyboard users --- */
+  /* THIS SECTION DOES: draw the brand-colored ring only when navigating by keyboard */
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+/* --- ACCESSIBILITY: honor the visitor's reduced-motion setting --- */
+/* THIS SECTION DOES: switch off animations and smooth scrolling for people who prefer less movement */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
