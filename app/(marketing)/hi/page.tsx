@@ -11,6 +11,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { Button } from "@/components/ui/Button";
 import { NoteForm } from "@/components/forms/NoteForm";
 import { building, hiPage, identity } from "@/content/site-content";
+import { notesAreStored } from "@/lib/forms/deliver-note";
 import { hiQrSvg } from "@/lib/hi-qr";
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ type HiPageProps = {
 export default async function HiPage({ searchParams }: HiPageProps) {
   const metAt = typeof searchParams?.e === "string" ? searchParams.e.replace(/-/g, " ") : "";
   const qr = await hiQrSvg(`${identity.siteUrl}/hi`);
+  const stored = notesAreStored();
 
   return (
     <>
@@ -59,7 +61,11 @@ export default async function HiPage({ searchParams }: HiPageProps) {
         <div className="shell grid gap-10 py-16 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
             <h2 className="font-serif text-h2 text-ink">Stay in touch</h2>
-            <p className="mt-4 max-w-reading text-body text-text-secondary">{hiPage.privacy}</p>
+            <p className="mt-4 max-w-reading text-body text-text-secondary">
+              {stored
+                ? "Your name and note are stored so I can follow up. You can ask me to delete them by emailing me from the Contact page."
+                : "Sending opens your email app with this note. Nothing is kept on this site."}
+            </p>
             <div className="mt-8">
               <NoteForm kind="hi" metAt={metAt} submitLabel="Send my note" track="button:submit_hi:hi" />
             </div>

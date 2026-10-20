@@ -30,3 +30,14 @@ These items were marked VERIFY in `ideas/website-copy-map-2026-10-19.md`. They a
 Also removed, per the copy map's FIX list: AWS Certified Cloud Practitioner, any BYU degree, "Business Strategy" or a product-management emphasis, and any reading that he holds an MPA.
 
 The public Ask about me assistant reads `content/about-brant.md` only. `data/brant-knowledge.json` still has older claims. It is not the public answer source.
+
+## Wording locked in the review pass
+
+| Item | What shipped |
+|---|---|
+| AWS on About | The skills line lists Pendo Essentials, SQL, Python, Figma, and the Agile Foundations course certificate. It does not discuss AWS. |
+| Bridger role | Experience lists the role as Founder. The summary still says the product is in TestFlight beta. |
+| Private CV | The Drive file link is not on the site. Experience renders "Open the CV" only when `CV_URL` is a public URL. |
+| Writing | The page, the nav link, the footer link, and the home block stay hidden until a real local post or a Substack feed item exists. |
+| Newsletter signup | The signup is a Substack subscribe link from `SUBSTACK_URL`. If that variable is unset, the signup is hidden. It does not fall back to email. |
+| /hi storage line | The page says a note is stored only when `INTRO_CRM_CAPTURE_URL` or `CRM_WEBHOOK_URL` is set. Otherwise it says the note opens in the visitor's email app and nothing is kept on the site. |

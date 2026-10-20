@@ -16,14 +16,19 @@ import { clsx } from "clsx";
 import { identity, primaryNav } from "@/content/site-content";
 import { openBrantChat } from "@/components/chatbot/chat-events";
 
-export function SiteHeader() {
+type SiteHeaderProps = {
+  showWriting?: boolean; // true only when a real essay or letter exists
+};
+
+export function SiteHeader({ showWriting = false }: SiteHeaderProps) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const nav = primaryNav.filter((item) => showWriting || item.href !== "/writing");
 
   const isActive = (href?: string) =>
     href === "/" ? pathname === "/" : Boolean(href && (pathname === href || pathname.startsWith(`${href}/`)));
 
-  const renderNavItem = (item: (typeof primaryNav)[number], onNavigate?: () => void) => {
+  const renderNavItem = (item: (typeof nav)[number], onNavigate?: () => void) => {
     if (item.kind === "chat") {
       return (
         <button
@@ -58,8 +63,8 @@ export function SiteHeader() {
     );
   };
 
-  const links = primaryNav.filter((item) => item.kind === "route");
-  const ask = primaryNav.find((item) => item.kind === "chat");
+  const links = nav.filter((item) => item.kind === "route");
+  const ask = nav.find((item) => item.kind === "chat");
 
   return (
     <header className="sticky top-0 z-sticky border-b border-border-subtle bg-glass backdrop-blur-glass">
@@ -101,7 +106,7 @@ export function SiteHeader() {
       {menuOpen && (
         <nav aria-label="Primary mobile" className="border-t border-border-subtle bg-bg xl:hidden">
           <div className="shell flex flex-col gap-1 py-4">
-            {primaryNav.map((item) => renderNavItem(item, () => setMenuOpen(false)))}
+            {nav.map((item) => renderNavItem(item, () => setMenuOpen(false)))}
           </div>
         </nav>
       )}

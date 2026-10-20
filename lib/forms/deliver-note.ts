@@ -9,6 +9,7 @@
 // ============================================
 
 import "server-only";
+import { unstable_noStore as noStore } from "next/cache";
 
 // THIS SECTION DOES: describe a note after it has already been checked
 export type Note = {
@@ -28,9 +29,16 @@ export type Delivery =
 // THIS SECTION DOES: pick the webhook if Brant has set one. Intro's capture
 // URL wins when present. CRM_WEBHOOK_URL is the older name from .env.example.
 function webhookUrl(): string | undefined {
+  noStore();
   const intro = process.env.INTRO_CRM_CAPTURE_URL?.trim();
   const crm = process.env.CRM_WEBHOOK_URL?.trim();
   return intro || crm || undefined;
+}
+
+// THIS SECTION DOES: tell /hi whether a note is kept by the CRM.
+// Mail-app delivery is not storage, so this stays false until a webhook is set.
+export function notesAreStored(): boolean {
+  return Boolean(webhookUrl());
 }
 
 // THIS SECTION DOES: build a mailto link that carries the note in the body

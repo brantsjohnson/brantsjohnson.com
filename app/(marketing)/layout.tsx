@@ -9,13 +9,15 @@ import { ChatLauncher } from "@/components/chatbot/ChatLauncher";
 import { SiteFooter } from "@/components/sections/SiteFooter";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { identity } from "@/content/site-content";
+import { getPublicWriting } from "@/lib/writing/public-posts";
 
-export default function MarketingLayout({
+export default async function MarketingLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const chatConfigured = Boolean(process.env.OPENAI_API_KEY);
+  const writing = await getPublicWriting();
   const person = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -44,9 +46,9 @@ export default function MarketingLayout({
       >
         Skip to content
       </a>
-      <SiteHeader />
+      <SiteHeader showWriting={writing.show} />
       <main id="content">{children}</main>
-      <SiteFooter />
+      <SiteFooter showWriting={writing.show} />
       <ChatLauncher configured={chatConfigured} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} />
     </>

@@ -1,6 +1,6 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the chat screen people actually use. It shows the conversation,
+// This is the chat screen people use. It shows the conversation,
 // an input box, and a few suggested questions. It talks to the server at
 // /api/chatbot and streams Brant's answer back live. It never loads any
 // private facts in the browser; it only sends the visitor's questions and
@@ -181,7 +181,6 @@ function ConfiguredChatWidget({ company, role, suggestions }: Omit<ChatWidgetPro
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask me anything about Brant"
             aria-label="Ask a question about Brant"
             className="flex-1 rounded-xl border border-border-subtle bg-surface px-4 py-3 text-body text-text-primary outline-none focus:border-accent"
           />

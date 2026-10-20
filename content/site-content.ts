@@ -61,12 +61,6 @@ export const identity = {
   siteUrl: "https://www.brantsjohnson.com",
 };
 
-// THIS SECTION DOES: the master résumé PDF approved on October 6, 2026
-export const cv = {
-  label: "Open the CV",
-  href: "https://drive.google.com/file/d/13CIXfn65M3b8HJ7nH0AapH2mY9RBoOZ3/view",
-};
-
 // THIS SECTION DOES: list the main navigation, in the order the plan locked
 export const primaryNav: NavItem[] = [
   { label: "Home", kind: "route", href: "/" },
@@ -110,7 +104,7 @@ export const building = {
   },
   bridger: {
     name: "Bridger",
-    role: "TestFlight beta",
+    role: "Founder",
     dates: "Apr 2025 to present",
     summary:
       "1,778 users, about 230 part-time volunteers, and contracted engineers and designers.",
@@ -138,7 +132,7 @@ export const about = {
   location: "I live in American Fork, Utah, and I am open to relocating.",
   skillsTitle: "Skills",
   skills:
-    "Pendo Essentials for Web, SQL, Python, Figma, and an Agile Foundations course certificate. AWS is a skill I use, not a certificate I hold.",
+    "Pendo Essentials for Web, SQL, Python, Figma, and an Agile Foundations course certificate.",
   outsideTitle: "Outside work",
   outside: [
     "I designed, fundraised, and managed the Uintah Resilience Archway in Vernal. The build ran from 2017 to 2023.",
@@ -164,7 +158,7 @@ export const experience: ExperienceRole[] = [
   },
   {
     org: "Bridger",
-    role: "TestFlight beta",
+    role: "Founder",
     dates: "Apr 2025 to present",
     summary:
       "I started Bridger in April 2025. It is in TestFlight beta with 1,778 users, about 230 part-time volunteers, and contracted engineers and designers.",
@@ -307,7 +301,7 @@ export const projects: Project[] = [
     summary:
       "A TestFlight beta I started in April 2025. 1,778 users, about 230 part-time volunteers, and contracted engineers and designers.",
     paragraphs: [
-      "I started Bridger in April 2025. It is in TestFlight beta.",
+      "I started Bridger in April 2025 as Founder. It is in TestFlight beta.",
       "1,778 people use it. About 230 part-time volunteers are part of the work, along with contracted engineers and designers.",
     ],
     href: "https://bridger.social",
@@ -347,8 +341,6 @@ export const hiPage = {
   eyebrow: "Hi",
   title: "I build technology as a bridge to real human connection.",
   deck: "Product manager and founder. Try the work, then leave a way for me to follow up.",
-  privacy:
-    "Your name and note are stored so I can follow up. You can ask me to delete them by emailing me from the Contact page.",
 };
 
 // THIS SECTION DOES: find one project by the slug in its URL

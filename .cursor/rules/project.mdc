@@ -1,0 +1,5 @@
+---
+description: New repo scoped operating gate
+alwaysApply: true
+---
+Read AGENTS.md, docs/INDEX.md and docs/BUILD-STATE.md. Design before feature code. Update SCHEMA-MAP, tests and handoff. Separate verified facts from [OPEN] decisions.

@@ -2,9 +2,9 @@
 // WHAT THIS FILE DOES (plain English):
 // This is the shelf of Brant's public writing. Each entry is either
 // a government reform essay or a newsletter letter. Pages read this
-// list and nothing else, so a new piece appears when a real post is
-// added here. This file does not fetch from the network and it does
-// not invent posts. An empty list means the shelves are honestly empty.
+// list. A new piece appears when a real post is added here. Substack
+// letters are read separately when SUBSTACK_URL is set. This file
+// does not invent posts. An empty list means no local piece is published.
 // ============================================
 
 // THIS SECTION DOES: name the two kinds of writing this site is ready to hold

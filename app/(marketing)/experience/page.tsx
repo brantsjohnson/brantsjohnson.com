@@ -1,14 +1,15 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the Experience page. It is an editorial timeline of the
-// checked roles, newest first, plus a link to the current CV PDF.
-// Roles that are still unverified are not listed.
+// checked roles, newest first. A CV button appears only when a public
+// CV_URL is set. Roles that are still unverified are not listed.
 // ============================================
 
 import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
 import { Button } from "@/components/ui/Button";
-import { cv, experience, experienceIntro } from "@/content/site-content";
+import { experience, experienceIntro } from "@/content/site-content";
+import { publicCvUrl } from "@/lib/site/public-env";
 
 export const metadata: Metadata = {
   title: "Experience",
@@ -16,10 +17,12 @@ export const metadata: Metadata = {
 };
 
 export default function ExperiencePage() {
+  const cvUrl = publicCvUrl();
+
   return (
     <>
       <PageHero eyebrow={experienceIntro.eyebrow} title={experienceIntro.title} deck={experienceIntro.deck} />
-      <ol className="shell pb-8">
+      <ol className="shell pb-16">
         {experience.map((role) => (
           <li key={`${role.org}-${role.dates}`} className="grid gap-4 border-t border-border-subtle py-10 md:grid-cols-[200px_1fr] md:gap-12">
             <div>
@@ -41,11 +44,13 @@ export default function ExperiencePage() {
           </li>
         ))}
       </ol>
-      <div className="shell pb-16">
-        <Button href={cv.href} track="button:open_cv:experience">
-          {cv.label}
-        </Button>
-      </div>
+      {cvUrl && (
+        <div className="shell pb-16">
+          <Button href={cvUrl} track="button:open_cv:experience">
+            Open the CV
+          </Button>
+        </div>
+      )}
     </>
   );
 }

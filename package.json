@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "check:stubs": "node tools/ci/no-stubs.mjs"
+    "check:stubs": "node tools/ci/no-stubs.mjs && python3 tools/ci/no-stubs"
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.65",

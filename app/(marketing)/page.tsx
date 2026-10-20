@@ -1,7 +1,7 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the Home page. It opens with the bridge line, shows five
-// proof numbers, then Intro beside Bridger, then a door to writing.
+// proof numbers, then Intro beside Bridger, then Writing when a real post exists.
 // Referral links can swap the hero lines. They do not change the facts.
 // ============================================
 
@@ -11,9 +11,9 @@ import { PageHero } from "@/components/sections/PageHero";
 import { OpenChatButton } from "@/components/chatbot/OpenChatButton";
 import { Button } from "@/components/ui/Button";
 import { building, hero, proofChips } from "@/content/site-content";
-import { postsNewestFirst } from "@/content/writing/posts";
 import { getActiveReferralVariant } from "@/lib/cms/get-active-referral-variant";
 import { getReferralVariantContent } from "@/lib/cms/referral-variant";
+import { getPublicWriting } from "@/lib/writing/public-posts";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -27,7 +27,8 @@ type HomePageProps = {
 export default async function HomePage({ searchParams }: HomePageProps) {
   const variantId = await getActiveReferralVariant(searchParams);
   const copy = getReferralVariantContent(variantId);
-  const latest = postsNewestFirst().slice(0, 3);
+  const writing = await getPublicWriting();
+  const latest = writing.posts.slice(0, 3);
 
   return (
     <>
@@ -95,31 +96,37 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         </div>
       </section>
 
-      <section aria-labelledby="writing-title" className="border-t border-border-subtle">
-        <div className="shell grid gap-8 py-16 md:grid-cols-[220px_1fr]">
-          <h2 id="writing-title" className="font-serif text-h2 text-ink">
-            Writing
-          </h2>
-          {latest.length === 0 ? (
-            <p className="text-body">
-              <Link href="/writing" data-track="link:writing:home" className="underline decoration-accent underline-offset-4">
-                Essays and letters
-              </Link>
-            </p>
-          ) : (
+      {writing.show && (
+        <section aria-labelledby="writing-title" className="border-t border-border-subtle">
+          <div className="shell grid gap-8 py-16 md:grid-cols-[220px_1fr]">
+            <h2 id="writing-title" className="font-serif text-h2 text-ink">
+              Writing
+            </h2>
             <ul className="flex flex-col gap-6">
               {latest.map((post) => (
-                <li key={post.slug}>
-                  <Link href={`/writing/${post.slug}`} data-track={`link:open_writing:home`} className="font-serif text-h3 text-ink">
-                    {post.title}
-                  </Link>
-                  <p className="mt-2 text-body text-text-secondary">{post.excerpt}</p>
+                <li key={post.id}>
+                  {post.external ? (
+                    <a
+                      href={post.href}
+                      data-track="link:open_writing:home"
+                      className="font-serif text-h3 text-ink"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {post.title}
+                    </a>
+                  ) : (
+                    <Link href={post.href} data-track="link:open_writing:home" className="font-serif text-h3 text-ink">
+                      {post.title}
+                    </Link>
+                  )}
+                  {post.excerpt && <p className="mt-2 text-body text-text-secondary">{post.excerpt}</p>}
                 </li>
               ))}
             </ul>
-          )}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
     </>
   );
 }

@@ -1,7 +1,7 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the page people see when a URL does not exist. It offers
-// a way home. It is not a placeholder for a future page.
+// a way home. It does not stand in for a page that is still being written.
 // ============================================
 
 import Link from "next/link";

@@ -1,0 +1,5 @@
+---
+description: Data privacy security and external action gates
+alwaysApply: true
+---
+Read DATA-MODEL, SECURITY-AND-PRIVACY and STANDARDS-AND-GATES for authorization/data work. Deny by default; no secrets or unapproved irreversible actions. Deploy only after live verification.

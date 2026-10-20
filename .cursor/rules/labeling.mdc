@@ -1,0 +1,5 @@
+---
+description: Source file and code section naming
+alwaysApply: true
+---
+Read LABELING-STANDARD and SCHEMA-MAP when making structural code changes. Give modules readable semantic names, responsibility, inputs and outputs.

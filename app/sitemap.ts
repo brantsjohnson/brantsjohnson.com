@@ -1,15 +1,17 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This lists the public pages for search engines. Stub sections are
-// not included. Writing posts are added when they exist.
+// This lists the public pages for search engines. Writing is included
+// only when a real post exists.
 // ============================================
 
 import type { MetadataRoute } from "next";
 import { identity, projects } from "@/content/site-content";
-import { writingPosts } from "@/content/writing/posts";
+import { getPublicWriting } from "@/lib/writing/public-posts";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = ["", "/about", "/experience", "/projects", "/service", "/writing", "/contact", "/hi"];
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const writing = await getPublicWriting();
+  const paths = ["", "/about", "/experience", "/projects", "/service", "/contact", "/hi"];
+  if (writing.show) paths.push("/writing");
   const dated = new Date();
   return [
     ...paths.map((path) => ({
@@ -20,9 +22,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${identity.siteUrl}/projects/${project.slug}`,
       lastModified: dated,
     })),
-    ...writingPosts.map((post) => ({
-      url: `${identity.siteUrl}/writing/${post.slug}`,
-      lastModified: new Date(post.published),
-    })),
+    ...writing.posts
+      .filter((post) => !post.external)
+      .map((post) => ({
+        url: `${identity.siteUrl}${post.href}`,
+        lastModified: dated,
+      })),
   ];
 }

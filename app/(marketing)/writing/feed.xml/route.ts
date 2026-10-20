@@ -1,9 +1,8 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the RSS feed for the Writing page. It lists real essays
-// and letters only. An empty shelf produces a valid feed with no
-// items, so a reader can subscribe before the first piece is up.
-// Newsletter mirrors point their canonical link at the original.
+// This is the RSS feed for pieces published on this site. It is
+// available only when a real local post exists. Newsletter mirrors
+// point their canonical link at the original.
 // ============================================
 
 import { identity } from "@/content/site-content";
@@ -19,6 +18,9 @@ function escapeXml(value: string): string {
 
 export function GET() {
   const posts = postsNewestFirst();
+  if (posts.length === 0) {
+    return new Response("No posts yet.", { status: 404 });
+  }
   const items = posts
     .map((post) => {
       const link = post.canonicalUrl ?? `${identity.siteUrl}/writing/${post.slug}`;

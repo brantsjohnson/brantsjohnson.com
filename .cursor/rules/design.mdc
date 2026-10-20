@@ -1,0 +1,5 @@
+---
+description: Design-first and usability gate
+alwaysApply: true
+---
+Read DESIGN-SYSTEM and FEATURES-AND-FLOWS before any UI change. Use approved references, accessible controls, adaptive states, concise copy and locked-UI contract.

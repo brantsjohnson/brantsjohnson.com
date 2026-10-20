@@ -15,7 +15,7 @@ LinkedIn: https://www.linkedin.com/in/brantshanonjohnson/
 
 Intro: Founder and Product Lead, November 2025 to present. AI agent software for live events. Live at https://intro.events
 
-Bridger: started April 2025. It is in TestFlight beta with 1,778 users, about 230 part-time volunteers, and contracted engineers and designers. Live at https://bridger.social
+Bridger: Founder, started April 2025. It is in TestFlight beta with 1,778 users, about 230 part-time volunteers, and contracted engineers and designers. Live at https://bridger.social
 
 ## Utah Business
 
@@ -45,7 +45,7 @@ Product Manager for a regional volunteer organization, pro bono, in Birmingham, 
 
 BS in Business and Analysis, Utah Valley University, Woodbury School of Business, conferred April 30, 2025. Bachelor's degree only.
 
-Pendo Essentials for Web, October 2022, is a verified certificate. Agile Foundations is a course certificate from about October 2022, not a professional Agile certification. SQL, Python, and Figma are working skills. AWS is a skill, not a certificate.
+Pendo Essentials for Web, October 2022, is a verified certificate. Agile Foundations is a course certificate from about October 2022, not a professional Agile certification. SQL, Python, and Figma are working skills.
 
 ## Service and leadership
 

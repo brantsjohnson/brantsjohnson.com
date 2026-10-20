@@ -18,4 +18,5 @@ jobs:
       - run: npm run lint
       - run: npx tsc --noEmit
       - run: node tools/ci/no-stubs.mjs
+      - run: python3 tools/ci/no-stubs
       - run: npm run build
