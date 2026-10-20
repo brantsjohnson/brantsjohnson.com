@@ -1,32 +1,37 @@
 /* ============================================
    WHAT THIS FILE DOES (plain English):
-   This file holds the shared colors, text colors, fonts, spacing,
-   corner roundness, and motion numbers for the whole site (design
-   tokens). Components should use these names instead of typing raw
-   values. Change a value here once and the whole site follows.
-   Exact brand colors are still placeholders until Brant locks them in.
+   This file holds the shared colors, type, spacing, corners, and
+   motion for the whole site. Components use these names instead of
+   typing raw values. The palette is the live Wix look: gold headlines
+   on black, warm paper for reading, and a gray for quiet labels.
+   Gold is bright, so small text on paper uses black or a darker gray
+   that still passes contrast. Change a value here and the site follows.
    ============================================ */
 
 :root {
-  /* THIS SECTION DOES: set light-mode surface colors (placeholders) */
-  --color-bg: #f4f2ee; /* base page background, warm near-white like the preferred header */
-  --color-surface: #ffffff; /* solid panel fill before glass */
-  --color-glass: rgba(255, 255, 255, 0.72); /* see-through glass overlay */
-  --color-border-subtle: rgba(0, 0, 0, 0.08); /* thin border on glass panels */
+  /* THIS SECTION DOES: set the paper, ink, and black bands */
+  --color-bg: #f4f2ec; /* warm off-white page background */
+  --color-surface: #fffdf8; /* solid card fill on the paper */
+  --color-ink: #000000; /* true black for text on paper and for hero bands */
+  --color-on-hero: #f4f2ec; /* paper colored text that sits on a black band */
+  --color-glass: rgba(244, 242, 236, 0.82); /* sticky nav, light and slightly see-through */
+  --color-border-subtle: rgba(0, 0, 0, 0.12); /* hairline on paper */
+  --color-hero-line: rgba(233, 191, 133, 0.45); /* gold hairline used on black bands */
 
-  /* THIS SECTION DOES: set text colors */
-  --color-text-primary: #16150f; /* main headings and body */
-  --color-text-secondary: #57544c; /* captions and supporting copy */
+  /* THIS SECTION DOES: set text colors that stay readable on the paper */
+  --color-text-primary: #000000; /* headings and body on paper */
+  --color-text-secondary: #3f3d39; /* supporting text, darkened from the brand gray so it passes WCAG AA on paper */
+  --color-muted: #8f8f8f; /* the Wix gray, for large labels and rules only, never small body text */
 
-  /* THIS SECTION DOES: set the single accent color (replace when brand is final) */
-  --color-accent: #b0894a; /* warm gold accent, matches the active nav link in the preferred header */
-  --color-accent-muted: #caa76c; /* softer accent for hover */
+  /* THIS SECTION DOES: set the single gold accent */
+  --color-accent: #e9bf85; /* Wix gold for headlines on black, rules, and the main button */
+  --color-accent-muted: #d7ae72; /* slightly deeper gold for hover, still dark enough under black text */
 
-  /* THIS SECTION DOES: name the two typefaces (headings get a serif for personality, body stays neutral) */
-  --font-serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, Cambria, "Times New Roman", serif; /* full-name wordmark and headings */
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* body and UI text */
+  /* THIS SECTION DOES: name the two typefaces. Next.js fills the file variables. */
+  --font-serif: var(--font-serif-file), "Cormorant Garamond", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-sans: var(--font-sans-file), "Source Sans 3", "Avenir Next", Avenir, "Segoe UI", sans-serif;
 
-  /* THIS SECTION DOES: set the shared spacing steps (8px rhythm, per docs 14 and 16) */
+  /* THIS SECTION DOES: set the shared spacing steps (8px rhythm) */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -38,41 +43,28 @@
   --space-24: 96px;
   --space-32: 128px;
 
-  /* THIS SECTION DOES: set how wide the page and reading column are allowed to grow */
-  --shell-max: 1240px; /* the centered content shell so wide screens do not stretch */
-  --reading-max: 68ch; /* long-form text stays near 50 to 75 characters per line */
-  --page-gutter: clamp(16px, 3vw, 64px); /* side padding that grows with the screen */
+  /* THIS SECTION DOES: set how wide the page and the reading column may grow */
+  --shell-max: 1120px;
+  --reading-max: 66ch;
+  --page-gutter: clamp(20px, 4vw, 56px);
 
-  /* THIS SECTION DOES: set the two corner-roundness levels used everywhere */
-  --radius-panel: 20px; /* large glass panels and cards */
-  --radius-control: 12px; /* buttons, inputs, chips */
+  /* THIS SECTION DOES: set corner roundness. Buttons are soft. Story blocks are nearly square. */
+  --radius-panel: 18px;
+  --radius-control: 999px; /* pill buttons, a small bit of fun against the serious type */
 
-  /* THIS SECTION DOES: set the soft shadow used on glass panels (never a hard drop shadow) */
-  --shadow-glass: 0 20px 60px rgba(0, 0, 0, 0.12);
+  /* THIS SECTION DOES: set a soft shadow used rarely, never as a card stack */
+  --shadow-glass: 0 18px 50px rgba(0, 0, 0, 0.16);
 
   /* THIS SECTION DOES: set shared motion numbers */
-  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1); /* soft Apple-like easing */
-  --motion-fast: 120ms; /* tiny press and hover feedback */
-  --motion-standard: 220ms; /* menus and small transitions */
-  --motion-surface: 300ms; /* panels and sheets opening */
-  --motion-duration: 480ms; /* default section reveal length */
-  --glass-blur: 16px; /* blur strength for glass panels */
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-fast: 120ms;
+  --motion-standard: 220ms;
+  --motion-surface: 300ms;
+  --motion-duration: 480ms;
+  --glass-blur: 16px;
 
-  /* THIS SECTION DOES: set stacking order so layers never fight (higher sits on top) */
-  --z-sticky: 100; /* the sticky header */
-  --z-overlay: 200; /* dimmed background behind a panel */
-  --z-modal: 300; /* the chat panel and dialogs */
-}
-
-/* THIS SECTION DOES: swap to dark-mode placeholders when the device prefers dark */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #0b0b0c;
-    --color-surface: #161618;
-    --color-glass: rgba(22, 22, 24, 0.72);
-    --color-border-subtle: rgba(255, 255, 255, 0.1);
-    --color-text-primary: #f5f3ec;
-    --color-text-secondary: #a7a29a;
-    --shadow-glass: 0 20px 60px rgba(0, 0, 0, 0.5);
-  }
+  /* THIS SECTION DOES: set stacking order so the nav and chat stay above the page */
+  --z-sticky: 100;
+  --z-overlay: 200;
+  --z-modal: 300;
 }

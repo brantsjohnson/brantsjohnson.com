@@ -26,9 +26,15 @@ html {
 body {
   background: var(--color-bg);
   color: var(--color-text-primary);
-  font-family: var(--font-sans); /* neutral, legible body font */
+  font-family: var(--font-sans); /* light sans for reading, serif stays on headings */
+  font-weight: 400;
   font-size: var(--body-size, 1.0625rem);
   -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-ink);
 }
 
 /* THIS SECTION DOES: give every heading the serif typeface so the name and titles feel editorial */

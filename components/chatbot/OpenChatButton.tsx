@@ -14,13 +14,25 @@ import { openBrantChat } from "@/components/chatbot/chat-events";
 
 type OpenChatButtonProps = {
   children: ReactNode;
-  variant?: "primary" | "ghost";
+  variant?: "primary" | "ghost" | "line";
   className?: string;
+  track?: string;
 };
 
-export function OpenChatButton({ children, variant = "primary", className }: OpenChatButtonProps) {
+export function OpenChatButton({
+  children,
+  variant = "primary",
+  className,
+  track = "button:open_chat:page",
+}: OpenChatButtonProps) {
   return (
-    <Button variant={variant} onClick={openBrantChat} className={className} ariaLabel="Open BrantChat">
+    <Button
+      variant={variant}
+      onClick={openBrantChat}
+      className={className}
+      ariaLabel="Ask about me"
+      track={track}
+    >
       {children}
     </Button>
   );

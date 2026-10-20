@@ -1,38 +1,125 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the Home page. It stacks the chat-forward hero (with referral
-// variant copy when applicable), proof chips, photo mosaic, doorway cards,
-// the security focus block, and Bridger "Now" tastes when available.
+// This is the Home page. It opens with the bridge line, shows five
+// proof numbers, then Intro beside Bridger, then a door to writing.
+// Referral links can swap the hero lines. They do not change the facts.
 // ============================================
 
-import { Hero } from "@/components/sections/Hero";
-import { HomeSections } from "@/components/sections/HomeSections";
-import { Now } from "@/components/sections/Now";
-import { PhotoMosaic } from "@/components/sections/PhotoMosaic";
-import { ProofChips } from "@/components/sections/ProofChips";
-import { SecurityFocus } from "@/components/sections/SecurityFocus";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { PageHero } from "@/components/sections/PageHero";
+import { OpenChatButton } from "@/components/chatbot/OpenChatButton";
+import { Button } from "@/components/ui/Button";
+import { building, hero, proofChips } from "@/content/site-content";
+import { postsNewestFirst } from "@/content/writing/posts";
 import { getActiveReferralVariant } from "@/lib/cms/get-active-referral-variant";
 import { getReferralVariantContent } from "@/lib/cms/referral-variant";
-import { getBridgerInterests } from "@/lib/integrations/bridger";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description: hero.subline,
+};
 
 type HomePageProps = {
   searchParams?: Readonly<Record<string, string | string[] | undefined>>;
 };
 
-// THIS SECTION DOES: assemble the home page from its sections, top to bottom
 export default async function HomePage({ searchParams }: HomePageProps) {
   const variantId = await getActiveReferralVariant(searchParams);
-  const heroCopy = getReferralVariantContent(variantId);
-  const interests = await getBridgerInterests();
+  const copy = getReferralVariantContent(variantId);
+  const latest = postsNewestFirst().slice(0, 3);
 
   return (
     <>
-      <Hero copy={heroCopy} />
-      <ProofChips />
-      <PhotoMosaic />
-      <HomeSections />
-      <SecurityFocus copy={heroCopy} />
-      <Now interests={interests} />
+      <PageHero
+        eyebrow="Brant S. Johnson"
+        title={copy.heroHeadline}
+        deck={copy.heroBody}
+        tall
+        mark
+        actions={
+          <>
+            <OpenChatButton track="button:open_chat:home">{hero.primaryCta}</OpenChatButton>
+            <Button href={hero.secondaryCta.href} variant="line" track="button:see_work:home">
+              {hero.secondaryCta.label}
+            </Button>
+          </>
+        }
+      />
+
+      <section aria-label="Proof" className="border-b border-border-subtle">
+        <ol className="shell grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-5">
+          {proofChips.map((chip) => (
+            <li key={chip.value}>
+              <p className="font-serif text-h2 text-ink">{chip.value}</p>
+              <div className="mt-3 h-px w-10 bg-accent" />
+              <p className="mt-3 text-caption text-text-secondary">{chip.label}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section aria-labelledby="building-title" className="shell py-16">
+        <div>
+          <h2 id="building-title" className="font-serif text-h2 text-ink">
+            {building.kicker}
+          </h2>
+          <div className="mt-8 grid gap-6 lg:grid-cols-12">
+            <article className="flex flex-col justify-between bg-ink p-8 text-on-hero lg:col-span-7 lg:min-h-[360px] lg:p-12">
+              <div>
+                <p className="text-caption uppercase tracking-[0.18em] text-accent">{building.intro.role}</p>
+                <h3 className="mt-3 font-serif text-display text-accent">{building.intro.name}</h3>
+                <p className="mt-4 max-w-reading text-body">{building.intro.summary}</p>
+                <p className="mt-2 text-caption text-muted">{building.intro.dates}</p>
+              </div>
+              <div className="mt-8">
+                <Button href={building.intro.href} track="button:visit_intro:home">
+                  {building.intro.hrefLabel}
+                </Button>
+              </div>
+            </article>
+            <article className="flex flex-col justify-between border border-ink p-8 lg:col-span-5">
+              <div>
+                <p className="text-caption uppercase tracking-[0.18em] text-text-secondary">{building.bridger.role}</p>
+                <h3 className="mt-3 font-serif text-h1 text-ink">{building.bridger.name}</h3>
+                <p className="mt-4 text-body text-text-secondary">{building.bridger.summary}</p>
+                <p className="mt-2 text-caption text-text-secondary">{building.bridger.dates}</p>
+              </div>
+              <div className="mt-8">
+                <Button href={building.bridger.href} variant="ghost" track="button:visit_bridger:home">
+                  {building.bridger.hrefLabel}
+                </Button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="writing-title" className="border-t border-border-subtle">
+        <div className="shell grid gap-8 py-16 md:grid-cols-[220px_1fr]">
+          <h2 id="writing-title" className="font-serif text-h2 text-ink">
+            Writing
+          </h2>
+          {latest.length === 0 ? (
+            <p className="text-body">
+              <Link href="/writing" data-track="link:writing:home" className="underline decoration-accent underline-offset-4">
+                Essays and letters
+              </Link>
+            </p>
+          ) : (
+            <ul className="flex flex-col gap-6">
+              {latest.map((post) => (
+                <li key={post.slug}>
+                  <Link href={`/writing/${post.slug}`} data-track={`link:open_writing:home`} className="font-serif text-h3 text-ink">
+                    {post.title}
+                  </Link>
+                  <p className="mt-2 text-body text-text-secondary">{post.excerpt}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </section>
     </>
   );
 }

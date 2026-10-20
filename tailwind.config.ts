@@ -27,6 +27,9 @@ const config: Config = {
         "text-secondary": "var(--color-text-secondary)",
         accent: "var(--color-accent)",
         "accent-muted": "var(--color-accent-muted)",
+        ink: "var(--color-ink)",
+        "on-hero": "var(--color-on-hero)",
+        muted: "var(--color-muted)",
       },
       // THIS SECTION DOES: connect the two typefaces to font-serif and font-sans
       fontFamily: {

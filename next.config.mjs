@@ -9,9 +9,18 @@
 const wixToNextRedirects = [
   { old: "/blank-2", next: "/experience" },
   { old: "/blank-1", next: "/service" },
-  { old: "/blank-3", next: "/leadership" },
-  { old: "/blank-4", next: "/skills" },
+  { old: "/blank-3", next: "/service" },
+  { old: "/blank-4", next: "/about#skills" },
   { old: "/about-1", next: "/about" },
+  { old: "/leadership", next: "/service" },
+  { old: "/skills", next: "/about#skills" },
+  { old: "/blog", next: "/writing" },
+  { old: "/blog/:slug", next: "/writing/:slug" },
+  { old: "/poetry", next: "/writing" },
+  { old: "/poetry/:slug", next: "/writing" },
+  { old: "/civic-engagement", next: "/service" },
+  { old: "/photography", next: "/about" },
+  { old: "/photography/:slug", next: "/about" },
 ];
 
 /** @type {import('next').NextConfig} */

@@ -12,6 +12,7 @@
 import { openai } from "@ai-sdk/openai";
 import { streamText, convertToModelMessages, type UIMessage } from "ai";
 import { buildSystemPrompt } from "@/lib/ai/prompt";
+import { reserveChatSpend } from "@/lib/ai/spend-cap";
 import { getClientIp, rateLimit } from "@/lib/utils/rate-limit";
 
 // THIS SECTION DOES: run this on the Node.js runtime and allow up to 30
@@ -61,6 +62,12 @@ export async function POST(request: Request) {
       { error: "Too many messages. Please wait a moment and try again." },
       { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } }
     );
+  }
+
+  // --- COST: stop answering once this process has reserved the monthly cap ---
+  const budget = reserveChatSpend();
+  if (!budget.ok) {
+    return Response.json({ error: budget.error }, { status: 429 });
   }
 
   // THIS SECTION DOES: read the conversation and optional company/role context

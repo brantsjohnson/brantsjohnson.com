@@ -1,8 +1,8 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // Edge middleware runs before pages load. It handles referral links
-// (/from/ig and query params), and rewrites the BrantChat subdomain
-// root to the in-site /chat page when that host points here.
+// (/from/ig and query params), and sends the BrantChat subdomain to
+// the home page with Ask about me already open.
 // ============================================
 
 import { NextResponse } from "next/server";
@@ -36,10 +36,10 @@ export function middleware(request: NextRequest) {
   const host = request.headers.get("host") ?? "";
   const isBrantChatHost = host.startsWith("brantchat.");
 
+  // The old chat subdomain now opens Ask about me on the public site.
   if (isBrantChatHost && request.nextUrl.pathname === "/") {
-    const url = request.nextUrl.clone();
-    url.pathname = "/chat";
-    return NextResponse.rewrite(url);
+    const canonical = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.brantsjohnson.com";
+    return NextResponse.redirect(`${canonical}/?ask=1`, 301);
   }
 
   const { pathname } = request.nextUrl;

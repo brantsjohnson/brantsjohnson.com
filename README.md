@@ -4,16 +4,14 @@ Personal site for Brant S. Johnson.
 
 ## What this is right now
 
-Foundation only, matching `docs/01-ARCHITECTURE.md`:
+The public site is a multi-page Next.js app:
 
-- Next.js 14 App Router + TypeScript + Tailwind
-- Route stubs for marketing sections, admin portal, and API endpoints
-- `lib/` for AI (chatbot), CMS, and integrations
-- Design token placeholders in `styles/tokens.css`
-- Initial Supabase `site` schema migration (not applied yet)
-- Integrated chatbot at `/chat` (see `docs/15-CHAT-INTEGRATION.md`)
+- Home, About, Experience, Projects, Service & Leadership, Writing, Contact, and `/hi`
+- Ask about me on every page, answered from `content/about-brant.md`
+- Wix palette and serif headings in `styles/tokens.css`
+- Old Wix URLs redirect. Photography, poetry, civic, skills, and leadership stubs are gone.
 
-No full brand polish or marketing content yet.
+Unconfirmed claims are listed in `VERIFY.md`, not printed as fact. Open follow-ups are in `ops/DECISIONS-NEEDED.md`.
 
 ## Quick start
 

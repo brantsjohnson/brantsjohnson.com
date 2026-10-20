@@ -1,301 +1,357 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the single place that holds the words and facts shown on
-// the public site: Brant's name, the navigation labels, the home
-// page copy, the proof stats, and the Experience, Service,
-// Leadership, Skills, About, and Projects entries.
-// Pages read from here so copy lives in one spot, never hardcoded
-// inside a component. All copy here follows the no-dashes rule from
-// docs/03 (dates read "Oct 2024 to Nov 2025", never with a dash).
-// This file holds content only. It does not draw any UI itself.
+// the public site: name, navigation, home, about, experience, projects,
+// service, contact, and the short /hi page. Pages read from here so
+// copy lives in one spot. Dates are written with "to", never a dash.
+// Unverified claims are not in this file. They are listed in VERIFY.md.
+// This file holds content only. It does not draw any UI.
 // ============================================
 
-// THIS SECTION DOES: describe the shapes of our content so editors get autocomplete and typos are caught
+// THIS SECTION DOES: describe the shapes of the content so typos are caught early
 export type NavItem = {
   label: string;
-  // A route item navigates to a page. A chat item opens the BrantChat panel instead of a page.
   kind: "route" | "chat";
-  href?: string; // present for route items
+  href?: string;
 };
 
 export type ProofChip = {
-  value: string; // the big number or word that carries the proof
-  label: string; // one short line of context for that number
+  value: string;
+  label: string;
 };
 
-export type PhotoSlot = {
-  alt: string; // what the photo shows, for screen readers and as the placeholder caption
-  // Optional real image path under /public. When empty, the UI shows a framed placeholder.
-  src?: string;
-  // Rough shape of the frame so the gallery reserves space and never jumps as images load.
-  aspect: "portrait" | "landscape" | "square";
-};
-
-export type TimelineEntry = {
+export type ExperienceRole = {
   org: string;
   role: string;
-  dates?: string; // optional, written without dashes; omitted when a firm date is not known
+  dates: string;
+  place?: string;
   summary: string;
+  href?: string;
+  hrefLabel?: string;
 };
 
-export type SkillGroup = {
-  group: string;
-  items: string[];
+export type ServiceStory = {
+  title: string;
+  role: string;
+  dates: string;
+  place?: string;
+  paragraphs: string[];
 };
 
 export type Project = {
+  slug: string;
   name: string;
-  blurb: string;
-  status: "live" | "coming-soon";
-  // A live on-site feature that opens the chat panel instead of navigating away.
+  kicker: string;
+  summary: string;
+  paragraphs: string[];
+  href?: string;
+  hrefLabel?: string;
   kind?: "chat";
-  // A real, working URL. Only ever set when the link is live. Coming-soon items leave this empty.
-  url?: string;
+  featured?: boolean;
 };
 
-// THIS SECTION DOES: hold Brant's identity and the wordmark shown in the header (full name only, never initials)
+// THIS SECTION DOES: hold Brant's identity. The header shows the full name, never initials.
 export const identity = {
   fullName: "Brant S. Johnson",
-  wordmark: "Brant S. Johnson", // the header shows the full name, never a "BSJ" monogram
-  role: "Customer focused product manager",
+  wordmark: "Brant S. Johnson",
+  role: "Customer-focused product manager",
   location: "American Fork, Utah. Open to relocating.",
-  email: "Brantshanonjohnson@gmail.com",
+  email: "me@brantsjohnson.com",
   linkedin: "https://www.linkedin.com/in/brantshanonjohnson/",
+  siteUrl: "https://www.brantsjohnson.com",
 };
 
-// THIS SECTION DOES: list the main navigation, matching Brant's preferred header order
-// BrantChat opens the chat panel rather than loading a page, so it has no href.
+// THIS SECTION DOES: the master résumé PDF approved on October 6, 2026
+export const cv = {
+  label: "Open the CV",
+  href: "https://drive.google.com/file/d/13CIXfn65M3b8HJ7nH0AapH2mY9RBoOZ3/view",
+};
+
+// THIS SECTION DOES: list the main navigation, in the order the plan locked
 export const primaryNav: NavItem[] = [
   { label: "Home", kind: "route", href: "/" },
-  { label: "BrantChat", kind: "chat" },
-  { label: "Experience", kind: "route", href: "/experience" },
-  { label: "Service", kind: "route", href: "/service" },
-  { label: "Leadership", kind: "route", href: "/leadership" },
-  { label: "Skills", kind: "route", href: "/skills" },
   { label: "About", kind: "route", href: "/about" },
-];
-
-// THIS SECTION DOES: list the quieter pages, kept out of the main row so it stays clean (docs/08 §3)
-// Contact lives here only, so it appears once on the site (the "contact once" rule in docs/03).
-export const secondaryNav: NavItem[] = [
+  { label: "Experience", kind: "route", href: "/experience" },
   { label: "Projects", kind: "route", href: "/projects" },
-  { label: "Writing", kind: "route", href: "/blog" },
-  { label: "Photography", kind: "route", href: "/photography" },
-  { label: "Civic Engagement", kind: "route", href: "/civic-engagement" },
+  { label: "Service & Leadership", kind: "route", href: "/service" },
+  { label: "Writing", kind: "route", href: "/writing" },
   { label: "Contact", kind: "route", href: "/contact" },
+  { label: "Ask about me", kind: "chat" },
 ];
 
-// THIS SECTION DOES: hold the home hero copy and its two calls to action
+// THIS SECTION DOES: the home hero. Referral traffic may swap the lines. The CTAs stay.
 export const hero = {
-  eyebrow: "Product management",
-  // The home hero shows the full name large, the way Brant's preferred header does.
-  name: identity.fullName,
-  // One line that says what he does, front-loaded with the meaning.
-  positioning:
-    "Product manager who has owned the whole thing, from KYC and onboarding to analytics, and who sells what he ships.",
-  primaryCta: { label: "Ask about my work", kind: "chat" as const },
-  secondaryCta: { label: "See my experience", href: "/experience" },
+  headline: "I build technology as a bridge to real human connection.",
+  subline:
+    "Product manager and founder. I've owned the whole loop, from KYC and onboarding to analytics, and I sell what I ship.",
+  primaryCta: "Ask about my work",
+  secondaryCta: { label: "See my work", href: "/projects" },
 };
 
-// THIS SECTION DOES: hold the proof stats shown on home for density (the first one is the Crew chip)
+// THIS SECTION DOES: the proof row on home. Each number is a checked fact.
 export const proofChips: ProofChip[] = [
   { value: "Sole PM", label: "First and only product manager at Crew Finance" },
   { value: "50%", label: "Faster onboarding from experiments I ran at Crew" },
+  { value: "$2.5M", label: "Raise I built the financial models for at Crew" },
+  { value: "1,778", label: "People in the Bridger TestFlight beta" },
   { value: "400", label: "Volunteers I trained and led in Birmingham, England" },
-  { value: "2,270%", label: "Content lift I drove at Young Ambassadors" },
-  { value: "22", label: "Youth I led on a Habitat for Humanity build in Hawaii" },
-  { value: "Weekly", label: "AI training I run for the team at Utah Business" },
 ];
 
-// THIS SECTION DOES: hold the home photo gallery slots
-// These are framed placeholders until Brant drops real files into /public/photos.
-// The alt text describes the intended photo so the layout is meaningful even while empty.
-export const photoSlots: PhotoSlot[] = [
-  { alt: "Brant presenting product work to a team", aspect: "landscape" },
-  { alt: "Brant on the front lines at a Utah Business event", aspect: "portrait" },
-  { alt: "The Crew Finance card program work in progress", aspect: "square" },
-  { alt: "Brant leading youth on the Habitat for Humanity build in Hawaii", aspect: "landscape" },
-];
+// THIS SECTION DOES: the two products on home. Intro is the featured one.
+export const building = {
+  kicker: "Currently building",
+  intro: {
+    name: "Intro",
+    role: "Founder and Product Lead",
+    dates: "Nov 2025 to present",
+    summary: "AI agent software for live events.",
+    href: "https://intro.events",
+    hrefLabel: "Visit Intro",
+  },
+  bridger: {
+    name: "Bridger",
+    role: "TestFlight beta",
+    dates: "Apr 2025 to present",
+    summary:
+      "1,778 users, about 230 part-time volunteers, and contracted engineers and designers.",
+    href: "https://bridger.social",
+    hrefLabel: "Visit Bridger",
+  },
+};
 
-// THIS SECTION DOES: hold the Experience timeline (paid product and sales roles)
-export const experience: TimelineEntry[] = [
+// THIS SECTION DOES: the About page, using the connection story that already reads like him
+export const about = {
+  eyebrow: "About",
+  title: "People matter most.",
+  paragraphs: [
+    "I'm Brant Johnson, a product-minded entrepreneur and community builder who believes connection is the antidote to loneliness, and the foundation of any thriving society.",
+    "Over the years, I've worked in product management, AI, media, and government, and I've seen both the good and the bad of what technology can do.",
+    "On one hand, it can pull us into endless scrolling and shallow interactions. On the other, it has the power to rebuild trust, spark collaboration, and make relationships stronger. I'm choosing the latter.",
+    "My career has taken me through startups where I helped shape fintech products, media organizations where I connected with CEOs and entrepreneurs, and political spaces where I saw how communities thrive when people are engaged.",
+    "Across all of it, one theme has been constant. I love building tools, spaces, and stories that bring people together.",
+    "Bridger is the app that helps strangers become friends. Intro is where I experiment with AI that should enhance human connection, not replace it. The work comes back to the same belief: people matter most.",
+    "I don't see technology as the end goal. I see it as a bridge to stronger friendships, better communities, and more meaningful lives.",
+  ],
+  educationTitle: "Education",
+  education:
+    "I earned a BS in Business and Analysis at Utah Valley University, Woodbury School of Business, in 2025.",
+  location: "I live in American Fork, Utah, and I am open to relocating.",
+  skillsTitle: "Skills",
+  skills:
+    "Pendo Essentials for Web, SQL, Python, Figma, and an Agile Foundations course certificate. AWS is a skill I use, not a certificate I hold.",
+  outsideTitle: "Outside work",
+  outside: [
+    "I designed, fundraised, and managed the Uintah Resilience Archway in Vernal. The build ran from 2017 to 2023.",
+    "I founded the Resilience Scholarship in 2020 so more graduating seniors could be seen, and I started a weekly meeting with the school counselors.",
+  ],
+};
+
+// THIS SECTION DOES: the experience timeline, newest first, checked facts only
+export const experienceIntro = {
+  eyebrow: "Experience",
+  title: "The work, in order.",
+  deck: "About six years of product work, from a volunteer organization in Birmingham to the products I am building now.",
+};
+
+export const experience: ExperienceRole[] = [
+  {
+    org: "Intro",
+    role: "Founder and Product Lead",
+    dates: "Nov 2025 to present",
+    summary: "I build AI agent software for live events.",
+    href: "https://intro.events",
+    hrefLabel: "Visit Intro",
+  },
+  {
+    org: "Bridger",
+    role: "TestFlight beta",
+    dates: "Apr 2025 to present",
+    summary:
+      "I started Bridger in April 2025. It is in TestFlight beta with 1,778 users, about 230 part-time volunteers, and contracted engineers and designers.",
+    href: "https://bridger.social",
+    hrefLabel: "Visit Bridger",
+  },
   {
     org: "Utah Business",
     role: "Account Executive",
     dates: "Oct 2024 to Nov 2025",
+    place: "Salt Lake City",
     summary:
-      "Recruited to sell print, digital, and event campaigns to Utah companies. I ran AI training for the team every week and rebuilt scattered sales steps into clean Monday.com and Magazine Manager workflows.",
+      "I sold print, digital, and event campaigns across 63 clients and 52 annual events. I partnered with agency teams, ran weekly AI training for the team, and kept the work in Monday.com and Magazine Manager.",
   },
   {
     org: "Crew Finance",
-    role: "Product Manager",
-    dates: "Dec 2022 to Mar 2024",
+    role: "Senior Product Manager (first employee)",
+    dates: "Dec 2022 to Apr 2024",
+    place: "Remote",
     summary:
-      "The first and only product manager. I owned strategy, design, onboarding, user research, and the card program. I set up the KYC process with banking and compliance partners, and ran onboarding experiments that cut onboarding time in half.",
+      "I was the first employee and the only product manager. I owned the Visa card issuing program, set up KYC with banking and compliance partners, and ran onboarding experiments that cut onboarding time in half. I built the financial models behind a $2.5M raise, and I led the brand identity as lead illustrator.",
   },
   {
-    org: "Divvy",
-    role: "Product Analytics",
-    summary:
-      "I emailed my way into a role that did not exist yet, then ran analytics for every product team. My main project was fixing Pendo so teams could trust what it told them about how people used the app.",
+    org: "Office of Senator Mitt Romney",
+    role: "Congressional Intern",
+    dates: "Sept 6 to Dec 8, 2022",
+    place: "Washington, D.C.",
+    summary: "I interned in the Washington, D.C. office.",
   },
   {
-    org: "Sandbox",
-    role: "Founding Product Manager",
+    org: "Divvy (BILL)",
+    role: "Associate Product Management Analyst (internship)",
+    dates: "Jun to Sept 2022",
+    place: "Draper, Utah",
     summary:
-      "My first real product team in tech. Four people and four interns building from scratch. I was the product manager, the salesperson, the researcher, and the one learning to code at 2 AM.",
+      "I was the analytics partner to 8 product managers. I did not own a roadmap. My main project was fixing Pendo so teams could trust what it told them.",
   },
   {
-    org: "FranklinCovey",
-    role: "Marketing",
+    org: "BackLocal",
+    role: "Head of Product",
+    dates: "Sept 2021 to Sept 2022",
+    place: "Sandbox, Provo",
     summary:
-      "Worked under the VP of Marketing on book launches, digital courses, and author brands. I ran the LinkedIn outreach strategy using Sales Navigator.",
-  },
-];
-
-// THIS SECTION DOES: hold the Service timeline (humanitarian and community work)
-export const service: TimelineEntry[] = [
-  {
-    org: "Habitat for Humanity, Hilo, Hawaii",
-    role: "Trip Leader",
-    dates: "May to Aug 2021",
-    summary:
-      "Led 22 youth over a series of 10 days to build a home. I planned daily service, cultural, and personal growth activities, and navigated the group through strict COVID protocol.",
+      "I led product in the Sandbox venture program, ran more than 370 user interviews, and led a 7-day design sprint. The product had revenue at launch.",
   },
   {
-    org: "Community service, Utah",
-    role: "Volunteer",
-    summary:
-      "Tutored fourth graders, ran a stop bullying campaign across seven schools, and volunteered with the Boys and Girls Club.",
-  },
-];
-
-// THIS SECTION DOES: hold the Leadership timeline (roles where Brant directed people and programs)
-export const leadership: TimelineEntry[] = [
-  {
-    org: "Young Ambassadors, International Musical Theatre Company",
-    role: "Public Relations Director and Performer",
-    dates: "Apr 2021 to May 2023",
-    summary:
-      "Grew content interactions by 2,270% and expanded the audience past 3,100 followers through Facebook and Instagram campaigns.",
-  },
-  {
-    org: "TEDxSaltLakeCity",
-    role: "Organization Assistant",
-    dates: "Jan to Sept 2021",
-    summary:
-      "Directed monthly meetings, set structured agendas and clear minutes, and designed brand creative to promote key events.",
-  },
-  {
-    org: "Regional service, Birmingham, England",
-    role: "Regional Leader",
+    org: "Regional Volunteer Organization",
+    role: "Product Manager (pro bono)",
     dates: "Oct 2017 to Sept 2019",
+    place: "Birmingham, England",
     summary:
-      "Trained and led 400 volunteers on organizational standards and financial policy, and ran quarterly campaigns that reached thousands.",
+      "I trained and led 400 volunteers and built 3 internal reporting tools. Reporting dropped from about 2 days to about 3 hours, and adoption led the organization to add a second engineer.",
   },
 ];
 
-// THIS SECTION DOES: hold the Skills, grouped so the page scans easily instead of one long list
-export const skills: SkillGroup[] = [
-  {
-    group: "Product",
-    items: [
-      "Product management",
-      "Strategic roadmaps",
-      "Go to market strategy",
-      "User research",
-      "Experimentation",
-      "Product operations",
-    ],
-  },
-  {
-    group: "AI",
-    items: [
-      "OpenAI and Gemini APIs",
-      "Prompt and retrieval design",
-      "Embeddings and similarity scoring",
-      "Cursor",
-      "Weekly team AI training",
-    ],
-  },
-  {
-    group: "Technical",
-    items: ["SQL", "Python", "React Native", "VBA for Excel", "WordPress", "CSS"],
-  },
-  {
-    group: "Design",
-    items: [
-      "Figma",
-      "Adobe Illustrator",
-      "Adobe Lightroom",
-      "Procreate",
-      "Brand and packaging design",
-    ],
-  },
-  {
-    group: "Business",
-    items: [
-      "B2B strategy",
-      "P&L management",
-      "Financial modeling",
-      "Startup development",
-      "Process improvement",
-    ],
-  },
-  {
-    group: "Leadership",
-    items: [
-      "Team leadership",
-      "Hiring and training",
-      "Conflict management",
-      "Cross functional communication",
-    ],
-  },
-];
-
-// THIS SECTION DOES: hold a short list of notable certifications for the Skills page
-export const certifications: string[] = [
-  "AWS Certified Cloud Practitioner (Jun 2025)",
-  "Agile Product Owner Role (Jun 2025)",
-  "Figma Essential Training (Oct 2022)",
-  "Learning SQL Programming (Oct 2022)",
-  "Python Data Analysis (Oct 2022)",
-  "Lean Six Sigma Projects (Nov 2022)",
-];
-
-// THIS SECTION DOES: hold the About page paragraphs, written in Brant's first person voice
-export const about = {
-  headline: "About Brant",
-  paragraphs: [
-    "I am a product manager based in American Fork, Utah, and I am open to relocating.",
-    "I like the whole loop, not just the build. I have owned product strategy, KYC, onboarding, and the card program at Crew Finance, run analytics across product teams at Divvy, and sold campaigns on the front lines at Utah Business. Selling what I ship shows me the gaps faster than any dashboard.",
-    "My top Clifton strength is Futuristic. I think in roadmaps and in how a product wins against the field while staying useful to the customer.",
-    "I use AI every day and train teams on it every week. I believe the teams that adopt tools like Cursor early will move the fastest.",
-    "I studied Business Strategy with a Product Management emphasis at the BYU Marriott School of Business.",
-  ],
+// THIS SECTION DOES: service and leadership stories that are safe to print
+export const serviceIntro = {
+  eyebrow: "Service & Leadership",
+  title: "Work that stayed in the town.",
+  deck: "The archway, the scholarship, a build in Hawaii, TEDxSaltLakeCity, and student government.",
 };
 
-// THIS SECTION DOES: hold the Projects list
-// Rule from Brant: live links only. A project without a working URL is marked "coming soon"
-// and is never turned into a clickable link, so the site has no dead links.
-export const projects: Project[] = [
+export const serviceStories: ServiceStory[] = [
   {
-    name: "BrantChat",
-    blurb:
-      "An AI assistant trained on my work. Ask it about my product experience, my projects, or how I think.",
-    status: "live",
-    kind: "chat", // opens the chat panel on this site, a working on-site feature
+    title: "Uintah Resilience Archway",
+    role: "Designer, fundraiser, and project manager",
+    dates: "2017 to 2023",
+    place: "Vernal, Utah",
+    paragraphs: [
+      "For more than 60 years Uintah had an archway. I decided to reconstruct a new one.",
+      "I fundraised and asked people to donate their services. I designed it, managed the build, and saw it through from 2017 to 2023.",
+    ],
   },
   {
-    name: "Filibusters",
-    blurb:
-      "A project on how political systems and procedure actually work. The live link is coming soon.",
-    status: "coming-soon", // no url on purpose, so it never renders as a link
+    title: "Resilience Scholarship",
+    role: "Founder",
+    dates: "Began 2020",
+    place: "Vernal, Utah",
+    paragraphs: [
+      "A lot of scholarships go to students whose lives already make room for high grades and long activity lists.",
+      "I founded the Resilience Scholarship in 2020, and I started a weekly meeting with the school counselors so more graduating seniors could be seen.",
+      "If you want to donate, write me from the Contact page.",
+    ],
   },
   {
-    name: "Conference matchmaking",
-    blurb:
-      "An app that uses AI to connect the right people at business conferences. The live link is coming soon.",
-    status: "coming-soon",
+    title: "Habitat for Humanity, Hilo",
+    role: "Trip leader",
+    dates: "May to Aug 2021",
+    place: "Hilo, Hawaii",
+    paragraphs: [
+      "I led 22 youth over a series of 10 days to build a home.",
+      "I planned daily service, cultural, and personal growth activities, and navigated the group through strict COVID protocol.",
+    ],
+  },
+  {
+    title: "TEDxSaltLakeCity",
+    role: "Organization Assistant",
+    dates: "Jan to Sept 2021",
+    paragraphs: [
+      "I directed monthly meetings, set structured agendas and clear minutes, and designed brand creative to promote events.",
+      "That role ended in September 2021.",
+    ],
+  },
+  {
+    title: "Student government",
+    role: "Student body president",
+    dates: "Elementary, middle, and high school",
+    place: "Vernal, Utah",
+    paragraphs: [
+      "I was student body president in elementary, middle, and high school in Vernal, Utah.",
+    ],
   },
 ];
+
+// THIS SECTION DOES: the projects. Live links only. Ask about me opens the on-site panel.
+export const projectsIntro = {
+  eyebrow: "Projects",
+  title: "Two products, and a way to ask.",
+  deck: "Intro is the featured build. Bridger is in TestFlight. Ask about me stays on this site.",
+};
+
+export const projects: Project[] = [
+  {
+    slug: "intro",
+    name: "Intro",
+    kicker: "Featured",
+    summary: "AI agent software for live events. Founder and Product Lead since November 2025.",
+    paragraphs: [
+      "Intro is AI agent software for live events. I am Founder and Product Lead, from November 2025.",
+      "The product is live. This page does not stand in for it.",
+    ],
+    href: "https://intro.events",
+    hrefLabel: "Visit Intro",
+    featured: true,
+  },
+  {
+    slug: "bridger",
+    name: "Bridger",
+    kicker: "Beta",
+    summary:
+      "A TestFlight beta I started in April 2025. 1,778 users, about 230 part-time volunteers, and contracted engineers and designers.",
+    paragraphs: [
+      "I started Bridger in April 2025. It is in TestFlight beta.",
+      "1,778 people use it. About 230 part-time volunteers are part of the work, along with contracted engineers and designers.",
+    ],
+    href: "https://bridger.social",
+    hrefLabel: "Visit Bridger",
+  },
+  {
+    slug: "ask",
+    name: "Ask about me",
+    kicker: "On this site",
+    summary: "A short conversation grounded in the public facts on this site. It will not guess.",
+    paragraphs: [
+      "Ask about my work, my schooling, or how to reach me. The answers come from the public notes on this site.",
+      "If a fact is not in those notes, the assistant says so.",
+    ],
+    kind: "chat",
+  },
+];
+
+// THIS SECTION DOES: the writing shelves. Posts themselves live in content/writing/posts.ts.
+export const writingIntro = {
+  eyebrow: "Writing",
+  title: "Essays and letters.",
+  deck: "Government reform essays live here. Newsletter letters are mirrored one day later, with a link back to the original.",
+  essayShelf: "Government reform",
+  letterShelf: "Newsletter",
+};
+
+// THIS SECTION DOES: the contact page. This is the one place the email address is shown.
+export const contactIntro = {
+  eyebrow: "Contact",
+  title: "Write me.",
+  deck: "If you want to talk about the work, send a note. I read them.",
+};
+
+// THIS SECTION DOES: the short page he can text from an event
+export const hiPage = {
+  eyebrow: "Hi",
+  title: "I build technology as a bridge to real human connection.",
+  deck: "Product manager and founder. Try the work, then leave a way for me to follow up.",
+  privacy:
+    "Your name and note are stored so I can follow up. You can ask me to delete them by emailing me from the Contact page.",
+};
+
+// THIS SECTION DOES: find one project by the slug in its URL
+export function getProject(slug: string): Project | undefined {
+  return projects.find((project) => project.slug === slug);
+}
