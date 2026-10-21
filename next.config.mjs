@@ -7,11 +7,27 @@
 // ============================================
 
 const wixToNextRedirects = [
-  { old: "/blank-2", next: "/experience" },
-  { old: "/blank-1", next: "/service" },
-  { old: "/blank-3", next: "/leadership" },
-  { old: "/blank-4", next: "/skills" },
+  { old: "/blank-2", next: "/work" },
+  { old: "/experience", next: "/work" },
+  { old: "/projects", next: "/work" },
+  { old: "/projects/intro", next: "/work#intro" },
+  { old: "/projects/bridger", next: "/work#bridger" },
+  { old: "/projects/ask", next: "/ask" },
+  { old: "/projects/:slug", next: "/work" },
+  { old: "/blank-1", next: "/about#service" },
+  { old: "/blank-3", next: "/about#service" },
+  { old: "/service", next: "/about#service" },
+  { old: "/leadership", next: "/about#service" },
+  { old: "/civic-engagement", next: "/about#service" },
+  { old: "/blank-4", next: "/about#skills" },
   { old: "/about-1", next: "/about" },
+  { old: "/skills", next: "/about#skills" },
+  { old: "/blog", next: "/writing" },
+  { old: "/blog/:slug", next: "/writing/:slug" },
+  { old: "/poetry", next: "/writing" },
+  { old: "/poetry/:slug", next: "/writing" },
+  { old: "/photography", next: "/about" },
+  { old: "/photography/:slug", next: "/about" },
 ];
 
 /** @type {import('next').NextConfig} */

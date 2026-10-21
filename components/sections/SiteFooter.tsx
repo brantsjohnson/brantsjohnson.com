@@ -1,42 +1,44 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the footer at the bottom of every public page. It repeats
-// the full-name wordmark, offers the quieter secondary links
-// (Projects, Writing, Photography, Civic Engagement, Contact), and
-// shows a small copyright line. Contact appears here as a link only;
-// the actual contact details live on the Contact page, so contact
-// information is never duplicated (the "contact once" rule, docs/03).
+// This is the footer. It repeats the full name as a way home and
+// lists the same pages as the header, in a quieter row. The email
+// address is not repeated here. It lives on the Contact page.
+// The year updates on its own.
 // ============================================
 
 import Link from "next/link";
-import { identity, secondaryNav } from "@/content/site-content";
+import { identity, primaryNav } from "@/content/site-content";
 
-export function SiteFooter() {
-  // THIS SECTION DOES: show the current year so the copyright stays current on its own
+type SiteFooterProps = {
+  showWriting?: boolean; // true only when at least two real pieces exist
+};
+
+export function SiteFooter({ showWriting = false }: SiteFooterProps) {
   const year = new Date().getFullYear();
+  const links = primaryNav.filter((item) => item.href !== "/" && item.href !== "/ask");
+  if (showWriting) {
+    links.splice(2, 0, { label: "Writing", kind: "route", href: "/writing" });
+  }
 
   return (
-    <footer className="mt-24 border-t border-border-subtle">
-      <div className="shell flex flex-col gap-8 py-12 md:flex-row md:items-center md:justify-between">
-        {/* The wordmark again, quietly, tying the bottom back to the top */}
-        <Link href="/" className="font-serif text-h3 text-text-primary">
+    <footer className="mt-8 border-t border-border-subtle bg-bg">
+      <div className="shell flex flex-col gap-8 py-12 md:flex-row md:items-end md:justify-between">
+        <Link href="/" className="font-serif text-h2 text-ink">
           {identity.wordmark}
         </Link>
-
-        {/* The quieter pages, grouped away from the main navigation */}
-        <nav aria-label="Secondary" className="flex flex-wrap gap-x-6 gap-y-3">
-          {secondaryNav.map((item) => (
+        <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-2">
+          {links.map((item) => (
             <Link
-              key={item.label}
+              key={item.href}
               href={item.href ?? "/"}
-              className="text-caption text-text-secondary transition-colors hover:text-accent"
+              data-track={`nav_item:${item.label.toLowerCase().replace(/[^a-z]+/g, "_")}:footer`}
+              className="text-caption text-text-secondary"
             >
               {item.label}
             </Link>
           ))}
         </nav>
       </div>
-
       <div className="shell pb-10 text-caption text-text-secondary">
         {year} {identity.fullName}
       </div>

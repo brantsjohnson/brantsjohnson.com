@@ -32,8 +32,10 @@ next-env.d.ts
 # Testing / coverage
 coverage/
 
-# Editor / agent local state
-.cursor/
+# Editor / agent local state. The starter-kit rules are part of the repo.
+.cursor/*
+!.cursor/rules/
+!.cursor/rules/**
 
 # BrantChat is kept live as its own deployment (brantchat.brantsjohnson.com).
 # It keeps its own install, build, deploy, and git metadata out of this repo.

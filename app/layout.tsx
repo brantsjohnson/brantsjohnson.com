@@ -1,35 +1,53 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This wraps the whole website in the basic HTML shell (the outer
-// page frame). Shared chrome like nav and footer will plug in later.
-// It does not draw any real page content by itself.
+// This wraps the whole website in the HTML shell. It loads the two
+// typefaces (a serif for titles, a light sans for reading) and sets
+// the default title. Search engines are asked to wait until the
+// domain moves off Wix. See app/robots.ts.
 // ============================================
 
 import type { Metadata } from "next";
+import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
+import { hero, identity } from "@/content/site-content";
 
-// THIS SECTION DOES: set the default browser tab title and keep search engines from indexing this scaffold yet
+const serif = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-serif-file",
+  display: "swap",
+});
+
+const sans = Source_Sans_3({
+  subsets: ["latin"],
+  weight: ["300", "400", "600", "700"],
+  variable: "--font-sans-file",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
+  metadataBase: new URL(identity.siteUrl),
   title: {
-    default: "Brant S. Johnson",
-    template: "%s | Brant S. Johnson",
+    default: identity.fullName,
+    template: `%s | ${identity.fullName}`,
   },
-  description: "Brant S. Johnson is a customer focused product manager who has owned KYC, onboarding, and analytics, and who sells what he ships.",
-  robots: {
-    index: false, // do not show unfinished pages in Google yet
-    follow: false,
-  },
+  description: hero.subline,
+  robots: { index: false, follow: false },
+  icons: { icon: "/favicon.svg" },
 };
 
-// THIS SECTION DOES: render the outer HTML document and put each page's content inside the body
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className={`${serif.variable} ${sans.variable}`}>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

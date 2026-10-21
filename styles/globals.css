@@ -25,10 +25,17 @@ html {
 
 body {
   background: var(--color-bg);
-  color: var(--color-text-primary);
-  font-family: var(--font-sans); /* neutral, legible body font */
-  font-size: var(--body-size, 1.0625rem);
+  color: var(--color-text-secondary); /* 18px reading text stays softer than the black titles */
+  font-family: var(--font-sans); /* light sans for reading, serif stays on headings */
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-ink);
 }
 
 /* THIS SECTION DOES: give every heading the serif typeface so the name and titles feel editorial */
@@ -66,5 +73,14 @@ h3 {
     max-width: var(--shell-max);
     margin-inline: auto;
     padding-inline: var(--page-gutter);
+  }
+
+  /* THIS SECTION DOES: the only small caps style, used for labels */
+  .label {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
   }
 }

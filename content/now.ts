@@ -30,7 +30,7 @@ export const nowContent = {
 
   // Shown when Bridger is not connected yet, or when tastes are set to private.
   // This is a placeholder message only. It does not pretend to list any tastes.
-  emptyState: "Nothing shared here yet. Check back soon.",
+  emptyState: "Nothing shared here yet.",
 
   // Prefix for the small timestamp that tells visitors how fresh the shared tastes are.
   updatedPrefix: "Updated",

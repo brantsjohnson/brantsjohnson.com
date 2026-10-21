@@ -1,0 +1,5 @@
+---
+description: Preserve founder-approved visual contracts
+alwaysApply: true
+---
+Nothing is locked by default. Only the founder may mark a component APPROVED or LOCKED; preserve its visuals, responsive layout and behavior.
