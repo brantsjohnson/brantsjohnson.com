@@ -88,8 +88,9 @@ export const homeStats: ProofChip[] = [
   { value: "400", label: "Volunteers led in Birmingham" },
 ];
 
-// THIS SECTION DOES: real photographs from the current Wix site, sized for the web.
-// Birmingham volunteers and Bridger screens are not here.
+// THIS SECTION DOES: real photographs and one Intro product screen, sized for the web.
+// Birmingham volunteers are not here.
+// No Bridger App Store or TestFlight screen is in the repo.
 export const photos = {
   speaking: {
     src: "/photos/brant-speaking-on-stage.jpg",
@@ -127,11 +128,11 @@ export const photos = {
     width: 1280,
     height: 854,
   },
-  logo: {
-    src: "/photos/brant-s-johnson-logo.png",
-    alt: "",
-    width: 292,
-    height: 291,
+  intro: {
+    src: "/photos/intro-attendee-suggestions.jpg",
+    alt: "The Intro app showing people to meet at a Founders and Funders Summit.",
+    width: 1000,
+    height: 2040,
   },
 };
 

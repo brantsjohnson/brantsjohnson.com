@@ -15,8 +15,8 @@ export function PageHero({ eyebrow, title, deck }: PageHeroProps) {
   return (
     <header className="shell pb-4 pt-16 md:pt-24">
       <p className="label text-text-secondary">{eyebrow}</p>
-      <h1 className="mt-4 max-w-[14ch] font-serif text-h1 text-ink">{title}</h1>
-      {deck && <p className="mt-6 max-w-reading text-body text-text-secondary">{deck}</p>}
+      <h1 className="mt-4 font-serif text-h1 text-ink">{title}</h1>
+      {deck && <p className="mt-6 text-body text-text-secondary">{deck}</p>}
     </header>
   );
 }

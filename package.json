@@ -10,12 +10,13 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "check:stubs": "node tools/ci/no-stubs.mjs && python3 tools/ci/no-stubs",
-    "test": "tsx --test lib/ai/answer-question.test.ts"
+    "test": "tsx --test lib/ai/answer-question.test.ts lib/hero-experiment.test.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.65",
     "@ai-sdk/react": "^4.0.100",
     "@supabase/supabase-js": "^2.57.4",
+    "@vercel/analytics": "^1.6.1",
     "ai": "^7.0.97",
     "clsx": "^2.1.1",
     "framer-motion": "^11.15.0",

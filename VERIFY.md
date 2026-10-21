@@ -50,5 +50,6 @@ The public Ask about me assistant reads `content/about-brant.md` only. `data/bra
 | About story | `brant-at-podium.jpg`, beside the story. |
 | Archway | `archway-crane-install.jpg` runs full-bleed. `archway-build-crew.jpg` sits under that caption. |
 | Scholarship | `resilience-scholarship-2021.jpg` and `resilience-scholarship-2022.jpg`. Brant confirmed the recipients can appear. |
-| Header | `brant-s-johnson-logo.png` beside the name. The image alt is empty because the name is the accessible name. |
-| Still needed | A photograph of the Birmingham volunteers, and Bridger screens. Neither is invented. |
+| Header | The plain serif wordmark, Brant S. Johnson. The circle mark is not in the header or the favicon. |
+| Intro | A screen captured from the live Intro product at intro.events. |
+| Still needed | A photograph of the Birmingham volunteers, and a Bridger App Store or TestFlight screen. Neither is invented. |

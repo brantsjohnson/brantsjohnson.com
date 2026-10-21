@@ -6,13 +6,13 @@ Status: specified and built on the existing Next.js site. Not deployed. A pull r
 
 Four public pages: Home, Work, About, and Contact. Ask about me is a full page at `/ask`, linked once from the header. `/hi` stays unlisted. Writing stays hidden until at least two real pieces exist. Old routes redirect: Experience and Projects to `/work`, Service to `/about#service`.
 
-Photos in `public/photos` are web-sized derivatives. `next/image` serves smaller widths from those files. Still missing: a Birmingham volunteers photograph, and Bridger screens.
+Photos in `public/photos` are web-sized derivatives. `next/image` serves smaller widths from those files. Intro uses a screen captured from intro.events. Still missing: a Birmingham volunteers photograph, and a Bridger App Store or TestFlight screen. The header is the serif wordmark only.
 
 ## Checks run in this workspace
 
-Recorded after the four-page redesign and the full-resolution photo set.
+Recorded after the layout pass, the Intro screen, the Ask thread, and the headline test.
 
-- `npm test` passed (preset answers stay short and on topic).
+- `npm test` passed (preset answers stay short and on topic, and the headline list splits evenly).
 - `npx tsc --noEmit` passed.
 - `npx next lint` passed.
 - `node tools/ci/no-stubs.mjs` passed.
@@ -28,7 +28,11 @@ Recorded after the four-page redesign and the full-resolution photo set.
 - `/hi` says the note opens in the email app and does not say the note is stored.
 - Redirects returned 301: `/experience` and `/projects` to `/work`, `/projects/intro` to `/work#intro`, `/service` to `/about#service`, `/skills` to `/about#skills`.
 - `POST /api/ask` and the `/ask` page both answered "Where did Brant go to school?" with the Utah Valley University bachelor's sentence only.
-- Header logo and name fit at 390px without overflow. Desktop and phone screenshots are in the pull request.
+- The content shell is 1200px wide on a 1440px viewport. Intro is two columns, with the product screen on the right. Bridger is full width because no screen exists.
+- The homepage headline test sets a first-party cookie, `bj_hero_variant`, and splits visitors evenly across the list in `lib/hero-experiment.ts`. `?hero=a`, `?hero=b`, and `?hero=c` preview the three lines. Clicks on "See the work" and a scroll to the work section are Vercel Analytics events `hero_see_work` and `hero_scroll_work`.
+- The header is the serif wordmark only. The circle mark is not in the header or the favicon.
+- Ask keeps a running thread, four suggestion chips, and follow-ups. "Tell me more" after the school question adds that it is a bachelor's degree only.
+- Desktop and phone screenshots, before and after, are in the pull request.
 - Earlier Lighthouse on `/` with headless Chrome: performance 97, accessibility 100, SEO 63. The only failed SEO audit is `is-crawlable`, because robots disallow indexing until the Wix cutover. That setting was not changed in this pass.
 
 ## Starter kit

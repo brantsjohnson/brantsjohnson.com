@@ -80,7 +80,7 @@ export default function AboutPage() {
       <section id="service" className="pb-20">
         <div className="shell">
           <p className="label text-text-secondary">Service</p>
-          <h2 className="mt-4 max-w-[16ch] font-serif text-h2 text-ink">Work that stayed in the town.</h2>
+          <h2 className="mt-4 font-serif text-h2 text-ink">Work that stayed in the town.</h2>
           <div className="mt-12 max-w-reading">{archway && <Story {...archway} />}</div>
         </div>
 

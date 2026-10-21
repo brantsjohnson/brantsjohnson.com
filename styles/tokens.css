@@ -44,7 +44,7 @@
   --space-32: 128px;
 
   /* THIS SECTION DOES: set how wide the page and the reading column may grow */
-  --shell-max: 1120px;
+  --shell-max: 1200px;
   --reading-max: 66ch;
   --page-gutter: clamp(20px, 4vw, 56px);
 

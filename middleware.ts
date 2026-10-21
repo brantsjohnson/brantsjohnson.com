@@ -1,8 +1,8 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // Edge middleware runs before pages load. It handles referral links
-// (/from/ig and query params), and sends the BrantChat subdomain to
-// the home page with Ask about me already open.
+// (/from/ig and query params), remembers the homepage headline test
+// in a first-party cookie, and sends the BrantChat subdomain to Ask.
 // ============================================
 
 import { NextResponse } from "next/server";
@@ -15,6 +15,42 @@ import {
   referralSourceFromSearchParams,
   resolveReferralVariantFromSource,
 } from "@/lib/cms/referral-variant";
+import {
+  HERO_EXPERIMENT_COOKIE,
+  HERO_EXPERIMENT_HEADER,
+  assignHeroExperimentId,
+  parseHeroExperimentId,
+  type HeroExperimentId,
+} from "@/lib/hero-experiment";
+
+const HERO_COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 180;
+
+function heroVariantFor(request: NextRequest): { id: HeroExperimentId; remember: boolean } {
+  const preview = parseHeroExperimentId(request.nextUrl.searchParams.get("hero"));
+  if (preview) return { id: preview, remember: false };
+  const existing = parseHeroExperimentId(request.cookies.get(HERO_EXPERIMENT_COOKIE)?.value);
+  if (existing) return { id: existing, remember: false };
+  return { id: assignHeroExperimentId(), remember: true };
+}
+
+function rememberHero(response: NextResponse, request: NextRequest, id: HeroExperimentId, remember: boolean) {
+  if (!remember) return;
+  response.cookies.set(HERO_EXPERIMENT_COOKIE, id, {
+    path: "/",
+    maxAge: HERO_COOKIE_MAX_AGE_SECONDS,
+    sameSite: "lax",
+    secure: request.nextUrl.protocol === "https:",
+  });
+}
+
+function nextWithHero(request: NextRequest) {
+  const hero = heroVariantFor(request);
+  const headers = new Headers(request.headers);
+  headers.set(HERO_EXPERIMENT_HEADER, hero.id);
+  const response = NextResponse.next({ request: { headers } });
+  rememberHero(response, request, hero.id, hero.remember);
+  return response;
+}
 
 function applyReferralCookies(response: NextResponse, source: string) {
   const variant = resolveReferralVariantFromSource(source);
@@ -39,7 +75,10 @@ export function middleware(request: NextRequest) {
   // The old chat subdomain now opens Ask about me on the public site.
   if (isBrantChatHost && request.nextUrl.pathname === "/") {
     const canonical = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.brantsjohnson.com";
-    return NextResponse.redirect(`${canonical}/ask`, 301);
+    const response = NextResponse.redirect(`${canonical}/ask`, 301);
+    const hero = heroVariantFor(request);
+    rememberHero(response, request, hero.id, hero.remember);
+    return response;
   }
 
   const { pathname } = request.nextUrl;
@@ -51,17 +90,19 @@ export function middleware(request: NextRequest) {
     url.search = "";
     const response = NextResponse.redirect(url);
     applyReferralCookies(response, pathSource);
+    const hero = heroVariantFor(request);
+    rememberHero(response, request, hero.id, hero.remember);
     return response;
   }
 
   const querySource = referralSourceFromSearchParams(request.nextUrl.searchParams);
   if (querySource) {
-    const response = NextResponse.next();
+    const response = nextWithHero(request);
     applyReferralCookies(response, querySource);
     return response;
   }
 
-  return NextResponse.next();
+  return nextWithHero(request);
 }
 
 export const config = {

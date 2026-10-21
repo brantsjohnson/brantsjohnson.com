@@ -53,6 +53,7 @@ export function Button({
           className={classes}
           aria-label={ariaLabel}
           data-track={track}
+          onClick={onClick}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -61,7 +62,7 @@ export function Button({
       );
     }
     return (
-      <Link href={href} className={classes} aria-label={ariaLabel} data-track={track}>
+      <Link href={href} className={classes} aria-label={ariaLabel} data-track={track} onClick={onClick}>
         {children}
       </Link>
     );

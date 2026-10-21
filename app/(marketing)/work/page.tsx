@@ -5,10 +5,11 @@
 // ============================================
 
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageHero } from "@/components/sections/PageHero";
 import { Button } from "@/components/ui/Button";
 import { TextLink } from "@/components/ui/TextLink";
-import { building, experience, experienceIntro } from "@/content/site-content";
+import { building, experience, experienceIntro, photos } from "@/content/site-content";
 import { publicCvUrl } from "@/lib/site/public-env";
 
 export const metadata: Metadata = {
@@ -23,31 +24,42 @@ export default function WorkPage() {
     <>
       <PageHero eyebrow="Work" title="The work, in order." deck={experienceIntro.deck} />
 
-      <section className="shell grid gap-12 py-12 md:grid-cols-2 md:py-16">
-        <article id="intro">
-          <p className="label text-text-secondary">Intro</p>
-          <h2 className="mt-3 font-serif text-h2 text-ink">{building.intro.name}</h2>
-          <p className="mt-3 text-body text-text-secondary">
-            {building.intro.role}, {building.intro.dates}. {building.intro.summary}
-          </p>
-          <div className="mt-6">
-            <Button href={building.intro.href} track="button:visit_intro:work">
-              Visit Intro
-            </Button>
+      <section id="intro" className="shell py-12 md:py-16">
+        <div className="grid items-center gap-x-16 gap-y-10 lg:grid-cols-2">
+          <div>
+            <p className="label text-text-secondary">Intro</p>
+            <h2 className="mt-3 font-serif text-h2 text-ink">{building.intro.name}</h2>
+            <p className="mt-3 text-body text-text-secondary">
+              {building.intro.role}, {building.intro.dates}. {building.intro.summary}
+            </p>
+            <div className="mt-6">
+              <Button href={building.intro.href} track="button:visit_intro:work">
+                Visit Intro
+              </Button>
+            </div>
           </div>
-        </article>
-        <article id="bridger">
-          <p className="label text-text-secondary">Bridger</p>
-          <h2 className="mt-3 font-serif text-h2 text-ink">{building.bridger.name}</h2>
-          <p className="mt-3 text-body text-text-secondary">
-            {building.bridger.role}, {building.bridger.dates}. {building.bridger.summary}
-          </p>
-          <div className="mt-6">
-            <TextLink href={building.bridger.href} track="link:visit_bridger:work">
-              Visit Bridger
-            </TextLink>
-          </div>
-        </article>
+          <Image
+            src={photos.intro.src}
+            alt={photos.intro.alt}
+            width={photos.intro.width}
+            height={photos.intro.height}
+            sizes="(min-width: 1024px) 40vw, 90vw"
+            className="mx-auto h-auto w-full max-w-[420px]"
+          />
+        </div>
+      </section>
+
+      <section id="bridger" className="shell pb-12">
+        <p className="label text-text-secondary">Bridger</p>
+        <h2 className="mt-3 font-serif text-h2 text-ink">{building.bridger.name}</h2>
+        <p className="mt-3 text-body text-text-secondary">
+          {building.bridger.role}, {building.bridger.dates}. {building.bridger.summary}
+        </p>
+        <div className="mt-6">
+          <TextLink href={building.bridger.href} track="link:visit_bridger:work">
+            Visit Bridger
+          </TextLink>
+        </div>
       </section>
 
       <ol className="shell pb-20">

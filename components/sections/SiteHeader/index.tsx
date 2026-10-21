@@ -8,13 +8,12 @@
 
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { clsx } from "clsx";
-import { identity, photos, primaryNav, type NavItem } from "@/content/site-content";
+import { identity, primaryNav, type NavItem } from "@/content/site-content";
 
 type SiteHeaderProps = {
   showWriting?: boolean; // true only when at least two real pieces exist
@@ -57,15 +56,8 @@ export function SiteHeader({ showWriting = false }: SiteHeaderProps) {
   return (
     <header className="sticky top-0 z-sticky border-b border-border-subtle bg-glass backdrop-blur-glass">
       <div className="shell flex items-center justify-between gap-4 py-3">
-        <Link href="/" data-track="link:home_wordmark:global" className="flex items-center gap-3">
-          <Image
-            src={photos.logo.src}
-            alt={photos.logo.alt}
-            width={photos.logo.width}
-            height={photos.logo.height}
-            className="h-11 w-11"
-          />
-          <span className="font-serif text-h3 text-ink">{identity.wordmark}</span>
+        <Link href="/" data-track="link:home_wordmark:global" className="font-serif text-h3 text-ink">
+          {identity.wordmark}
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-4 xl:flex">

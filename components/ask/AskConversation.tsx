@@ -1,8 +1,9 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the full-page Ask conversation. A person asks one thing,
-// gets a short answer, and can follow up. Suggested questions are
-// the same ones the tests lock.
+// This is the Ask conversation. Messages stay on the page as a thread.
+// Four suggested questions sit under the thread as chips.
+// A follow-up is sent with the earlier questions, so the answer
+// can add the next fact without starting over.
 // ============================================
 
 "use client";
@@ -47,52 +48,60 @@ export function AskConversation() {
   }
 
   return (
-    <div className="shell flex max-w-reading flex-col gap-8 py-10 pb-20">
-      {turns.length === 0 && (
-        <ul className="flex flex-col">
-          {PRESET_QUESTIONS.map((question) => (
-            <li key={question} className="border-t border-border-subtle">
-              <button
-                type="button"
-                onClick={() => void ask(question)}
-                className="inline-flex min-h-[44px] w-full items-center justify-between py-3 text-left text-body text-ink"
-                data-track="button:preset_question:ask"
-              >
-                {question}
-                <span aria-hidden="true" className="text-accent">
-                  →
-                </span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      <ol className="flex flex-col gap-6">
+    <div className="shell flex flex-col gap-8 py-8 pb-20">
+      <ol className="flex min-h-[8rem] flex-col gap-4" aria-live="polite">
+        {turns.length === 0 && (
+          <li className="max-w-[40rem] text-body text-text-secondary">
+            Ask a question. Answers come from the public notes, and a follow-up can add the next fact.
+          </li>
+        )}
         {turns.map((turn, index) => (
-          <li key={`${turn.role}-${index}`} className={turn.role === "user" ? "text-ink" : "text-text-secondary"}>
-            <p className="label text-text-secondary">{turn.role === "user" ? "You" : "Answer"}</p>
-            <p className="mt-2 text-body">{turn.text}</p>
+          <li
+            key={`${turn.role}-${index}`}
+            aria-label={turn.role === "user" ? "You" : "Answer"}
+            className={turn.role === "user" ? "flex justify-end" : "flex justify-start"}
+          >
+            <p
+              className={
+                turn.role === "user"
+                  ? "max-w-[36rem] rounded-panel bg-ink px-4 py-3 text-body text-on-hero"
+                  : "max-w-[40rem] text-body text-text-secondary"
+              }
+            >
+              {turn.text}
+            </p>
           </li>
         ))}
       </ol>
+
+      <div className="flex flex-wrap gap-2" aria-label="Suggested questions">
+        {PRESET_QUESTIONS.map((question) => (
+          <button
+            key={question}
+            type="button"
+            disabled={busy}
+            onClick={() => void ask(question)}
+            className="inline-flex min-h-[44px] items-center rounded-full border border-border-subtle px-4 text-left text-body text-ink disabled:opacity-50"
+            data-track="button:preset_question:ask"
+          >
+            {question}
+          </button>
+        ))}
+      </div>
 
       <form
         onSubmit={(event) => {
           event.preventDefault();
           void ask(input);
         }}
-        className="flex flex-col gap-4 sm:flex-row sm:items-end"
+        className="flex items-center gap-3"
       >
-        <label className="flex flex-1 flex-col gap-2">
-          <span className="label text-text-secondary">Question</span>
-          <input
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
-            aria-label="Ask a question about Brant"
-            className="min-h-[44px] border-b border-ink bg-transparent text-body text-ink outline-none"
-          />
-        </label>
+        <input
+          value={input}
+          onChange={(event) => setInput(event.target.value)}
+          aria-label="Ask a question about Brant"
+          className="min-h-[44px] flex-1 border-b border-ink bg-transparent text-body text-ink outline-none"
+        />
         <Button type="submit" track="button:send_question:ask" ariaLabel="Send question">
           {busy ? "Sending" : "Send"}
         </Button>
