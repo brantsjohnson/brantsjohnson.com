@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     );
   }
 
-  let body: { question?: string };
+  let body: { question?: string; earlier?: unknown };
   try {
     body = await request.json();
   } catch {
@@ -36,5 +36,9 @@ export async function POST(request: Request) {
     return Response.json({ error: "That question is too long." }, { status: 413 });
   }
 
-  return Response.json({ answer: answerFromPublicNotes(question) });
+  const earlier = Array.isArray(body.earlier)
+    ? body.earlier.filter((item): item is string => typeof item === "string").slice(-6)
+    : [];
+
+  return Response.json({ answer: answerFromPublicNotes(question, earlier) });
 }

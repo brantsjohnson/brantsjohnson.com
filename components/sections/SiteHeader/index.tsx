@@ -1,51 +1,40 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the sticky bar at the top of every public page. It shows
-// Brant's full name, the page links, and the Ask about me button.
+// Brant's full name, the page links, and one Ask link.
 // On a narrow screen the links collapse into a Menu button.
 // The bar is a light glass strip so the page can scroll under it.
 // ============================================
 
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { clsx } from "clsx";
-import { identity, primaryNav } from "@/content/site-content";
-import { openBrantChat } from "@/components/chatbot/chat-events";
+import { identity, photos, primaryNav, type NavItem } from "@/content/site-content";
 
 type SiteHeaderProps = {
-  showWriting?: boolean; // true only when a real essay or letter exists
+  showWriting?: boolean; // true only when at least two real pieces exist
 };
 
 export function SiteHeader({ showWriting = false }: SiteHeaderProps) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const nav = primaryNav.filter((item) => showWriting || item.href !== "/writing");
+  const nav: NavItem[] = showWriting
+    ? [
+        ...primaryNav.slice(0, 3),
+        { label: "Writing", kind: "route", href: "/writing" },
+        ...primaryNav.slice(3),
+      ]
+    : primaryNav;
 
   const isActive = (href?: string) =>
     href === "/" ? pathname === "/" : Boolean(href && (pathname === href || pathname.startsWith(`${href}/`)));
 
-  const renderNavItem = (item: (typeof nav)[number], onNavigate?: () => void) => {
-    if (item.kind === "chat") {
-      return (
-        <button
-          key={item.label}
-          type="button"
-          onClick={() => {
-            openBrantChat();
-            onNavigate?.();
-          }}
-          data-track="button:open_chat:global"
-          className="inline-flex min-h-[44px] items-center rounded-control bg-accent px-4 text-caption font-semibold text-ink"
-        >
-          {item.label}
-        </button>
-      );
-    }
-
+  const renderNavItem = (item: NavItem, onNavigate?: () => void) => {
     return (
       <Link
         key={item.label}
@@ -58,37 +47,32 @@ export function SiteHeader({ showWriting = false }: SiteHeaderProps) {
           isActive(item.href) && "underline decoration-accent decoration-2 underline-offset-8"
         )}
       >
-        {item.label}
+        {item.href === "/ask" ? "Ask about me →" : item.label}
       </Link>
     );
   };
 
-  const links = nav.filter((item) => item.kind === "route");
-  const ask = nav.find((item) => item.kind === "chat");
+  const links = nav;
 
   return (
     <header className="sticky top-0 z-sticky border-b border-border-subtle bg-glass backdrop-blur-glass">
       <div className="shell flex items-center justify-between gap-4 py-3">
-        <Link href="/" data-track="link:home_wordmark:global" className="font-serif text-h3 text-ink">
-          {identity.wordmark}
+        <Link href="/" data-track="link:home_wordmark:global" className="flex items-center gap-3">
+          <Image
+            src={photos.logo.src}
+            alt={photos.logo.alt}
+            width={photos.logo.width}
+            height={photos.logo.height}
+            className="h-11 w-11"
+          />
+          <span className="font-serif text-h3 text-ink">{identity.wordmark}</span>
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-4 xl:flex">
           {links.map((item) => renderNavItem(item))}
-          {ask && renderNavItem(ask)}
         </nav>
 
         <div className="flex items-center gap-2 xl:hidden">
-          {ask && (
-            <button
-              type="button"
-              onClick={() => openBrantChat()}
-              data-track="button:open_chat:global"
-              className="inline-flex min-h-[44px] items-center rounded-control bg-accent px-4 text-caption font-semibold text-ink"
-            >
-              Ask
-            </button>
-          )}
           <button
             type="button"
             onClick={() => setMenuOpen((value) => !value)}

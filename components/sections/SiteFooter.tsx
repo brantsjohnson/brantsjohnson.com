@@ -10,14 +10,15 @@ import Link from "next/link";
 import { identity, primaryNav } from "@/content/site-content";
 
 type SiteFooterProps = {
-  showWriting?: boolean; // true only when a real essay or letter exists
+  showWriting?: boolean; // true only when at least two real pieces exist
 };
 
 export function SiteFooter({ showWriting = false }: SiteFooterProps) {
   const year = new Date().getFullYear();
-  const links = primaryNav.filter(
-    (item) => item.kind === "route" && item.href !== "/" && (showWriting || item.href !== "/writing")
-  );
+  const links = primaryNav.filter((item) => item.href !== "/" && item.href !== "/ask");
+  if (showWriting) {
+    links.splice(2, 0, { label: "Writing", kind: "route", href: "/writing" });
+  }
 
   return (
     <footer className="mt-8 border-t border-border-subtle bg-bg">

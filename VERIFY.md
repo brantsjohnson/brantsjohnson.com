@@ -38,6 +38,17 @@ The public Ask about me assistant reads `content/about-brant.md` only. `data/bra
 | AWS on About | The skills line lists Pendo Essentials, SQL, Python, Figma, and the Agile Foundations course certificate. It does not discuss AWS. |
 | Bridger role | Experience lists the role as Founder. The summary still says the product is in TestFlight beta. |
 | Private CV | The Drive file link is not on the site. Experience renders "Open the CV" only when `CV_URL` is a public URL. |
-| Writing | The page, the nav link, the footer link, and the home block stay hidden until a real local post or a Substack feed item exists. |
+| Writing | The page, the nav link, the footer link, and the home block stay hidden until at least two real pieces exist. Local posts and Substack feed items count together. |
 | Newsletter signup | The signup is a Substack subscribe link from `SUBSTACK_URL`. If that variable is unset, the signup is hidden. It does not fall back to email. |
 | /hi storage line | The page says a note is stored only when `INTRO_CRM_CAPTURE_URL` or `CRM_WEBHOOK_URL` is set. Otherwise it says the note opens in the visitor's email app and nothing is kept on the site. |
+
+## Photos on the four-page site
+
+| Item | What shipped |
+|---|---|
+| Home hero | `brant-speaking-on-stage.jpg`, full height of the black hero on desktop. |
+| About story | `brant-at-podium.jpg`, beside the story. |
+| Archway | `archway-crane-install.jpg` runs full-bleed. `archway-build-crew.jpg` sits under that caption. |
+| Scholarship | `resilience-scholarship-2021.jpg` and `resilience-scholarship-2022.jpg`. Brant confirmed the recipients can appear. |
+| Header | `brant-s-johnson-logo.png` beside the name. The image alt is empty because the name is the accessible name. |
+| Still needed | A photograph of the Birmingham volunteers, and Bridger screens. Neither is invented. |

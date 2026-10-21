@@ -1,16 +1,14 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the short page Brant can text from an event. It says what
-// he does, links the two live products, and takes a follow-up note.
-// The event name can be prefilled with ?e= on the link. A QR code
-// points at this page on the public site.
+// This is the short page Brant can text from an event. It is not in
+// the main navigation. It takes a follow-up note and shows a QR code.
+// The event name can be prefilled with ?e= on the link.
 // ============================================
 
 import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
-import { Button } from "@/components/ui/Button";
 import { NoteForm } from "@/components/forms/NoteForm";
-import { building, hiPage, identity } from "@/content/site-content";
+import { hiPage, identity } from "@/content/site-content";
 import { notesAreStored } from "@/lib/forms/deliver-note";
 import { hiQrSvg } from "@/lib/hi-qr";
 
@@ -31,52 +29,21 @@ export default async function HiPage({ searchParams }: HiPageProps) {
 
   return (
     <>
-      <PageHero eyebrow={hiPage.eyebrow} title={hiPage.title} deck={hiPage.deck} tall />
-      <section className="shell grid gap-6 py-16 md:grid-cols-2">
-        <article className="flex flex-col justify-between bg-ink p-8 text-on-hero">
-          <div>
-            <h2 className="font-serif text-h1 text-accent">{building.intro.name}</h2>
-            <p className="mt-3 text-body">{building.intro.summary}</p>
-          </div>
+      <PageHero eyebrow={hiPage.eyebrow} title="Good to meet you." deck={hiPage.deck} />
+      <section className="shell grid gap-10 py-12 pb-20 lg:grid-cols-[1.2fr_0.8fr]">
+        <div>
+          <p className="max-w-reading text-body text-text-secondary">
+            {stored
+              ? "Your name and note are stored so I can follow up. You can ask me to delete them by emailing me from the Contact page."
+              : "Sending opens your email app with this note. Nothing is kept on this site."}
+          </p>
           <div className="mt-8">
-            <Button href={building.intro.href} track="button:visit_intro:hi">
-              {building.intro.hrefLabel}
-            </Button>
+            <NoteForm kind="hi" metAt={metAt} submitLabel="Send my note" track="button:submit_hi:hi" />
           </div>
-        </article>
-        <article className="flex flex-col justify-between border border-ink p-8">
-          <div>
-            <h2 className="font-serif text-h1 text-ink">{building.bridger.name}</h2>
-            <p className="mt-3 text-body text-text-secondary">{building.bridger.summary}</p>
-          </div>
-          <div className="mt-8">
-            <Button href={building.bridger.href} variant="ghost" track="button:visit_bridger:hi">
-              {building.bridger.hrefLabel}
-            </Button>
-          </div>
-        </article>
-      </section>
-
-      <section className="border-t border-border-subtle">
-        <div className="shell grid gap-10 py-16 lg:grid-cols-[1.2fr_0.8fr]">
-          <div>
-            <h2 className="font-serif text-h2 text-ink">Stay in touch</h2>
-            <p className="mt-4 max-w-reading text-body text-text-secondary">
-              {stored
-                ? "Your name and note are stored so I can follow up. You can ask me to delete them by emailing me from the Contact page."
-                : "Sending opens your email app with this note. Nothing is kept on this site."}
-            </p>
-            <div className="mt-8">
-              <NoteForm kind="hi" metAt={metAt} submitLabel="Send my note" track="button:submit_hi:hi" />
-            </div>
-          </div>
-          <div>
-            <h2 className="font-serif text-h3 text-ink">QR for this page</h2>
-            <div
-              className="mt-4 max-w-[220px] bg-bg p-3"
-              dangerouslySetInnerHTML={{ __html: qr }}
-            />
-          </div>
+        </div>
+        <div>
+          <h2 className="font-serif text-h2 text-ink">QR for this page</h2>
+          <div className="mt-4 max-w-[220px] bg-bg p-3" dangerouslySetInnerHTML={{ __html: qr }} />
         </div>
       </section>
     </>

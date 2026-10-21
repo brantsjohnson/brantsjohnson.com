@@ -6,5 +6,5 @@ Current sections:
 
 - `SiteHeader/` sticky glass bar: full name, the page links, and Ask about me.
 - `SiteFooter.tsx` wordmark, page links, and the current year. The email address is not repeated here.
-- `PageHero.tsx` black band with a gold serif title, one line, and optional actions.
-- `BridgeMark.tsx` a small original bridge drawing used on Home and About. It is not Crew artwork.
+- `PageHero.tsx` cream header with a large serif title.
+- `BridgeMark.tsx` an unused bridge drawing. It is not on a page, and it is not Crew artwork.

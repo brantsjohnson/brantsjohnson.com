@@ -39,7 +39,7 @@ export function middleware(request: NextRequest) {
   // The old chat subdomain now opens Ask about me on the public site.
   if (isBrantChatHost && request.nextUrl.pathname === "/") {
     const canonical = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.brantsjohnson.com";
-    return NextResponse.redirect(`${canonical}/?ask=1`, 301);
+    return NextResponse.redirect(`${canonical}/ask`, 301);
   }
 
   const { pathname } = request.nextUrl;

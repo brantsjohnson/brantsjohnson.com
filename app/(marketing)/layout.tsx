@@ -1,11 +1,10 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This wraps every public page with the skip link, the sticky header,
-// the footer, the Ask about me panel, and a short person description
+// the footer, and a short person description
 // for search engines. Admin pages do not use this wrapper.
 // ============================================
 
-import { ChatLauncher } from "@/components/chatbot/ChatLauncher";
 import { SiteFooter } from "@/components/sections/SiteFooter";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { identity } from "@/content/site-content";
@@ -16,7 +15,6 @@ export default async function MarketingLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const chatConfigured = Boolean(process.env.OPENAI_API_KEY);
   const writing = await getPublicWriting();
   const person = {
     "@context": "https://schema.org",
@@ -49,7 +47,6 @@ export default async function MarketingLayout({
       <SiteHeader showWriting={writing.show} />
       <main id="content">{children}</main>
       <SiteFooter showWriting={writing.show} />
-      <ChatLauncher configured={chatConfigured} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} />
     </>
   );

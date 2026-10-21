@@ -38,12 +38,14 @@ const config: Config = {
       },
       // THIS SECTION DOES: name the type sizes used across the site
       fontSize: {
-        display: ["clamp(2.75rem, 1.4rem + 5vw, 5rem)", { lineHeight: "1.05" }],
-        h1: ["clamp(2.125rem, 1.4rem + 3vw, 3.25rem)", { lineHeight: "1.1" }],
-        h2: ["clamp(1.625rem, 1.2rem + 1.6vw, 2.25rem)", { lineHeight: "1.2" }],
-        h3: ["1.375rem", { lineHeight: "1.3" }],
-        body: ["clamp(1rem, 0.96rem + 0.2vw, 1.125rem)", { lineHeight: "1.6" }],
+        // Hero titles land between 80px and 96px on a desktop window.
+        display: ["clamp(2.75rem, 6.2vw, 6rem)", { lineHeight: "0.96" }],
+        h1: ["clamp(3.25rem, 5vw, 4.75rem)", { lineHeight: "1.02" }],
+        h2: ["2.25rem", { lineHeight: "1.15" }],
+        h3: ["1.5rem", { lineHeight: "1.3" }],
+        body: ["1.125rem", { lineHeight: "1.6" }],
         caption: ["0.875rem", { lineHeight: "1.4" }],
+        stat: ["clamp(4.5rem, 6vw, 5.5rem)", { lineHeight: "0.9" }],
       },
       // THIS SECTION DOES: expose the shared spacing steps as padding/margin/gap classes
       spacing: {

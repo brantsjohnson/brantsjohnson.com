@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "check:stubs": "node tools/ci/no-stubs.mjs && python3 tools/ci/no-stubs"
+    "check:stubs": "node tools/ci/no-stubs.mjs && python3 tools/ci/no-stubs",
+    "test": "tsx --test lib/ai/answer-question.test.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.65",
@@ -24,6 +25,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "server-only": "^0.0.1",
+    "sharp": "^0.35.5",
     "tailwind-merge": "^2.6.0",
     "zod": "^3.25.76"
   },
@@ -38,6 +40,7 @@
     "playwright": "^1.64.1",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
+    "tsx": "^4.23.15",
     "typescript": "^5.7.2"
   }
 }

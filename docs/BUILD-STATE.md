@@ -4,27 +4,31 @@ Status: specified and built on the existing Next.js site. Not deployed. A pull r
 
 ## What this build is
 
-Multi-page brantsjohnson.com from the v3 plan and the copy map: Home, About, Experience, Projects, Service & Leadership, Writing, Contact, /hi, and Ask about me. Stub pages are removed. Old Wix slugs redirect.
+Four public pages: Home, Work, About, and Contact. Ask about me is a full page at `/ask`, linked once from the header. `/hi` stays unlisted. Writing stays hidden until at least two real pieces exist. Old routes redirect: Experience and Projects to `/work`, Service to `/about#service`.
+
+Photos in `public/photos` are web-sized derivatives. `next/image` serves smaller widths from those files. Still missing: a Birmingham volunteers photograph, and Bridger screens.
 
 ## Checks run in this workspace
 
-Recorded after the review fixes on this branch.
+Recorded after the four-page redesign and the full-resolution photo set.
 
+- `npm test` passed (preset answers stay short and on topic).
 - `npx tsc --noEmit` passed.
 - `npx next lint` passed.
 - `node tools/ci/no-stubs.mjs` passed.
 - `python3 tools/ci/no-stubs` passed and printed `no-stubs: clean`.
 - `npx next build` passed.
-- Page checks against `next start`: `/`, `/about`, `/experience`, `/projects`, `/projects/intro`, `/projects/bridger`, `/service`, `/contact`, `/hi` returned 200.
-- `/writing` and `/writing/feed.xml` returned 404 because no local post exists and `SUBSTACK_URL` is unset.
-- Home, header, and footer do not link to `/writing` in that state.
-- Experience shows Bridger as Founder and does not render a CV button.
-- About skills do not mention AWS.
+- Page checks against `next start`: `/`, `/about`, `/work`, `/contact`, `/ask`, `/hi` returned 200.
+- `/writing` and `/writing/feed.xml` returned 404 because fewer than two posts exist and `SUBSTACK_URL` is unset.
+- Home HTML does not link a Writing item. `showWriting` is false. The three stats are in the first HTML response, with no scroll-hidden opacity.
+- Home has one gold button, "See the work". Work has one, "Visit Intro". Contact has one, "Send the note". Ask has one, "Send". About has none.
+- Hero headline measured 89px on a 1440px viewport. Body is 18px. Stat numbers measured 86px.
+- Work lists Bridger as Founder and does not render a CV link.
+- About skills do not mention AWS. About renders the podium, the full-bleed crane, the archway crew, and both scholarship photos.
 - `/hi` says the note opens in the email app and does not say the note is stored.
-- Redirects returned 301: `/about-1` to `/about`, `/blank-2` to `/experience`, `/skills` to `/about#skills`, `/blog` and `/poetry` to `/writing`.
-- `POST /api/ask` answered the school question with Utah Valley University and did not invent a BYU degree or an AWS certificate.
-- `POST /api/contact` for contact and for /hi returned a mailto delivery because no CRM webhook is configured.
-- Ask about me, opened with `/?ask=1`, answered "Where did Brant go to school?" with Utah Valley University.
+- Redirects returned 301: `/experience` and `/projects` to `/work`, `/projects/intro` to `/work#intro`, `/service` to `/about#service`, `/skills` to `/about#skills`.
+- `POST /api/ask` and the `/ask` page both answered "Where did Brant go to school?" with the Utah Valley University bachelor's sentence only.
+- Header logo and name fit at 390px without overflow. Desktop and phone screenshots are in the pull request.
 - Earlier Lighthouse on `/` with headless Chrome: performance 97, accessibility 100, SEO 63. The only failed SEO audit is `is-crawlable`, because robots disallow indexing until the Wix cutover. That setting was not changed in this pass.
 
 ## Starter kit

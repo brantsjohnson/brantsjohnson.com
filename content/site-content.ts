@@ -61,35 +61,79 @@ export const identity = {
   siteUrl: "https://www.brantsjohnson.com",
 };
 
-// THIS SECTION DOES: list the main navigation, in the order the plan locked
+// THIS SECTION DOES: list the main navigation. Ask is the one chat entry, and it is a page.
 export const primaryNav: NavItem[] = [
   { label: "Home", kind: "route", href: "/" },
+  { label: "Work", kind: "route", href: "/work" },
   { label: "About", kind: "route", href: "/about" },
-  { label: "Experience", kind: "route", href: "/experience" },
-  { label: "Projects", kind: "route", href: "/projects" },
-  { label: "Service & Leadership", kind: "route", href: "/service" },
-  { label: "Writing", kind: "route", href: "/writing" },
   { label: "Contact", kind: "route", href: "/contact" },
-  { label: "Ask about me", kind: "chat" },
+  { label: "Ask about me", kind: "route", href: "/ask" },
 ];
 
-// THIS SECTION DOES: the home hero. Referral traffic may swap the lines. The CTAs stay.
+// THIS SECTION DOES: the home hero. Referral traffic may swap the lines.
 export const hero = {
   headline: "I build technology as a bridge to real human connection.",
   subline:
     "Product manager and founder. I've owned the whole loop, from KYC and onboarding to analytics, and I sell what I ship.",
-  primaryCta: "Ask about my work",
-  secondaryCta: { label: "See my work", href: "/projects" },
+  primaryCta: { label: "See the work", href: "/work" },
 };
 
-// THIS SECTION DOES: the proof row on home. Each number is a checked fact.
-export const proofChips: ProofChip[] = [
-  { value: "Sole PM", label: "First and only product manager at Crew Finance" },
-  { value: "50%", label: "Faster onboarding from experiments I ran at Crew" },
-  { value: "$2.5M", label: "Raise I built the financial models for at Crew" },
-  { value: "1,778", label: "People in the Bridger TestFlight beta" },
-  { value: "400", label: "Volunteers I trained and led in Birmingham, England" },
+// THIS SECTION DOES: one proof sentence under the hero, then three numbers in the band
+export const proofLine =
+  "First and only product manager at Crew Finance, where onboarding got twice as fast.";
+
+export const homeStats: ProofChip[] = [
+  { value: "50%", label: "Faster onboarding at Crew" },
+  { value: "$2.5M", label: "Raise modeled at Crew" },
+  { value: "400", label: "Volunteers led in Birmingham" },
 ];
+
+// THIS SECTION DOES: real photographs from the current Wix site, sized for the web.
+// Birmingham volunteers and Bridger screens are not here.
+export const photos = {
+  speaking: {
+    src: "/photos/brant-speaking-on-stage.jpg",
+    alt: "Brant S. Johnson speaking on stage.",
+    width: 2000,
+    height: 1269,
+  },
+  podium: {
+    src: "/photos/brant-at-podium.jpg",
+    alt: "Brant S. Johnson speaking at a wooden podium.",
+    width: 2000,
+    height: 1117,
+  },
+  archwayCrane: {
+    src: "/photos/archway-crane-install.jpg",
+    alt: "A crane setting the Uintah archway over the road.",
+    width: 2200,
+    height: 1259,
+  },
+  archwayCrew: {
+    src: "/photos/archway-build-crew.jpg",
+    alt: "A crew building a frame for the Uintah Resilience Archway.",
+    width: 2000,
+    height: 1221,
+  },
+  scholarship2021: {
+    src: "/photos/resilience-scholarship-2021.jpg",
+    alt: "Brant S. Johnson with three 2021 Resilience Scholarship recipients.",
+    width: 1567,
+    height: 1045,
+  },
+  scholarship2022: {
+    src: "/photos/resilience-scholarship-2022.jpg",
+    alt: "A 2022 Resilience Scholarship recipient with her certificate.",
+    width: 1280,
+    height: 854,
+  },
+  logo: {
+    src: "/photos/brant-s-johnson-logo.png",
+    alt: "",
+    width: 292,
+    height: 291,
+  },
+};
 
 // THIS SECTION DOES: the two products on home. Intro is the featured one.
 export const building = {
@@ -123,7 +167,7 @@ export const about = {
     "On one hand, it can pull us into endless scrolling and shallow interactions. On the other, it has the power to rebuild trust, spark collaboration, and make relationships stronger. I'm choosing the latter.",
     "My career has taken me through startups where I helped shape fintech products, media organizations where I connected with CEOs and entrepreneurs, and political spaces where I saw how communities thrive when people are engaged.",
     "Across all of it, one theme has been constant. I love building tools, spaces, and stories that bring people together.",
-    "Bridger is the app that helps strangers become friends. Intro is where I experiment with AI that should enhance human connection, not replace it. The work comes back to the same belief: people matter most.",
+    "The work comes back to the same belief: people matter most.",
     "I don't see technology as the end goal. I see it as a bridge to stronger friendships, better communities, and more meaningful lives.",
   ],
   educationTitle: "Education",
@@ -306,17 +350,6 @@ export const projects: Project[] = [
     ],
     href: "https://bridger.social",
     hrefLabel: "Visit Bridger",
-  },
-  {
-    slug: "ask",
-    name: "Ask about me",
-    kicker: "On this site",
-    summary: "A short conversation grounded in the public facts on this site. It will not guess.",
-    paragraphs: [
-      "Ask about my work, my schooling, or how to reach me. The answers come from the public notes on this site.",
-      "If a fact is not in those notes, the assistant says so.",
-    ],
-    kind: "chat",
   },
 ];
 

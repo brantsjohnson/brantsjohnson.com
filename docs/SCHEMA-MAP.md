@@ -37,16 +37,15 @@ The rows above are the starter-kit draft. These rows name what this repository a
 | Route | What it is | Shown when |
 |---|---|---|
 | `/` | Home | Always |
-| `/about` | About | Always |
-| `/experience` | Experience timeline. CV button uses `CV_URL` | Always. The button only when `CV_URL` is set |
-| `/projects` and `/projects/[slug]` | Intro, Bridger, Ask about me | Always |
-| `/service` | Service and leadership | Always |
-| `/writing` and `/writing/[slug]` | Essays and letters | A real local post or a Substack feed item exists |
+| `/work` | Intro, Bridger, then the experience timeline | Always |
+| `/about` | Story and service, including the archway and the scholarship | Always |
 | `/contact` | Contact note | Always |
-| `/hi` | Event follow-up. Storage sentence uses the CRM webhook | Always |
+| `/ask` | Full-page Ask conversation | Always. Linked from the header |
+| `/writing` and `/writing/[slug]` | Essays and letters | At least two real posts |
+| `/hi` | Unlisted event follow-up | Not in the nav |
 
 | Env name | Purpose |
 |---|---|
 | `SUBSTACK_URL` | Publication root. Feed is `{url}/feed`. Signup is `{url}/subscribe` |
-| `CV_URL` | Public CV link for the Experience button |
+| `CV_URL` | Public CV link. Work shows "Open the CV" only when this is an https URL |
 | `INTRO_CRM_CAPTURE_URL` or `CRM_WEBHOOK_URL` | When set, contact and /hi notes are posted there and /hi may say they are stored |

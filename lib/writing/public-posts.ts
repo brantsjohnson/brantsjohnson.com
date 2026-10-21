@@ -3,7 +3,7 @@
 // This builds the public writing list. Local essays and letters come
 // from content/writing/posts.ts. When SUBSTACK_URL is set, letters
 // are also read from that publication's RSS feed. The site shows
-// Writing only when this list has at least one real post. A missing
+// Writing only when this list has at least two real posts. A missing
 // URL, an empty feed, or a failed fetch leaves the list empty.
 // ============================================
 
@@ -135,7 +135,8 @@ export const getPublicWriting = cache(async (): Promise<PublicWriting> => {
     posts,
     essays: posts.filter((post) => post.kind === "essay"),
     letters: posts.filter((post) => post.kind === "newsletter"),
-    show: posts.length > 0,
+    // Two real pieces is the smallest shelf worth a public page.
+    show: posts.length >= 2,
     subscribeUrl: base ? `${base}/subscribe` : null,
     feedUrl: localCount > 0 ? "/writing/feed.xml" : base ? `${base}/feed` : null,
   };
