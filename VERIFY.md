@@ -36,7 +36,7 @@ The public Ask about me assistant reads `content/about-brant.md` only. `data/bra
 | Item | What shipped |
 |---|---|
 | AWS on About | The skills line lists Pendo Essentials, SQL, Python, Figma, and the Agile Foundations course certificate. It does not discuss AWS. |
-| Bridger role | Withheld from the public pages in the Washington lookup pass. Home, Work, About, Ask, and /hi do not name it. |
+| Bridger role | Named on Home, Work, About, Now, Ask, and /hi. Founder, April 2025 to present. A socialization app in a beta of about 25 people, at bridger.social. Older user counts and dollar figures stay off the site. |
 | Private CV | The Drive file link is not on the site. Experience renders "Open the CV" only when `CV_URL` is a public URL. |
 | Writing | The page, the nav link, the footer link, and the home block stay hidden until at least two real pieces exist. Local posts and Substack feed items count together. |
 | Newsletter signup | The signup is a Substack subscribe link from `SUBSTACK_URL`. If that variable is unset, the signup is hidden. It does not fall back to email. |
@@ -52,4 +52,4 @@ The public Ask about me assistant reads `content/about-brant.md` only. `data/bra
 | Scholarship | `resilience-scholarship-2021.jpg` and `resilience-scholarship-2022.jpg`. Brant confirmed the recipients can appear. |
 | Header | The plain serif wordmark, Brant S. Johnson. The circle mark is not in the header or the favicon. |
 | Intro | A screen captured from the live Intro product at intro.events. |
-| Still needed | A photograph of the Birmingham volunteers, and a Bridger App Store or TestFlight screen. Neither is invented. |
+| Still needed | A photograph of the Birmingham volunteers. No Bridger screen was sent, so none is shown. |

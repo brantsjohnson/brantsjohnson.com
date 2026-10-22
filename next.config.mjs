@@ -11,7 +11,7 @@ const wixToNextRedirects = [
   { old: "/experience", next: "/work" },
   { old: "/projects", next: "/work" },
   { old: "/projects/intro", next: "/work#intro" },
-  { old: "/projects/bridger", next: "/work" },
+  { old: "/projects/bridger", next: "/work#bridger" },
   { old: "/projects/ask", next: "/ask" },
   { old: "/projects/:slug", next: "/work" },
   { old: "/blank-1", next: "/about#service" },

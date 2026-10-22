@@ -1,20 +1,22 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the About page. It tells his story, shows him at a podium,
-// then schooling, then service: the archway, the scholarship, and the
-// 22 youth in Hilo. Photographs are real files from the Wix site.
+// names Intro and Bridger, then schooling, then service: the archway,
+// the scholarship, and the 22 youth in Hilo. Photographs are real
+// files from the Wix site. Bridger has no screen here.
 // ============================================
 
 import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero } from "@/components/sections/PageHero";
-import { about, photos, serviceStories } from "@/content/site-content";
+import { TextLink } from "@/components/ui/TextLink";
+import { about, building, photos, serviceStories } from "@/content/site-content";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "About",
   description:
-    "Brant S. Johnson on connection, the Uintah Resilience Archway, and the Resilience Scholarship.",
+    "Brant S. Johnson on connection, Intro, Bridger, the Uintah Resilience Archway, and the Resilience Scholarship.",
   path: "/about",
 });
 
@@ -67,6 +69,35 @@ export default function AboutPage() {
           ))}
         </div>
       </div>
+
+      <section id="building" className="shell border-t border-border-subtle py-16">
+        <p className="label text-text-secondary">{building.kicker}</p>
+        <h2 className="mt-4 font-serif text-h2 text-ink">Intro and Bridger.</h2>
+        <div className="mt-10 grid gap-10 md:grid-cols-2">
+          <div>
+            <h3 className="font-serif text-h3 text-ink">{building.intro.name}</h3>
+            <p className="mt-3 max-w-reading text-body text-text-secondary">
+              {building.intro.role}, {building.intro.dates}. {building.intro.summary}
+            </p>
+            <div className="mt-4">
+              <TextLink href={building.intro.href} track="link:visit_intro:about">
+                Visit Intro
+              </TextLink>
+            </div>
+          </div>
+          <div>
+            <h3 className="font-serif text-h3 text-ink">{building.bridger.name}</h3>
+            <p className="mt-3 max-w-reading text-body text-text-secondary">
+              {building.bridger.role}, {building.bridger.dates}. {building.bridger.summary}
+            </p>
+            <div className="mt-4">
+              <TextLink href={building.bridger.href} track="link:visit_bridger:about">
+                Visit Bridger
+              </TextLink>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="shell grid gap-12 py-16 md:grid-cols-2">
         <div>

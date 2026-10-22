@@ -1,8 +1,9 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the Work page. Intro sits at the top with a real product
-// screen. Under it is the experience timeline, newest first, with
-// the dates in a narrow left column. A public CV link appears only
+// screen. Bridger sits under it as text, because no screen was sent.
+// Under both is the experience timeline, newest first, with the
+// dates in a narrow left column. A public CV link appears only
 // when CV_URL is set.
 // TODO(brant): set CV_URL to a public résumé link when you want the button.
 // ============================================
@@ -54,9 +55,22 @@ export default function WorkPage() {
         </div>
       </section>
 
+      <section id="bridger" className="shell border-t border-border-subtle py-12 md:py-16">
+        <p className="label text-text-secondary">Bridger</p>
+        <h2 className="mt-3 font-serif text-h2 text-ink">{building.bridger.name}</h2>
+        <p className="mt-3 max-w-reading text-body text-text-secondary">
+          {building.bridger.role}, {building.bridger.dates}. {building.bridger.summary}
+        </p>
+        <div className="mt-6">
+          <TextLink href={building.bridger.href} track="link:visit_bridger:work">
+            Visit Bridger
+          </TextLink>
+        </div>
+      </section>
+
       <ol className="shell pb-20">
         {experience
-          .filter((role) => role.org !== "Intro")
+          .filter((role) => role.org !== "Intro" && role.org !== "Bridger")
           .map((role) => (
           <li
             key={`${role.org}-${role.dates}`}

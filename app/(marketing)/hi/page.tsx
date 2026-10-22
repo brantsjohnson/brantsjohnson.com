@@ -1,21 +1,19 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the short page Brant can text from an event. It is not in
-// the main navigation. It takes a follow-up note and shows a QR code.
-// The event name can be prefilled with ?e= on the link.
+// the main navigation. It offers both products, a booking link, a
+// follow-up note, and a QR code. The event name can be prefilled
+// with ?e= on the link.
 // ============================================
 
 import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
 import { NoteForm } from "@/components/forms/NoteForm";
 import { TextLink } from "@/components/ui/TextLink";
-import { building, hiPage, identity } from "@/content/site-content";
+import { booking, building, hiPage, identity } from "@/content/site-content";
 import { notesAreStored } from "@/lib/forms/deliver-note";
 import { hiQrSvg } from "@/lib/hi-qr";
 import { pageMetadata } from "@/lib/site/page-metadata";
-
-// TODO(brant): add a calendar link here only after you send one.
-// A second product demo stays off this page until you confirm it.
 
 export const metadata: Metadata = {
   ...pageMetadata({
@@ -50,10 +48,24 @@ export default async function HiPage({ searchParams }: HiPageProps) {
             </TextLink>
           </div>
         </div>
+        <div className="max-w-reading border-t border-border-subtle py-8">
+          <h2 className="font-serif text-h2 text-ink">{building.bridger.name}</h2>
+          <p className="mt-3 text-body text-text-secondary">{building.bridger.summary}</p>
+          <div className="mt-4">
+            <TextLink href={building.bridger.href} track="link:visit_bridger:hi">
+              Visit Bridger
+            </TextLink>
+          </div>
+        </div>
       </section>
       <section className="shell grid gap-10 py-8 pb-20 lg:grid-cols-[1.2fr_0.8fr]">
         <div>
           <h2 className="font-serif text-h2 text-ink">Stay in touch</h2>
+          <div className="mt-4">
+            <TextLink href={booking.href} track="link:book_time:hi">
+              {booking.label}
+            </TextLink>
+          </div>
           <p className="mt-4 max-w-reading text-body text-text-secondary">
             {stored
               ? "Your name and note are stored so I can follow up. You can ask me to delete them by emailing me from the Contact page."

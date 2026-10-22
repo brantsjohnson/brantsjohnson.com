@@ -56,6 +56,12 @@ export const identity = {
   siteUrl: "https://www.brantsjohnson.com",
 };
 
+// THIS SECTION DOES: the meeting link Brant sent. Pages that offer a conversation use it.
+export const booking = {
+  href: "https://calendar.app.google/qj9tb56BYCdppJPk9",
+  label: "Book time",
+};
+
 // THIS SECTION DOES: list the main navigation. Ask is the one chat entry, and it is a page.
 export const primaryNav: NavItem[] = [
   { label: "Home", kind: "route", href: "/" },
@@ -95,7 +101,7 @@ export const homeRecord: { kicker: string; line: string }[] = [
 
 // THIS SECTION DOES: real photographs and one Intro product screen, sized for the web.
 // Birmingham volunteers are not here.
-// No Bridger App Store or TestFlight screen is in the repo.
+// No Bridger screen is in the repo, so the pages do not show one.
 export const photos = {
   speaking: {
     src: "/photos/brant-speaking-on-stage.jpg",
@@ -141,7 +147,7 @@ export const photos = {
   },
 };
 
-// THIS SECTION DOES: the product on the public site. Intro is the one linked build.
+// THIS SECTION DOES: the two products on the public site, with the links Brant confirmed.
 export const building = {
   kicker: "Currently building",
   intro: {
@@ -151,6 +157,14 @@ export const building = {
     summary: "AI agent software for live events.",
     href: "https://intro.events",
     hrefLabel: "Visit Intro",
+  },
+  bridger: {
+    name: "Bridger",
+    role: "Founder",
+    dates: "Apr 2025 to present",
+    summary: "A socialization app in a beta of about 25 people.",
+    href: "https://bridger.social",
+    hrefLabel: "Visit Bridger",
   },
 };
 
@@ -181,7 +195,7 @@ export const about = {
 export const experienceIntro = {
   eyebrow: "Experience",
   title: "The work, in order.",
-  deck: "About six years of product work, from a volunteer organization in Birmingham to Intro.",
+  deck: "About six years of product work, from a volunteer organization in Birmingham to Intro and Bridger.",
 };
 
 export const experience: ExperienceRole[] = [
@@ -192,6 +206,14 @@ export const experience: ExperienceRole[] = [
     summary: "I build AI agent software for live events.",
     href: "https://intro.events",
     hrefLabel: "Visit Intro",
+  },
+  {
+    org: "Bridger",
+    role: "Founder",
+    dates: "Apr 2025 to present",
+    summary: "I started Bridger in April 2025. It is a socialization app in a beta of about 25 people.",
+    href: "https://bridger.social",
+    hrefLabel: "Visit Bridger",
   },
   {
     org: "Utah Business",
@@ -305,7 +327,7 @@ export const serviceStories: ServiceStory[] = [
 export const projectsIntro = {
   eyebrow: "Projects",
   title: "Two products, and a way to ask.",
-  deck: "Intro is the live build. Ask about me stays on this site.",
+  deck: "Intro and Bridger are the live builds. Ask about me stays on this site.",
 };
 
 export const projects: Project[] = [
@@ -321,6 +343,18 @@ export const projects: Project[] = [
     href: "https://intro.events",
     hrefLabel: "Visit Intro",
     featured: true,
+  },
+  {
+    slug: "bridger",
+    name: "Bridger",
+    kicker: "Also building",
+    summary: "A socialization app in a beta of about 25 people. Founder since April 2025.",
+    paragraphs: [
+      "Bridger is a socialization app. I am the founder, from April 2025.",
+      "It is in a beta of about 25 people. The product is at bridger.social.",
+    ],
+    href: "https://bridger.social",
+    hrefLabel: "Visit Bridger",
   },
 ];
 
@@ -354,7 +388,7 @@ export const nowPage = {
   eyebrow: "Now",
   title: "This month.",
   paragraphs: [
-    "I am building Intro, AI agent software for live events.",
+    "I am building Intro, AI agent software for live events, and Bridger, a socialization app in a beta of about 25 people.",
     "I am in American Fork, Utah, and I am open to relocating.",
   ],
 };

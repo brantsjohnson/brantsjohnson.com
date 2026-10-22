@@ -8,6 +8,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
   about,
+  booking,
   building,
   contactIntro,
   experience,
@@ -33,6 +34,7 @@ function strings(value: unknown, found: string[] = []): string[] {
 
 const publicCopy = strings({
   about,
+  booking,
   building,
   contactIntro,
   experience,
@@ -49,10 +51,17 @@ const publicCopy = strings({
 });
 
 test("public copy stays inside the voice rules", () => {
-  const banned = [/Bridger/i, /\$/, /—/, /–/, /\bactually\b/i, /\bIsrael\b/, /\bTrump\b/];
+  const banned = [/\$/, /—/, /–/, /\bactually\b/i, /\bIsrael\b/, /\bTrump\b/, /1,778/, /TestFlight/i, /2\.5/];
   for (const line of publicCopy) {
     for (const pattern of banned) {
       assert.doesNotMatch(line, pattern, line);
     }
   }
+});
+
+test("public copy names Bridger and the booking link", () => {
+  const joined = publicCopy.join("\n");
+  assert.match(joined, /https:\/\/bridger\.social/);
+  assert.match(joined, /beta of about 25 people/);
+  assert.match(joined, /https:\/\/calendar\.app\.google\/qj9tb56BYCdppJPk9/);
 });

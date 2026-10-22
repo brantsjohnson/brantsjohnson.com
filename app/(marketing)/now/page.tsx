@@ -8,7 +8,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
 import { TextLink } from "@/components/ui/TextLink";
-import { nowPage } from "@/content/site-content";
+import { building, nowPage } from "@/content/site-content";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -27,9 +27,14 @@ export default function NowPage() {
             {paragraph}
           </p>
         ))}
-        <TextLink href="/work#intro" track="link:intro:now">
-          See Intro
-        </TextLink>
+        <div className="flex flex-col gap-2">
+          <TextLink href="/work#intro" track="link:intro:now">
+            See Intro
+          </TextLink>
+          <TextLink href={building.bridger.href} track="link:bridger:now">
+            Visit Bridger
+          </TextLink>
+        </div>
       </div>
     </>
   );

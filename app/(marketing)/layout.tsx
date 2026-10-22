@@ -35,7 +35,7 @@ export default async function MarketingLayout({
       "@type": "CollegeOrUniversity",
       name: "Utah Valley University",
     },
-    sameAs: [identity.linkedin, "https://intro.events"],
+    sameAs: [identity.linkedin, "https://intro.events", "https://bridger.social"],
   };
 
   return (

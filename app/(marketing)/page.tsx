@@ -2,9 +2,10 @@
 // WHAT THIS FILE DOES (plain English):
 // This is the home page. A person should be able to say who Brant is,
 // name three pieces of work, and know how to write him, without hunting.
-// The order is the hero, three facts, Intro, the archway photograph,
-// then a way to the contact page. The headline stays the same for
-// every visitor unless a referral link or a ?hero= preview says otherwise.
+// The order is the hero, three facts, Intro, Bridger, the archway
+// photograph, then a way to write or book time. The headline stays
+// the same for every visitor unless a referral link or a ?hero=
+// preview says otherwise.
 // ============================================
 
 import type { Metadata } from "next";
@@ -12,7 +13,7 @@ import Image from "next/image";
 import { SeeTheWorkButton, WorkSectionView } from "@/components/home/HeroExperiment";
 import { Button } from "@/components/ui/Button";
 import { TextLink } from "@/components/ui/TextLink";
-import { building, hero, homeRecord, photos } from "@/content/site-content";
+import { booking, building, hero, homeRecord, photos } from "@/content/site-content";
 import { getActiveReferralVariant } from "@/lib/cms/get-active-referral-variant";
 import { getReferralVariantContent } from "@/lib/cms/referral-variant";
 import { heroHeadlineFor, parseHeroExperimentId } from "@/lib/hero-experiment";
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   ...pageMetadata({
     title: "Brant S. Johnson, product manager and founder",
     description:
-      "Brant S. Johnson builds technology as a bridge to real human connection. Product manager and founder, open to relocating.",
+      "Brant S. Johnson builds technology as a bridge to real human connection. He is building Intro and Bridger, and he is open to relocating.",
     path: "/",
   }),
   title: { absolute: "Brant S. Johnson, product manager and founder" },
@@ -120,6 +121,21 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         </div>
       </section>
 
+      <section id="bridger" className="border-t border-border-subtle">
+        <div className="shell max-w-reading py-16 md:py-24">
+          <p className="label text-text-secondary">Also building</p>
+          <h2 className="mt-4 font-serif text-h2 text-ink">{building.bridger.name}</h2>
+          <p className="mt-6 text-body text-text-secondary">
+            {building.bridger.summary} {building.bridger.role}, {building.bridger.dates}.
+          </p>
+          <div className="mt-6">
+            <TextLink href={building.bridger.href} track="link:visit_bridger:home">
+              Visit Bridger
+            </TextLink>
+          </div>
+        </div>
+      </section>
+
       <section aria-label="Uintah Resilience Archway">
         <figure>
           <Image
@@ -144,9 +160,12 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         <p className="mt-4 max-w-reading text-body text-text-secondary">
           If you want to talk about the work, send a note. I read them.
         </p>
-        <div className="mt-6">
+        <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:gap-8">
           <TextLink href="/contact" track="link:contact:home">
             Go to contact
+          </TextLink>
+          <TextLink href={booking.href} track="link:book_time:home">
+            {booking.label}
           </TextLink>
         </div>
       </section>

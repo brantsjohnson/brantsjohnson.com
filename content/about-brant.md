@@ -15,6 +15,8 @@ LinkedIn: https://www.linkedin.com/in/brantshanonjohnson/
 
 Intro: Founder and Product Lead, November 2025 to present. AI agent software for live events. Live at https://intro.events
 
+Bridger: Founder, April 2025 to present. A socialization app in a beta of about 25 people. Live at https://bridger.social
+
 ## Utah Business
 
 Account Executive at Utah Business (Deseret News), Salt Lake City, October 2024 to November 2025. He covered 63 clients and 52 annual events. He sold print, digital, and event campaigns, partnered with agency teams, ran weekly AI training for the team, and used Monday.com and Magazine Manager. He no longer works there.
@@ -59,4 +61,4 @@ Student body president in elementary, middle, and high school in Vernal, Utah.
 
 ## How to reach him
 
-Email me@brantsjohnson.com or use the contact form on brantsjohnson.com/contact. A short networking page lives at brantsjohnson.com/hi.
+Email me@brantsjohnson.com or use the contact form on brantsjohnson.com/contact. A short networking page lives at brantsjohnson.com/hi. To book time: https://calendar.app.google/qj9tb56BYCdppJPk9

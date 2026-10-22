@@ -32,7 +32,7 @@ const TOPICS: Topic[] = [
     id: "contact",
     score: (question) => hits(question, [/\b(reach|email|contact|write him|get in touch)\b/i]),
     short: "Email him at me@brantsjohnson.com, or send a note from the Contact page.",
-    more: "If you met him in person, the short follow-up page is brantsjohnson.com/hi.",
+    more: "If you met him in person, the short follow-up page is brantsjohnson.com/hi. To book time, use https://calendar.app.google/qj9tb56BYCdppJPk9.",
   },
   {
     id: "school",
@@ -51,11 +51,18 @@ const TOPICS: Topic[] = [
     more: "SQL, Python, and Figma are working skills.",
   },
   {
+    id: "bridger",
+    score: (question) => hits(question, [/\bbridger\b/i]) * 3,
+    short:
+      "Bridger is a socialization app in a beta of about 25 people. He is Founder, from April 2025, and it is live at bridger.social.",
+    more: "The public notes describe that beta and the link. They do not add a larger user count.",
+  },
+  {
     id: "building",
     score: (question) => hits(question, [/\b(building|intro)\b/i]),
     short:
-      "He is building Intro, AI agent software for live events. He is Founder and Product Lead, from November 2025.",
-    more: "Intro is live at intro.events.",
+      "He is building Intro and Bridger. Intro is AI agent software for live events. Bridger is a socialization app in a beta of about 25 people.",
+    more: "Intro is live at intro.events. Bridger is live at bridger.social. He is Founder and Product Lead of Intro, from November 2025, and Founder of Bridger, from April 2025.",
   },
   {
     id: "crew",
