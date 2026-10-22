@@ -20,7 +20,8 @@ export function TextLink({ href, children, track }: TextLinkProps) {
     </span>
   );
 
-  if (href.startsWith("http")) {
+  // A PDF is a file, so the browser opens it directly instead of as a page.
+  if (href.startsWith("http") || href.endsWith(".pdf")) {
     return (
       <a href={href} className={className} data-track={track} target="_blank" rel="noopener noreferrer">
         {children}

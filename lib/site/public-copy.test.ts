@@ -18,6 +18,7 @@ import {
   homeRecord,
   nowPage,
   projects,
+  publicCv,
   serviceStories,
 } from "../../content/site-content";
 import { referralVariantContent } from "../../content/referral-variants";
@@ -44,6 +45,7 @@ const publicCopy = strings({
   homeRecord,
   nowPage,
   projects,
+  publicCv,
   serviceStories,
   referralVariantContent,
   defaultAndLinkedInSecurityLines,
@@ -64,4 +66,5 @@ test("public copy names Bridger and the booking link", () => {
   assert.match(joined, /https:\/\/bridger\.social/);
   assert.match(joined, /beta of about 25 people/);
   assert.match(joined, /https:\/\/calendar\.app\.google\/qj9tb56BYCdppJPk9/);
+  assert.match(joined, /\/cv\.pdf/);
 });

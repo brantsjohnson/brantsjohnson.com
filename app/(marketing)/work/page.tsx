@@ -3,9 +3,7 @@
 // This is the Work page. Intro sits at the top with a real product
 // screen. Bridger sits under it as text, because no screen was sent.
 // Under both is the experience timeline, newest first, with the
-// dates in a narrow left column. A public CV link appears only
-// when CV_URL is set.
-// TODO(brant): set CV_URL to a public résumé link when you want the button.
+// dates in a narrow left column. The public CV is the file at /cv.pdf.
 // ============================================
 
 import type { Metadata } from "next";
@@ -13,9 +11,8 @@ import Image from "next/image";
 import { PageHero } from "@/components/sections/PageHero";
 import { Button } from "@/components/ui/Button";
 import { TextLink } from "@/components/ui/TextLink";
-import { building, experience, experienceIntro, photos } from "@/content/site-content";
+import { building, experience, experienceIntro, photos, publicCv } from "@/content/site-content";
 import { pageMetadata } from "@/lib/site/page-metadata";
-import { publicCvUrl } from "@/lib/site/public-env";
 
 export const metadata: Metadata = pageMetadata({
   title: "Work",
@@ -24,8 +21,6 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function WorkPage() {
-  const cvUrl = publicCvUrl();
-
   return (
     <>
       <PageHero eyebrow="Work" title="The work, in order." deck={experienceIntro.deck} />
@@ -95,13 +90,11 @@ export default function WorkPage() {
           </li>
         ))}
       </ol>
-      {cvUrl && (
-        <div className="shell pb-20">
-          <TextLink href={cvUrl} track="link:open_cv:work">
-            Open the CV
-          </TextLink>
-        </div>
-      )}
+      <div className="shell pb-20">
+        <TextLink href={publicCv.href} track="link:public_cv:work">
+          {publicCv.label}
+        </TextLink>
+      </div>
     </>
   );
 }

@@ -37,7 +37,7 @@ The public Ask about me assistant reads `content/about-brant.md` only. `data/bra
 |---|---|
 | AWS on About | The skills line lists Pendo Essentials, SQL, Python, Figma, and the Agile Foundations course certificate. It does not discuss AWS. |
 | Bridger role | Named on Home, Work, About, Now, Ask, and /hi. Founder, April 2025 to present. A socialization app in a beta of about 25 people, at bridger.social. Older user counts and dollar figures stay off the site. |
-| Private CV | The Drive file link is not on the site. Experience renders "Open the CV" only when `CV_URL` is a public URL. |
+| Public CV | `public/cv.pdf` is linked as Public CV from Work, About, and /hi. The private Drive file is not linked. |
 | Writing | The page, the nav link, the footer link, and the home block stay hidden until at least two real pieces exist. Local posts and Substack feed items count together. |
 | Newsletter signup | The signup is a Substack subscribe link from `SUBSTACK_URL`. If that variable is unset, the signup is hidden. It does not fall back to email. |
 | /hi storage line | The page says a note is stored only when `INTRO_CRM_CAPTURE_URL` or `CRM_WEBHOOK_URL` is set. Otherwise it says the note opens in the visitor's email app and nothing is kept on the site. |

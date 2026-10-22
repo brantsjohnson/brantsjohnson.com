@@ -43,10 +43,10 @@ The rows above are the starter-kit draft. These rows name what this repository a
 | `/ask` | Full-page Ask conversation | Always. Linked from the header |
 | `/writing` and `/writing/[slug]` | Essays and letters | At least two real posts |
 | `/hi` | Unlisted event follow-up | Not in the nav |
+| `/cv.pdf` | Public CV file | Linked from Work, About, and /hi |
 
 | Env name | Purpose |
 |---|---|
 | `SUBSTACK_URL` | Publication root. Feed is `{url}/feed`. Signup is `{url}/subscribe` |
-| `CV_URL` | Public CV link. Work shows "Open the CV" only when this is an https URL |
 | `INTRO_CRM_CAPTURE_URL` or `CRM_WEBHOOK_URL` | When set, contact and /hi notes are posted there and /hi may say they are stored |
 | Cookie `bj_hero_variant` | First-party homepage headline test. Visitors are split evenly across the list in `lib/hero-experiment.ts`. |

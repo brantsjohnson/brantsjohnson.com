@@ -10,7 +10,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero } from "@/components/sections/PageHero";
 import { TextLink } from "@/components/ui/TextLink";
-import { about, building, photos, serviceStories } from "@/content/site-content";
+import { about, building, photos, publicCv, serviceStories } from "@/content/site-content";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -104,6 +104,11 @@ export default function AboutPage() {
           <h2 className="font-serif text-h2 text-ink">{about.educationTitle}</h2>
           <p className="mt-4 text-body text-text-secondary">{about.education}</p>
           <p className="mt-4 text-body text-text-secondary">{about.location}</p>
+          <div className="mt-4">
+            <TextLink href={publicCv.href} track="link:public_cv:about">
+              {publicCv.label}
+            </TextLink>
+          </div>
         </div>
         <div id="skills">
           <h2 className="font-serif text-h2 text-ink">{about.skillsTitle}</h2>

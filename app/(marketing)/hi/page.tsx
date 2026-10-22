@@ -10,7 +10,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
 import { NoteForm } from "@/components/forms/NoteForm";
 import { TextLink } from "@/components/ui/TextLink";
-import { booking, building, hiPage, identity } from "@/content/site-content";
+import { booking, building, hiPage, identity, publicCv } from "@/content/site-content";
 import { notesAreStored } from "@/lib/forms/deliver-note";
 import { hiQrSvg } from "@/lib/hi-qr";
 import { pageMetadata } from "@/lib/site/page-metadata";
@@ -61,9 +61,12 @@ export default async function HiPage({ searchParams }: HiPageProps) {
       <section className="shell grid gap-10 py-8 pb-20 lg:grid-cols-[1.2fr_0.8fr]">
         <div>
           <h2 className="font-serif text-h2 text-ink">Stay in touch</h2>
-          <div className="mt-4">
+          <div className="mt-4 flex flex-col gap-2">
             <TextLink href={booking.href} track="link:book_time:hi">
               {booking.label}
+            </TextLink>
+            <TextLink href={publicCv.href} track="link:public_cv:hi">
+              {publicCv.label}
             </TextLink>
           </div>
           <p className="mt-4 max-w-reading text-body text-text-secondary">

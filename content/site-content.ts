@@ -62,6 +62,12 @@ export const booking = {
   label: "Book time",
 };
 
+// THIS SECTION DOES: the résumé file in public/cv.pdf. The link is the file itself.
+export const publicCv = {
+  href: "/cv.pdf",
+  label: "Public CV",
+};
+
 // THIS SECTION DOES: list the main navigation. Ask is the one chat entry, and it is a page.
 export const primaryNav: NavItem[] = [
   { label: "Home", kind: "route", href: "/" },
