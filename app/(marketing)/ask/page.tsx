@@ -7,11 +7,13 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
 import { AskConversation } from "@/components/ask/AskConversation";
+import { pageMetadata } from "@/lib/site/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Ask about me",
-  description: "A short conversation from the public notes on this site.",
-};
+  description: "Short answers about Brant S. Johnson from the public notes on this site.",
+  path: "/ask",
+});
 
 export default function AskPage() {
   return (

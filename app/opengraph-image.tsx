@@ -7,6 +7,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
+export const alt = "Brant S. Johnson. Technology as a bridge to real human connection.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -26,10 +27,11 @@ export default function OpenGraphImage() {
           fontSize: 72,
         }}
       >
-        <div style={{ fontSize: 28, letterSpacing: 4 }}>BRANT S. JOHNSON</div>
-        <div style={{ marginTop: 24, fontSize: 64, lineHeight: 1.05 }}>
+        <div style={{ fontSize: 28, letterSpacing: 4, color: "#F4F2EC" }}>BRANT S. JOHNSON</div>
+        <div style={{ marginTop: 24, fontSize: 64, lineHeight: 1.05, maxWidth: 900 }}>
           Technology as a bridge to real human connection.
         </div>
+        <div style={{ marginTop: 28, fontSize: 28, color: "#F4F2EC" }}>Product manager and founder</div>
       </div>
     ),
     size

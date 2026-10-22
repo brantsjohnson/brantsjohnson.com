@@ -36,7 +36,7 @@ The public Ask about me assistant reads `content/about-brant.md` only. `data/bra
 | Item | What shipped |
 |---|---|
 | AWS on About | The skills line lists Pendo Essentials, SQL, Python, Figma, and the Agile Foundations course certificate. It does not discuss AWS. |
-| Bridger role | Experience lists the role as Founder. The summary still says the product is in TestFlight beta. |
+| Bridger role | Withheld from the public pages in the Washington lookup pass. Home, Work, About, Ask, and /hi do not name it. |
 | Private CV | The Drive file link is not on the site. Experience renders "Open the CV" only when `CV_URL` is a public URL. |
 | Writing | The page, the nav link, the footer link, and the home block stay hidden until at least two real pieces exist. Local posts and Substack feed items count together. |
 | Newsletter signup | The signup is a Substack subscribe link from `SUBSTACK_URL`. If that variable is unset, the signup is hidden. It does not fall back to email. |

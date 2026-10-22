@@ -6,11 +6,27 @@
 // domain moves off Wix. See app/robots.ts.
 // ============================================
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
-import { hero, identity } from "@/content/site-content";
+import { identity } from "@/content/site-content";
+
+const description =
+  "Brant S. Johnson is a product manager and founder. He builds technology as a bridge to real human connection.";
+
+// THIS SECTION DOES: point share images at the preview while a preview is open,
+// and at the public domain everywhere else.
+function metadataBaseUrl(): URL {
+  if (process.env.VERCEL_ENV === "preview" && process.env.VERCEL_URL) {
+    return new URL(`https://${process.env.VERCEL_URL}`);
+  }
+  const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (configured) return new URL(configured);
+  return new URL(identity.siteUrl);
+}
+
+const allowIndexing = process.env.SITE_INDEXABLE === "true";
 
 const serif = Cormorant_Garamond({
   subsets: ["latin"],
@@ -27,14 +43,38 @@ const sans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(identity.siteUrl),
+  metadataBase: metadataBaseUrl(),
   title: {
     default: identity.fullName,
     template: `%s | ${identity.fullName}`,
   },
-  description: hero.subline,
-  robots: { index: false, follow: false },
+  description,
+  applicationName: identity.fullName,
+  authors: [{ name: identity.fullName, url: identity.siteUrl }],
+  creator: identity.fullName,
+  robots: allowIndexing
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: identity.siteUrl,
+    siteName: identity.fullName,
+    title: identity.fullName,
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: identity.fullName,
+    description,
+  },
   icons: { icon: "/favicon.svg" },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

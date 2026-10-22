@@ -3,7 +3,7 @@
 // This is the sticky bar at the top of every public page. It shows
 // Brant's full name, the page links, and one Ask link.
 // On a narrow screen the links collapse into a Menu button.
-// The bar is a light glass strip so the page can scroll under it.
+// The bar is a solid paper strip so the page can scroll under it.
 // ============================================
 
 "use client";
@@ -54,7 +54,7 @@ export function SiteHeader({ showWriting = false }: SiteHeaderProps) {
   const links = nav;
 
   return (
-    <header className="sticky top-0 z-sticky border-b border-border-subtle bg-glass backdrop-blur-glass">
+    <header className="sticky top-0 z-sticky border-b border-border-subtle bg-bg">
       <div className="shell flex items-center justify-between gap-4 py-3">
         <Link href="/" data-track="link:home_wordmark:global" className="font-serif text-h3 text-ink">
           {identity.wordmark}

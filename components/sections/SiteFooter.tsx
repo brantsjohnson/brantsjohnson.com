@@ -19,6 +19,7 @@ export function SiteFooter({ showWriting = false }: SiteFooterProps) {
   if (showWriting) {
     links.splice(2, 0, { label: "Writing", kind: "route", href: "/writing" });
   }
+  links.push({ label: "Now", kind: "route", href: "/now" });
 
   return (
     <footer className="mt-8 border-t border-border-subtle bg-bg">

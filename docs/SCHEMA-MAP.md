@@ -37,7 +37,7 @@ The rows above are the starter-kit draft. These rows name what this repository a
 | Route | What it is | Shown when |
 |---|---|---|
 | `/` | Home | Always |
-| `/work` | Intro, Bridger, then the experience timeline | Always |
+| `/work` | Intro, then the experience timeline | Always |
 | `/about` | Story and service, including the archway and the scholarship | Always |
 | `/contact` | Contact note | Always |
 | `/ask` | Full-page Ask conversation | Always. Linked from the header |

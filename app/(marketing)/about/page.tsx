@@ -9,11 +9,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero } from "@/components/sections/PageHero";
 import { about, photos, serviceStories } from "@/content/site-content";
+import { pageMetadata } from "@/lib/site/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About",
-  description: about.paragraphs[0],
-};
+  description:
+    "Brant S. Johnson on connection, the Uintah Resilience Archway, and the Resilience Scholarship.",
+  path: "/about",
+});
 
 function Story({ title, role, dates, place, paragraphs }: { title: string; role: string; dates: string; place?: string; paragraphs: string[] }) {
   return (
@@ -48,21 +51,21 @@ export default function AboutPage() {
       <PageHero eyebrow={about.eyebrow} title={about.title} />
 
       <div className="shell grid items-start gap-12 py-8 lg:grid-cols-[1fr_0.9fr]">
-        <div className="flex max-w-reading flex-col gap-6">
-          {about.paragraphs.map((paragraph) => (
-            <p key={paragraph.slice(0, 24)} className="text-body text-text-secondary">
-              {paragraph}
-            </p>
-          ))}
-        </div>
         <Image
           src={photos.podium.src}
           alt={photos.podium.alt}
           width={photos.podium.width}
           height={photos.podium.height}
           sizes="(min-width: 1024px) 40vw, 100vw"
-          className="h-auto w-full"
+          className="h-auto w-full lg:col-start-2 lg:row-start-1"
         />
+        <div className="flex max-w-reading flex-col gap-6 lg:col-start-1 lg:row-start-1">
+          {about.paragraphs.map((paragraph) => (
+            <p key={paragraph.slice(0, 24)} className="text-body text-text-secondary">
+              {paragraph}
+            </p>
+          ))}
+        </div>
       </div>
 
       <section className="shell grid gap-12 py-16 md:grid-cols-2">

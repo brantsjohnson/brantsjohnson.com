@@ -41,8 +41,8 @@ export const referralVariantContent: Record<ReferralVariantId, ReferralVariantCo
     heroBody:
       "Product manager and founder. I've owned the whole loop, from KYC and onboarding to analytics, and I sell what I ship.",
     focusLines: [
-      "Founder and PM work from the first version through launch.",
-      "Bridger and Intro help people connect around shared tastes, not endless feeds.",
+      "Founder and product work from the first version through launch.",
+      "Intro helps people meet at live events.",
       "Good products serve communities.",
     ],
     securityFocus: {
@@ -53,14 +53,14 @@ export const referralVariantContent: Record<ReferralVariantId, ReferralVariantCo
   social: {
     id: "social",
     analyticsLabel: "social_connection",
-    // Required hero line for Instagram, Threads, TikTok, and Substack links.
-    heroHeadline: "Technology should bring people together, not keep them scrolling alone.",
+    // Hero line for Instagram, Threads, TikTok, and Substack links.
+    heroHeadline: "Technology should bring people together.",
     heroBody:
-      "I care about ending isolation online and building people-first tech. Bridger and Intro are about real connection over performance.",
+      "I care about connection, and about technology that helps people find each other.",
     focusLines: [
-      "Connection beats vanity metrics.",
-      "Shared tastes and introductions, not another algorithmic feed.",
-      "Cooperative models I trust.",
+      "Connection is the point of the work.",
+      "Introductions and shared time, in person.",
+      "I build tools, spaces, and stories that bring people together.",
     ],
     securityFocus: {
       title: "Privacy and trust",
@@ -72,11 +72,11 @@ export const referralVariantContent: Record<ReferralVariantId, ReferralVariantCo
     analyticsLabel: "linkedin_x_ai_craft",
     heroHeadline: "Agentic products with a human spine.",
     heroBody:
-      "I design and ship AI-assisted workflows where the model does the busy work and people stay accountable. My craft is retrieval, tooling, and product judgment in an AI world. People still matter. That is the point of the automation.",
+      "I design and ship AI-assisted workflows where the model handles the busy work and people stay accountable. My craft is retrieval, tooling, and product judgment. People still matter.",
     focusLines: [
       "Agentic patterns that stay observable and reversible.",
-      "PM and founder lens on what to automate versus what to keep human.",
-      "Bridger and Intro as products, not demos.",
+      "A product judgment on what to automate and what to keep with a person.",
+      "Intro is live software for events.",
     ],
     securityFocus: {
       title: "Security and compliance in product work",

@@ -15,7 +15,7 @@
 export const nowContent = {
   // Section heading and one short line under it.
   heading: "Now",
-  intro: "What I am into lately, pulled from my Bridger profile.",
+  intro: "What I am into lately.",
 
   // Small labels above each group of shared tastes.
   labels: {

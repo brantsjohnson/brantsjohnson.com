@@ -28,6 +28,7 @@ export function LocalAsk() {
   async function ask(question: string) {
     const trimmed = question.trim();
     if (!trimmed || busy) return;
+    const earlier = turns.filter((turn) => turn.role === "user").map((turn) => turn.text);
     setBusy(true);
     setError("");
     setInput("");
@@ -36,7 +37,7 @@ export function LocalAsk() {
       const response = await fetch("/api/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: trimmed }),
+        body: JSON.stringify({ question: trimmed, earlier }),
       });
       const body = (await response.json()) as { answer?: string; error?: string };
       if (!response.ok || !body.answer) {

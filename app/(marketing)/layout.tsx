@@ -7,7 +7,7 @@
 
 import { SiteFooter } from "@/components/sections/SiteFooter";
 import { SiteHeader } from "@/components/sections/SiteHeader";
-import { identity } from "@/content/site-content";
+import { hero, identity, photos } from "@/content/site-content";
 import { getPublicWriting } from "@/lib/writing/public-posts";
 
 export default async function MarketingLayout({
@@ -23,6 +23,8 @@ export default async function MarketingLayout({
     url: identity.siteUrl,
     email: `mailto:${identity.email}`,
     jobTitle: "Founder and Product Lead",
+    description: hero.headline,
+    image: `${identity.siteUrl}${photos.speaking.src}`,
     address: {
       "@type": "PostalAddress",
       addressLocality: "American Fork",
@@ -33,7 +35,7 @@ export default async function MarketingLayout({
       "@type": "CollegeOrUniversity",
       name: "Utah Valley University",
     },
-    sameAs: [identity.linkedin, "https://intro.events", "https://bridger.social"],
+    sameAs: [identity.linkedin, "https://intro.events"],
   };
 
   return (

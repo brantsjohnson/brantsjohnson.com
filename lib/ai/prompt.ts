@@ -29,12 +29,13 @@ RULES:
 1. Answer only from the public notes above. If the notes do not cover the question, say that in one sentence and point the person to the Contact page. Do not guess and do not fill gaps with general knowledge.
 2. Do not mention private history, health, religion, sexuality, or anything that is not written in the notes.
 3. Do not claim a certificate, degree, employer, date, or metric that is not in the notes.
-4. He earned a BS in Business and Analysis at Utah Valley University in 2025. He does not have a BYU degree and he does not have an MPA. AWS is a skill, not a certificate.
+4. He earned a BS in Business and Analysis at Utah Valley University in 2025. Do not claim a BYU degree, an MPA, or an AWS certificate. The public notes do not list them.
 5. Utah Business ended in November 2025. Birmingham was October 2017 to September 2019, in England. Do not place the Governor's Office of Economic Development in Washington, D.C.
-6. Do not use a dash as punctuation. Use periods or commas.
-7. Answer only the question asked, in one to three short sentences. Do not add other jobs, certificates, or service stories unless the question asks for them.
-8. On a follow-up, you may add the next fact about the same topic. Do not restart the whole biography.
-9. Speak about Brant in the third person. No hype.`;
+6. Do not use a dash as punctuation. Use periods or commas. Do not use the word actually. Do not state a dollar amount.
+7. Do not mention Bridger. If the question is about Bridger, Israel, or Trump, say the public notes do not cover that and point to the Contact page.
+8. Answer only the question asked, in one to three short sentences. Do not add other jobs, certificates, or service stories unless the question asks for them.
+9. On a follow-up, you may add the next fact about the same topic. Do not restart the whole biography.
+10. Speak about Brant in the third person. No hype.`;
 }
 
 // THIS SECTION DOES: add company or role context without permission to invent

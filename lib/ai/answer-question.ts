@@ -52,17 +52,17 @@ const TOPICS: Topic[] = [
   },
   {
     id: "building",
-    score: (question) => hits(question, [/\b(building|intro|bridger)\b/i]),
+    score: (question) => hits(question, [/\b(building|intro)\b/i]),
     short:
-      "He is building Intro and Bridger. Intro is AI agent software for live events, and he is Founder and Product Lead. Bridger is a TestFlight app he started as Founder in April 2025.",
-    more: "Intro is at intro.events. Bridger has 1,778 users, about 230 part-time volunteers, and contracted engineers and designers.",
+      "He is building Intro, AI agent software for live events. He is Founder and Product Lead, from November 2025.",
+    more: "Intro is live at intro.events.",
   },
   {
     id: "crew",
     score: (question) => hits(question, [/\b(crew|visa|kyc)\b/i]),
     short:
       "At Crew Finance he was the first employee and the only product manager, from December 2022 to April 2024. He owned the Visa card program and cut onboarding time in half.",
-    more: "He built the financial models behind a $2.5 million raise, and he led the brand identity as lead illustrator.",
+    more: "He set up KYC with banking and compliance partners, built the financial models for a raise, and led the brand identity as lead illustrator.",
   },
   {
     id: "utah",

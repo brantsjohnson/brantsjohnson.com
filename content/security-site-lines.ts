@@ -7,12 +7,12 @@
 // ============================================
 
 export const defaultAndLinkedInSecurityLines = [
-  "Cybersecurity is part of the product, not a slide at the end.",
+  "Cybersecurity is part of the product work.",
   "For AI features I care about least privilege, careful handling of model inputs, and clear ownership when something goes wrong.",
-  "I would rather show who can see what, what is encrypted, and what is logged than claim a badge we have not earned.",
+  "I want it clear who can see what, what is protected, and what is logged.",
 ] as const;
 
 export const socialSecurityLines = [
   "I build technology that protects people: privacy by default, careful access, and systems that earn trust.",
-  "Security is part of caring for the community, not a marketing afterthought.",
+  "Security is part of caring for the community.",
 ] as const;

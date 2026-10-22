@@ -10,7 +10,7 @@ import { getPublicWriting } from "@/lib/writing/public-posts";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const writing = await getPublicWriting();
-  const paths = ["", "/work", "/about", "/contact", "/ask"];
+  const paths = ["", "/work", "/about", "/contact", "/ask", "/now"];
   if (writing.show) paths.push("/writing");
   const dated = new Date();
   return [

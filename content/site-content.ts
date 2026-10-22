@@ -15,11 +15,6 @@ export type NavItem = {
   href?: string;
 };
 
-export type ProofChip = {
-  value: string;
-  label: string;
-};
-
 export type ExperienceRole = {
   org: string;
   role: string;
@@ -71,21 +66,31 @@ export const primaryNav: NavItem[] = [
 ];
 
 // THIS SECTION DOES: the home hero. Referral traffic may swap the lines.
+// The public headline is this one sentence. The three test lines in
+// lib/hero-experiment.ts are preview-only, via ?hero=a, ?hero=b, or ?hero=c.
 export const hero = {
   headline: "I build technology as a bridge to real human connection.",
   subline:
     "Product manager and founder. I've owned the whole loop, from KYC and onboarding to analytics, and I sell what I ship.",
+  availability: "American Fork, Utah. Open to relocating.",
   primaryCta: { label: "See the work", href: "/work" },
 };
 
-// THIS SECTION DOES: one proof sentence under the hero, then three numbers in the band
-export const proofLine =
-  "First and only product manager at Crew Finance, where onboarding got twice as fast.";
-
-export const homeStats: ProofChip[] = [
-  { value: "50%", label: "Faster onboarding at Crew" },
-  { value: "$2.5M", label: "Raise modeled at Crew" },
-  { value: "400", label: "Volunteers led in Birmingham" },
+// THIS SECTION DOES: the three facts a first-time reader should be able to repeat.
+// Details live on the Work page. Dollar figures are not shown.
+export const homeRecord: { kicker: string; line: string }[] = [
+  {
+    kicker: "Washington, D.C.",
+    line: "Congressional intern, Office of Senator Mitt Romney.",
+  },
+  {
+    kicker: "Product",
+    line: "First product manager at Crew Finance. Onboarding got twice as fast.",
+  },
+  {
+    kicker: "Media",
+    line: "Account executive at Utah Business, across 63 clients and 52 events.",
+  },
 ];
 
 // THIS SECTION DOES: real photographs and one Intro product screen, sized for the web.
@@ -136,7 +141,7 @@ export const photos = {
   },
 };
 
-// THIS SECTION DOES: the two products on home. Intro is the featured one.
+// THIS SECTION DOES: the product on the public site. Intro is the one linked build.
 export const building = {
   kicker: "Currently building",
   intro: {
@@ -147,15 +152,6 @@ export const building = {
     href: "https://intro.events",
     hrefLabel: "Visit Intro",
   },
-  bridger: {
-    name: "Bridger",
-    role: "Founder",
-    dates: "Apr 2025 to present",
-    summary:
-      "1,778 users, about 230 part-time volunteers, and contracted engineers and designers.",
-    href: "https://bridger.social",
-    hrefLabel: "Visit Bridger",
-  },
 };
 
 // THIS SECTION DOES: the About page, using the connection story that already reads like him
@@ -163,13 +159,9 @@ export const about = {
   eyebrow: "About",
   title: "People matter most.",
   paragraphs: [
-    "I'm Brant Johnson, a product-minded entrepreneur and community builder who believes connection is the antidote to loneliness, and the foundation of any thriving society.",
-    "Over the years, I've worked in product management, AI, media, and government, and I've seen both the good and the bad of what technology can do.",
-    "On one hand, it can pull us into endless scrolling and shallow interactions. On the other, it has the power to rebuild trust, spark collaboration, and make relationships stronger. I'm choosing the latter.",
-    "My career has taken me through startups where I helped shape fintech products, media organizations where I connected with CEOs and entrepreneurs, and political spaces where I saw how communities thrive when people are engaged.",
-    "Across all of it, one theme has been constant. I love building tools, spaces, and stories that bring people together.",
-    "The work comes back to the same belief: people matter most.",
-    "I don't see technology as the end goal. I see it as a bridge to stronger friendships, better communities, and more meaningful lives.",
+    "I'm Brant Johnson, a product-minded entrepreneur and community builder. Connection is the antidote to loneliness, and the foundation of any thriving society.",
+    "I have worked in product management, AI, media, and government. I build tools, spaces, and stories that bring people together.",
+    "The work comes back to the same belief. People matter most. Technology is a bridge to stronger friendships, better communities, and more meaningful lives.",
   ],
   educationTitle: "Education",
   education:
@@ -189,7 +181,7 @@ export const about = {
 export const experienceIntro = {
   eyebrow: "Experience",
   title: "The work, in order.",
-  deck: "About six years of product work, from a volunteer organization in Birmingham to the products I am building now.",
+  deck: "About six years of product work, from a volunteer organization in Birmingham to Intro.",
 };
 
 export const experience: ExperienceRole[] = [
@@ -200,15 +192,6 @@ export const experience: ExperienceRole[] = [
     summary: "I build AI agent software for live events.",
     href: "https://intro.events",
     hrefLabel: "Visit Intro",
-  },
-  {
-    org: "Bridger",
-    role: "Founder",
-    dates: "Apr 2025 to present",
-    summary:
-      "I started Bridger in April 2025. It is in TestFlight beta with 1,778 users, about 230 part-time volunteers, and contracted engineers and designers.",
-    href: "https://bridger.social",
-    hrefLabel: "Visit Bridger",
   },
   {
     org: "Utah Business",
@@ -224,7 +207,7 @@ export const experience: ExperienceRole[] = [
     dates: "Dec 2022 to Apr 2024",
     place: "Remote",
     summary:
-      "I was the first employee and the only product manager. I owned the Visa card issuing program, set up KYC with banking and compliance partners, and ran onboarding experiments that cut onboarding time in half. I built the financial models behind a $2.5M raise, and I led the brand identity as lead illustrator.",
+      "I was the first employee and the only product manager. I owned the Visa card issuing program, set up KYC with banking and compliance partners, and ran onboarding experiments that cut onboarding time in half. I built the financial models for a raise, and I led the brand identity as lead illustrator.",
   },
   {
     org: "Office of Senator Mitt Romney",
@@ -322,7 +305,7 @@ export const serviceStories: ServiceStory[] = [
 export const projectsIntro = {
   eyebrow: "Projects",
   title: "Two products, and a way to ask.",
-  deck: "Intro is the featured build. Bridger is in TestFlight. Ask about me stays on this site.",
+  deck: "Intro is the live build. Ask about me stays on this site.",
 };
 
 export const projects: Project[] = [
@@ -338,19 +321,6 @@ export const projects: Project[] = [
     href: "https://intro.events",
     hrefLabel: "Visit Intro",
     featured: true,
-  },
-  {
-    slug: "bridger",
-    name: "Bridger",
-    kicker: "Beta",
-    summary:
-      "A TestFlight beta I started in April 2025. 1,778 users, about 230 part-time volunteers, and contracted engineers and designers.",
-    paragraphs: [
-      "I started Bridger in April 2025 as Founder. It is in TestFlight beta.",
-      "1,778 people use it. About 230 part-time volunteers are part of the work, along with contracted engineers and designers.",
-    ],
-    href: "https://bridger.social",
-    hrefLabel: "Visit Bridger",
   },
 ];
 
@@ -373,8 +343,20 @@ export const contactIntro = {
 // THIS SECTION DOES: the short page he can text from an event
 export const hiPage = {
   eyebrow: "Hi",
-  title: "I build technology as a bridge to real human connection.",
+  title: "Good to meet you.",
+  line: "I build technology as a bridge to real human connection.",
   deck: "Product manager and founder. Try the work, then leave a way for me to follow up.",
+};
+
+// THIS SECTION DOES: the public Now page. One month, only checked facts.
+// TODO(brant): replace this with your own monthly note when you want a longer one.
+export const nowPage = {
+  eyebrow: "Now",
+  title: "This month.",
+  paragraphs: [
+    "I am building Intro, AI agent software for live events.",
+    "I am in American Fork, Utah, and I am open to relocating.",
+  ],
 };
 
 // THIS SECTION DOES: find one project by the slug in its URL

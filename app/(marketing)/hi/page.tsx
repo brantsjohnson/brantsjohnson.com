@@ -8,13 +8,21 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
 import { NoteForm } from "@/components/forms/NoteForm";
-import { hiPage, identity } from "@/content/site-content";
+import { TextLink } from "@/components/ui/TextLink";
+import { building, hiPage, identity } from "@/content/site-content";
 import { notesAreStored } from "@/lib/forms/deliver-note";
 import { hiQrSvg } from "@/lib/hi-qr";
+import { pageMetadata } from "@/lib/site/page-metadata";
+
+// TODO(brant): add a calendar link here only after you send one.
+// A second product demo stays off this page until you confirm it.
 
 export const metadata: Metadata = {
-  title: "Hi",
-  description: hiPage.title,
+  ...pageMetadata({
+    title: "Hi",
+    description: "A short page for people who just met Brant S. Johnson.",
+    path: "/hi",
+  }),
   robots: { index: false, follow: false },
 };
 
@@ -29,10 +37,24 @@ export default async function HiPage({ searchParams }: HiPageProps) {
 
   return (
     <>
-      <PageHero eyebrow={hiPage.eyebrow} title="Good to meet you." deck={hiPage.deck} />
-      <section className="shell grid gap-10 py-12 pb-20 lg:grid-cols-[1.2fr_0.8fr]">
+      <PageHero eyebrow={hiPage.eyebrow} title={hiPage.title} deck={hiPage.line} />
+      <section className="shell pb-4">
+        <p className="max-w-reading text-body text-text-secondary">{hiPage.deck}</p>
+        <div className="mt-10 max-w-reading border-t border-border-subtle py-8">
+          <p className="label text-text-secondary">Try it</p>
+          <h2 className="mt-3 font-serif text-h2 text-ink">{building.intro.name}</h2>
+          <p className="mt-3 text-body text-text-secondary">{building.intro.summary}</p>
+          <div className="mt-4">
+            <TextLink href={building.intro.href} track="link:visit_intro:hi">
+              Visit Intro
+            </TextLink>
+          </div>
+        </div>
+      </section>
+      <section className="shell grid gap-10 py-8 pb-20 lg:grid-cols-[1.2fr_0.8fr]">
         <div>
-          <p className="max-w-reading text-body text-text-secondary">
+          <h2 className="font-serif text-h2 text-ink">Stay in touch</h2>
+          <p className="mt-4 max-w-reading text-body text-text-secondary">
             {stored
               ? "Your name and note are stored so I can follow up. You can ask me to delete them by emailing me from the Contact page."
               : "Sending opens your email app with this note. Nothing is kept on this site."}
@@ -43,7 +65,12 @@ export default async function HiPage({ searchParams }: HiPageProps) {
         </div>
         <div>
           <h2 className="font-serif text-h2 text-ink">QR for this page</h2>
-          <div className="mt-4 max-w-[220px] bg-bg p-3" dangerouslySetInnerHTML={{ __html: qr }} />
+          <div
+            className="mt-4 max-w-[220px] bg-bg p-3"
+            role="img"
+            aria-label="QR code for brantsjohnson.com/hi"
+            dangerouslySetInnerHTML={{ __html: qr }}
+          />
         </div>
       </section>
     </>

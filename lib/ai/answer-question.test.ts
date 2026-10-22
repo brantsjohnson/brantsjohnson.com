@@ -15,7 +15,7 @@ function sentences(answer: string): string[] {
 
 test("preset answers stay short and on topic", () => {
   const expected = [
-    { question: PRESET_QUESTIONS[0], include: /Intro/i, exclude: /Romney|Archway|TEDx|Utah Valley/i },
+    { question: PRESET_QUESTIONS[0], include: /Intro/i, exclude: /Romney|Archway|TEDx|Utah Valley|Bridger|\$/i },
     { question: PRESET_QUESTIONS[1], include: /Utah Valley University/i, exclude: /Archway|TEDx|Pendo|Habitat|student body|scholarship|Crew/i },
     { question: PRESET_QUESTIONS[2], include: /Crew/i, exclude: /Utah Valley|Bridger|Archway|TEDx/i },
     { question: PRESET_QUESTIONS[3], include: /me@brantsjohnson.com/i, exclude: /Archway|TEDx|Crew|Utah Valley/i },
@@ -39,4 +39,14 @@ test("a follow-up adds the next fact and still stays on topic", () => {
   const certificates = answerFromNotes("What certificates does he have?", [school]);
   assert.match(certificates, /Pendo/i);
   assert.doesNotMatch(certificates, /Archway|TEDx|Habitat|student body/i);
+});
+
+test("public answers skip withheld topics and dollar figures", () => {
+  const crewMore = answerFromNotes("Tell me more", ["What did Brant do at Crew?"]);
+  assert.match(crewMore, /KYC/i);
+  assert.doesNotMatch(crewMore, /\$|million|2\.5/);
+
+  const withheld = answerFromNotes("What is Bridger?");
+  assert.match(withheld, /public notes/i);
+  assert.doesNotMatch(withheld, /TestFlight|1,778|bridger\.social/i);
 });

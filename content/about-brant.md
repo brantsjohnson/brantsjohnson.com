@@ -15,15 +15,13 @@ LinkedIn: https://www.linkedin.com/in/brantshanonjohnson/
 
 Intro: Founder and Product Lead, November 2025 to present. AI agent software for live events. Live at https://intro.events
 
-Bridger: Founder, started April 2025. It is in TestFlight beta with 1,778 users, about 230 part-time volunteers, and contracted engineers and designers. Live at https://bridger.social
-
 ## Utah Business
 
 Account Executive at Utah Business (Deseret News), Salt Lake City, October 2024 to November 2025. He covered 63 clients and 52 annual events. He sold print, digital, and event campaigns, partnered with agency teams, ran weekly AI training for the team, and used Monday.com and Magazine Manager. He no longer works there.
 
 ## Crew Finance
 
-Senior Product Manager and first employee, December 2022 to April 2024, remote. He was the only product manager. He owned the Visa card issuing program, set up KYC with banking and compliance partners, and cut onboarding time in half. He built the financial models behind a $2.5 million raise. He also led brand identity as lead illustrator.
+Senior Product Manager and first employee, December 2022 to April 2024, remote. He was the only product manager. He owned the Visa card issuing program, set up KYC with banking and compliance partners, and cut onboarding time in half. He built the financial models for a raise. He also led brand identity as lead illustrator.
 
 ## Office of Senator Mitt Romney
 

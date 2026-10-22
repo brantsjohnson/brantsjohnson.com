@@ -10,11 +10,13 @@ import { PageHero } from "@/components/sections/PageHero";
 import { TextLink } from "@/components/ui/TextLink";
 import { NoteForm } from "@/components/forms/NoteForm";
 import { contactIntro, identity } from "@/content/site-content";
+import { pageMetadata } from "@/lib/site/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact",
-  description: contactIntro.deck,
-};
+  description: "Write Brant S. Johnson. He reads the notes.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

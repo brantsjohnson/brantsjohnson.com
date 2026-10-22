@@ -31,10 +31,16 @@ function filesIn(dir, found = []) {
   return found;
 }
 
+// THIS SECTION DOES: ignore notes in comments. A TODO in a comment is a
+// question for Brant. The same word in a sentence a visitor can read still fails.
+function visibleSource(text) {
+  return text.replace(/\/\*[\s\S]*?\*\//g, "").replace(/(^|[^:])\/\/.*$/gm, "$1");
+}
+
 const hits = [];
 for (const root of roots) {
   for (const file of filesIn(root)) {
-    const text = readFileSync(file, "utf8");
+    const text = visibleSource(readFileSync(file, "utf8"));
     for (const pattern of banned) {
       if (pattern.test(text)) hits.push(`${file} matches ${pattern}`);
     }

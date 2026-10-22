@@ -35,10 +35,19 @@ function webhookUrl(): string | undefined {
   return intro || crm || undefined;
 }
 
+// THIS SECTION DOES: read the shared secret that lets Intro tell a real
+// site note from a stranger posting to the same URL.
+// TODO(brant): set INTRO_CRM_CAPTURE_URL and INTRO_CRM_CAPTURE_SECRET together.
+function captureSecret(): string | undefined {
+  noStore();
+  const secret = process.env.INTRO_CRM_CAPTURE_SECRET?.trim();
+  return secret || undefined;
+}
+
 // THIS SECTION DOES: tell /hi whether a note is kept by the CRM.
-// Mail-app delivery is not storage, so this stays false until a webhook is set.
+// Mail-app delivery is not storage. A webhook without the secret is not storage either.
 export function notesAreStored(): boolean {
-  return Boolean(webhookUrl());
+  return Boolean(webhookUrl() && captureSecret());
 }
 
 // THIS SECTION DOES: build a mailto link that carries the note in the body
@@ -67,14 +76,19 @@ function mailtoHref(note: Note): string {
 // THIS SECTION DOES: send the note, preferring the webhook when it is configured
 export async function deliverNote(note: Note): Promise<Delivery> {
   const url = webhookUrl();
-  if (!url) {
+  const secret = captureSecret();
+  // An unsigned post is refused. The visitor's email app sends the note instead.
+  if (!url || !secret) {
     return { ok: true, delivery: "mailto", href: mailtoHref(note) };
   }
 
   try {
     const response = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-intro-capture-secret": secret,
+      },
       body: JSON.stringify({
         name: note.name,
         email: note.email ?? "",

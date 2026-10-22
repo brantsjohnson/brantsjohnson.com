@@ -1,7 +1,10 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the Work page. Intro and Bridger sit at the top. Under them
-// is the experience timeline, with the dates in a narrow left column.
+// This is the Work page. Intro sits at the top with a real product
+// screen. Under it is the experience timeline, newest first, with
+// the dates in a narrow left column. A public CV link appears only
+// when CV_URL is set.
+// TODO(brant): set CV_URL to a public résumé link when you want the button.
 // ============================================
 
 import type { Metadata } from "next";
@@ -10,12 +13,14 @@ import { PageHero } from "@/components/sections/PageHero";
 import { Button } from "@/components/ui/Button";
 import { TextLink } from "@/components/ui/TextLink";
 import { building, experience, experienceIntro, photos } from "@/content/site-content";
+import { pageMetadata } from "@/lib/site/page-metadata";
 import { publicCvUrl } from "@/lib/site/public-env";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Work",
   description: experienceIntro.deck,
-};
+  path: "/work",
+});
 
 export default function WorkPage() {
   const cvUrl = publicCvUrl();
@@ -49,21 +54,10 @@ export default function WorkPage() {
         </div>
       </section>
 
-      <section id="bridger" className="shell pb-12">
-        <p className="label text-text-secondary">Bridger</p>
-        <h2 className="mt-3 font-serif text-h2 text-ink">{building.bridger.name}</h2>
-        <p className="mt-3 text-body text-text-secondary">
-          {building.bridger.role}, {building.bridger.dates}. {building.bridger.summary}
-        </p>
-        <div className="mt-6">
-          <TextLink href={building.bridger.href} track="link:visit_bridger:work">
-            Visit Bridger
-          </TextLink>
-        </div>
-      </section>
-
       <ol className="shell pb-20">
-        {experience.map((role) => (
+        {experience
+          .filter((role) => role.org !== "Intro")
+          .map((role) => (
           <li
             key={`${role.org}-${role.dates}`}
             className="grid gap-3 border-t border-border-subtle py-10 md:grid-cols-[11rem_1fr] md:gap-12"
