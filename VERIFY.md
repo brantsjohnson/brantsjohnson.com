@@ -42,14 +42,12 @@ The public Ask about me assistant reads `content/about-brant.md` only. `data/bra
 | Newsletter signup | The signup is a Substack subscribe link from `SUBSTACK_URL`. If that variable is unset, the signup is hidden. It does not fall back to email. |
 | /hi storage line | The page says a note is stored only when `INTRO_CRM_CAPTURE_URL` or `CRM_WEBHOOK_URL` is set. Otherwise it says the note opens in the visitor's email app and nothing is kept on the site. |
 
-## Photos on the four-page site
+## Photos on the public site
 
 | Item | What shipped |
 |---|---|
-| Home hero | `brant-speaking-on-stage.jpg`, full height of the black hero on desktop. |
-| About story | `brant-at-podium.jpg`, beside the story. |
-| Archway | `archway-crane-install.jpg` runs full-bleed. `archway-build-crew.jpg` sits under that caption. |
-| Scholarship | `resilience-scholarship-2021.jpg` and `resilience-scholarship-2022.jpg`. Brant confirmed the recipients can appear. |
+| Home | No portrait. The hero is the sentence "Good ideas deserve to happen." |
+| Intro | `intro-live.jpg`, a crop of the live site at intro.events. |
+| Bridger | `bridger-live.jpg`, a crop of the live waitlist window at bridger.social. |
 | Header | The plain serif wordmark, Brant S. Johnson. The circle mark is not in the header or the favicon. |
-| Intro | A screen captured from the live Intro product at intro.events. |
-| Still needed | A photograph of the Birmingham volunteers. No Bridger screen was sent, so none is shown. |
+| Still needed | A photograph of the Birmingham volunteers, if Brant wants one on About. The older speaking, podium, archway, and scholarship photographs are not on the site. |

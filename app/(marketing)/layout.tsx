@@ -7,7 +7,7 @@
 
 import { SiteFooter } from "@/components/sections/SiteFooter";
 import { SiteHeader } from "@/components/sections/SiteHeader";
-import { hero, identity, photos } from "@/content/site-content";
+import { hero, identity, inquiries } from "@/content/site-content";
 import { getPublicWriting } from "@/lib/writing/public-posts";
 
 export default async function MarketingLayout({
@@ -21,10 +21,9 @@ export default async function MarketingLayout({
     "@type": "Person",
     name: identity.fullName,
     url: identity.siteUrl,
-    email: `mailto:${identity.email}`,
+    email: inquiries.email,
     jobTitle: "Founder and Product Lead",
-    description: hero.headline,
-    image: `${identity.siteUrl}${photos.speaking.src}`,
+    description: `${hero.headline} ${hero.studio}`,
     address: {
       "@type": "PostalAddress",
       addressLocality: "American Fork",

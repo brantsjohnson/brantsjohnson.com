@@ -16,6 +16,7 @@ import {
   hero,
   hiPage,
   homeRecord,
+  inquiries,
   nowPage,
   projects,
   publicCv,
@@ -43,6 +44,7 @@ const publicCopy = strings({
   hero,
   hiPage,
   homeRecord,
+  inquiries,
   nowPage,
   projects,
   publicCv,
@@ -61,10 +63,12 @@ test("public copy stays inside the voice rules", () => {
   }
 });
 
-test("public copy names Bridger and the booking link", () => {
+test("public copy names Bridger, the booking link, and the studio line", () => {
   const joined = publicCopy.join("\n");
+  assert.equal(hero.headline, "Good ideas deserve to happen.");
   assert.match(joined, /https:\/\/bridger\.social/);
   assert.match(joined, /beta of about 25 people/);
   assert.match(joined, /https:\/\/calendar\.app\.google\/qj9tb56BYCdppJPk9/);
   assert.match(joined, /\/cv\.pdf/);
+  assert.match(joined, /brantshanonjohnson@gmail.com/);
 });

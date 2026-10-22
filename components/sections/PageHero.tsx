@@ -1,8 +1,7 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the top of an inner page. It sits on the cream paper with
-// a large serif title. The black band is reserved for the home hero
-// and the home stats, so this component does not paint one.
+// a large serif title and a quiet eyebrow, in the same rhythm as home.
 // ============================================
 
 type PageHeroProps = {
@@ -13,7 +12,7 @@ type PageHeroProps = {
 
 export function PageHero({ eyebrow, title, deck }: PageHeroProps) {
   return (
-    <header className="shell pb-4 pt-16 md:pt-24">
+    <header className="shell pb-12 pt-16 md:pb-16 md:pt-24">
       <p className="label text-text-secondary">{eyebrow}</p>
       <h1 className="mt-4 font-serif text-h1 text-ink">{title}</h1>
       {deck && <p className="mt-6 text-body text-text-secondary">{deck}</p>}

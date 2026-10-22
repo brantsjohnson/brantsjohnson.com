@@ -38,8 +38,8 @@ const config: Config = {
       },
       // THIS SECTION DOES: name the type sizes used across the site
       fontSize: {
-        // Hero titles land between 80px and 96px on a desktop window.
-        display: ["clamp(2.75rem, 6.2vw, 5.75rem)", { lineHeight: "0.92", letterSpacing: "-0.03em" }],
+        // The home headline. Two lines on a phone, and still two lines on a desktop window.
+        display: ["clamp(2.55rem, 5.6vw, 5.25rem)", { lineHeight: "0.94", letterSpacing: "-0.03em" }],
         h1: ["clamp(2.75rem, 5vw, 4.5rem)", { lineHeight: "0.98", letterSpacing: "-0.025em" }],
         h2: ["2.25rem", { lineHeight: "1.15" }],
         h3: ["1.5rem", { lineHeight: "1.3" }],

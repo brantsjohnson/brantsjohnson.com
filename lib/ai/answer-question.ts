@@ -31,8 +31,8 @@ const TOPICS: Topic[] = [
   {
     id: "contact",
     score: (question) => hits(question, [/\b(reach|email|contact|write him|get in touch)\b/i]),
-    short: "Email him at me@brantsjohnson.com, or send a note from the Contact page.",
-    more: "If you met him in person, the short follow-up page is brantsjohnson.com/hi. To book time, use https://calendar.app.google/qj9tb56BYCdppJPk9.",
+    short: "Email inquiries at brantshanonjohnson@gmail.com, or me@brantsjohnson.com.",
+    more: "The Contact page takes a note. If you met him in person, the short follow-up page is brantsjohnson.com/hi. To book time, use https://calendar.app.google/qj9tb56BYCdppJPk9.",
   },
   {
     id: "school",

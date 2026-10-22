@@ -1,17 +1,15 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the Work page. Intro sits at the top with a real product
-// screen. Bridger sits under it as text, because no screen was sent.
-// Under both is the experience timeline, newest first, with the
-// dates in a narrow left column. The public CV is the file at /cv.pdf.
+// This is the Work page. Intro and Bridger sit together under the
+// title, each with a live screenshot. The experience timeline follows.
+// The public CV is the file at /cv.pdf.
 // ============================================
 
 import type { Metadata } from "next";
-import Image from "next/image";
 import { PageHero } from "@/components/sections/PageHero";
-import { Button } from "@/components/ui/Button";
+import { ProductPair } from "@/components/sections/ProductPair";
 import { TextLink } from "@/components/ui/TextLink";
-import { building, experience, experienceIntro, photos, publicCv } from "@/content/site-content";
+import { experience, experienceIntro, publicCv } from "@/content/site-content";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -23,78 +21,48 @@ export const metadata: Metadata = pageMetadata({
 export default function WorkPage() {
   return (
     <>
-      <PageHero eyebrow="Work" title="The work, in order." deck={experienceIntro.deck} />
+      <PageHero eyebrow="Work" title="The work." deck={experienceIntro.deck} />
 
-      <section id="intro" className="shell py-12 md:py-16">
-        <div className="grid items-center gap-x-16 gap-y-10 lg:grid-cols-2">
-          <div>
-            <p className="label text-text-secondary">Intro</p>
-            <h2 className="mt-3 font-serif text-h2 text-ink">{building.intro.name}</h2>
-            <p className="mt-3 text-body text-text-secondary">
-              {building.intro.role}, {building.intro.dates}. {building.intro.summary}
-            </p>
-            <div className="mt-6">
-              <Button href={building.intro.href} track="button:visit_intro:work">
-                Visit Intro
-              </Button>
-            </div>
-          </div>
-          <Image
-            src={photos.intro.src}
-            alt={photos.intro.alt}
-            width={photos.intro.width}
-            height={photos.intro.height}
-            sizes="(min-width: 1024px) 40vw, 90vw"
-            className="mx-auto h-auto w-full max-w-[420px]"
-          />
-        </div>
+      <section id="projects" className="shell scroll-mt-24 pb-16 md:pb-24">
+        <h2 className="sr-only">Selected projects.</h2>
+        <ProductPair page="work" />
       </section>
 
-      <section id="bridger" className="shell border-t border-border-subtle py-12 md:py-16">
-        <p className="label text-text-secondary">Bridger</p>
-        <h2 className="mt-3 font-serif text-h2 text-ink">{building.bridger.name}</h2>
-        <p className="mt-3 max-w-reading text-body text-text-secondary">
-          {building.bridger.role}, {building.bridger.dates}. {building.bridger.summary}
-        </p>
-        <div className="mt-6">
-          <TextLink href={building.bridger.href} track="link:visit_bridger:work">
-            Visit Bridger
+      <section className="shell border-t border-border-subtle py-16 md:py-24">
+        <h2 className="font-serif text-h2 text-ink">The record.</h2>
+        <ol className="mt-8">
+          {experience
+            .filter((role) => role.org !== "Intro" && role.org !== "Bridger")
+            .map((role) => (
+              <li
+                key={`${role.org}-${role.dates}`}
+                className="grid gap-3 border-t border-border-subtle py-8 md:grid-cols-[11rem_1fr] md:gap-12 md:py-10"
+              >
+                <div>
+                  <p className="text-body text-text-secondary">{role.dates}</p>
+                  {role.place && <p className="mt-1 text-caption text-text-secondary">{role.place}</p>}
+                </div>
+                <div>
+                  <h3 className="font-serif text-h3 text-ink">{role.role}</h3>
+                  <p className="mt-2 text-body text-ink">{role.org}</p>
+                  <p className="mt-4 max-w-reading text-body text-text-secondary">{role.summary}</p>
+                  {role.href && role.hrefLabel && (
+                    <div className="mt-4">
+                      <TextLink href={role.href} track={`link:visit_${role.org.toLowerCase()}:work`}>
+                        {role.hrefLabel}
+                      </TextLink>
+                    </div>
+                  )}
+                </div>
+              </li>
+            ))}
+        </ol>
+        <div className="border-t border-border-subtle pt-8">
+          <TextLink href={publicCv.href} track="link:public_cv:work">
+            {publicCv.label}
           </TextLink>
         </div>
       </section>
-
-      <ol className="shell pb-20">
-        {experience
-          .filter((role) => role.org !== "Intro" && role.org !== "Bridger")
-          .map((role) => (
-          <li
-            key={`${role.org}-${role.dates}`}
-            className="grid gap-3 border-t border-border-subtle py-10 md:grid-cols-[11rem_1fr] md:gap-12"
-          >
-            <div>
-              <p className="text-body text-text-secondary">{role.dates}</p>
-              {role.place && <p className="mt-1 text-caption text-text-secondary">{role.place}</p>}
-            </div>
-            <div>
-              <h2 className="font-serif text-h2 text-ink">{role.role}</h2>
-              <p className="mt-2 text-body text-ink">{role.org}</p>
-              <p className="mt-4 max-w-reading text-body text-text-secondary">{role.summary}</p>
-              {role.href && role.hrefLabel && (
-                <div className="mt-4">
-                  <TextLink href={role.href} track={`link:visit_${role.org.toLowerCase()}:work`}>
-                    {role.hrefLabel}
-                  </TextLink>
-                </div>
-              )}
-            </div>
-          </li>
-        ))}
-      </ol>
-      <div className="shell pb-20">
-        <TextLink href={publicCv.href} track="link:public_cv:work">
-          {publicCv.label}
-        </TextLink>
-      </div>
     </>
   );
 }

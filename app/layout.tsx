@@ -13,7 +13,7 @@ import "@/styles/globals.css";
 import { identity } from "@/content/site-content";
 
 const description =
-  "Brant S. Johnson is a product manager and founder. He builds technology as a bridge to real human connection.";
+  "Good ideas deserve to happen. Brant S. Johnson runs a studio for consulting, creative projects, opportunities, partnerships, and events.";
 
 // THIS SECTION DOES: point share images at the preview while a preview is open,
 // and at the public domain everywhere else.
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#f4f2ec",
   width: "device-width",
   initialScale: 1,
 };

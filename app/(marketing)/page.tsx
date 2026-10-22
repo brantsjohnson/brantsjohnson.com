@@ -1,81 +1,106 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the home page. A person should be able to say who Brant is,
-// name three pieces of work, and know how to write him, without hunting.
-// The order is the hero, three facts, Intro, Bridger, the archway
-// photograph, then a way to write or book time. The headline stays
-// the same for every visitor unless a referral link or a ?hero=
-// preview says otherwise.
+// This is the home page. Every visitor sees one headline.
+// The card follows the studio mockup: a quiet mark, the practice
+// line, the headline, and three ways in. Intro and Bridger sit
+// together under that, as the selected projects.
 // ============================================
 
 import type { Metadata } from "next";
-import Image from "next/image";
-import { SeeTheWorkButton, WorkSectionView } from "@/components/home/HeroExperiment";
-import { Button } from "@/components/ui/Button";
+import Link from "next/link";
+import { ProductPair } from "@/components/sections/ProductPair";
 import { TextLink } from "@/components/ui/TextLink";
-import { booking, building, hero, homeRecord, photos } from "@/content/site-content";
-import { getActiveReferralVariant } from "@/lib/cms/get-active-referral-variant";
-import { getReferralVariantContent } from "@/lib/cms/referral-variant";
-import { heroHeadlineFor, parseHeroExperimentId } from "@/lib/hero-experiment";
+import { booking, hero, homeRecord, inquiries } from "@/content/site-content";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = {
   ...pageMetadata({
-    title: "Brant S. Johnson, product manager and founder",
-    description:
-      "Brant S. Johnson builds technology as a bridge to real human connection. He is building Intro and Bridger, and he is open to relocating.",
+    title: "Brant S. Johnson. Good ideas deserve to happen.",
+    description: hero.studio,
     path: "/",
   }),
-  title: { absolute: "Brant S. Johnson, product manager and founder" },
+  title: { absolute: "Brant S. Johnson. Good ideas deserve to happen." },
 };
 
-type HomePageProps = {
-  searchParams?: Readonly<Record<string, string | string[] | undefined>>;
-};
-
-export default async function HomePage({ searchParams }: HomePageProps) {
-  const variantId = await getActiveReferralVariant(searchParams);
-  const copy = getReferralVariantContent(variantId);
-  const previewRaw = searchParams?.hero;
-  const preview = parseHeroExperimentId(typeof previewRaw === "string" ? previewRaw : previewRaw?.[0]);
-  const showPreview = Boolean(preview) && variantId === "default";
-  const headline = showPreview && preview ? heroHeadlineFor(preview) : copy.heroHeadline;
-
+export default function HomePage() {
   return (
     <>
-      {showPreview && preview && <WorkSectionView variant={preview} />}
-      <section className="bg-ink text-on-hero">
-        <div className="grid lg:min-h-[88vh] lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="flex flex-col justify-end px-[var(--page-gutter)] py-14 lg:py-20 lg:pr-16">
-            <h1 className="font-serif text-display text-accent" data-hero-variant={showPreview ? preview : "canonical"}>
-              {headline}
-            </h1>
-            <p className="mt-6 max-w-reading text-body text-on-hero">{copy.heroBody}</p>
-            <p className="mt-4 text-body text-on-hero">{hero.availability}</p>
-            <div className="mt-10">
-              {showPreview && preview ? (
-                <SeeTheWorkButton href={hero.primaryCta.href} label={hero.primaryCta.label} variant={preview} />
-              ) : (
-                <Button href={hero.primaryCta.href} track="button:see_work:home">
-                  {hero.primaryCta.label}
-                </Button>
-              )}
+      <section className="shell pb-4 pt-10 md:pb-6 md:pt-16">
+        <div className="rounded-panel border border-border-subtle bg-surface px-5 py-8 sm:px-10 sm:py-12 md:px-14 md:py-14">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <span
+                aria-hidden="true"
+                className="grid h-11 w-11 shrink-0 place-items-center rounded-[10px] border border-border-subtle font-serif text-[1.65rem] leading-none text-ink"
+              >
+                *
+              </span>
+              <p className="label tracking-[0.12em] text-ink">
+                Brant
+                <br />
+                Studio
+              </p>
             </div>
+            <p className="label tracking-[0.12em] text-right text-text-secondary">
+              <span className="block whitespace-nowrap">Independent</span>
+              <span className="block whitespace-nowrap">creative</span>
+              <span className="block whitespace-nowrap">practice</span>
+            </p>
           </div>
-          <div className="relative h-[52vh] sm:h-[64vh] lg:h-auto lg:min-h-[88vh]">
-            <Image
-              src={photos.speaking.src}
-              alt={photos.speaking.alt}
-              fill
-              priority
-              sizes="(min-width: 1024px) 48vw, 100vw"
-              className="object-cover object-[center_18%]"
-            />
+
+          <div className="mt-7 border-t border-border-subtle sm:mt-8" />
+
+          <h1 className="mt-8 font-serif text-display text-ink sm:mt-10 sm:max-w-[9.4em]">{hero.headline}</h1>
+          <p className="mt-6 max-w-[38rem] text-body text-text-secondary">{hero.subline}</p>
+          <p className="mt-3 max-w-[38rem] text-body text-ink">{hero.studio}</p>
+
+          <div className="mt-8 flex items-start justify-between gap-3 border-t border-border-subtle pt-4 md:mt-12 md:items-center">
+            <p className="flex min-w-0 flex-1 flex-col text-body md:flex-row md:flex-wrap md:items-center md:gap-x-3">
+              <Link href="/work#projects" className="inline-flex min-h-[44px] items-center" data-track="link:projects:home">
+                Selected projects
+              </Link>
+              <span aria-hidden="true" className="hidden text-text-secondary md:inline">
+                ·
+              </span>
+              <Link
+                href="/about#collaborations"
+                className="inline-flex min-h-[44px] items-center"
+                data-track="link:collaborations:home"
+              >
+                Collaborations
+              </Link>
+              <span aria-hidden="true" className="hidden text-text-secondary md:inline">
+                ·
+              </span>
+              <a
+                href={inquiries.href}
+                className="inline-flex min-h-[44px] items-center"
+                data-track="link:inquiries:home"
+              >
+                {inquiries.label}
+              </a>
+            </p>
+            <Link
+              href="/work#projects"
+              aria-label="Selected projects"
+              className="mt-1 hidden h-11 w-11 shrink-0 items-center justify-center text-body text-ink md:mt-0 md:inline-flex"
+              data-track="link:projects_arrow:home"
+            >
+              <span aria-hidden="true">→</span>
+            </Link>
           </div>
+        </div>
+        <p className="mt-5 text-caption text-text-secondary">{hero.name}</p>
+      </section>
+
+      <section id="projects" className="shell scroll-mt-24 py-16 md:py-24">
+        <h2 className="font-serif text-h2 text-ink">Selected projects.</h2>
+        <div className="mt-8 md:mt-10">
+          <ProductPair page="home" />
         </div>
       </section>
 
-      <section className="shell py-16 md:py-24" aria-label="Selected work">
+      <section className="shell border-t border-border-subtle py-16 md:py-24" aria-label="Selected record">
         <h2 className="font-serif text-h2 text-ink">The short version.</h2>
         <ol className="mt-8">
           {homeRecord.map((item, index) => (
@@ -96,71 +121,15 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         </div>
       </section>
 
-      <section id="work" className="border-t border-border-subtle">
-        <div id="intro" className="shell grid items-center gap-x-16 gap-y-10 py-16 md:py-24 lg:grid-cols-2">
-          <div>
-            <p className="label text-text-secondary">{building.kicker}</p>
-            <h2 className="mt-4 font-serif text-display text-ink">{building.intro.name}</h2>
-            <p className="mt-6 max-w-reading text-body text-text-secondary">
-              {building.intro.summary} {building.intro.role}, {building.intro.dates}.
-            </p>
-            <div className="mt-6">
-              <TextLink href={building.intro.href} track="link:visit_intro:home">
-                Visit Intro
-              </TextLink>
-            </div>
-          </div>
-          <Image
-            src={photos.intro.src}
-            alt={photos.intro.alt}
-            width={photos.intro.width}
-            height={photos.intro.height}
-            sizes="(min-width: 1024px) 420px, 70vw"
-            className="mx-auto h-auto w-full max-w-[280px] sm:max-w-[360px]"
-          />
-        </div>
-      </section>
-
-      <section id="bridger" className="border-t border-border-subtle">
-        <div className="shell max-w-reading py-16 md:py-24">
-          <p className="label text-text-secondary">Also building</p>
-          <h2 className="mt-4 font-serif text-h2 text-ink">{building.bridger.name}</h2>
-          <p className="mt-6 text-body text-text-secondary">
-            {building.bridger.summary} {building.bridger.role}, {building.bridger.dates}.
-          </p>
-          <div className="mt-6">
-            <TextLink href={building.bridger.href} track="link:visit_bridger:home">
-              Visit Bridger
-            </TextLink>
-          </div>
-        </div>
-      </section>
-
-      <section aria-label="Uintah Resilience Archway">
-        <figure>
-          <Image
-            src={photos.archwayCrane.src}
-            alt={photos.archwayCrane.alt}
-            width={photos.archwayCrane.width}
-            height={photos.archwayCrane.height}
-            sizes="100vw"
-            className="h-auto max-h-[80vh] w-full object-cover"
-          />
-          <figcaption className="shell flex flex-col gap-4 py-8 md:flex-row md:items-center md:justify-between">
-            <p className="text-body text-ink">Uintah Resilience Archway, Vernal, Utah.</p>
-            <TextLink href="/about#service" track="link:archway:home">
-              Read the story
-            </TextLink>
-          </figcaption>
-        </figure>
-      </section>
-
-      <section className="shell py-20 md:py-28">
-        <h2 className="font-serif text-h2 text-ink">Write me.</h2>
+      <section className="shell border-t border-border-subtle py-16 md:py-24">
+        <h2 className="font-serif text-h2 text-ink">Inquiries.</h2>
         <p className="mt-4 max-w-reading text-body text-text-secondary">
-          If you want to talk about the work, send a note. I read them.
+          For a project, a partnership, or an event, write me. I read them.
         </p>
-        <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:gap-8">
+        <div className="mt-6 flex flex-col gap-1 sm:flex-row sm:gap-8">
+          <TextLink href={inquiries.href} track="link:inquiries_email:home">
+            {inquiries.email}
+          </TextLink>
           <TextLink href="/contact" track="link:contact:home">
             Go to contact
           </TextLink>

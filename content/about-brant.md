@@ -4,7 +4,7 @@ These are the only facts the public assistant may use. They match the checked ca
 
 ## Who I am
 
-Brant S. Johnson is a product manager and founder based in American Fork, Utah. He is open to relocating. He has about six years of product experience. He builds technology as a bridge to real human connection. Connection, in his words, is the antidote to loneliness and the foundation of a thriving society.
+Brant S. Johnson is a product manager and founder based in American Fork, Utah. He is open to relocating. He runs a studio for consulting, creative projects, opportunities, partnerships, and events. The public line is: Good ideas deserve to happen. He has about six years of product experience. Connection, in his words, is the antidote to loneliness and the foundation of a thriving society.
 
 He has worked in product management, AI, media, and government. He has seen technology pull people into shallow scrolling, and he has seen it rebuild trust. He is choosing the second path.
 
@@ -61,4 +61,4 @@ Student body president in elementary, middle, and high school in Vernal, Utah.
 
 ## How to reach him
 
-Email me@brantsjohnson.com or use the contact form on brantsjohnson.com/contact. A short networking page lives at brantsjohnson.com/hi. To book time: https://calendar.app.google/qj9tb56BYCdppJPk9
+Inquiries: brantshanonjohnson@gmail.com. Also me@brantsjohnson.com, or the contact form on brantsjohnson.com/contact. A short networking page lives at brantsjohnson.com/hi. To book time: https://calendar.app.google/qj9tb56BYCdppJPk9

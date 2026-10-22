@@ -10,7 +10,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
 import { NoteForm } from "@/components/forms/NoteForm";
 import { TextLink } from "@/components/ui/TextLink";
-import { booking, building, hiPage, identity, publicCv } from "@/content/site-content";
+import { booking, building, hiPage, identity, inquiries, publicCv } from "@/content/site-content";
 import { notesAreStored } from "@/lib/forms/deliver-note";
 import { hiQrSvg } from "@/lib/hi-qr";
 import { pageMetadata } from "@/lib/site/page-metadata";
@@ -36,32 +36,36 @@ export default async function HiPage({ searchParams }: HiPageProps) {
   return (
     <>
       <PageHero eyebrow={hiPage.eyebrow} title={hiPage.title} deck={hiPage.line} />
-      <section className="shell pb-4">
+      <section className="shell pb-12">
         <p className="max-w-reading text-body text-text-secondary">{hiPage.deck}</p>
-        <div className="mt-10 max-w-reading border-t border-border-subtle py-8">
-          <p className="label text-text-secondary">Try it</p>
-          <h2 className="mt-3 font-serif text-h2 text-ink">{building.intro.name}</h2>
-          <p className="mt-3 text-body text-text-secondary">{building.intro.summary}</p>
-          <div className="mt-4">
-            <TextLink href={building.intro.href} track="link:visit_intro:hi">
-              Visit Intro
-            </TextLink>
-          </div>
-        </div>
-        <div className="max-w-reading border-t border-border-subtle py-8">
-          <h2 className="font-serif text-h2 text-ink">{building.bridger.name}</h2>
-          <p className="mt-3 text-body text-text-secondary">{building.bridger.summary}</p>
-          <div className="mt-4">
-            <TextLink href={building.bridger.href} track="link:visit_bridger:hi">
-              Visit Bridger
-            </TextLink>
-          </div>
+        <div className="mt-10 grid gap-10 border-t border-border-subtle pt-10 md:grid-cols-2">
+          <article>
+            <h2 className="font-serif text-h3 text-ink">{building.intro.name}</h2>
+            <p className="mt-3 text-body text-text-secondary">{building.intro.summary}</p>
+            <div className="mt-4">
+              <TextLink href={building.intro.href} track="link:visit_intro:hi">
+                Visit Intro
+              </TextLink>
+            </div>
+          </article>
+          <article>
+            <h2 className="font-serif text-h3 text-ink">{building.bridger.name}</h2>
+            <p className="mt-3 text-body text-text-secondary">{building.bridger.summary}</p>
+            <div className="mt-4">
+              <TextLink href={building.bridger.href} track="link:visit_bridger:hi">
+                Visit Bridger
+              </TextLink>
+            </div>
+          </article>
         </div>
       </section>
-      <section className="shell grid gap-10 py-8 pb-20 lg:grid-cols-[1.2fr_0.8fr]">
+      <section className="shell grid gap-10 border-t border-border-subtle py-16 pb-20 lg:grid-cols-[1.2fr_0.8fr] md:py-24">
         <div>
           <h2 className="font-serif text-h2 text-ink">Stay in touch</h2>
           <div className="mt-4 flex flex-col gap-2">
+            <TextLink href={inquiries.href} track="link:inquiries:hi">
+              {inquiries.label}
+            </TextLink>
             <TextLink href={booking.href} track="link:book_time:hi">
               {booking.label}
             </TextLink>

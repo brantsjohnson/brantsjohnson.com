@@ -37,7 +37,7 @@ export const referralVariantContent: Record<ReferralVariantId, ReferralVariantCo
   default: {
     id: "default",
     analyticsLabel: "default_founder_pm",
-    heroHeadline: "I build technology as a bridge to real human connection.",
+    heroHeadline: "Good ideas deserve to happen.",
     heroBody:
       "Product manager and founder. I've owned the whole loop, from KYC and onboarding to analytics, and I sell what I ship.",
     focusLines: [
@@ -55,7 +55,7 @@ export const referralVariantContent: Record<ReferralVariantId, ReferralVariantCo
     id: "social",
     analyticsLabel: "social_connection",
     // Hero line for Instagram, Threads, TikTok, and Substack links.
-    heroHeadline: "Technology should bring people together.",
+    heroHeadline: "Good ideas deserve to happen.",
     heroBody:
       "I care about connection, and about technology that helps people find each other.",
     focusLines: [
@@ -71,7 +71,7 @@ export const referralVariantContent: Record<ReferralVariantId, ReferralVariantCo
   linkedin_x: {
     id: "linkedin_x",
     analyticsLabel: "linkedin_x_ai_craft",
-    heroHeadline: "Agentic products with a human spine.",
+    heroHeadline: "Good ideas deserve to happen.",
     heroBody:
       "I design and ship AI-assisted workflows where the model handles the busy work and people stay accountable. My craft is retrieval, tooling, and product judgment. People still matter.",
     focusLines: [

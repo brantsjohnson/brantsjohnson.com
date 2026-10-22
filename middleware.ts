@@ -2,8 +2,8 @@
 // WHAT THIS FILE DOES (plain English):
 // Edge middleware runs before pages load. It handles referral links
 // (/from/ig and query params) and sends the BrantChat subdomain to Ask.
-// The homepage headline is the same for every visitor. A ?hero= preview
-// is read by the page itself and is not stored in a cookie.
+// The homepage headline is one sentence for every visitor.
+// A ?hero= query does not change it, and it is not stored in a cookie.
 // ============================================
 
 import { NextResponse } from "next/server";

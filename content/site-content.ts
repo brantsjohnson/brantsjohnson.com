@@ -62,6 +62,13 @@ export const booking = {
   label: "Book time",
 };
 
+// THIS SECTION DOES: the studio inquiries address. The site did not already have one.
+export const inquiries = {
+  email: "brantshanonjohnson@gmail.com",
+  href: "mailto:brantshanonjohnson@gmail.com",
+  label: "Inquiries",
+};
+
 // THIS SECTION DOES: the résumé file in public/cv.pdf. The link is the file itself.
 export const publicCv = {
   href: "/cv.pdf",
@@ -77,15 +84,13 @@ export const primaryNav: NavItem[] = [
   { label: "Ask about me", kind: "route", href: "/ask" },
 ];
 
-// THIS SECTION DOES: the home hero. Referral traffic may swap the lines.
-// The public headline is this one sentence. The three test lines in
-// lib/hero-experiment.ts are preview-only, via ?hero=a, ?hero=b, or ?hero=c.
+// THIS SECTION DOES: the one public headline. Every visitor sees this sentence.
 export const hero = {
-  headline: "I build technology as a bridge to real human connection.",
-  subline:
-    "Product manager and founder. I've owned the whole loop, from KYC and onboarding to analytics, and I sell what I ship.",
-  availability: "American Fork, Utah. Open to relocating.",
-  primaryCta: { label: "See the work", href: "/work" },
+  headline: "Good ideas deserve to happen.",
+  subline: "Creative strategy, community building, campaigns, events, and ambitious experiments.",
+  studio: "A studio for consulting, creative projects, opportunities, partnerships, and events.",
+  practice: "Independent creative practice",
+  name: "Brant S. Johnson. American Fork, Utah. Open to relocating.",
 };
 
 // THIS SECTION DOES: the three facts a first-time reader should be able to repeat.
@@ -105,51 +110,19 @@ export const homeRecord: { kicker: string; line: string }[] = [
   },
 ];
 
-// THIS SECTION DOES: real photographs and one Intro product screen, sized for the web.
-// Birmingham volunteers are not here.
-// No Bridger screen is in the repo, so the pages do not show one.
+// THIS SECTION DOES: live screenshots of the public products, cropped to one frame.
 export const photos = {
-  speaking: {
-    src: "/photos/brant-speaking-on-stage.jpg",
-    alt: "Brant S. Johnson speaking on stage.",
-    width: 2000,
-    height: 1269,
-  },
-  podium: {
-    src: "/photos/brant-at-podium.jpg",
-    alt: "Brant S. Johnson speaking at a wooden podium.",
-    width: 2000,
-    height: 1117,
-  },
-  archwayCrane: {
-    src: "/photos/archway-crane-install.jpg",
-    alt: "A crane setting the Uintah archway over the road.",
-    width: 2200,
-    height: 1259,
-  },
-  archwayCrew: {
-    src: "/photos/archway-build-crew.jpg",
-    alt: "A crew building a frame for the Uintah Resilience Archway.",
-    width: 2000,
-    height: 1221,
-  },
-  scholarship2021: {
-    src: "/photos/resilience-scholarship-2021.jpg",
-    alt: "Brant S. Johnson with three 2021 Resilience Scholarship recipients.",
-    width: 1567,
-    height: 1045,
-  },
-  scholarship2022: {
-    src: "/photos/resilience-scholarship-2022.jpg",
-    alt: "A 2022 Resilience Scholarship recipient with her certificate.",
-    width: 1280,
-    height: 854,
-  },
   intro: {
-    src: "/photos/intro-attendee-suggestions.jpg",
-    alt: "The Intro app showing people to meet at a Founders and Funders Summit.",
-    width: 1000,
-    height: 2040,
+    src: "/photos/intro-live.jpg",
+    alt: "The live Intro site, with the attendee experience on a phone.",
+    width: 1600,
+    height: 1000,
+  },
+  bridger: {
+    src: "/photos/bridger-live.jpg",
+    alt: "The live Bridger waitlist window.",
+    width: 948,
+    height: 1042,
   },
 };
 
@@ -179,9 +152,9 @@ export const about = {
   eyebrow: "About",
   title: "People matter most.",
   paragraphs: [
-    "I'm Brant Johnson, a product-minded entrepreneur and community builder. Connection is the antidote to loneliness, and the foundation of any thriving society.",
-    "I have worked in product management, AI, media, and government. I build tools, spaces, and stories that bring people together.",
-    "The work comes back to the same belief. People matter most. Technology is a bridge to stronger friendships, better communities, and more meaningful lives.",
+    "I'm Brant Johnson. I run a studio for consulting, creative projects, opportunities, partnerships, and events.",
+    "I have worked in product, media, and government. I build tools, spaces, and stories that bring people together.",
+    "Good ideas deserve to happen. I take them on as products, partnerships, and events.",
   ],
   educationTitle: "Education",
   education:
@@ -201,7 +174,7 @@ export const about = {
 export const experienceIntro = {
   eyebrow: "Experience",
   title: "The work, in order.",
-  deck: "About six years of product work, from a volunteer organization in Birmingham to Intro and Bridger.",
+  deck: "Intro and Bridger, then the roles.",
 };
 
 export const experience: ExperienceRole[] = [
@@ -377,15 +350,15 @@ export const writingIntro = {
 export const contactIntro = {
   eyebrow: "Contact",
   title: "Write me.",
-  deck: "If you want to talk about the work, send a note. I read them.",
+  deck: "For a project, a partnership, or an event, write inquiries. I read them.",
 };
 
 // THIS SECTION DOES: the short page he can text from an event
 export const hiPage = {
   eyebrow: "Hi",
   title: "Good to meet you.",
-  line: "I build technology as a bridge to real human connection.",
-  deck: "Product manager and founder. Try the work, then leave a way for me to follow up.",
+  line: "Good ideas deserve to happen.",
+  deck: "A studio for consulting, creative projects, opportunities, partnerships, and events.",
 };
 
 // THIS SECTION DOES: the public Now page. One month, only checked facts.
@@ -394,7 +367,7 @@ export const nowPage = {
   eyebrow: "Now",
   title: "This month.",
   paragraphs: [
-    "I am building Intro, AI agent software for live events, and Bridger, a socialization app in a beta of about 25 people.",
+    "I run a studio for consulting, creative projects, opportunities, partnerships, and events. I am building Intro and Bridger.",
     "I am in American Fork, Utah, and I am open to relocating.",
   ],
 };
