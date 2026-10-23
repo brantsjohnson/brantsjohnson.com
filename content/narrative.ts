@@ -118,7 +118,8 @@ export const hero = {
     "I'm a senior product manager, a creator, performer and entrepreneur, and an activist for the places that raised me.",
   location: "American Fork, Utah. Open to relocating.",
   storyCta: { label: "Read my story", href: "/story" },
-  resumeCta: { label: "See full CV", href: "/cv.pdf" },
+  // TODO(brant): No portrait is on the site. Do not draw an empty frame
+  // beside this line until a real photo file exists.
 };
 
 // THIS SECTION DOES: the product story, then the compact role list on the page
@@ -215,16 +216,16 @@ export const creator = {
     ] as AreaTag[],
     body: "I drew the Crew brand on an iPad. I wasn't a trained designer, so I learned the tools, learned enough illustration to carry a system, and worked with our UX designer so the card, the packaging, the landing page, onboarding and the app felt like one product. The hard part was tone. Family banking can't feel childish to the parent or like your mom's bank to the kid.",
     wordmark: {
-      src: "/images/crew-wordmark-2024.jpg",
+      src: "/images/crew-wordmark-2024.webp",
       alt: "Crew wordmark Brant designed in 2024",
-      width: 1600,
-      height: 400,
+      width: 1200,
+      height: 300,
     },
     motion: [
       {
         mp4: "/creator/crew/van-crew.mp4",
         webm: "/creator/crew/van-crew.webm",
-        poster: "/creator/crew/van-crew-poster.jpg",
+        poster: "/creator/crew/van-crew-poster.webp",
         alt: "Crew illustration of a van packed with household things.",
         width: 2530,
         height: 2827,
@@ -232,7 +233,7 @@ export const creator = {
       {
         mp4: "/creator/crew/bathtub-crew.mp4",
         webm: "/creator/crew/bathtub-crew.webm",
-        poster: "/creator/crew/bathtub-crew-poster.jpg",
+        poster: "/creator/crew/bathtub-crew-poster.webp",
         alt: "Crew illustration of a claw-foot bathtub and a rubber duck.",
         width: 2732,
         height: 2048,
@@ -240,16 +241,16 @@ export const creator = {
     ] as CrewMotionClip[],
     stills: [
       {
-        src: "/creator/crew/crew-social-announcement.png",
+        src: "/creator/crew/crew-social-announcement.webp",
         alt: "Crew announcement graphic reading Banking built for families, with a drawn hand holding a card.",
         width: 1080,
         height: 1080,
       },
       {
-        src: "/creator/crew/crew-linkedin-announcement.png",
+        src: "/creator/crew/crew-linkedin-announcement.webp",
         alt: "Wide Crew announcement graphic reading Banking built for families, with a drawn hand holding a card.",
-        width: 1700,
-        height: 1080,
+        width: 1400,
+        height: 889,
       },
     ] as CrewStill[],
     back: {
@@ -310,7 +311,9 @@ export const publishedWriting: WritingShelfItem[] = [
   },
 ];
 
-// THIS SECTION DOES: theater and performing, as its own section, text first
+// THIS SECTION DOES: theater and performing, as its own section, text first.
+// TODO(brant): No theater photo is on the site. Do not draw an empty frame
+// on the performer page until a real picture exists.
 export const performer = {
   id: "performer",
   title: "Performer",
@@ -366,10 +369,10 @@ export const entrepreneur = {
       hrefLabel: "Visit Intro",
       track: "link:visit_intro:entrepreneur",
       image: {
-        src: "/photos/intro-live.jpg",
+        src: "/photos/intro-live.webp",
         alt: "The live Intro site, with the attendee experience on a phone.",
-        width: 1600,
-        height: 1000,
+        width: 1200,
+        height: 750,
       },
     },
     {
@@ -386,10 +389,10 @@ export const entrepreneur = {
       hrefLabel: "Visit Bridger",
       track: "link:visit_bridger:entrepreneur",
       image: {
-        src: "/photos/bridger-live.jpg",
+        src: "/photos/bridger-live.webp",
         alt: "The live Bridger waitlist window.",
-        width: 948,
-        height: 1042,
+        width: 900,
+        height: 989,
       },
     },
     {
@@ -425,7 +428,7 @@ export const activist = {
     video: {
       mp4: "/activist/archway-video.mp4",
       webm: "/activist/archway-video.webm",
-      poster: "/activist/archway-video-poster.jpg",
+      poster: "/activist/archway-poster.webp",
       label: "The Uintah Resilience Archway in Vernal, Utah",
     },
   },

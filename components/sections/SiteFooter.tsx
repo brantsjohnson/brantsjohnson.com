@@ -1,8 +1,9 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the footer on every page. The name links home. Under it,
-// See résumé and See full CV sit with Writing, Ask, LinkedIn, and
-// Contact. The year and name close the page.
+// See full CV sits with Writing, Ask, LinkedIn, and Contact.
+// See résumé is included only when its file exists. The year and
+// name close the page.
 // ============================================
 
 import Link from "next/link";

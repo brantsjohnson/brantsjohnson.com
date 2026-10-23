@@ -1,7 +1,7 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// Optional photo frame. With no src, it renders nothing so live
-// pages do not show empty placeholders.
+// Optional photo frame. With no src, it renders nothing so a page
+// does not show an empty frame.
 // ============================================
 
 import Image from "next/image";

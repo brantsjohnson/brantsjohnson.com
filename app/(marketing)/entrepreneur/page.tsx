@@ -40,7 +40,9 @@ export default function EntrepreneurPage() {
                 alt={card.image.alt}
                 width={card.image.width}
                 height={card.image.height}
-                className="mb-4 h-40 w-full rounded-panel object-cover"
+                sizes="(min-width: 1024px) 30vw, 100vw"
+                loading="lazy"
+                className="mb-4 h-40 w-full rounded-panel object-cover object-top"
               />
             ) : null}
             <h2 className="font-serif text-h3 text-ink">{card.name}</h2>

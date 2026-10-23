@@ -26,7 +26,8 @@ export function ProductPair({ page }: { page: "home" | "work" }) {
                 alt={photo.alt}
                 fill
                 sizes="(min-width: 768px) 36vw, 100vw"
-                className="object-contain"
+                loading="lazy"
+                className="object-contain object-top"
               />
             </div>
           </div>

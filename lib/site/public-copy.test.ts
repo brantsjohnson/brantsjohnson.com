@@ -89,7 +89,7 @@ test("public copy stays inside the voice rules", () => {
   }
 });
 
-test("public copy names the story, Bridger without a user count, and the résumé", () => {
+test("public copy names the story and Bridger, and does not link a missing résumé", () => {
   const joined = publicCopy.join("\n");
   assert.equal(hero.headline, "Good ideas deserve to happen.");
   assert.match(hero.identity, /a creator, performer and entrepreneur/);
@@ -108,7 +108,12 @@ test("public copy names the story, Bridger without a user count, and the résum�
   assert.match(joined, /interned in the Governor's Office and worked with the Governor's Office of Economic Development/);
   assert.match(joined, /https:\/\/calendar\.app\.google\/qj9tb56BYCdppJPk9/);
   assert.match(joined, /\/cv\.pdf/);
-  assert.doesNotMatch(joined, /\/resume\.pdf/);
+  assert.equal(publicResume.href, null);
+  assert.doesNotMatch(joined, /resume\.pdf/);
+  assert.equal(
+    footerNav.some((item) => item.href === "/resume.pdf" || item.label === "See résumé"),
+    false
+  );
   assert.match(joined, /brantshanonjohnson@gmail.com/);
   assert.match(joined, /constituent inquiries/);
   assert.match(joined, /Crew wordmark Brant designed in 2024/);

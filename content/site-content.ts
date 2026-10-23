@@ -75,14 +75,19 @@ export const publicCv = {
   label: "See full CV",
 };
 
-// THIS SECTION DOES: short CV link on the footer (same file as publicCv).
-export const publicResume = {
-  href: "/cv.pdf",
+// TODO(brant): public/resume.pdf is not in the repo. Leave href null so the
+// site does not link to a missing file, and does not pretend the full CV is
+// the one-page résumé. When a one-page résumé is ready, and only if it has no
+// phone number and no street address, set href to "/resume.pdf". The footer
+// and the home hero pick that up. The full CV at /cv.pdf stays linked.
+export const publicResume: { label: string; href: string | null } = {
   label: "See résumé",
+  href: null,
 };
 
-// THIS SECTION DOES: the footer row on every page, in this order
-export const footerNav: { label: string; href: string }[] = [
+// THIS SECTION DOES: the footer row on every page, in this order.
+// A null href (the résumé, until the PDF exists) is left out.
+const footerItems: { label: string; href: string | null }[] = [
   publicResume,
   publicCv,
   { label: "Writing", href: "/writing" },
@@ -91,6 +96,10 @@ export const footerNav: { label: string; href: string }[] = [
   { label: "Contact", href: "/contact" },
   { label: "Full work history", href: "/work" },
 ];
+
+export const footerNav: { label: string; href: string }[] = footerItems.filter(
+  (item): item is { label: string; href: string } => typeof item.href === "string" && item.href.length > 0
+);
 
 // THIS SECTION DOES: the bar across the top. The wordmark is home.
 // The five rooms come first. Story and contact sit with them.
@@ -129,16 +138,16 @@ export const homeRecord: { kicker: string; line: string }[] = [
 // THIS SECTION DOES: live screenshots of the public products, cropped to one frame.
 export const photos = {
   intro: {
-    src: "/photos/intro-live.jpg",
+    src: "/photos/intro-live.webp",
     alt: "The live Intro site, with the attendee experience on a phone.",
-    width: 1600,
-    height: 1000,
+    width: 1200,
+    height: 750,
   },
   bridger: {
-    src: "/photos/bridger-live.jpg",
+    src: "/photos/bridger-live.webp",
     alt: "The live Bridger waitlist window.",
-    width: 948,
-    height: 1042,
+    width: 900,
+    height: 989,
   },
 };
 

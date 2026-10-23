@@ -2,7 +2,8 @@
 // WHAT THIS FILE DOES (plain English):
 // The town, the scholarship, and the government work, one tab each.
 // The archway video has no caption track. The paragraph and the
-// figcaption are the text a visitor can read.
+// figcaption are the text a visitor can read. A poster frame shows
+// the arch before play, and the clip itself waits until then.
 // ============================================
 
 import type { Metadata } from "next";
@@ -45,7 +46,7 @@ export default function ActivistPage() {
                     <video
                       controls
                       playsInline
-                      preload="metadata"
+                      preload="none"
                       poster={activist.archway.video.poster}
                       aria-label={activist.archway.video.label}
                       className="max-h-72 w-full rounded-panel bg-ink"

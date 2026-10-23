@@ -14,6 +14,7 @@ import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { areas, hero } from "@/content/narrative";
+import { publicResume } from "@/content/site-content";
 
 const hashRoutes: Record<string, string> = {
   "#product": "/product",
@@ -103,9 +104,11 @@ export function OverviewHome() {
           <Button href={hero.storyCta.href} track="button:read_story:home">
             {hero.storyCta.label}
           </Button>
-          <Button href={hero.resumeCta.href} variant="ghost" track="button:resume:home">
-            {hero.resumeCta.label}
-          </Button>
+          {publicResume.href ? (
+            <Button href={publicResume.href} variant="ghost" track="button:resume:home">
+              {publicResume.label}
+            </Button>
+          ) : null}
         </div>
         <p className="mt-3 text-caption text-text-secondary">
           <Link href="/story" className="underline decoration-accent decoration-2 underline-offset-4">

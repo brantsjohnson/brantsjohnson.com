@@ -41,6 +41,8 @@ export default function CrewPage() {
                   alt={crew.wordmark.alt}
                   width={crew.wordmark.width}
                   height={crew.wordmark.height}
+                  sizes="(min-width: 768px) 36rem, 100vw"
+                  loading="lazy"
                   className="h-auto w-full max-w-xl mix-blend-multiply"
                 />
               ),
@@ -84,6 +86,8 @@ export default function CrewPage() {
                         alt={still.alt}
                         width={still.width}
                         height={still.height}
+                        sizes="(min-width: 640px) 40vw, 100vw"
+                        loading="lazy"
                         className="h-auto w-full rounded-panel"
                       />
                     </li>
