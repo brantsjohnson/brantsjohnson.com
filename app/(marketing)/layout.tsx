@@ -2,7 +2,7 @@
 // WHAT THIS FILE DOES (plain English):
 // This wraps every public page with the skip link, the sticky header,
 // the footer, and a short person description
-// for search engines. Admin pages do not use this wrapper.
+// for search engines. Every public page uses this wrapper.
 // ============================================
 
 import { SiteFooter } from "@/components/sections/SiteFooter";

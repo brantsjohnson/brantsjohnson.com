@@ -42,6 +42,23 @@ test("a follow-up adds the next fact and still stays on topic", () => {
   assert.doesNotMatch(certificates, /Archway|TEDx|Habitat|student body/i);
 });
 
+test("where he lives matches the About page", () => {
+  const about = "I live in American Fork, Utah, and I am open to relocating.";
+  const answer = answerFromNotes("Where does Brant live?");
+  assert.equal(answer, "He lives in American Fork, Utah, and he is open to relocating.");
+  assert.match(about, /American Fork, Utah/);
+  assert.match(about, /open to relocating/);
+  assert.match(answer, /American Fork, Utah/);
+  assert.match(answer, /open to relocating/);
+});
+
+test("the Romney answer says the work in the public notes", () => {
+  const answer = answerFromNotes("What did Brant do for Senator Romney?");
+  assert.match(answer, /constituent inquiries/);
+  assert.match(answer, /nuclear licensing policy/);
+  assert.doesNotMatch(answer, /50 to 200|500 pages/);
+});
+
 test("public answers skip withheld topics and dollar figures", () => {
   const crewMore = answerFromNotes("Tell me more", ["What did Brant do at Crew?"]);
   assert.match(crewMore, /KYC/i);

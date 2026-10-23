@@ -44,6 +44,8 @@ The rows above are the starter-kit draft. These rows name what this repository a
 | `/writing` and `/writing/[slug]` | Essays and letters | At least two real posts |
 | `/hi` | Unlisted event follow-up | Not in the nav |
 | `/cv.pdf` | Public CV file | Linked from Work, About, and /hi |
+| `/admin` and seven sub-pages | Private tool shells | Removed 2026-10-23. They were not part of the public site. |
+| `lib/ai-settings/` | Shared AI call settings | Copied from the starter kit. Ask does not call it yet. |
 
 | Env name | Purpose |
 |---|---|

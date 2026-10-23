@@ -1,0 +1,51 @@
+{
+  "verified_on": "2026-10-19",
+  "sources": {
+    "xai": "https://docs.x.ai/developers/pricing",
+    "anthropic": "https://platform.claude.com/docs/en/about-claude/pricing",
+    "openai": "https://developers.openai.com/api/docs/pricing",
+    "gemini": "https://ai.google.dev/gemini-api/docs/pricing",
+    "jev": "https://docs.typesafe.ai/api"
+  },
+  "providers": {
+    "xai": {
+      "key_env": "XAI_API_KEY",
+      "models": [
+        {"id": "grok-4.20-0309-non-reasoning", "tier": "cheap", "in": 1.25, "out": 2.50, "efforts": [], "temperature": true},
+        {"id": "grok-4.3", "tier": "cheap", "in": 1.25, "out": 2.50, "efforts": ["low", "medium", "high"], "temperature": true},
+        {"id": "grok-4.7", "tier": "workhorse", "in": 2.00, "out": 6.00, "efforts": ["low", "medium", "high", "xhigh"], "temperature": true}
+      ]
+    },
+    "anthropic": {
+      "key_env": "ANTHROPIC_API_KEY",
+      "models": [
+        {"id": "claude-haiku-5-5", "tier": "cheap", "in": 0.10, "out": 0.50, "efforts": ["low", "medium", "high"], "temperature": false},
+        {"id": "claude-sonnet-5-5", "tier": "workhorse", "in": 2.00, "out": 10.00, "efforts": ["low", "medium", "high", "xhigh"], "temperature": false},
+        {"id": "claude-opus-5-5", "tier": "frontier", "in": 4.00, "out": 20.00, "efforts": ["low", "medium", "high", "xhigh"], "temperature": false}
+      ]
+    },
+    "openai": {
+      "key_env": "OPENAI_API_KEY",
+      "models": [
+        {"id": "gpt-6-luna", "tier": "cheap", "in": 0.10, "out": 0.50, "efforts": ["none", "low", "medium", "high", "xhigh"], "temperature": "only_without_reasoning"},
+        {"id": "gpt-6.1-sol", "tier": "workhorse", "in": 2.00, "out": 10.00, "efforts": ["low", "medium", "high", "xhigh"], "temperature": false},
+        {"id": "gpt-6-astra", "tier": "frontier", "in": 10.00, "out": 50.00, "efforts": ["low", "medium", "high", "xhigh"], "temperature": false}
+      ]
+    },
+    "gemini": {
+      "key_env": "GEMINI_API_KEY",
+      "models": [
+        {"id": "gemini-3.5-flash-lite", "tier": "cheap", "in": 0.30, "out": 2.50, "efforts": ["minimal", "low", "medium", "high"], "temperature": true},
+        {"id": "gemini-3.8-flash", "tier": "workhorse", "in": 0.75, "out": 3.75, "efforts": ["low", "medium", "high"], "temperature": true, "price_note": "doubles on 2027-01-01"},
+        {"id": "gemini-4-argon", "tier": "frontier", "in": 2.00, "out": 10.00, "efforts": ["low", "medium", "high"], "temperature": false, "price_note": "intro price; $4/$20 from 2026-12-01"}
+      ]
+    },
+    "jev": {
+      "key_env": "TYPESAFE_API_KEY",
+      "router_only": true,
+      "models": [
+        {"id": "jev-latest", "tier": "cheap", "in": 0.042, "out": 0, "efforts": [], "temperature": false}
+      ]
+    }
+  }
+}

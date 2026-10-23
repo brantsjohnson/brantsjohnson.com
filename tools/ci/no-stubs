@@ -27,9 +27,6 @@ for f, rel in shipped_files():
     for n, line in enumerate(f.read_text(encoding="utf-8", errors="ignore").splitlines(), 1):
         if FLAG.search(line):
             continue
-        stripped = line.strip()
-        if stripped.startswith(("//", "#", "*", "/*")):
-            continue
         for rx, kind in ((WORDS, "stub/placeholder word"), (SAMPLE_IMPORT, "sample/mock import"), (DEAD_HANDLER, "dead click handler")):
             m = rx.search(line)
             if m:

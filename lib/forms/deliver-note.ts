@@ -37,7 +37,8 @@ function webhookUrl(): string | undefined {
 
 // THIS SECTION DOES: read the shared secret that lets Intro tell a real
 // site note from a stranger posting to the same URL.
-// TODO(brant): set INTRO_CRM_CAPTURE_URL and INTRO_CRM_CAPTURE_SECRET together.
+// The capture URL and this secret are both required. Until both are set,
+// the note goes out through the visitor's own email app.
 function captureSecret(): string | undefined {
   noStore();
   const secret = process.env.INTRO_CRM_CAPTURE_SECRET?.trim();

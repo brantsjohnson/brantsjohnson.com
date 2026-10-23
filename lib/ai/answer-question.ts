@@ -79,17 +79,30 @@ const TOPICS: Topic[] = [
     more: "He sold print, digital, and event campaigns, ran weekly AI training, and used Monday.com and Magazine Manager. He no longer works there.",
   },
   {
+    id: "location",
+    // The About page says "I live in American Fork, Utah, and I am open to relocating."
+    // Ask uses the same facts in the third person.
+    score: (question) =>
+      hits(question, [
+        /\b(live|lives|living|located|hometown|reside|resides)\b/i,
+        /\bwhere (does|is|do) (he|brant)\b/i,
+        /\bopen to relocating\b/i,
+      ]),
+    short: "He lives in American Fork, Utah, and he is open to relocating.",
+    more: "He runs a studio for consulting, creative projects, opportunities, partnerships, and events.",
+  },
+  {
     id: "romney",
     score: (question) => hits(question, [/\b(romney|senator|congressional)\b/i]),
     short:
-      "He was a congressional intern for Senator Mitt Romney in Washington, D.C., from September 6 to December 8, 2022.",
-    more: "The public notes stop at that role and those dates.",
+      "He was a congressional intern for Senator Mitt Romney in Washington, D.C., from September 6 to December 8, 2022. He handled constituent inquiries and wrote a brief on nuclear licensing policy for budget appropriations.",
+    more: "The brief supported budget appropriations. The internship ran from September 6 to December 8, 2022.",
   },
   {
     id: "divvy",
     score: (question) => hits(question, [/\b(divvy)\b/i]),
     short:
-      "He interned at Divvy (BILL) in Draper from June to September 2022, as the analytics partner to 8 product managers. He did not own a roadmap.",
+      "He interned at Divvy (BILL) in Draper from June to September 2022, as the analytics partner to 8 product managers.",
     more: "His main project was fixing Pendo so teams could trust what the product analytics told them.",
   },
   {
@@ -128,7 +141,7 @@ const TOPICS: Topic[] = [
   {
     id: "tedx",
     score: (question) => hits(question, [/\btedx\b/i]),
-    short: "He was an organization assistant at TEDxSaltLakeCity from January to September 2021. That role ended in September 2021.",
+    short: "He was an organization assistant at TEDxSaltLakeCity from January to September 2021.",
     more: "He directed monthly meetings, set agendas and minutes, and designed brand creative.",
   },
   {

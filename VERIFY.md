@@ -7,15 +7,15 @@ These items were marked VERIFY in `ideas/website-copy-map-2026-10-19.md`. They a
 | Utah Business "25+ marketing products" | Cut. The page says 63 clients and 52 annual events. |
 | Crew DEI line | Cut. |
 | Crew supply chain / 8 suppliers | Cut. |
-| Romney nuclear policy memo and daily request volume | Cut. The role is "Congressional Intern," Washington, D.C., Sept 6 to Dec 8, 2022. |
-| Divvy 95% accuracy, 45 teams, 53-element taxonomy, Salesforce analysis, guidebook, "emailed my way in" | Cut. The page says analytics partner to 8 product managers, no roadmap ownership, Pendo. |
+| Romney nuclear policy memo and daily request volume | The daily count and the 500-page figure stay off the pages. The line uses the duties already in public/cv.pdf: constituent inquiries, and a brief on nuclear licensing policy for budget appropriations. |
+| Divvy 95% accuracy, 45 teams, 53-element taxonomy, Salesforce analysis, guidebook, "emailed my way in" | Cut. The page says analytics partner to 8 product managers, and Pendo. |
 | BackLocal team size and 33% partnership profit | Cut. The page says more than 370 user interviews, a 7-day sprint, and revenue at launch. |
 | FranklinCovey title, dates, podcast claim, lead counts | Cut. The role is not on the site. |
 | BYU Public Ethics Lab and any MPA reading | Cut. Education is the UVU bachelor's only. |
 | GOED title and location | Cut. It is not placed in Washington, D.C., and it is not on the site. |
 | Archway completion date and $100,000 | Cut. The story says the build ran from 2017 to 2023. No dollar amount. |
 | Scholarship count, dollar amount, and the "Resilient" vs "Resilience" name | The site uses "Resilience Scholarship," founded 2020. Count and amount are omitted. |
-| TEDx $85K and a 2023 event | Cut. The role is January to September 2021. The page says that role ended in September 2021. |
+| TEDx $85K and a 2023 event | Cut. The role is January to September 2021. |
 | TEDx 95% task completion | Cut. |
 | Birmingham monthly expenses and 20+ regions | Cut. The page uses the checked line: 400 volunteers, 3 reporting tools, about 2 days to about 3 hours. |
 | Young Ambassadors role, dates, and lift | Cut. |

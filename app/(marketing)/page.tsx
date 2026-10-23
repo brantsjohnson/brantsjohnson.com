@@ -1,7 +1,7 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the home page. Every visitor sees one headline.
-// The card follows the studio mockup: a quiet mark, the practice
+// The card follows the studio layout: a quiet mark, the practice
 // line, the headline, and three ways in. Intro and Bridger sit
 // together under that, as the selected projects.
 // ============================================

@@ -8,9 +8,6 @@
 import type { MetadataRoute } from "next";
 import { identity } from "@/content/site-content";
 
-// TODO(brant): set SITE_INDEXABLE=true at DNS cutover so this preview
-// does not stay hidden after it replaces the Wix site.
-
 export default function robots(): MetadataRoute.Robots {
   if (process.env.SITE_INDEXABLE === "true") {
     return {

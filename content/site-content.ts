@@ -98,7 +98,7 @@ export const hero = {
 export const homeRecord: { kicker: string; line: string }[] = [
   {
     kicker: "Washington, D.C.",
-    line: "Congressional intern, Office of Senator Mitt Romney.",
+    line: "Congressional intern for Senator Mitt Romney. Handled constituent inquiries and wrote a nuclear licensing brief.",
   },
   {
     kicker: "Product",
@@ -215,7 +215,8 @@ export const experience: ExperienceRole[] = [
     role: "Congressional Intern",
     dates: "Sept 6 to Dec 8, 2022",
     place: "Washington, D.C.",
-    summary: "I interned in the Washington, D.C. office.",
+    summary:
+      "I handled constituent inquiries and wrote a brief on nuclear licensing policy for budget appropriations.",
   },
   {
     org: "Divvy (BILL)",
@@ -223,7 +224,7 @@ export const experience: ExperienceRole[] = [
     dates: "Jun to Sept 2022",
     place: "Draper, Utah",
     summary:
-      "I was the analytics partner to 8 product managers. I did not own a roadmap. My main project was fixing Pendo so teams could trust what it told them.",
+      "I was the analytics partner to 8 product managers. My main project was fixing Pendo so teams could trust what it told them.",
   },
   {
     org: "BackLocal",
@@ -288,7 +289,6 @@ export const serviceStories: ServiceStory[] = [
     dates: "Jan to Sept 2021",
     paragraphs: [
       "I directed monthly meetings, set structured agendas and clear minutes, and designed brand creative to promote events.",
-      "That role ended in September 2021.",
     ],
   },
   {

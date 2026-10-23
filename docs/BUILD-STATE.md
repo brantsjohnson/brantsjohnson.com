@@ -1,6 +1,6 @@
 # BUILD-STATE
 
-Status: public pages recut for a Washington lookup, on top of the four-page site. Not deployed to the production domain. A pull request is not a launch.
+Status: public pages recut for a Washington lookup, on top of the four-page site. Admin shells are removed. Not deployed to the production domain. A pull request is not a launch. GitHub Actions is off, so the gates below were run locally.
 
 ## What this build is
 
@@ -12,11 +12,14 @@ Photos in `public/photos` are crops of intro.events and bridger.social. The olde
 
 ## Checks
 
-Recorded after the studio revision.
+Recorded after removing the admin shells and restoring the starter-kit no-stubs check.
 
-- `npm test` passed. The public headline is the one sentence. Preset answers stay on topic. Bridger answers use the 25-person beta and bridger.social. Public copy has no em dash, en dash, "actually", Israel, or Trump.
-- `npx tsc --noEmit`, `npx next lint`, both no-stubs checks, and `npx next build` passed.
-- Against `next start`: the home headline stays "Good ideas deserve to happen." with `?hero=b`. Intro and Bridger share one row on Work. `/about#collaborations` lands on the collaborations section. Inquiries is a mailto to brantshanonjohnson@gmail.com. The phone menu opens About. The contact form accepts a name, email, and note.
+- `npm test` passed. The public headline is the one sentence. Ask answers where he lives the same way About does. The Romney answer names constituent inquiries and the nuclear licensing brief. Public copy has no em dash, en dash, "actually", Israel, or Trump.
+- `npm run typecheck` passed.
+- `npm run lint` passed.
+- `npm run build` passed. The route list has no `/admin`.
+- `python3 tools/ci/no-stubs` passed. `node tools/ci/no-stubs.mjs` passed.
+- `node --test lib/ai-settings/test.mjs` passed.
 - Search engines are still blocked until `SITE_INDEXABLE=true`.
 
 ## Open work

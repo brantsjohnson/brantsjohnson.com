@@ -71,4 +71,7 @@ test("public copy names Bridger, the booking link, and the studio line", () => {
   assert.match(joined, /https:\/\/calendar\.app\.google\/qj9tb56BYCdppJPk9/);
   assert.match(joined, /\/cv\.pdf/);
   assert.match(joined, /brantshanonjohnson@gmail.com/);
+  assert.match(joined, /constituent inquiries/);
+  assert.doesNotMatch(joined, /I did not own a roadmap/);
+  assert.doesNotMatch(joined, /That role ended in September 2021/);
 });

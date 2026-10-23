@@ -4,7 +4,7 @@ These are the only facts the public assistant may use. They match the checked ca
 
 ## Who I am
 
-Brant S. Johnson is a product manager and founder based in American Fork, Utah. He is open to relocating. He runs a studio for consulting, creative projects, opportunities, partnerships, and events. The public line is: Good ideas deserve to happen. He has about six years of product experience. Connection, in his words, is the antidote to loneliness and the foundation of a thriving society.
+Brant S. Johnson is a product manager and founder. He lives in American Fork, Utah, and he is open to relocating. He runs a studio for consulting, creative projects, opportunities, partnerships, and events. The public line is: Good ideas deserve to happen. He has about six years of product experience. Connection, in his words, is the antidote to loneliness and the foundation of a thriving society.
 
 He has worked in product management, AI, media, and government. He has seen technology pull people into shallow scrolling, and he has seen it rebuild trust. He is choosing the second path.
 
@@ -27,11 +27,11 @@ Senior Product Manager and first employee, December 2022 to April 2024, remote. 
 
 ## Office of Senator Mitt Romney
 
-Congressional Intern, Washington, D.C., September 6 to December 8, 2022.
+Congressional Intern, Washington, D.C., September 6 to December 8, 2022. He handled constituent inquiries and wrote a brief on nuclear licensing policy for budget appropriations.
 
 ## Divvy
 
-Associate Product Management Analyst, an internship at Divvy (BILL) in Draper, Utah, June to September 2022. He was the analytics partner to 8 product managers. He did not own a roadmap. He worked on Pendo so teams could trust what the product analytics told them.
+Associate Product Management Analyst, an internship at Divvy (BILL) in Draper, Utah, June to September 2022. He was the analytics partner to 8 product managers. He worked on Pendo so teams could trust what the product analytics told them.
 
 ## BackLocal
 
