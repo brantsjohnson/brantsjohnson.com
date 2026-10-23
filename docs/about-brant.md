@@ -5,7 +5,7 @@ Public, résumé-level facts only. Items marked **(confirm with Brant)** are not
 ## Basics
 - Name on the site: Brant S. Johnson. Grew up in Vernal, Utah. Lives in American Fork, Utah. Open to relocating.
 - Education: BS, Business and Analysis, Utah Valley University, Woodbury School of Business (April 2025). Coursework at BYU Marriott School of Business, 2020 to 2022 (strategy, analytics, information systems, entrepreneurship).
-- Certificates: Agile Foundations (course certificate, about Oct 2022; issuer **confirm with Brant**; never call it a professional Agile certification). Pendo Essentials for Web (Pendo, Oct 2022).
+- Certificates: Course certificates and badges: full list under Credentials below.
 - About six years of product experience.
 
 ## Product Manager (newest first)
@@ -87,3 +87,51 @@ Energetic, warm, funny, self-aware, a little playful ("haha"), honest about mist
 
 ## Contact
 Use the email, LinkedIn and booking link already in `content/site-content.ts`. Do not add others.
+
+## Credentials (site-ready)
+Source: his old site's Skills page (brantsjohnson.com/blank-4). Full table with verify links and saved images: `sources/credentials.md`. Call these course certificates, never professional certifications.
+- Education: BYU, Business Strategy, Emphasis Product Management.
+- Pendo Essentials for Web, Pendo (Credly badge), Oct 2022.
+- How to Manage Lean Six Sigma Projects: Part I, LinkedIn Learning, Nov 2022.
+- Agile Foundations, Oct 2022. Issuer still **confirm with Brant**: the old site's button links to the Pendo badge by mistake, so this page does not answer the open question. Likely LinkedIn Learning, unverified.
+- Figma Essential Training: The Basics, LinkedIn Learning, Oct 2022.
+- Learning Excel: Data Analysis, LinkedIn Learning, Oct 2022.
+- Learning SQL Programming, LinkedIn Learning, Oct 2022.
+- Operational Excellence Foundations, LinkedIn Learning, Oct 2022.
+- Operations Management Foundations, LinkedIn Learning, Oct 2022.
+- Process Improvement Foundations, LinkedIn Learning, Oct 2022.
+- Python Data Analysis, LinkedIn Learning, Oct 2022.
+- Social Media Marketing: Strategy and Optimization, LinkedIn Learning, Oct 2022.
+- The Non-Technical Skills of Effective Data Scientists, LinkedIn Learning, Feb 2022.
+
+## Writing and media (site-ready)
+
+### Podcast: Quick Before You Forget (May 11, 2026)
+"Believe in Yourself: How to Overcome Self-Doubt and Find Purpose in Life with Brant Johnson." https://www.youtube.com/watch?v=qhj9oJrPxfg (about 48 min; the doubt segment starts near 25:00).
+Host Ty talks with Brant about resilience, self-belief, loneliness and purpose. Brant tells the story of surviving a crash on black ice, building the Resilience Arch at 17 and turning leftover funds into a scholarship, and why he builds connection technology. The episode also covers deeply personal topics (family loss, identity, mental health); keep those off the site unless Brant writes them himself.
+- "Doubt is incredibly normal. And so, just because it is there doesn't mean you should need to listen to it."
+- "Some days doubt kind of does win... but it's the do I keep going through that? That's really I think what matters the most."
+- "Too many people have doubted themselves who could have changed the world."
+- "I'm working on connection technology cuz isolation is just on the rise."
+(Quotes are from auto-captions, lightly trimmed; check against the audio before publishing.)
+
+### Article: "YES, you need marketing: Don't fall for the 'Elon Musk Myth' and Learn from Nike's Fall" (LinkedIn, Nov 22, 2024)
+https://www.linkedin.com/pulse/yes-you-need-marketing-dont-fall-elon-musk-myth-learn-s-johnson-divvc/
+Written while he worked at Utah Business. He argues that "Tesla doesn't advertise" is a myth because Musk himself is the marketing, that ad-only shortcuts on TikTok or Instagram do not build brand equity, and that Nike's pullback from traditional marketing hurt it. His advice: diversify channels, commit to the long game, and test messaging.
+- "Marketing isn't just an expense, it's an investment. Nike gets it. AMEX gets it. You should too."
+- "Elon is marketing; he just does it differently."
+- "If the industry giants are doubling down on marketing, why wouldn't you?"
+
+### LinkedIn post: the AI chatbot of himself he built in 2024 (LinkedIn, about Feb 11, 2026, from the post image timestamp)
+https://www.linkedin.com/posts/brantshanonjohnson_we-are-massively-underutilizing-ai-i-only-ugcPost-7427437674073923584-plve/
+Before going all in on Intro, he wrote 45 pages of his accomplishments, fun facts and work philosophies and used them to build an AI chatbot of himself so recruiters could learn about him interactively. Because he knew the whole dataset, he could see how much it left out when asked generic questions. His lesson: AI knows a lot but will not share it unless you ask specifically.
+- "We are massively underutilizing AI. I only realized it when I built my own chatbot."
+- "The prompt was too generic, so the output was generic."
+- "If you want better results, have better prompts."
+- Fun fact from the post: he started a petition to save the bees in 3rd grade.
+
+### LinkedIn post: advice ask from StartFest (LinkedIn, Sept 26, 2023)
+https://www.linkedin.com/posts/brantshanonjohnson_startfest-share-7112566281001738241-zRrO/
+After hearing Arian Lewis speak at StartFest, Brant, then a PM at an early-stage fintech startup wearing product, marketing, branding, strategy and customer service hats, asked his network how to lead across all of them. It drew 28 comments with advice (The Lean Startup, prioritizing what drives value, Y Combinator).
+- "The team I work with is the best in the business and I want to make sure I can magnify their skills."
+- "I know the people I'm connected with are geniuses, so I am open to any and all thoughts. You rock!"

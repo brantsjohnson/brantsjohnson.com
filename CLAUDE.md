@@ -2,6 +2,9 @@
 
 This is Brant S. Johnson's personal site (Next.js on Vercel). Read this file and `docs/about-brant.md` (which includes fun facts, stories and voice from Brant's info about me doc) before you write or change anything. Use only the facts in those files and in `content/site-content.ts`. If a fact is not there, leave it out and ask Brant. Never invent dates, numbers, titles or quotes.
 
+## Content sources
+- `docs/sources/credentials.md` lists his credentials, with images in `docs/sources/certs/`.
+
 ## Who Brant is (one line)
 Senior product manager, creator, performer, entrepreneur and activist from Utah. Thesis: "I build technology as a bridge to real human connection." Motto: "Good ideas deserve to happen."
 
