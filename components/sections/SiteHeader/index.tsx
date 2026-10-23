@@ -1,16 +1,16 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the sticky bar at the top of every public page. It shows
-// Brant's full name, the page links, and one Ask link.
+// This is the sticky bar at the top of every public page, including home.
+// It shows Brant's name and the rooms of the site.
 // On a narrow screen the links collapse into a Menu button.
-// The bar is a solid paper strip so the page can scroll under it.
+// Escape closes that menu. The bar is a solid paper strip.
 // ============================================
 
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { clsx } from "clsx";
 import { identity, primaryNav, type NavItem } from "@/content/site-content";
@@ -22,14 +22,23 @@ type SiteHeaderProps = {
 export function SiteHeader({ showWriting = false }: SiteHeaderProps) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  if (pathname === "/") return null;
-  const nav: NavItem[] = showWriting
-    ? [
-        ...primaryNav.slice(0, 3),
-        { label: "Writing", kind: "route", href: "/writing" },
-        ...primaryNav.slice(3),
-      ]
-    : primaryNav;
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
+  const ask = primaryNav.filter((item) => item.href === "/ask");
+  const rest = primaryNav.filter((item) => item.href !== "/ask");
+  const nav: NavItem[] = [
+    ...rest,
+    ...(showWriting ? [{ label: "Writing", kind: "route" as const, href: "/writing" }] : []),
+    ...ask,
+  ];
 
   const isActive = (href?: string) =>
     href === "/" ? pathname === "/" : Boolean(href && (pathname === href || pathname.startsWith(`${href}/`)));

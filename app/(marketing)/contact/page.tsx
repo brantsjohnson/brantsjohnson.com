@@ -9,6 +9,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
 import { TextLink } from "@/components/ui/TextLink";
 import { NoteForm } from "@/components/forms/NoteForm";
+import { contactBlock } from "@/content/narrative";
 import { booking, contactIntro, identity, inquiries } from "@/content/site-content";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
@@ -21,7 +22,7 @@ export const metadata: Metadata = pageMetadata({
 export default function ContactPage() {
   return (
     <>
-      <PageHero eyebrow={contactIntro.eyebrow} title={contactIntro.title} deck={contactIntro.deck} />
+      <PageHero eyebrow={contactIntro.eyebrow} title={contactIntro.title} deck={`${contactBlock.line} ${contactIntro.deck}`} />
       <div className="shell grid gap-12 pb-20 md:grid-cols-[0.8fr_1.1fr]">
         <div>
           <p className="label text-text-secondary">Inquiries</p>

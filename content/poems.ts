@@ -7,6 +7,7 @@
 // ============================================
 
 export type Poem = {
+  slug: string;
   title: string;
   year: string;
   stanzas: string[][];
@@ -15,6 +16,7 @@ export type Poem = {
 
 export const poems: Poem[] = [
   {
+    slug: "to-the-sky",
     title: "To The Sky",
     year: "2022",
     credit: "Author: Kassidy J. Bowen, 2017 Uintah Alumni",
@@ -52,6 +54,7 @@ export const poems: Poem[] = [
     ],
   },
   {
+    slug: "your-understanding-charm",
     title: "Your understanding charm",
     year: "2024",
     stanzas: [

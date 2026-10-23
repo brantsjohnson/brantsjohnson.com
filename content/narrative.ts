@@ -30,16 +30,73 @@ export type CrewStill = {
   height: number;
 };
 
-// THIS SECTION DOES: the order of the sticky nav. It matches the section headers.
+// THIS SECTION DOES: one door on the homepage. The pigment is that room's color.
+export type AreaDoor = {
+  id: string;
+  label: string;
+  short: string;
+  href: string;
+  pigment: string;
+  plate: string;
+  deck: string;
+};
+
+// THIS SECTION DOES: the five rooms, in the order a visitor meets them.
+// Decks are shortened from sentences already in this file.
+export const areas: AreaDoor[] = [
+  {
+    id: "product",
+    label: "Senior Product Manager",
+    short: "Product",
+    href: "/product",
+    pigment: "#122e48",
+    plate: "#0c1f30",
+    deck: "I build technology as a bridge to real human connection.",
+  },
+  {
+    id: "creator",
+    label: "Creator",
+    short: "Creator",
+    href: "/creator",
+    pigment: "#a83a1c",
+    plate: "#7c2a14",
+    deck: "Brands, shows, essays and poems.",
+  },
+  {
+    id: "performer",
+    label: "Performer",
+    short: "Performer",
+    href: "/performer",
+    pigment: "#582046",
+    plate: "#3c1630",
+    deck: "Theater, including BYU Young Ambassadors.",
+  },
+  {
+    id: "entrepreneur",
+    label: "Entrepreneur",
+    short: "Entrepreneur",
+    href: "/entrepreneur",
+    pigment: "#0e543c",
+    plate: "#093828",
+    deck: "Intro, Bridger, and BackLocal.",
+  },
+  {
+    id: "activist",
+    label: "Activist",
+    short: "Activist",
+    href: "/activist",
+    pigment: "#104860",
+    plate: "#0a3040",
+    deck: "I care about who gets seen.",
+  },
+];
+
+// THIS SECTION DOES: the same five rooms, then the quieter pages.
 export const storyNav: StoryNavItem[] = [
-  { label: "Senior Product Manager", href: "#product" },
-  { label: "Creator", href: "#creator" },
-  { label: "Performer", href: "#performer" },
-  { label: "Entrepreneur", href: "#entrepreneur" },
-  { label: "Activist", href: "#activist" },
-  { label: "Story", href: "#story" },
-  { label: "Beliefs", href: "#beliefs" },
-  { label: "Contact", href: "#contact" },
+  ...areas.map(({ label, href }) => ({ label, href })),
+  { label: "Story", href: "/story" },
+  { label: "Beliefs", href: "/beliefs" },
+  { label: "Contact", href: "/contact" },
 ];
 
 // THIS SECTION DOES: the opening card. The large line is the headline.
@@ -51,7 +108,7 @@ export const hero = {
   identity:
     "I'm a senior product manager, a creator, performer and entrepreneur, and an activist for the places that raised me.",
   location: "American Fork, Utah. Open to relocating.",
-  storyCta: { label: "Read my story", href: "#product" },
+  storyCta: { label: "Read my story", href: "/story" },
   resumeCta: { label: "See résumé", href: "/resume.pdf" },
 };
 
@@ -80,7 +137,7 @@ export const product = {
       {
         type: "link",
         text: "See how I did the branding for Crew",
-        href: "#crew-brand",
+        href: "/creator/crew",
         track: "link:crew_brand:product",
       },
     ],
@@ -98,7 +155,7 @@ export const product = {
       {
         type: "link",
         text: "BackLocal is also a creator story",
-        href: "#creator-backlocal",
+        href: "/creator#backlocal",
         track: "link:backlocal_creator:product",
       },
     ],
@@ -119,7 +176,7 @@ export const product = {
     "Product teams are closer to theater than to a sports team: different crafts, different constraints, one experience.",
   quoteLink: {
     text: "Why theater",
-    href: "#performer",
+    href: "/performer",
     track: "link:why_theater:product",
   },
 };
@@ -136,7 +193,7 @@ export const creator = {
     {
       type: "link",
       text: "See the performing work",
-      href: "#performer",
+      href: "/performer",
       track: "link:performing:creator",
     },
   ] as CopyPart[],
@@ -144,8 +201,8 @@ export const creator = {
     id: "crew-brand",
     title: "Crew brand",
     tags: [
-      { label: "Product", href: "#product" },
-      { label: "Creator", href: "#creator" },
+      { label: "Product", href: "/product" },
+      { label: "Creator", href: "/creator" },
     ] as AreaTag[],
     body: "I drew the Crew brand on an iPad. I wasn't a trained designer, so I learned the tools, learned enough illustration to carry a system, and worked with our UX designer so the card, the packaging, the landing page, onboarding and the app felt like one product. The hard part was tone. Family banking can't feel childish to the parent or like your mom's bank to the kid.",
     wordmark: {
@@ -184,7 +241,7 @@ export const creator = {
     ] as CrewStill[],
     back: {
       text: "Back to the product story",
-      href: "#product",
+      href: "/product",
       track: "link:product:crew_brand",
     },
   },
@@ -192,14 +249,14 @@ export const creator = {
     id: "creator-backlocal",
     title: "BackLocal",
     tags: [
-      { label: "Product", href: "#product" },
-      { label: "Creator", href: "#creator" },
-      { label: "Entrepreneur", href: "#entrepreneur" },
+      { label: "Product", href: "/product" },
+      { label: "Creator", href: "/creator" },
+      { label: "Entrepreneur", href: "/entrepreneur" },
     ] as AreaTag[],
     body: "In Sandbox I worked on branding as well as product, alongside customer interviews and a team of about ten people.",
     link: {
       text: "Read the BackLocal product story",
-      href: "#product",
+      href: "/product",
       track: "link:product:creator_backlocal",
     },
   },
@@ -245,8 +302,8 @@ export const performer = {
   id: "performer",
   title: "Performer",
   tags: [
-    { label: "Creator", href: "#creator" },
-    { label: "Product", href: "#product" },
+    { label: "Creator", href: "/creator" },
+    { label: "Product", href: "/product" },
   ] as AreaTag[],
   paragraphs: [
     "I love theater, even though singing in public is one of my biggest fears. In high school I was recognized among the top high-school actors in Utah twice, and I ran marketing for our shows. For The Little Mermaid I turned the school into part of the show: seaweed curtains, banners, things hanging overhead. Attendance grew to levels the program hadn't seen. Later I made BYU Young Ambassadors as a non-major, came back for a second year and toured internationally, including South Korea. I was cast at Hale Centre Theatre in Elf the Musical, a dream I'd said out loud for years.",
@@ -254,7 +311,7 @@ export const performer = {
   ],
   workLink: {
     text: "How that shows up at work",
-    href: "#product",
+    href: "/product",
     track: "link:product:performer",
   },
   essay: {
@@ -289,8 +346,8 @@ export const entrepreneur = {
       dates: "Nov 2025 to present",
       summary: "AI agent software for live events.",
       tags: [
-        { label: "Entrepreneur", href: "#entrepreneur" },
-        { label: "Product", href: "#product" },
+        { label: "Entrepreneur", href: "/entrepreneur" },
+        { label: "Product", href: "/product" },
       ],
       href: "https://intro.events",
       hrefLabel: "Visit Intro",
@@ -309,8 +366,8 @@ export const entrepreneur = {
       summary:
         "An app that helps people become friends around what they love. In a TestFlight beta, built with contracted engineers and designers.",
       tags: [
-        { label: "Entrepreneur", href: "#entrepreneur" },
-        { label: "Product", href: "#product" },
+        { label: "Entrepreneur", href: "/entrepreneur" },
+        { label: "Product", href: "/product" },
       ],
       href: "https://bridger.social",
       hrefLabel: "Visit Bridger",
@@ -328,11 +385,11 @@ export const entrepreneur = {
       dates: "Sept 2021 to Sept 2022",
       summary: "Head of Product in BYU's Sandbox venture program.",
       tags: [
-        { label: "Product", href: "#product" },
-        { label: "Creator", href: "#creator" },
-        { label: "Entrepreneur", href: "#entrepreneur" },
+        { label: "Product", href: "/product" },
+        { label: "Creator", href: "/creator" },
+        { label: "Entrepreneur", href: "/entrepreneur" },
       ],
-      href: "#product",
+      href: "/product",
       hrefLabel: "Product story",
       track: "link:product:entrepreneur_backlocal",
     },
@@ -373,7 +430,7 @@ export const activist = {
       {
         type: "link",
         text: "See how I listen to customers",
-        href: "#product",
+        href: "/product",
         track: "link:product:activist",
       },
     ] as CopyPart[],
@@ -399,7 +456,7 @@ export const story = {
       {
         type: "link",
         text: "The archway came next",
-        href: "#activist",
+        href: "/activist",
         track: "link:activist:story",
       },
     ],

@@ -97,6 +97,10 @@ test("public copy names the story, Bridger without a user count, and the rÃ©sumÃ
     storyNav.slice(0, 5).map((item) => item.label),
     ["Senior Product Manager", "Creator", "Performer", "Entrepreneur", "Activist"]
   );
+  assert.deepEqual(
+    storyNav.slice(0, 5).map((item) => item.href),
+    ["/product", "/creator", "/performer", "/entrepreneur", "/activist"]
+  );
   assert.match(joined, /https:\/\/bridger\.social/);
   assert.match(joined, /TestFlight/);
   assert.doesNotMatch(joined, /25 people/);

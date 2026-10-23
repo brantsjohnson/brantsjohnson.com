@@ -36,12 +36,12 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-8 border-t border-border-subtle bg-bg">
-      <div className="shell py-12">
-        <Link href="/" className="font-serif text-h2 text-ink">
+    <footer className="border-t border-border-subtle bg-bg">
+      <div className="shell py-4">
+        <Link href="/" className="font-serif text-h3 text-ink">
           {identity.wordmark}
         </Link>
-        <nav aria-label="Footer" className="mt-6 flex flex-wrap items-center gap-y-1">
+        <nav aria-label="Footer" className="mt-3 flex flex-wrap items-center gap-y-1">
           {footerNav.map((item) => (
             <span
               key={item.href}
@@ -51,7 +51,7 @@ export function SiteFooter() {
             </span>
           ))}
         </nav>
-        <p className="mt-8 text-caption text-text-secondary">
+        <p className="mt-3 text-caption text-text-secondary">
           {year} {identity.fullName}
         </p>
       </div>

@@ -90,13 +90,19 @@ export const footerNav: { label: string; href: string }[] = [
   { label: "Ask about me", href: "/ask" },
   { label: "LinkedIn", href: identity.linkedin },
   { label: "Contact", href: "/contact" },
+  { label: "Full work history", href: "/work" },
 ];
 
-// THIS SECTION DOES: list the main navigation. Ask is the one chat entry, and it is a page.
+// THIS SECTION DOES: the bar across the top. The wordmark is home.
+// The five rooms come first. Story and contact sit with them.
+// Ask stays the one chat entry. Writing and the full work history live in the footer.
 export const primaryNav: NavItem[] = [
-  { label: "Home", kind: "route", href: "/" },
-  { label: "Work", kind: "route", href: "/work" },
-  { label: "About", kind: "route", href: "/about" },
+  { label: "Product", kind: "route", href: "/product" },
+  { label: "Creator", kind: "route", href: "/creator" },
+  { label: "Performer", kind: "route", href: "/performer" },
+  { label: "Entrepreneur", kind: "route", href: "/entrepreneur" },
+  { label: "Activist", kind: "route", href: "/activist" },
+  { label: "Story", kind: "route", href: "/story" },
   { label: "Contact", kind: "route", href: "/contact" },
   { label: "Ask about me", kind: "route", href: "/ask" },
 ];
