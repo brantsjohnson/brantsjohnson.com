@@ -5,7 +5,7 @@
 // is currently reading. It only runs on the server, and it is built
 // so it can NEVER crash the page. If Bridger is turned off, not set
 // up, or Brant has opted out, this quietly returns nothing and the
-// Now section shows its placeholder instead.
+// Now section shows its empty message instead.
 //
 // This file is logic only. It does not draw any UI.
 // ============================================
@@ -64,12 +64,12 @@ function normalizeInterests(raw: unknown): BridgerInterests | null {
 // THIS SECTION DOES: fetch the shared tastes from Bridger on the server.
 // It returns the data only when Bridger is configured and responds normally.
 // In every other case (not configured, opted out, network error) it returns
-// nothing, and the caller shows the static placeholder.
+// nothing, and the caller shows the static empty message.
 export async function getBridgerInterests(): Promise<BridgerInterests | null> {
   const base = process.env.BRIDGER_API_BASE;
   const slug = process.env.BRIDGER_SHARE_SLUG;
 
-  // No base URL or slug means the feature is not turned on. Show the placeholder.
+  // No base URL or slug means the feature is not turned on. Leave the tastes off the page.
   if (!base || !slug) return null;
 
   // --- SECURITY: this token is a server-only secret. It must never be a
@@ -90,7 +90,7 @@ export async function getBridgerInterests(): Promise<BridgerInterests | null> {
       next: { revalidate: REVALIDATE_SECONDS }, // cache briefly, then refresh
     });
 
-    // 404 means Brant opted out; any other non-OK status is treated the same way: show placeholder.
+    // 404 means Brant opted out; any other non-OK status is treated the same way: leave the tastes off the page.
     if (!response.ok) return null;
 
     const data = (await response.json()) as unknown;

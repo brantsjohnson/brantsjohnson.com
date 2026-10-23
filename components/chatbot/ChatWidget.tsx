@@ -1,6 +1,6 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the chat screen people actually use. It shows the conversation,
+// This is the chat screen people use. It shows the conversation,
 // an input box, and a few suggested questions. It talks to the server at
 // /api/chatbot and streams Brant's answer back live. It never loads any
 // private facts in the browser; it only sends the visitor's questions and
@@ -15,6 +15,7 @@ import { DefaultChatTransport } from "ai";
 import { Send } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { MessageContent } from "@/components/chatbot/MessageContent";
+import { LocalAsk } from "@/components/chatbot/LocalAsk";
 
 // THIS SECTION DOES: describe the optional context the widget can carry.
 // "company" and "role" tailor answers; "suggestions" seeds the starter chips;
@@ -29,10 +30,10 @@ interface ChatWidgetProps {
 
 // A few safe, general starter questions shown before the visitor types
 const DEFAULT_SUGGESTIONS = [
-  "Tell me about Brant's experience.",
-  "What are Brant's strengths as a product manager?",
-  "What is Brant's greatest accomplishment?",
-  "What is Brant's experience with AI?",
+  "What is Brant building now?",
+  "Where did Brant go to school?",
+  "What did Brant do at Crew?",
+  "How do I reach Brant?",
 ];
 
 // THIS SECTION DOES: pull the plain text out of an AI message, which arrives
@@ -47,16 +48,9 @@ function messageText(parts: { type: string; text?: string }[]): string {
 export function ChatWidget({ company, role, suggestions, configured = true }: ChatWidgetProps) {
   // THIS SECTION DOES: if the server has no AI key, show a clear, honest
   // "not set up yet" screen instead of a chat box that would only error out
+  // Without an AI key, still answer from the checked public notes.
   if (!configured) {
-    return (
-      <div className="mx-auto flex h-full max-w-md flex-col items-center justify-center px-6 text-center">
-        <h1 className="text-h3 font-semibold text-text-primary">Chat is not set up yet</h1>
-        <p className="mt-3 text-body text-text-secondary">
-          The assistant needs an OpenAI API key before it can answer. Once the
-          site owner adds it, this chat will work here automatically.
-        </p>
-      </div>
-    );
+    return <LocalAsk />;
   }
 
   return <ConfiguredChatWidget company={company} role={role} suggestions={suggestions} />;
@@ -101,7 +95,7 @@ function ConfiguredChatWidget({ company, role, suggestions }: Omit<ChatWidgetPro
       <div className="flex-1 space-y-4 overflow-y-auto px-4 py-6">
         {!hasMessages && (
           <div className="mx-auto max-w-xl pt-8 text-center">
-            <h1 className="text-h2 font-semibold text-text-primary">Ask about Brant</h1>
+            <h1 className="font-serif text-h2 text-ink">Ask about me</h1>
             <p className="mt-3 text-body text-text-secondary">
               {company
                 ? `A quick way for the ${company} team to get to know Brant's work.`
@@ -121,7 +115,7 @@ function ConfiguredChatWidget({ company, role, suggestions }: Omit<ChatWidgetPro
                 className={cn(
                   "max-w-[85%] rounded-2xl px-4 py-3 shadow-sm",
                   isUser
-                    ? "bg-accent text-white"
+                    ? "bg-accent text-ink"
                     : "border border-border-subtle bg-surface text-text-primary"
                 )}
               >
@@ -187,7 +181,6 @@ function ConfiguredChatWidget({ company, role, suggestions }: Omit<ChatWidgetPro
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask me anything about Brant"
             aria-label="Ask a question about Brant"
             className="flex-1 rounded-xl border border-border-subtle bg-surface px-4 py-3 text-body text-text-primary outline-none focus:border-accent"
           />

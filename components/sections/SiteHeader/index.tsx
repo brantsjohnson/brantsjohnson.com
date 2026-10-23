@@ -1,116 +1,98 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the sticky bar at the top of every public page. On the
-// left it shows Brant's full name "Brant S. Johnson" as a serif
-// wordmark (never a "BSJ" monogram) that links home. On the right
-// it shows the main navigation: Home, BrantChat, Experience,
-// Service, Leadership, Skills, About. "BrantChat" is not a page; it
-// opens the chat panel. On narrow screens the links collapse into a
-// labeled "Menu" button. The active page's link is shown in the
-// accent color.
+// This is the sticky bar at the top of every public page, including home.
+// It shows Brant's name and the rooms of the site.
+// On a narrow screen the links collapse into a Menu button.
+// Escape closes that menu. The bar is a solid paper strip.
 // ============================================
 
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { clsx } from "clsx";
-import { identity, primaryNav, secondaryNav } from "@/content/site-content";
-import { openBrantChat } from "@/components/chatbot/chat-events";
+import { identity, primaryNav, type NavItem } from "@/content/site-content";
 
-export function SiteHeader() {
-  // THIS SECTION DOES: know which page we are on, so the matching link can be highlighted
+type SiteHeaderProps = {
+  showWriting?: boolean; // true only when at least two real pieces exist
+};
+
+export function SiteHeader({ showWriting = false }: SiteHeaderProps) {
   const pathname = usePathname();
-  // THIS SECTION DOES: remember whether the small-screen menu is open
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // THIS SECTION DOES: decide if a nav link points at the page we are currently on
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
+  const ask = primaryNav.filter((item) => item.href === "/ask");
+  const rest = primaryNav.filter((item) => item.href !== "/ask");
+  const nav: NavItem[] = [
+    ...rest,
+    ...(showWriting ? [{ label: "Writing", kind: "route" as const, href: "/writing" }] : []),
+    ...ask,
+  ];
+
   const isActive = (href?: string) =>
-    href === "/" ? pathname === "/" : Boolean(href && pathname.startsWith(href));
+    href === "/" ? pathname === "/" : Boolean(href && (pathname === href || pathname.startsWith(`${href}/`)));
 
-  // THIS SECTION DOES: draw one nav link, either a page link or the chat opener
-  const renderNavItem = (
-    item: (typeof primaryNav)[number],
-    onNavigate?: () => void
-  ) => {
-    const activeClass = "text-accent";
-    const restClass = "text-text-primary hover:text-accent";
-
-    if (item.kind === "chat") {
-      return (
-        <button
-          key={item.label}
-          type="button"
-          onClick={() => {
-            openBrantChat();
-            onNavigate?.();
-          }}
-          className={clsx("text-body transition-colors", restClass)}
-        >
-          {item.label}
-        </button>
-      );
-    }
-
+  const renderNavItem = (item: NavItem, onNavigate?: () => void) => {
     return (
       <Link
         key={item.label}
         href={item.href ?? "/"}
         onClick={onNavigate}
         aria-current={isActive(item.href) ? "page" : undefined}
+        data-track={`nav_item:${item.label.toLowerCase().replace(/[^a-z]+/g, "_")}:global`}
         className={clsx(
-          "text-body transition-colors",
-          isActive(item.href) ? activeClass : restClass
+          "inline-flex min-h-[44px] items-center text-caption text-ink",
+          isActive(item.href) && "underline decoration-accent decoration-2 underline-offset-8"
         )}
       >
-        {item.label}
+        {item.href === "/ask" ? "Ask about me →" : item.label}
       </Link>
     );
   };
 
+  const links = nav;
+
   return (
-    // --- The header is sticky and uses the glass look so it floats over content calmly ---
-    <header className="sticky top-0 z-sticky border-b border-border-subtle bg-glass backdrop-blur-glass">
-      <div className="shell flex items-center justify-between py-4">
-        {/* THIS SECTION DOES: the full-name wordmark, linking home (the logo is the single Home affordance) */}
-        <Link href="/" className="font-serif text-h3 tracking-tight text-text-primary">
+    <header className="sticky top-0 z-sticky border-b border-border-subtle bg-bg">
+      <div className="shell flex items-center justify-between gap-4 py-3">
+        <Link href="/" data-track="link:home_wordmark:global" className="font-serif text-h3 text-ink">
           {identity.wordmark}
         </Link>
 
-        {/* THIS SECTION DOES: the main navigation row, visible on wider screens */}
-        <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
-          {primaryNav.map((item) => renderNavItem(item))}
+        <nav aria-label="Primary" className="hidden items-center gap-4 xl:flex">
+          {links.map((item) => renderNavItem(item))}
         </nav>
 
-        {/* THIS SECTION DOES: the labeled menu button, shown only on narrow screens */}
-        <button
-          type="button"
-          onClick={() => setMenuOpen((v) => !v)}
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-          className="flex items-center gap-2 text-body text-text-primary md:hidden"
-        >
-          {menuOpen ? <X size={20} /> : <Menu size={20} />}
-          Menu
-        </button>
+        <div className="flex items-center gap-2 xl:hidden">
+          <button
+            type="button"
+            onClick={() => setMenuOpen((value) => !value)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            data-track="button:toggle_menu:global"
+            className="inline-flex min-h-[44px] items-center gap-2 text-body text-ink"
+          >
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            Menu
+          </button>
+        </div>
       </div>
 
-      {/* THIS SECTION DOES: the stacked menu that opens on narrow screens */}
       {menuOpen && (
-        <nav
-          aria-label="Primary mobile"
-          className="border-t border-border-subtle bg-glass backdrop-blur-glass md:hidden"
-        >
-          <div className="shell flex flex-col gap-4 py-6">
-            {primaryNav.map((item) => renderNavItem(item, () => setMenuOpen(false)))}
-            {/* The quieter pages sit below a divider so the main choices stay clear */}
-            <div className="mt-2 border-t border-border-subtle pt-4">
-              <div className="flex flex-col gap-4">
-                {secondaryNav.map((item) => renderNavItem(item, () => setMenuOpen(false)))}
-              </div>
-            </div>
+        <nav aria-label="Primary mobile" className="border-t border-border-subtle bg-bg xl:hidden">
+          <div className="shell flex flex-col gap-1 py-4">
+            {nav.map((item) => renderNavItem(item, () => setMenuOpen(false)))}
           </div>
         </nav>
       )}

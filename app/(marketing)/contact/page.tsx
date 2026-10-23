@@ -1,44 +1,50 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the Contact page, and it is the one place contact happens
-// on the site (the "contact once" rule in docs/03). It shows the
-// direct ways to reach Brant: email and LinkedIn. A full contact
-// form that saves to the CMS comes in a later pass; the links here
-// work now, so there are no dead ends. The details come from
-// content/site-content.ts.
+// This is the Contact page, and it is the one place the email
+// addresses are printed. The form is the filled button. Inquiries,
+// LinkedIn, and Book time are text links.
 // ============================================
 
 import type { Metadata } from "next";
-import { PageIntro } from "@/components/sections/PageIntro";
-import { FadeInOnScroll } from "@/components/motion/FadeInOnScroll";
-import { GlassPanel } from "@/components/motion/GlassPanel";
-import { identity } from "@/content/site-content";
+import { PageHero } from "@/components/sections/PageHero";
+import { TextLink } from "@/components/ui/TextLink";
+import { NoteForm } from "@/components/forms/NoteForm";
+import { contactBlock } from "@/content/narrative";
+import { booking, contactIntro, identity, inquiries } from "@/content/site-content";
+import { pageMetadata } from "@/lib/site/page-metadata";
 
-// THIS SECTION DOES: set this page's browser tab title
-export const metadata: Metadata = { title: "Contact" };
+export const metadata: Metadata = pageMetadata({
+  title: "Contact",
+  description: "Write Brant S. Johnson. He reads the notes.",
+  path: "/contact",
+});
 
-// THIS SECTION DOES: draw the intro and the direct contact links
 export default function ContactPage() {
   return (
     <>
-      <PageIntro eyebrow="Contact" title="Get in touch" deck="The fastest ways to reach me." />
-      <FadeInOnScroll className="shell max-w-reading pb-16">
-        <GlassPanel className="flex flex-col gap-4 p-6 md:p-8">
-          {/* A real, working email link, so the page has no dead ends */}
-          <a
-            href={`mailto:${identity.email}`}
-            className="text-body font-medium text-accent hover:text-accent-muted"
-          >
+      <PageHero eyebrow={contactIntro.eyebrow} title={contactIntro.title} deck={`${contactBlock.line} ${contactIntro.deck}`} />
+      <div className="shell grid gap-12 pb-20 md:grid-cols-[0.8fr_1.1fr]">
+        <div>
+          <p className="label text-text-secondary">Inquiries</p>
+          <div className="mt-2">
+            <TextLink href={inquiries.href} track="link:inquiries:contact">
+              {inquiries.email}
+            </TextLink>
+          </div>
+          <div className="mt-8 flex flex-col gap-1">
+          <TextLink href={`mailto:${identity.email}`} track="link:email:contact">
             {identity.email}
-          </a>
-          <a
-            href={identity.linkedin}
-            className="text-body font-medium text-accent hover:text-accent-muted"
-          >
+          </TextLink>
+          <TextLink href={identity.linkedin} track="link:linkedin:contact">
             LinkedIn
-          </a>
-        </GlassPanel>
-      </FadeInOnScroll>
+          </TextLink>
+          <TextLink href={booking.href} track="link:book_time:contact">
+            {booking.label}
+          </TextLink>
+          </div>
+        </div>
+        <NoteForm kind="contact" submitLabel="Send the note" track="button:submit_contact:contact" />
+      </div>
     </>
   );
 }

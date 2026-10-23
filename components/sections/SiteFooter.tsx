@@ -1,44 +1,60 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the footer at the bottom of every public page. It repeats
-// the full-name wordmark, offers the quieter secondary links
-// (Projects, Writing, Photography, Civic Engagement, Contact), and
-// shows a small copyright line. Contact appears here as a link only;
-// the actual contact details live on the Contact page, so contact
-// information is never duplicated (the "contact once" rule, docs/03).
+// This is the footer on every page. The name links home. Under it,
+// See full CV sits with Writing, Ask, LinkedIn, and Contact.
+// See résumé is included only when its file exists. The year and
+// name close the page.
 // ============================================
 
 import Link from "next/link";
-import { identity, secondaryNav } from "@/content/site-content";
+import { footerNav, identity } from "@/content/site-content";
+
+function FooterLink({ href, label }: { href: string; label: string }) {
+  const className = "inline-flex min-h-[44px] items-center text-caption text-ink";
+  const track = `nav_item:${label.toLowerCase().replace(/[^a-z]+/g, "_")}:footer`;
+  if (href.startsWith("/") && !href.endsWith(".pdf")) {
+    return (
+      <Link href={href} className={className} data-track={track}>
+        {label}
+      </Link>
+    );
+  }
+  const external = href.startsWith("http");
+  return (
+    <a
+      href={href}
+      className={className}
+      data-track={track}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+    >
+      {label}
+    </a>
+  );
+}
 
 export function SiteFooter() {
-  // THIS SECTION DOES: show the current year so the copyright stays current on its own
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-24 border-t border-border-subtle">
-      <div className="shell flex flex-col gap-8 py-12 md:flex-row md:items-center md:justify-between">
-        {/* The wordmark again, quietly, tying the bottom back to the top */}
-        <Link href="/" className="font-serif text-h3 text-text-primary">
+    <footer className="border-t border-border-subtle bg-bg">
+      <div className="shell py-4">
+        <Link href="/" className="font-serif text-h3 text-ink">
           {identity.wordmark}
         </Link>
-
-        {/* The quieter pages, grouped away from the main navigation */}
-        <nav aria-label="Secondary" className="flex flex-wrap gap-x-6 gap-y-3">
-          {secondaryNav.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href ?? "/"}
-              className="text-caption text-text-secondary transition-colors hover:text-accent"
+        <nav aria-label="Footer" className="mt-3 flex flex-wrap items-center gap-y-1">
+          {footerNav.map((item) => (
+            <span
+              key={item.href}
+              className="inline-flex items-center after:mx-3 after:text-text-secondary after:content-['·'] last:after:content-none"
             >
-              {item.label}
-            </Link>
+              <FooterLink href={item.href} label={item.label} />
+            </span>
           ))}
         </nav>
-      </div>
-
-      <div className="shell pb-10 text-caption text-text-secondary">
-        {year} {identity.fullName}
+        <p className="mt-3 text-caption text-text-secondary">
+          {year} {identity.fullName}
+        </p>
       </div>
     </footer>
   );

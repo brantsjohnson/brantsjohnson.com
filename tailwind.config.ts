@@ -27,6 +27,9 @@ const config: Config = {
         "text-secondary": "var(--color-text-secondary)",
         accent: "var(--color-accent)",
         "accent-muted": "var(--color-accent-muted)",
+        ink: "var(--color-ink)",
+        "on-hero": "var(--color-on-hero)",
+        muted: "var(--color-muted)",
       },
       // THIS SECTION DOES: connect the two typefaces to font-serif and font-sans
       fontFamily: {
@@ -35,12 +38,14 @@ const config: Config = {
       },
       // THIS SECTION DOES: name the type sizes used across the site
       fontSize: {
-        display: ["clamp(2.75rem, 1.4rem + 5vw, 5rem)", { lineHeight: "1.05" }],
-        h1: ["clamp(2.125rem, 1.4rem + 3vw, 3.25rem)", { lineHeight: "1.1" }],
-        h2: ["clamp(1.625rem, 1.2rem + 1.6vw, 2.25rem)", { lineHeight: "1.2" }],
-        h3: ["1.375rem", { lineHeight: "1.3" }],
-        body: ["clamp(1rem, 0.96rem + 0.2vw, 1.125rem)", { lineHeight: "1.6" }],
+        // The home headline. Two lines on a phone, and still two lines on a desktop window.
+        display: ["clamp(2.55rem, 5.6vw, 5.25rem)", { lineHeight: "0.94", letterSpacing: "-0.03em" }],
+        h1: ["clamp(2.75rem, 5vw, 4.5rem)", { lineHeight: "0.98", letterSpacing: "-0.025em" }],
+        h2: ["2.25rem", { lineHeight: "1.15" }],
+        h3: ["1.5rem", { lineHeight: "1.3" }],
+        body: ["1.125rem", { lineHeight: "1.6" }],
         caption: ["0.875rem", { lineHeight: "1.4" }],
+        stat: ["clamp(4.5rem, 6vw, 5.5rem)", { lineHeight: "0.9" }],
       },
       // THIS SECTION DOES: expose the shared spacing steps as padding/margin/gap classes
       spacing: {

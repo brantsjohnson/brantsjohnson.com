@@ -1,35 +1,93 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This wraps the whole website in the basic HTML shell (the outer
-// page frame). Shared chrome like nav and footer will plug in later.
-// It does not draw any real page content by itself.
+// This wraps the whole website in the HTML shell. It loads the two
+// typefaces (a serif for titles, a light sans for reading) and sets
+// the default title. Search engines are asked to wait until the
+// domain moves off Wix. See app/robots.ts.
 // ============================================
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
+import { identity } from "@/content/site-content";
 
-// THIS SECTION DOES: set the default browser tab title and keep search engines from indexing this scaffold yet
+const description =
+  "Good ideas deserve to happen. I'm a senior product manager, a creator, performer and entrepreneur, and an activist for the places that raised me.";
+
+// THIS SECTION DOES: point share images at the preview while a preview is open,
+// and at the public domain everywhere else.
+function metadataBaseUrl(): URL {
+  if (process.env.VERCEL_ENV === "preview" && process.env.VERCEL_URL) {
+    return new URL(`https://${process.env.VERCEL_URL}`);
+  }
+  const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (configured) return new URL(configured);
+  return new URL(identity.siteUrl);
+}
+
+const allowIndexing = process.env.SITE_INDEXABLE === "true";
+
+const serif = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-serif-file",
+  display: "swap",
+});
+
+const sans = Source_Sans_3({
+  subsets: ["latin"],
+  weight: ["300", "400", "600", "700"],
+  variable: "--font-sans-file",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
+  metadataBase: metadataBaseUrl(),
   title: {
-    default: "Brant S. Johnson",
-    template: "%s | Brant S. Johnson",
+    default: identity.fullName,
+    template: `%s | ${identity.fullName}`,
   },
-  description: "Brant S. Johnson is a customer focused product manager who has owned KYC, onboarding, and analytics, and who sells what he ships.",
-  robots: {
-    index: false, // do not show unfinished pages in Google yet
-    follow: false,
+  description,
+  applicationName: identity.fullName,
+  authors: [{ name: identity.fullName, url: identity.siteUrl }],
+  creator: identity.fullName,
+  robots: allowIndexing
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: identity.siteUrl,
+    siteName: identity.fullName,
+    title: identity.fullName,
+    description,
   },
+  twitter: {
+    card: "summary_large_image",
+    title: identity.fullName,
+    description,
+  },
+  icons: { icon: "/favicon.svg" },
 };
 
-// THIS SECTION DOES: render the outer HTML document and put each page's content inside the body
+export const viewport: Viewport = {
+  themeColor: "#f4f2ec",
+  width: "device-width",
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className={`${serif.variable} ${sans.variable}`}>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

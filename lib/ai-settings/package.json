@@ -1,0 +1,12 @@
+{
+  "name": "@brant/ai-settings",
+  "version": "1.0.0",
+  "description": "One settings shape for every AI call: provider, model, temperature, effort, deep thinking, max cost, cheap-first escalation.",
+  "type": "module",
+  "main": "index.mjs",
+  "files": ["index.mjs", "models.json"],
+  "engines": {"node": ">=18"},
+  "scripts": {"test": "node --test test.mjs"},
+  "license": "UNLICENSED",
+  "private": true
+}

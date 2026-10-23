@@ -1,0 +1,26 @@
+ai-settings: one settings shape for every AI call
+
+  import { run, autoRoute } from "./lib/ai-settings/index.mjs";
+
+  const result = await run(
+    {
+      purpose: "Summarize one support ticket in two lines",
+      provider: "xai",              // xai | anthropic | openai | gemini
+      tier: "cheap",                // or model: "grok-4.7"
+      effort: "low",                // low | medium | high | xhigh
+      deepThinking: false,
+      temperature: 0.2,             // dropped where a model rejects it
+      maxCostUsd: 0.01,             // hard cap for the call, retries included
+      maxOutputTokens: 300,
+      escalation: { steps: ["thinking", "effort", "tier", "provider"], fallbackProviders: ["gemini"], maxAttempts: 3 },
+    },
+    [{ role: "system", content: "Two lines, plain words." }, { role: "user", content: ticketText }],
+    { check: (text) => text.split("\n").length <= 2 },
+  );
+  // result: { ok, text, attempt, spentUsd, log }
+
+Keys come from env: XAI_API_KEY, ANTHROPIC_API_KEY, OPENAI_API_KEY, GEMINI_API_KEY, TYPESAFE_API_KEY.
+Models and prices: models.json (check monthly against the sources listed in it).
+Auto mode: autoRoute(taskText, { useJev: true }) returns { tier, deepThinking, effort, source }.
+Tests: node --test test.mjs
+Rules: brant-control-center ideas/ai-model-settings-2026-10-19.md

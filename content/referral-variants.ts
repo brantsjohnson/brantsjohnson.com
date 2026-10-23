@@ -37,13 +37,14 @@ export const referralVariantContent: Record<ReferralVariantId, ReferralVariantCo
   default: {
     id: "default",
     analyticsLabel: "default_founder_pm",
-    heroHeadline: "Founder and product leader who puts people first.",
+    heroHeadline: "Good ideas deserve to happen.",
     heroBody:
-      "I build products and systems where teams and customers stay in the loop, not lost in dashboards. I use modern tools when they earn trust and save real time. Most of my energy goes to clarity, ownership, and work that holds up after launch.",
+      "Product manager and founder. I've owned the whole loop, from KYC and onboarding to analytics, and I sell what I ship.",
     focusLines: [
-      "Founder and PM work across zero to one and scale.",
-      "Bridger and Intro help people connect around shared tastes, not endless feeds.",
-      "Civic systems and co-ops remind me that good products serve communities.",
+      "Founder and product work from the first version through launch.",
+      "Intro helps people meet at live events.",
+      "Bridger helps people become friends around what they love.",
+      "Good products serve communities.",
     ],
     securityFocus: {
       title: "Security and compliance in product work",
@@ -53,14 +54,14 @@ export const referralVariantContent: Record<ReferralVariantId, ReferralVariantCo
   social: {
     id: "social",
     analyticsLabel: "social_connection",
-    // Required hero line for Instagram, Threads, TikTok, and Substack links.
-    heroHeadline: "Technology should bring people together, not keep them scrolling alone.",
+    // Hero line for Instagram, Threads, TikTok, and Substack links.
+    heroHeadline: "Good ideas deserve to happen.",
     heroBody:
-      "I care about ending isolation online and building ethical, people-first tech. Bridger and Intro are about real connection over performance. I follow co-ops, Filibuster, and other voices that explain how systems actually work.",
+      "I care about connection, and about technology that helps people find each other.",
     focusLines: [
-      "Connection beats vanity metrics.",
-      "Shared tastes and introductions, not another algorithmic feed.",
-      "Systems thinking from Filibuster and cooperative models I trust.",
+      "Connection is the point of the work.",
+      "Intro helps people meet in person. Bridger is a socialization app.",
+      "I build tools, spaces, and stories that bring people together.",
     ],
     securityFocus: {
       title: "Privacy and trust",
@@ -70,13 +71,13 @@ export const referralVariantContent: Record<ReferralVariantId, ReferralVariantCo
   linkedin_x: {
     id: "linkedin_x",
     analyticsLabel: "linkedin_x_ai_craft",
-    heroHeadline: "Agentic products with a human spine.",
+    heroHeadline: "Good ideas deserve to happen.",
     heroBody:
-      "I design and ship AI-assisted workflows where the model does the busy work and people stay accountable. My craft is retrieval, tooling, and product judgment in an AI world. People still matter. That is the point of the automation.",
+      "I design and ship AI-assisted workflows where the model handles the busy work and people stay accountable. My craft is retrieval, tooling, and product judgment. People still matter.",
     focusLines: [
       "Agentic patterns that stay observable and reversible.",
-      "PM and founder lens on what to automate versus what to keep human.",
-      "Bridger and Intro as products, not demos.",
+      "A product judgment on what to automate and what to keep with a person.",
+      "Intro is live software for events. Bridger helps people become friends around what they love.",
     ],
     securityFocus: {
       title: "Security and compliance in product work",

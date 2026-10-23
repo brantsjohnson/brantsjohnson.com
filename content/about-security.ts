@@ -8,7 +8,6 @@ import { defaultAndLinkedInSecurityLines } from "@/content/security-site-lines";
 
 export const aboutSecurityFocus = {
   title: "Security and compliance in product work",
-  intro:
-    "I treat security and compliance as product work. The sections below are how I scope shipping, not a claim that every audit is already finished.",
+  intro: "I treat security and compliance as product work.",
   lines: [...defaultAndLinkedInSecurityLines],
 };
