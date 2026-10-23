@@ -13,7 +13,7 @@ import { experience, experienceIntro, publicCv } from "@/content/site-content";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Work",
+  title: "Full work history",
   description: experienceIntro.deck,
   path: "/work",
 });
@@ -21,7 +21,7 @@ export const metadata: Metadata = pageMetadata({
 export default function WorkPage() {
   return (
     <>
-      <PageHero eyebrow="Work" title="The work." deck={experienceIntro.deck} />
+      <PageHero eyebrow="Work" title="Full work history." deck={experienceIntro.deck} />
 
       <section id="projects" className="shell scroll-mt-24 pb-16 md:pb-24">
         <h2 className="sr-only">Selected projects.</h2>

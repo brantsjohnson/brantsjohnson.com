@@ -1,47 +1,59 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the footer. It repeats the full name as a way home and
-// lists the same pages as the header, in a quieter row. The email
-// address is not repeated here. It lives on the Contact page.
-// The year updates on its own.
+// This is the footer on every page. The name links home. Under it,
+// See résumé and See full CV sit with Writing, Ask, LinkedIn, and
+// Contact. The year and name close the page.
 // ============================================
 
 import Link from "next/link";
-import { identity, primaryNav } from "@/content/site-content";
+import { footerNav, identity } from "@/content/site-content";
 
-type SiteFooterProps = {
-  showWriting?: boolean; // true only when at least two real pieces exist
-};
-
-export function SiteFooter({ showWriting = false }: SiteFooterProps) {
-  const year = new Date().getFullYear();
-  const links = primaryNav.filter((item) => item.href !== "/" && item.href !== "/ask");
-  if (showWriting) {
-    links.splice(2, 0, { label: "Writing", kind: "route", href: "/writing" });
+function FooterLink({ href, label }: { href: string; label: string }) {
+  const className = "inline-flex min-h-[44px] items-center text-caption text-ink";
+  const track = `nav_item:${label.toLowerCase().replace(/[^a-z]+/g, "_")}:footer`;
+  if (href.startsWith("/") && !href.endsWith(".pdf")) {
+    return (
+      <Link href={href} className={className} data-track={track}>
+        {label}
+      </Link>
+    );
   }
-  links.push({ label: "Now", kind: "route", href: "/now" });
+  const external = href.startsWith("http");
+  return (
+    <a
+      href={href}
+      className={className}
+      data-track={track}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+    >
+      {label}
+    </a>
+  );
+}
+
+export function SiteFooter() {
+  const year = new Date().getFullYear();
 
   return (
     <footer className="mt-8 border-t border-border-subtle bg-bg">
-      <div className="shell flex flex-col gap-8 py-12 md:flex-row md:items-end md:justify-between">
+      <div className="shell py-12">
         <Link href="/" className="font-serif text-h2 text-ink">
           {identity.wordmark}
         </Link>
-        <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-2">
-          {links.map((item) => (
-            <Link
+        <nav aria-label="Footer" className="mt-6 flex flex-wrap items-center gap-y-1">
+          {footerNav.map((item) => (
+            <span
               key={item.href}
-              href={item.href ?? "/"}
-              data-track={`nav_item:${item.label.toLowerCase().replace(/[^a-z]+/g, "_")}:footer`}
-              className="text-caption text-text-secondary"
+              className="inline-flex items-center after:mx-3 after:text-text-secondary after:content-['·'] last:after:content-none"
             >
-              {item.label}
-            </Link>
+              <FooterLink href={item.href} label={item.label} />
+            </span>
           ))}
         </nav>
-      </div>
-      <div className="shell pb-10 text-caption text-text-secondary">
-        {year} {identity.fullName}
+        <p className="mt-8 text-caption text-text-secondary">
+          {year} {identity.fullName}
+        </p>
       </div>
     </footer>
   );

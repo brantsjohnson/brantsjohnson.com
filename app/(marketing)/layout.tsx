@@ -7,7 +7,8 @@
 
 import { SiteFooter } from "@/components/sections/SiteFooter";
 import { SiteHeader } from "@/components/sections/SiteHeader";
-import { hero, identity, inquiries } from "@/content/site-content";
+import { identity, inquiries } from "@/content/site-content";
+import { hero } from "@/content/narrative";
 import { getPublicWriting } from "@/lib/writing/public-posts";
 
 export default async function MarketingLayout({
@@ -22,8 +23,8 @@ export default async function MarketingLayout({
     name: identity.fullName,
     url: identity.siteUrl,
     email: inquiries.email,
-    jobTitle: "Founder and Product Lead",
-    description: `${hero.headline} ${hero.studio}`,
+    jobTitle: "Senior Product Manager",
+    description: `${hero.headline} ${hero.identity}`,
     address: {
       "@type": "PostalAddress",
       addressLocality: "American Fork",
@@ -47,7 +48,7 @@ export default async function MarketingLayout({
       </a>
       <SiteHeader showWriting={writing.show} />
       <main id="content">{children}</main>
-      <SiteFooter showWriting={writing.show} />
+      <SiteFooter />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} />
     </>
   );

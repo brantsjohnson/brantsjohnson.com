@@ -49,7 +49,7 @@ export type Project = {
 export const identity = {
   fullName: "Brant S. Johnson",
   wordmark: "Brant S. Johnson",
-  role: "Customer-focused product manager",
+  role: "Senior Product Manager",
   location: "American Fork, Utah. Open to relocating.",
   email: "me@brantsjohnson.com",
   linkedin: "https://www.linkedin.com/in/brantshanonjohnson/",
@@ -72,8 +72,25 @@ export const inquiries = {
 // THIS SECTION DOES: the résumé file in public/cv.pdf. The link is the file itself.
 export const publicCv = {
   href: "/cv.pdf",
-  label: "Public CV",
+  label: "See full CV",
 };
+
+// THIS SECTION DOES: the one-page résumé. The file is added when a copy
+// without a phone number or street address is ready.
+export const publicResume = {
+  href: "/resume.pdf",
+  label: "See résumé",
+};
+
+// THIS SECTION DOES: the footer row on every page, in this order
+export const footerNav: { label: string; href: string }[] = [
+  publicResume,
+  publicCv,
+  { label: "Writing", href: "/writing" },
+  { label: "Ask about me", href: "/ask" },
+  { label: "LinkedIn", href: identity.linkedin },
+  { label: "Contact", href: "/contact" },
+];
 
 // THIS SECTION DOES: list the main navigation. Ask is the one chat entry, and it is a page.
 export const primaryNav: NavItem[] = [
@@ -84,14 +101,8 @@ export const primaryNav: NavItem[] = [
   { label: "Ask about me", kind: "route", href: "/ask" },
 ];
 
-// THIS SECTION DOES: the one public headline. Every visitor sees this sentence.
-export const hero = {
-  headline: "Good ideas deserve to happen.",
-  subline: "Creative strategy, community building, campaigns, events, and ambitious experiments.",
-  studio: "A studio for consulting, creative projects, opportunities, partnerships, and events.",
-  practice: "Independent creative practice",
-  name: "Brant S. Johnson. American Fork, Utah. Open to relocating.",
-};
+// THIS SECTION DOES: the home story lives in content/narrative.ts and is re-exported below.
+export { hero } from "@/content/narrative";
 
 // THIS SECTION DOES: the three facts a first-time reader should be able to repeat.
 // Details live on the Work page. Dollar figures are not shown.
@@ -141,7 +152,8 @@ export const building = {
     name: "Bridger",
     role: "Founder",
     dates: "Apr 2025 to present",
-    summary: "A socialization app in a beta of about 25 people.",
+    summary:
+      "An app that helps people become friends around what they love. In a TestFlight beta.",
     href: "https://bridger.social",
     hrefLabel: "Visit Bridger",
   },
@@ -152,9 +164,9 @@ export const about = {
   eyebrow: "About",
   title: "People matter most.",
   paragraphs: [
-    "I'm Brant Johnson. I run a studio for consulting, creative projects, opportunities, partnerships, and events.",
-    "I have worked in product, media, and government. I build tools, spaces, and stories that bring people together.",
-    "Good ideas deserve to happen. I take them on as products, partnerships, and events.",
+    "I'm Brant Johnson. I'm a senior product manager, a creator, performer and entrepreneur, and an activist for the places that raised me.",
+    "I build technology as a bridge to real human connection.",
+    "Good ideas deserve to happen.",
   ],
   educationTitle: "Education",
   education:
@@ -190,7 +202,8 @@ export const experience: ExperienceRole[] = [
     org: "Bridger",
     role: "Founder",
     dates: "Apr 2025 to present",
-    summary: "I started Bridger in April 2025. It is a socialization app in a beta of about 25 people.",
+    summary:
+      "I started Bridger in April 2025. It is an app that helps people become friends around what they love. It is in a TestFlight beta, built with contracted engineers and designers.",
     href: "https://bridger.social",
     hrefLabel: "Visit Bridger",
   },
@@ -327,10 +340,11 @@ export const projects: Project[] = [
     slug: "bridger",
     name: "Bridger",
     kicker: "Also building",
-    summary: "A socialization app in a beta of about 25 people. Founder since April 2025.",
+    summary:
+      "An app that helps people become friends around what they love. In a TestFlight beta. Founder since April 2025.",
     paragraphs: [
-      "Bridger is a socialization app. I am the founder, from April 2025.",
-      "It is in a beta of about 25 people. The product is at bridger.social.",
+      "Bridger helps people become friends around what they love. I am the founder, from April 2025.",
+      "It is in a TestFlight beta. The product is at bridger.social.",
     ],
     href: "https://bridger.social",
     hrefLabel: "Visit Bridger",
@@ -358,7 +372,7 @@ export const hiPage = {
   eyebrow: "Hi",
   title: "Good to meet you.",
   line: "Good ideas deserve to happen.",
-  deck: "A studio for consulting, creative projects, opportunities, partnerships, and events.",
+  deck: "I'm a senior product manager, a creator, performer and entrepreneur, and an activist for the places that raised me.",
 };
 
 // THIS SECTION DOES: the public Now page. One month, only checked facts.
@@ -367,7 +381,7 @@ export const nowPage = {
   eyebrow: "Now",
   title: "This month.",
   paragraphs: [
-    "I run a studio for consulting, creative projects, opportunities, partnerships, and events. I am building Intro and Bridger.",
+    "I am building Intro and Bridger. Good ideas deserve to happen.",
     "I am in American Fork, Utah, and I am open to relocating.",
   ],
 };

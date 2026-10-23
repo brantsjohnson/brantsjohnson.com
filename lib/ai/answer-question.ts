@@ -54,14 +54,14 @@ const TOPICS: Topic[] = [
     id: "bridger",
     score: (question) => hits(question, [/\bbridger\b/i]) * 3,
     short:
-      "Bridger is a socialization app in a beta of about 25 people. He is Founder, from April 2025, and it is live at bridger.social.",
-    more: "The public notes describe that beta and the link. They do not add a larger user count.",
+      "Bridger helps people become friends around what they love. He is Founder, from April 2025, and it is in a TestFlight beta at bridger.social.",
+    more: "The public notes do not give a user count.",
   },
   {
     id: "building",
     score: (question) => hits(question, [/\b(building|intro)\b/i]),
     short:
-      "He is building Intro and Bridger. Intro is AI agent software for live events. Bridger is a socialization app in a beta of about 25 people.",
+      "He is building Intro and Bridger. Intro is AI agent software for live events. Bridger helps people become friends around what they love.",
     more: "Intro is live at intro.events. Bridger is live at bridger.social. He is Founder and Product Lead of Intro, from November 2025, and Founder of Bridger, from April 2025.",
   },
   {
@@ -89,7 +89,7 @@ const TOPICS: Topic[] = [
         /\bopen to relocating\b/i,
       ]),
     short: "He lives in American Fork, Utah, and he is open to relocating.",
-    more: "He runs a studio for consulting, creative projects, opportunities, partnerships, and events.",
+    more: "He is a senior product manager, a creator, performer and entrepreneur, and an activist for the places that raised him.",
   },
   {
     id: "romney",
@@ -151,10 +151,25 @@ const TOPICS: Topic[] = [
     more: "That is the public note on student government.",
   },
   {
+    id: "performer",
+    score: (question) =>
+      hits(question, [/\b(theater|theatre|performer|performing|ambassadors|hale|mermaid)\b/i]),
+    short:
+      "He loves theater. In high school he was recognized among the top high-school actors in Utah twice. He made BYU Young Ambassadors as a non-major and was cast at Hale Centre Theatre in Elf the Musical.",
+    more: "Singing in public is one of his biggest fears. Theater taught him how a product team works: different crafts, one experience.",
+  },
+  {
+    id: "governor",
+    score: (question) => hits(question, [/\b(governor|economic development)\b/i]),
+    short:
+      "During COVID he interned in the Governor's Office and worked with the Governor's Office of Economic Development.",
+    more: "At sixteen he called his city manager and asked to be the city's first intern. The city manager said yes.",
+  },
+  {
     id: "who",
     score: (question) => hits(question, [/\bwho\b/i, /\babout him\b/i]),
     short:
-      "Brant S. Johnson is a product manager and founder in American Fork, Utah. He builds technology as a bridge to real human connection.",
+      "Brant S. Johnson is a senior product manager, creator, performer and entrepreneur in American Fork, Utah. He builds technology as a bridge to real human connection.",
     more: "He has about six years of product experience, and he is open to relocating.",
   },
 ];

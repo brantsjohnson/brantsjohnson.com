@@ -9,6 +9,7 @@
 
 import "server-only";
 import { cache } from "react";
+import { publishedWriting } from "@/content/narrative";
 import { postsNewestFirst, type WritingKind } from "@/content/writing/posts";
 import { substackBase, substackSubscribeUrl } from "@/lib/site/public-env";
 
@@ -77,6 +78,31 @@ function displayDate(raw: string): { label: string; sortKey: string } {
   return { label, sortKey: date.toISOString() };
 }
 
+function pathKey(href: string): string {
+  try {
+    return new URL(href).pathname.replace(/\/$/, "");
+  } catch {
+    return href;
+  }
+}
+
+// THIS SECTION DOES: keep the three live essays on the writing page even if the feed is down
+function knownLetters(): PublicWritingItem[] {
+  return publishedWriting.map((post) => {
+    const dated = displayDate(post.date);
+    return {
+      id: post.href,
+      title: post.title,
+      excerpt: "",
+      published: post.date,
+      href: post.href,
+      external: true,
+      kind: "newsletter" as const,
+      sortKey: dated.sortKey,
+    };
+  });
+}
+
 function localItems(): PublicWritingItem[] {
   return postsNewestFirst().map((post) => ({
     id: post.slug,
@@ -129,7 +155,9 @@ async function substackItems(base: string): Promise<PublicWritingItem[]> {
 export const getPublicWriting = cache(async (): Promise<PublicWriting> => {
   const base = substackBase();
   const remote = await substackItems(base);
-  const posts = [...localItems(), ...remote].sort((a, b) => (a.sortKey < b.sortKey ? 1 : -1));
+  const seen = new Set(remote.map((item) => pathKey(item.href)));
+  const known = knownLetters().filter((item) => !seen.has(pathKey(item.href)));
+  const posts = [...localItems(), ...remote, ...known].sort((a, b) => (a.sortKey < b.sortKey ? 1 : -1));
   const localCount = posts.filter((post) => !post.external).length;
   return {
     posts,

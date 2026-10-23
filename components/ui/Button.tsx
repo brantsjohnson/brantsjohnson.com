@@ -45,8 +45,9 @@ export function Button({
   const classes = clsx(baseClasses, variantClasses[variant], className);
 
   if (href) {
-    const external = href.startsWith("http");
-    if (external) {
+    const external = href.startsWith("http") || href.startsWith("mailto:");
+    const file = href.endsWith(".pdf");
+    if (external || file) {
       return (
         <a
           href={href}
@@ -54,8 +55,8 @@ export function Button({
           aria-label={ariaLabel}
           data-track={track}
           onClick={onClick}
-          target="_blank"
-          rel="noopener noreferrer"
+          target={external ? "_blank" : undefined}
+          rel={external ? "noopener noreferrer" : undefined}
         >
           {children}
         </a>

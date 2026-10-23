@@ -4,9 +4,9 @@ These are the only facts the public assistant may use. They match the checked ca
 
 ## Who I am
 
-Brant S. Johnson is a product manager and founder. He lives in American Fork, Utah, and he is open to relocating. He runs a studio for consulting, creative projects, opportunities, partnerships, and events. The public line is: Good ideas deserve to happen. He has about six years of product experience. Connection, in his words, is the antidote to loneliness and the foundation of a thriving society.
+Brant S. Johnson is a senior product manager, a creator, performer and entrepreneur, and an activist for the places that raised him. He lives in American Fork, Utah, and he is open to relocating. The public line is: Good ideas deserve to happen. He builds technology as a bridge to real human connection.
 
-He has worked in product management, AI, media, and government. He has seen technology pull people into shallow scrolling, and he has seen it rebuild trust. He is choosing the second path.
+He has worked in product management, performing, media, and government.
 
 Contact email: me@brantsjohnson.com
 LinkedIn: https://www.linkedin.com/in/brantshanonjohnson/
@@ -15,7 +15,7 @@ LinkedIn: https://www.linkedin.com/in/brantshanonjohnson/
 
 Intro: Founder and Product Lead, November 2025 to present. AI agent software for live events. Live at https://intro.events
 
-Bridger: Founder, April 2025 to present. A socialization app in a beta of about 25 people. Live at https://bridger.social
+Bridger: Founder, April 2025 to present. An app that helps people become friends around what they love. In a TestFlight beta, built with contracted engineers and designers. No public user count. Live at https://bridger.social
 
 ## Utah Business
 
@@ -23,7 +23,7 @@ Account Executive at Utah Business (Deseret News), Salt Lake City, October 2024 
 
 ## Crew Finance
 
-Senior Product Manager and first employee, December 2022 to April 2024, remote. He was the only product manager. He owned the Visa card issuing program, set up KYC with banking and compliance partners, and cut onboarding time in half. He built the financial models for a raise. He also led brand identity as lead illustrator.
+Senior Product Manager and first employee, December 2022 to April 2024, remote. He was the only product manager. He owned the Visa card issuing program, set up KYC with banking and compliance partners, and cut onboarding time in half. He built the financial models for a raise. He drew the Crew brand on an iPad, including the 2024 wordmark, and led brand identity with the UX designer.
 
 ## Office of Senator Mitt Romney
 
@@ -40,6 +40,14 @@ Head of Product at BackLocal, in the Sandbox venture program, September 2021 to 
 ## Birmingham
 
 Product Manager for a regional volunteer organization, pro bono, in Birmingham, England, October 2017 to September 2019. He trained and led 400 volunteers and built 3 internal reporting tools. Reporting dropped from about 2 days to about 3 hours, and the organization added a second engineer to maintain the tools.
+
+## Performing
+
+He loves theater, even though singing in public is one of his biggest fears. In high school he was recognized among the top high-school actors in Utah twice, and he ran marketing for the shows. For The Little Mermaid he turned the school into part of the show. He made BYU Young Ambassadors as a non-major, came back for a second year, and toured internationally, including South Korea. He was cast at Hale Centre Theatre in Elf the Musical.
+
+## Government beyond the Senate internship
+
+At sixteen he called his city manager and became the city's first intern. During COVID he interned in the Governor's Office and worked with the Governor's Office of Economic Development, on small-business grant work.
 
 ## Education and courses
 

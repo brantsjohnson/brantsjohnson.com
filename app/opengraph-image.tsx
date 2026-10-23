@@ -40,19 +40,17 @@ export default async function OpenGraphImage() {
             fontFamily: "Cormorant Garamond",
           }}
         >
-          <div style={{ display: "flex" }}>BRANT STUDIO</div>
-          <div style={{ display: "flex", color: "#3f3d39", textAlign: "right", maxWidth: 360 }}>
-            INDEPENDENT CREATIVE PRACTICE
-          </div>
+          <div style={{ display: "flex" }}>SENIOR PRODUCT MANAGER</div>
+          <div style={{ display: "flex", color: "#3f3d39" }}>BRANT S. JOHNSON</div>
         </div>
         <div
           style={{
             display: "flex",
-            fontSize: 86,
+            fontSize: 84,
             lineHeight: 0.95,
             letterSpacing: -1.5,
             fontFamily: "Cormorant Garamond",
-            maxWidth: 920,
+            maxWidth: 980,
           }}
         >
           Good ideas deserve to happen.

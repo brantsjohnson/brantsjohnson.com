@@ -43,7 +43,7 @@ export const referralVariantContent: Record<ReferralVariantId, ReferralVariantCo
     focusLines: [
       "Founder and product work from the first version through launch.",
       "Intro helps people meet at live events.",
-      "Bridger is a socialization app in a beta of about 25 people.",
+      "Bridger helps people become friends around what they love.",
       "Good products serve communities.",
     ],
     securityFocus: {
@@ -77,7 +77,7 @@ export const referralVariantContent: Record<ReferralVariantId, ReferralVariantCo
     focusLines: [
       "Agentic patterns that stay observable and reversible.",
       "A product judgment on what to automate and what to keep with a person.",
-      "Intro is live software for events. Bridger is a socialization app in a beta of about 25 people.",
+      "Intro is live software for events. Bridger helps people become friends around what they love.",
     ],
     securityFocus: {
       title: "Security and compliance in product work",

@@ -65,10 +65,10 @@ test("public answers skip withheld topics and dollar figures", () => {
   assert.doesNotMatch(crewMore, /\$|million|2\.5/);
 
   const bridger = answerFromNotes("What is Bridger?");
-  assert.match(bridger, /socialization app/i);
+  assert.match(bridger, /friends/i);
   assert.match(bridger, /bridger\.social/);
-  assert.match(bridger, /25/);
-  assert.doesNotMatch(bridger, /TestFlight|1,778|\$|million/);
+  assert.match(bridger, /TestFlight/);
+  assert.doesNotMatch(bridger, /25 people|1,778|\$|million/);
 
   const reach = answerFromNotes("Tell me more", ["How do I reach Brant?"]);
   assert.match(reach, /calendar\.app\.google\/qj9tb56BYCdppJPk9/);

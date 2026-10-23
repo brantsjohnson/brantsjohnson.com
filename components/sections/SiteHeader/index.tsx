@@ -22,6 +22,7 @@ type SiteHeaderProps = {
 export function SiteHeader({ showWriting = false }: SiteHeaderProps) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  if (pathname === "/") return null;
   const nav: NavItem[] = showWriting
     ? [
         ...primaryNav.slice(0, 3),
