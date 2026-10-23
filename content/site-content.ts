@@ -75,11 +75,11 @@ export const publicCv = {
   label: "See full CV",
 };
 
-// TODO(brant): public/resume.pdf is not in the repo. Leave href null so the
-// site does not link to a missing file, and does not pretend the full CV is
-// the one-page résumé. When a one-page résumé is ready, and only if it has no
-// phone number and no street address, set href to "/resume.pdf". The footer
-// and the home hero pick that up. The full CV at /cv.pdf stays linked.
+// THIS SECTION DOES: the one-page résumé link. public/resume.pdf is not in the
+// repo yet, so href stays null and the site does not link to a missing file or
+// treat the full CV as the one-page résumé. When that PDF is ready, and only
+// if it has no phone number and no street address, set href to "/resume.pdf".
+// The footer and the home hero read this object. The full CV at /cv.pdf stays linked.
 export const publicResume: { label: string; href: string | null } = {
   label: "See résumé",
   href: null,

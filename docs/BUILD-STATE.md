@@ -25,3 +25,5 @@ Recorded after removing the admin shells and restoring the starter-kit no-stubs 
 ## Open work
 
 See `ops/DECISIONS-NEEDED.md`. Writing, the newsletter signup, the CV button, search indexing, and CRM storage stay off until their env values exist.
+
+The one-page résumé PDF (`public/resume.pdf`) is still pending; until it ships, `publicResume.href` stays null and only `/cv.pdf` is linked.
