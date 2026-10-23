@@ -21,6 +21,11 @@ const config: Config = {
       colors: {
         bg: "var(--color-bg)",
         surface: "var(--color-surface)",
+        "surface-2": "var(--color-surface-2)",
+        "bg-deep": "var(--color-bg-deep)",
+        "on-gold": "var(--color-on-gold)",
+        "accent-bright": "var(--color-accent-bright)",
+        "accent-deep": "var(--color-accent-deep)",
         glass: "var(--color-glass)",
         "border-subtle": "var(--color-border-subtle)",
         "text-primary": "var(--color-text-primary)",
@@ -39,9 +44,9 @@ const config: Config = {
       // THIS SECTION DOES: name the type sizes used across the site
       fontSize: {
         // The home headline. Two lines on a phone, and still two lines on a desktop window.
-        display: ["clamp(2.55rem, 5.6vw, 5.25rem)", { lineHeight: "0.94", letterSpacing: "-0.03em" }],
-        h1: ["clamp(2.75rem, 5vw, 4.5rem)", { lineHeight: "0.98", letterSpacing: "-0.025em" }],
-        h2: ["2.25rem", { lineHeight: "1.15" }],
+        display: ["clamp(2.8rem, 7vw, 6.5rem)", { lineHeight: "0.92", letterSpacing: "-0.025em" }],
+        h1: ["clamp(3rem, 7.5vw, 6.5rem)", { lineHeight: "0.92", letterSpacing: "-0.025em" }],
+        h2: ["clamp(1.9rem, 3.2vw, 2.75rem)", { lineHeight: "1.08", letterSpacing: "-0.01em" }],
         h3: ["1.5rem", { lineHeight: "1.3" }],
         body: ["1.125rem", { lineHeight: "1.6" }],
         caption: ["0.875rem", { lineHeight: "1.4" }],

@@ -10,6 +10,7 @@ import { AreaTags } from "@/components/narrative/AreaTags";
 import { PanelTabs } from "@/components/narrative/PanelTabs";
 import { SectionFrame } from "@/components/narrative/SectionFrame";
 import { StoryLink } from "@/components/narrative/StoryLink";
+import { creatorChapter } from "@/content/chapters";
 import { areas, creator } from "@/content/narrative";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
@@ -43,7 +44,7 @@ export default function CrewPage() {
                   height={crew.wordmark.height}
                   sizes="(min-width: 768px) 36rem, 100vw"
                   loading="lazy"
-                  className="h-auto w-full max-w-xl mix-blend-multiply"
+                  className="h-auto w-full max-w-xl rounded-panel bg-[#f4f2ec] p-4"
                 />
               ),
             },
@@ -69,6 +70,31 @@ export default function CrewPage() {
                         <source src={clip.webm} type="video/webm" />
                         <source src={clip.mp4} type="video/mp4" />
                       </video>
+                    </li>
+                  ))}
+                </ul>
+              ),
+            },
+            {
+              id: "illustrations",
+              label: "Illustrations",
+              content: (
+                <ul className="grid grid-cols-2 gap-3 md:grid-cols-4">
+                  {creatorChapter.strip.map((still) => (
+                    <li
+                      key={still.src}
+                      className="relative overflow-hidden rounded-[6px] border border-border-subtle"
+                      style={{ aspectRatio: "1 / 1", background: still.bg ?? "var(--color-surface)" }}
+                    >
+                      <Image
+                        src={still.src}
+                        alt={still.alt}
+                        fill
+                        sizes="(min-width: 768px) 22vw, 46vw"
+                        quality={70}
+                        loading="lazy"
+                        className="object-contain p-2"
+                      />
                     </li>
                   ))}
                 </ul>

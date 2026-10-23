@@ -16,7 +16,7 @@ export function AreaRail({ current }: { current: string }) {
           key={area.href}
           href={area.href}
           data-track={`link:rail_${area.id}:${current.replace("/", "") || "home"}`}
-          className="label inline-flex min-h-[44px] items-center rounded-control px-4 text-on-hero"
+          className="label inline-flex min-h-[44px] items-center rounded-control border border-border-subtle px-4 text-on-hero transition-colors hover:border-accent"
           style={{ background: area.pigment }}
         >
           {area.short}

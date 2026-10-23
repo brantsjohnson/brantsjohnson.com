@@ -62,8 +62,8 @@ export function PanelTabs({ label, pigment, tabs }: PanelTabsProps) {
               className="label inline-flex min-h-[44px] items-center rounded-control px-4"
               style={
                 active
-                  ? { background: pigment, color: "#f4f2ec" }
-                  : { background: "transparent", color: "#000", border: "1px solid rgba(0,0,0,0.18)" }
+                  ? { background: "var(--color-accent)", color: "var(--color-on-gold)", border: "1px solid var(--color-accent)" }
+                  : { background: "transparent", color: "var(--color-ink)", border: "1px solid var(--color-border-subtle)" }
               }
             >
               {tab.label}
@@ -76,7 +76,8 @@ export function PanelTabs({ label, pigment, tabs }: PanelTabsProps) {
         id={`${base}-panel-${selected.id}`}
         aria-labelledby={`${base}-${selected.id}`}
         tabIndex={0}
-        className="mt-6 rounded-panel border border-border-subtle bg-surface p-6 shadow-glass outline-none md:p-8"
+        className="mt-6 rounded-panel border border-border-subtle p-6 shadow-glass outline-none md:p-8"
+        style={{ background: `linear-gradient(160deg, ${pigment}66, var(--color-surface) 60%)` }}
       >
         {selected.content}
       </div>

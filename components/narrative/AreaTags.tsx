@@ -15,7 +15,7 @@ export function AreaTags({ tags }: { tags: AreaTag[] }) {
           <Link
             href={tag.href}
             data-track={`link:tag_${tag.label.toLowerCase()}:story`}
-            className="label inline-flex min-h-[44px] items-center rounded-control border border-border-subtle px-3 text-ink"
+            className="label inline-flex min-h-[40px] items-center rounded-control border border-border-subtle px-3 text-[0.65rem] text-ink transition-colors hover:border-accent hover:text-accent"
           >
             {tag.label}
           </Link>

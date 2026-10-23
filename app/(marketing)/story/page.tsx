@@ -1,14 +1,14 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// Where he comes from, in the order the story already told it.
-// /about sends people here.
+// Where he comes from, as short panels with photos instead of one
+// long column. /about sends people here.
 // ============================================
 
 import type { Metadata } from "next";
-import { CopyText } from "@/components/narrative/CopyText";
-import { SectionFrame } from "@/components/narrative/SectionFrame";
+import { ChapterPage } from "@/components/narrative/ChapterPage";
 import { StoryLink } from "@/components/narrative/StoryLink";
-import { contactBlock, story } from "@/content/narrative";
+import { storyChapter } from "@/content/chapters";
+import { contactBlock } from "@/content/narrative";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -19,18 +19,19 @@ export const metadata: Metadata = pageMetadata({
 
 export default function StoryPage() {
   return (
-    <SectionFrame id="story" kicker="Story" title={story.title} pigment="#122e48" plate="#0c1f30">
-      <div className="flex flex-col gap-6">
-        {story.paragraphs.map((parts, index) => (
-          <CopyText key={index} parts={parts} />
-        ))}
-      </div>
-      <p className="mt-10 max-w-reading text-body text-text-secondary">{contactBlock.line}</p>
-      <p className="mt-4">
-        <StoryLink href="/contact" track="link:contact:story">
-          {contactBlock.title}
-        </StoryLink>
-      </p>
-    </SectionFrame>
+    <ChapterPage
+      chapter={storyChapter}
+      href="/story"
+      extra={
+        <div>
+          <p className="max-w-reading text-body text-text-secondary">{contactBlock.line}</p>
+          <p className="mt-3">
+            <StoryLink href="/contact" track="link:contact:story">
+              {contactBlock.title}
+            </StoryLink>
+          </p>
+        </div>
+      }
+    />
   );
 }

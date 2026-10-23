@@ -39,7 +39,9 @@ export type CrewMotionClip = {
   height: number;
 };
 
-// THIS SECTION DOES: one door on the homepage. The pigment is that room's color.
+// THIS SECTION DOES: one door on the homepage. Gold is the main color of the whole site.
+// Each room also has a tint (a glow and a highlight), a deep tone (for gradients),
+// and a photo that fills its door.
 export type AreaDoor = {
   id: string;
   label: string;
@@ -47,56 +49,87 @@ export type AreaDoor = {
   href: string;
   pigment: string;
   plate: string;
+  tint: string;
   deck: string;
+  door: { src: string; alt: string; position: string };
 };
 
 // THIS SECTION DOES: the five rooms, in the order a visitor meets them.
-// Decks are shortened from sentences already in this file.
 export const areas: AreaDoor[] = [
   {
     id: "product",
     label: "Senior Product Manager",
     short: "Product",
     href: "/product",
-    pigment: "#122e48",
-    plate: "#0c1f30",
+    pigment: "#12304c",
+    plate: "#0a1c2e",
+    tint: "#86b2e0",
     deck: "I build technology as a bridge to real human connection.",
+    door: {
+      src: "/images/brant-uploads/general/brant-at-crew.webp",
+      alt: "Brant at the Crew office.",
+      position: "50% 30%",
+    },
   },
   {
     id: "creator",
     label: "Creator",
     short: "Creator",
     href: "/creator",
-    pigment: "#a83a1c",
-    plate: "#7c2a14",
+    pigment: "#5a2414",
+    plate: "#33140b",
+    tint: "#f29272",
     deck: "Brands, shows, essays and poems.",
+    door: {
+      src: "/images/brant-uploads/crew-illustrations/door-spring.webp",
+      alt: "A blue Crew illustration of a front door with a wreath.",
+      position: "50% 50%",
+    },
   },
   {
     id: "performer",
     label: "Performer",
     short: "Performer",
     href: "/performer",
-    pigment: "#582046",
-    plate: "#3c1630",
+    pigment: "#521a40",
+    plate: "#2e0e24",
+    tint: "#e07aa8",
     deck: "Theater, including BYU Young Ambassadors.",
+    door: {
+      src: "/images/brant-uploads/elf-photos/53362764908-79aaaac7d3-o.webp",
+      alt: "The cast of Elf the Musical on stage at Hale Centre Theatre.",
+      position: "50% 50%",
+    },
   },
   {
     id: "entrepreneur",
     label: "Entrepreneur",
     short: "Entrepreneur",
     href: "/entrepreneur",
-    pigment: "#0e543c",
-    plate: "#093828",
+    pigment: "#0e4a35",
+    plate: "#082a1f",
+    tint: "#74d4a5",
     deck: "Intro, Bridger, and BackLocal.",
+    door: {
+      src: "/images/brant-uploads/general/brant-presenting-at-sandbox.webp",
+      alt: "Brant presenting BackLocal on the Sandbox stage.",
+      position: "28% 50%",
+    },
   },
   {
     id: "activist",
     label: "Activist",
     short: "Activist",
     href: "/activist",
-    pigment: "#104860",
-    plate: "#0a3040",
+    pigment: "#0d4558",
+    plate: "#072a36",
+    tint: "#59c9cf",
     deck: "I care about who gets seen.",
+    door: {
+      src: "/images/brant-uploads/general/brant-arch-being-welded.webp",
+      alt: "Brant with two builders beside the Uintah archway frame being welded.",
+      position: "50% 40%",
+    },
   },
 ];
 
@@ -463,7 +496,7 @@ export const story = {
     [
       {
         type: "text",
-        text: "I grew up in Vernal, Utah. My dad was a teacher. He died when I was ten, and at his funeral I looked out at a room of hundreds of people. I remember being shocked that one person could touch that many lives. I didn't need to be president or run a giant company to matter. I had a sphere of influence, and I could do something with it.",
+        text: "I grew up in Vernal, Utah. Early on I figured out that one person can touch hundreds of lives. I didn't need to be president or run a giant company to matter. I had a sphere of influence, and I could do something with it.",
       },
     ],
     [

@@ -1,10 +1,11 @@
 /* ============================================
    WHAT THIS FILE DOES (plain English):
    This is the main stylesheet the whole site loads.
-   It pulls in the design tokens and Tailwind layers, then sets a
-   few base page rules (background, text color, default font, and a
-   reusable centered content shell). Page-specific looks do not live
-   here; they live in their own components.
+   It pulls in the design tokens and Tailwind layers, then sets the base
+   page rules (the dark stage, gold type, film grain, the curtain that
+   opens on each page, and the slow ticker). Page layouts live in their
+   own components. Every animation here is cut to nothing when the
+   visitor asks their device for less motion.
    ============================================ */
 
 @import "./tokens.css";
@@ -21,36 +22,51 @@ body {
 
 html {
   scroll-behavior: smooth; /* gentle jump when clicking in-page anchors */
+  background: var(--color-bg);
+  color-scheme: dark;
 }
 
 body {
   background: var(--color-bg);
-  color: var(--color-text-secondary); /* 18px reading text stays softer than the black titles */
-  font-family: var(--font-sans); /* light sans for reading, serif stays on headings */
+  color: var(--color-text-secondary);
+  font-family: var(--font-sans);
   font-weight: 400;
-  font-size: 1.125rem;
-  line-height: 1.6;
+  font-size: 1.0625rem;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+/* THIS SECTION DOES: a faint film grain over the whole stage so flat color feels like paper and velvet */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 ::selection {
   background: var(--color-accent);
-  color: var(--color-ink);
+  color: var(--color-on-gold);
 }
 
-/* THIS SECTION DOES: give every heading the serif typeface so the name and titles feel editorial */
+/* THIS SECTION DOES: give every heading the display serif so the name and titles feel editorial */
 h1,
 h2,
 h3 {
   font-family: var(--font-serif);
-  font-weight: 500;
+  font-weight: 400;
 }
 
-/* --- ACCESSIBILITY: keep a clearly visible focus ring for keyboard users --- */
+/* --- ACCESSIBILITY: keep a clearly visible gold focus ring for keyboard users --- */
 :focus-visible {
-  outline: 2px solid var(--color-ink);
+  outline: 2px solid var(--color-accent);
   outline-offset: 3px;
-  box-shadow: 0 0 0 6px var(--color-accent);
+  border-radius: 4px;
 }
 
 /* THIS SECTION DOES: turn off nonessential motion when the visitor asks their device for less movement */
@@ -63,7 +79,11 @@ h3 {
   *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
     transition-duration: 0.001ms !important;
+  }
+  .ticker-track {
+    animation: none !important;
   }
 }
 
@@ -84,11 +104,73 @@ h3 {
     letter-spacing: 0.18em;
     text-transform: uppercase;
   }
+
+  /* THIS SECTION DOES: gold type that catches the light, for the biggest words on a page */
+  .gold-text {
+    background: linear-gradient(100deg, #b98a4b 0%, #f6d9a6 38%, #e9bf85 62%, #a97c3f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* THIS SECTION DOES: a thin gold rule that fades out at one end */
+  .gold-rule {
+    height: 1px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, rgba(233, 191, 133, 0) 100%);
+  }
 }
 
-/* THIS SECTION DOES: fade and rise a page when the visitor opens it.
-   The template remounts on each route, so the animation plays again.
-   Reduced motion, below, cuts the duration to nothing. */
+/* THIS SECTION DOES: the gold curtain. Two panels cover the page for a moment, then part.
+   The template remounts on each route, so it plays on every page. Reduced motion
+   cuts it to a single instant frame in the open position. */
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 350;
+  pointer-events: none;
+  display: flex;
+}
+
+.curtain span {
+  flex: 1;
+  background:
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.18) 0 2px, rgba(0, 0, 0, 0) 2px 46px),
+    linear-gradient(180deg, #2a2013, #120e08);
+  border-inline: 1px solid var(--color-accent-deep);
+  animation-duration: 900ms;
+  animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+  animation-fill-mode: both;
+  animation-delay: 60ms;
+}
+
+.curtain span:first-child {
+  animation-name: curtain-left;
+}
+
+.curtain span:last-child {
+  animation-name: curtain-right;
+}
+
+@keyframes curtain-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-101%);
+  }
+}
+
+@keyframes curtain-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(101%);
+  }
+}
+
+/* THIS SECTION DOES: fade and rise a page when the visitor opens it, just behind the curtain. */
 @keyframes page-rise {
   from {
     opacity: 0;
@@ -101,26 +183,38 @@ h3 {
 }
 
 .page-enter {
-  animation: page-rise 520ms var(--ease-brand) both;
+  animation: page-rise 700ms var(--ease-brand) 220ms both;
+}
+
+/* THIS SECTION DOES: the slow ticker of facts along the bottom of the home screen */
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker-track {
+  animation: ticker 60s linear infinite;
+  width: max-content;
+}
+
+.ticker:hover .ticker-track {
+  animation-play-state: paused;
 }
 
 /* THIS SECTION DOES: let the homepage fill the first screen on a desktop window.
-   The header and footer sit outside this block. */
-@media (min-width: 1024px) {
-  .overview-stage {
-    min-height: calc(100dvh - 12.5rem);
-  }
+   The header sits outside this block. */
+.home-stage {
+  min-height: calc(100dvh - 4.25rem);
 }
 
-/* THIS SECTION DOES: lift a colored door on hover. Pointer tilt is added in script
-   and only for a mouse, and only when the visitor allows motion. */
-@media (prefers-reduced-motion: no-preference) and (hover: hover) {
-  .door-card {
-    transition: transform 220ms var(--ease-brand), box-shadow 220ms var(--ease-brand);
-  }
-
-  .door-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 36px rgba(12, 20, 32, 0.22);
-  }
+/* THIS SECTION DOES: hide the scrollbar on horizontal photo rows while keeping them scrollable */
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }

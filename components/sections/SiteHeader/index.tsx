@@ -13,6 +13,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { clsx } from "clsx";
+import { ScrollProgress } from "@/components/narrative/ScrollProgress";
 import { identity, primaryNav, type NavItem } from "@/content/site-content";
 
 type SiteHeaderProps = {
@@ -52,11 +53,12 @@ export function SiteHeader({ showWriting = false }: SiteHeaderProps) {
         aria-current={isActive(item.href) ? "page" : undefined}
         data-track={`nav_item:${item.label.toLowerCase().replace(/[^a-z]+/g, "_")}:global`}
         className={clsx(
-          "inline-flex min-h-[44px] items-center text-caption text-ink",
-          isActive(item.href) && "underline decoration-accent decoration-2 underline-offset-8"
+          "label inline-flex min-h-[44px] items-center text-[0.72rem] transition-colors hover:text-accent",
+          isActive(item.href) ? "text-accent" : "text-ink",
+          item.href === "/ask" && "rounded-control border border-accent px-3 text-accent hover:bg-accent hover:text-on-gold"
         )}
       >
-        {item.href === "/ask" ? "Ask about me →" : item.label}
+        {item.href === "/ask" ? "Ask about me" : item.label}
       </Link>
     );
   };
@@ -64,13 +66,14 @@ export function SiteHeader({ showWriting = false }: SiteHeaderProps) {
   const links = nav;
 
   return (
-    <header className="sticky top-0 z-sticky border-b border-border-subtle bg-bg">
+    <header className="sticky top-0 z-sticky border-b border-border-subtle bg-glass backdrop-blur-glass">
       <div className="shell flex items-center justify-between gap-4 py-3">
-        <Link href="/" data-track="link:home_wordmark:global" className="font-serif text-h3 text-ink">
+        <Link href="/" data-track="link:home_wordmark:global" className="group inline-flex items-center gap-3 font-serif text-[1.6rem] leading-none text-ink">
+          <span aria-hidden="true" className="inline-block h-2.5 w-2.5 rotate-45 bg-accent transition-transform duration-500 group-hover:rotate-[225deg]" />
           {identity.wordmark}
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-4 xl:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-5 xl:flex">
           {links.map((item) => renderNavItem(item))}
         </nav>
 
@@ -81,13 +84,15 @@ export function SiteHeader({ showWriting = false }: SiteHeaderProps) {
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             data-track="button:toggle_menu:global"
-            className="inline-flex min-h-[44px] items-center gap-2 text-body text-ink"
+            className="label inline-flex min-h-[44px] items-center gap-2 text-ink"
           >
             {menuOpen ? <X size={20} /> : <Menu size={20} />}
             Menu
           </button>
         </div>
       </div>
+
+      <ScrollProgress />
 
       {menuOpen && (
         <nav aria-label="Primary mobile" className="border-t border-border-subtle bg-bg xl:hidden">

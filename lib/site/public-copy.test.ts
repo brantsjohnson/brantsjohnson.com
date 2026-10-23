@@ -7,6 +7,14 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
+  activistChapter,
+  creatorChapter,
+  entrepreneurChapter,
+  performerChapter,
+  productChapter,
+  storyChapter,
+} from "../../content/chapters";
+import {
   activist,
   beliefs,
   contactBlock,
@@ -49,6 +57,12 @@ function strings(value: unknown, found: string[] = []): string[] {
 }
 
 const publicCopy = strings({
+  activistChapter,
+  creatorChapter,
+  entrepreneurChapter,
+  performerChapter,
+  productChapter,
+  storyChapter,
   about,
   activist,
   beliefs,
