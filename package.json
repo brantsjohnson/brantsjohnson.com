@@ -10,7 +10,7 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "check:stubs": "node tools/ci/no-stubs.mjs && python3 tools/ci/no-stubs",
-    "test": "tsx --test lib/ai/answer-question.test.ts lib/site/public-copy.test.ts"
+    "test": "tsx --test lib/ai/answer-question.test.ts lib/site/public-copy.test.ts lib/site/public-env.test.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.65",

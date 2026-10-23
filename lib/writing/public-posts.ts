@@ -1,16 +1,16 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This builds the public writing list. Local essays and letters come
-// from content/writing/posts.ts. When SUBSTACK_URL is set, letters
-// are also read from that publication's RSS feed. The site shows
-// Writing only when this list has at least two real posts. A missing
-// URL, an empty feed, or a failed fetch leaves the list empty.
+// from content/writing/posts.ts. Letters are also read from the
+// Substack RSS feed (default https://brantsjohnson.substack.com).
+// The site shows Writing only when this list has at least two real
+// posts. An empty feed or a failed fetch can still hide the section.
 // ============================================
 
 import "server-only";
 import { cache } from "react";
 import { postsNewestFirst, type WritingKind } from "@/content/writing/posts";
-import { substackBase } from "@/lib/site/public-env";
+import { substackBase, substackSubscribeUrl } from "@/lib/site/public-env";
 
 // THIS SECTION DOES: describe one public piece, whether it lives here or on Substack
 export type PublicWritingItem = {
@@ -128,7 +128,7 @@ async function substackItems(base: string): Promise<PublicWritingItem[]> {
 // THIS SECTION DOES: assemble the list once per request and say whether Writing is public
 export const getPublicWriting = cache(async (): Promise<PublicWriting> => {
   const base = substackBase();
-  const remote = base ? await substackItems(base) : [];
+  const remote = await substackItems(base);
   const posts = [...localItems(), ...remote].sort((a, b) => (a.sortKey < b.sortKey ? 1 : -1));
   const localCount = posts.filter((post) => !post.external).length;
   return {
@@ -137,7 +137,7 @@ export const getPublicWriting = cache(async (): Promise<PublicWriting> => {
     letters: posts.filter((post) => post.kind === "newsletter"),
     // Two real pieces is the smallest shelf worth a public page.
     show: posts.length >= 2,
-    subscribeUrl: base ? `${base}/subscribe` : null,
+    subscribeUrl: substackSubscribeUrl(),
     feedUrl: localCount > 0 ? "/writing/feed.xml" : base ? `${base}/feed` : null,
   };
 });
