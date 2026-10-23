@@ -12,7 +12,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
-import { PhotoSlot } from "@/components/narrative/PhotoSlot";
 import { Button } from "@/components/ui/Button";
 import { areas, hero } from "@/content/narrative";
 
@@ -99,10 +98,7 @@ export function OverviewHome() {
           {hero.headline}
         </h1>
         <p className="mt-3 max-w-[38ch] text-body text-text-secondary">{hero.identity}</p>
-        <div className="mt-4 flex items-center gap-4">
-          <PhotoSlot orientation="portrait" className="w-14 shrink-0" />
-          <p className="text-caption text-text-secondary">{hero.location}</p>
-        </div>
+        <p className="mt-4 text-caption text-text-secondary">{hero.location}</p>
         <div className="mt-4 flex flex-wrap gap-3">
           <Button href={hero.storyCta.href} track="button:read_story:home">
             {hero.storyCta.label}

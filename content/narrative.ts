@@ -30,6 +30,15 @@ export type CrewStill = {
   height: number;
 };
 
+export type CrewMotionClip = {
+  mp4: string;
+  webm: string;
+  poster: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
 // THIS SECTION DOES: one door on the homepage. The pigment is that room's color.
 export type AreaDoor = {
   id: string;
@@ -109,7 +118,7 @@ export const hero = {
     "I'm a senior product manager, a creator, performer and entrepreneur, and an activist for the places that raised me.",
   location: "American Fork, Utah. Open to relocating.",
   storyCta: { label: "Read my story", href: "/story" },
-  resumeCta: { label: "See résumé", href: "/resume.pdf" },
+  resumeCta: { label: "See full CV", href: "/cv.pdf" },
 };
 
 // THIS SECTION DOES: the product story, then the compact role list on the page
@@ -213,18 +222,22 @@ export const creator = {
     },
     motion: [
       {
-        src: "/creator/crew/Van-Crew.GIF",
+        mp4: "/creator/crew/van-crew.mp4",
+        webm: "/creator/crew/van-crew.webm",
+        poster: "/creator/crew/van-crew-poster.jpg",
         alt: "Crew illustration of a van packed with household things.",
         width: 2530,
         height: 2827,
       },
       {
-        src: "/creator/crew/Bathtub-Crew.GIF",
+        mp4: "/creator/crew/bathtub-crew.mp4",
+        webm: "/creator/crew/bathtub-crew.webm",
+        poster: "/creator/crew/bathtub-crew-poster.jpg",
         alt: "Crew illustration of a claw-foot bathtub and a rubber duck.",
         width: 2732,
         height: 2048,
       },
-    ] as CrewStill[],
+    ] as CrewMotionClip[],
     stills: [
       {
         src: "/creator/crew/crew-social-announcement.png",
@@ -410,7 +423,9 @@ export const activist = {
       "The old arch over my high school's road came down when the road was widened, and it sat in a yard for years. At eighteen I drew a bigger one and started cold-calling companies for money, steel, engineering and labor. Someone told me nothing like this ever gets done. It took about five years, three principals, two school boards and two superintendents. The finished arch is about 25 feet tall and 63 feet wide. I didn't weld it. My job was getting the people who could into one project and keeping it alive.",
     ],
     video: {
-      src: "/activist/archway-video-all.mp4",
+      mp4: "/activist/archway-video.mp4",
+      webm: "/activist/archway-video.webm",
+      poster: "/activist/archway-video-poster.jpg",
       label: "The Uintah Resilience Archway in Vernal, Utah",
     },
   },

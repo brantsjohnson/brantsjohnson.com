@@ -108,7 +108,7 @@ test("public copy names the story, Bridger without a user count, and the r√©sum√
   assert.match(joined, /interned in the Governor's Office and worked with the Governor's Office of Economic Development/);
   assert.match(joined, /https:\/\/calendar\.app\.google\/qj9tb56BYCdppJPk9/);
   assert.match(joined, /\/cv\.pdf/);
-  assert.match(joined, /\/resume\.pdf/);
+  assert.doesNotMatch(joined, /\/resume\.pdf/);
   assert.match(joined, /brantshanonjohnson@gmail.com/);
   assert.match(joined, /constituent inquiries/);
   assert.match(joined, /Crew wordmark Brant designed in 2024/);

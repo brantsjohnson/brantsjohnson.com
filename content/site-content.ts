@@ -75,10 +75,9 @@ export const publicCv = {
   label: "See full CV",
 };
 
-// THIS SECTION DOES: the one-page résumé. The file is added when a copy
-// without a phone number or street address is ready.
+// THIS SECTION DOES: short CV link on the footer (same file as publicCv).
 export const publicResume = {
-  href: "/resume.pdf",
+  href: "/cv.pdf",
   label: "See résumé",
 };
 

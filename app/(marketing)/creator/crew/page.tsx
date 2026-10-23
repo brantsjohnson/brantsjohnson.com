@@ -50,11 +50,23 @@ export default function CrewPage() {
               label: "Motion",
               content: (
                 <ul className="grid gap-4 sm:grid-cols-2">
-                  {crew.motion.map((still) => (
-                    <li key={still.src}>
-                      {/* GIFs have to be a plain image. next/image freezes the first frame. */}
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={still.src} alt={still.alt} width={still.width} height={still.height} className="h-auto max-h-80 w-full rounded-panel object-contain" />
+                  {crew.motion.map((clip) => (
+                    <li key={clip.mp4}>
+                      <video
+                        loop
+                        muted
+                        autoPlay
+                        playsInline
+                        preload="none"
+                        poster={clip.poster}
+                        width={clip.width}
+                        height={clip.height}
+                        aria-label={clip.alt}
+                        className="h-auto max-h-80 w-full rounded-panel object-contain"
+                      >
+                        <source src={clip.webm} type="video/webm" />
+                        <source src={clip.mp4} type="video/mp4" />
+                      </video>
                     </li>
                   ))}
                 </ul>

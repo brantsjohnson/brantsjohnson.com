@@ -46,10 +46,12 @@ export default function ActivistPage() {
                       controls
                       playsInline
                       preload="metadata"
+                      poster={activist.archway.video.poster}
                       aria-label={activist.archway.video.label}
                       className="max-h-72 w-full rounded-panel bg-ink"
                     >
-                      <source src={activist.archway.video.src} type="video/mp4" />
+                      <source src={activist.archway.video.webm} type="video/webm" />
+                      <source src={activist.archway.video.mp4} type="video/mp4" />
                     </video>
                     <figcaption className="mt-3 text-caption text-text-secondary">{activist.archway.video.label}</figcaption>
                   </figure>
