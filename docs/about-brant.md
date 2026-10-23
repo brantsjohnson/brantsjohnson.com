@@ -93,7 +93,7 @@ Source: his old site's Skills page (brantsjohnson.com/blank-4). Full table with 
 - Education: BYU, Business Strategy, Emphasis Product Management.
 - Pendo Essentials for Web, Pendo (Credly badge), Oct 2022.
 - How to Manage Lean Six Sigma Projects: Part I, LinkedIn Learning, Nov 2022.
-- Agile Foundations, Oct 2022. Issuer still **confirm with Brant**: the old site's button links to the Pendo badge by mistake, so this page does not answer the open question. Likely LinkedIn Learning, unverified.
+- Agile Foundations, LinkedIn Learning, Oct 2022. No verify link; the old site's button pointed to the Pendo badge by mistake.
 - Figma Essential Training: The Basics, LinkedIn Learning, Oct 2022.
 - Learning Excel: Data Analysis, LinkedIn Learning, Oct 2022.
 - Learning SQL Programming, LinkedIn Learning, Oct 2022.

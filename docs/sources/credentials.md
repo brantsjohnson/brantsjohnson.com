@@ -8,7 +8,7 @@ Education line on the same page: BYU, Business Strategy, Emphasis Product Manage
 |---|---|---|---|---|---|
 | 1 | Pendo Essentials for Web (listed on old site as "Pendo Essentials") | Pendo (Credly badge) | Oct 2022 | https://www.credly.com/badges/00c80561-4f78-48df-acc3-fe28848e1aaa | certs/pendo-essentials-for-web.png |
 | 2 | How to Manage Lean Six Sigma Projects: Part I | LinkedIn Learning | Nov 2022 | https://www.linkedin.com/learning/certificates/9b2a3761cbfa38938e53eba0a93932440a44c7822d409b00d63f69ebdd459dbc | certs/lean-six-sigma-part-1.jpg |
-| 3 | Agile Foundations | Not confirmed (see note) | Oct 2022 | Old site links to the Pendo Credly badge by mistake; no Agile certificate link exists on the page | none |
+| 3 | Agile Foundations | LinkedIn Learning | Oct 2022 | none (old site linked to the Pendo Credly badge by mistake) | none |
 | 4 | Figma Essential Training: The Basics | LinkedIn Learning | Oct 2022 | https://www.linkedin.com/learning/certificates/48a90277597ff9cd4279121d3a00e0195c96052782e6708adeeb995f18068031 | certs/figma-essential-training.jpg |
 | 5 | Learning Excel: Data Analysis (2019) | LinkedIn Learning | Oct 2022 | https://www.linkedin.com/learning/certificates/69758541961830ddad8ab4852a4ff9fd67a2809391c7c8144fd5c3d25c690a68 | certs/learning-excel-data-analysis.jpg |
 | 6 | Learning SQL Programming | LinkedIn Learning | Oct 2022 | https://www.linkedin.com/learning/certificates/80c9f770414882995b7685db7312746895d67254e52f2677b3eeb92a17f8d5a9 | certs/learning-sql-programming.jpg |
@@ -20,7 +20,6 @@ Education line on the same page: BYU, Business Strategy, Emphasis Product Manage
 | 12 | The Non-Technical Skills of Effective Data Scientists | LinkedIn Learning | Feb 2022 | https://www.linkedin.com/learning/certificates/392d011f3789f229adb3f92918123114d88bbda1035c9f1c66a5c908ad3fdc91 | certs/non-technical-skills-data-scientists.jpg |
 
 Notes:
-- Agile Foundations: the old site's "Show Credential" button points to the same Credly URL as Pendo, so the issuer is still unknown. It is very likely the LinkedIn Learning course of that name (every other Oct 2022 course is LinkedIn Learning), but that is a guess. Confirm with Brant or his LinkedIn Licenses section before naming an issuer.
 - LinkedIn Learning certificate IDs are the hex string in each URL. The `?u=2153100` org parameter was dropped from the links.
 - Certificate images are the public preview images LinkedIn and Credly serve on each verify page. No PDFs are linked on the old page. Saved verify-page HTML sits beside each image as `*.page.html`.
 - `wix/` holds the two images on the old page (site logo/icon assets, not certificates).
