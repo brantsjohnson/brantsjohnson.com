@@ -9,28 +9,28 @@
    ============================================ */
 
 :root {
-  /* THIS SECTION DOES: set the stage. The site is a dark theater with gold as the one main color. */
-  --color-bg: #0d0b08; /* warm near-black, like a house after the lights go down */
-  --color-bg-deep: #070605; /* the deepest layer, for bands and photo wells */
-  --color-surface: #17130d; /* raised card on the stage */
-  --color-surface-2: #211b12; /* a second, lighter raised layer */
-  --color-ink: #f6efe2; /* warm cream, the main text color on the stage */
-  --color-on-hero: #f6efe2; /* cream text that sits on photos and colored panels */
-  --color-on-gold: #130e07; /* dark text for anything that sits on gold */
-  --color-glass: rgba(13, 11, 8, 0.72); /* sticky nav, dark and slightly see-through */
-  --color-border-subtle: rgba(246, 239, 226, 0.14); /* hairline on the stage */
-  --color-hero-line: rgba(233, 191, 133, 0.45); /* gold hairline */
+  /* THIS SECTION DOES: set the page. A warm white, like good paper, with lots of room around everything. */
+  --color-bg: #fbf9f5; /* warm white page */
+  --color-bg-deep: #f2ece1; /* the quiet cream band behind a section */
+  --color-surface: #ffffff; /* a card on the page */
+  --color-surface-2: #f6f1e8; /* a second, softer layer */
+  --color-ink: #16130e; /* near-black for headings and links */
+  --color-on-hero: #ffffff; /* white text that sits on a photo */
+  --color-on-gold: #16130e; /* dark text for anything that sits on gold */
+  --color-glass: rgba(251, 249, 245, 0.86); /* sticky nav, see-through paper */
+  --color-border-subtle: rgba(22, 19, 14, 0.12); /* hairline on the page */
+  --color-hero-line: rgba(138, 100, 40, 0.4);
 
-  /* THIS SECTION DOES: set text colors that stay readable on the stage */
-  --color-text-primary: #f6efe2;
-  --color-text-secondary: #cfc6b6; /* supporting text, passes WCAG AA on the stage */
-  --color-muted: #8f8677; /* large labels and rules only, never small body text */
+  /* THIS SECTION DOES: set text colors that stay readable on the page */
+  --color-text-primary: #16130e;
+  --color-text-secondary: #554e42; /* body text, passes WCAG AA on the page */
+  --color-muted: #8d8576; /* large labels and rules only, never small body text */
 
-  /* THIS SECTION DOES: set the single gold accent and its deeper and brighter steps */
-  --color-accent: #e9bf85; /* the gold */
-  --color-accent-muted: #d7ae72; /* hover on gold */
-  --color-accent-bright: #f6d9a6; /* highlights and glows */
-  --color-accent-deep: #9a7640; /* gold in shadow, for rules and plates */
+  /* THIS SECTION DOES: set the gold. It is a quiet, deeper gold used sparingly: a rule, a word, a small block. */
+  --color-accent: #c9a25a; /* gold for rules, small blocks and the main button */
+  --color-accent-muted: #b98f44; /* hover on gold */
+  --color-accent-bright: #e3c58d; /* a pale gold wash */
+  --color-accent-deep: #8a6428; /* gold used as text, dark enough to read on the page */
 
   /* THIS SECTION DOES: name the two typefaces. Next.js fills the file variables. */
   --font-serif: var(--font-serif-file), "Instrument Serif", "Palatino Linotype", Palatino, Georgia, serif;
@@ -49,16 +49,16 @@
   --space-32: 128px;
 
   /* THIS SECTION DOES: set how wide the page and the reading column may grow */
-  --shell-max: 1240px;
+  --shell-max: 1320px;
   --reading-max: 66ch;
-  --page-gutter: clamp(20px, 4vw, 56px);
+  --page-gutter: clamp(20px, 5vw, 72px);
 
   /* THIS SECTION DOES: set corner roundness. Buttons are soft. Story blocks are nearly square. */
-  --radius-panel: 14px;
-  --radius-control: 999px; /* pill buttons, a small bit of fun against the serious type */
+  --radius-panel: 4px;
+  --radius-control: 2px; /* buttons are crisp rectangles, like an editorial layout */
 
   /* THIS SECTION DOES: set a soft shadow used rarely, never as a card stack */
-  --shadow-glass: 0 24px 60px rgba(0, 0, 0, 0.5);
+  --shadow-glass: 0 18px 50px rgba(22, 19, 14, 0.10);
 
   /* THIS SECTION DOES: set shared motion numbers */
   --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);

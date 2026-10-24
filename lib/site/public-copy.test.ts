@@ -6,27 +6,11 @@
 
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import {
-  activistChapter,
-  creatorChapter,
-  entrepreneurChapter,
-  performerChapter,
-  productChapter,
-  storyChapter,
-} from "../../content/chapters";
-import {
-  activist,
-  beliefs,
-  contactBlock,
-  creator,
-  entrepreneur,
-  hero,
-  performer,
-  product,
-  publishedWriting,
-  story,
-  storyNav,
-} from "../../content/narrative";
+import { aboutIntro, aboutStories, outside } from "../../content/about";
+import { communityCases, communityIntro, serviceStories as communityService } from "../../content/community";
+import { crewProject, projects as projectCards, projectsIntro } from "../../content/projects";
+import { threads, workClose, workIntro } from "../../content/work";
+import { beliefs, contactBlock, hero, poetry, publishedWriting, story, storyNav } from "../../content/narrative";
 import {
   about,
   booking,
@@ -57,31 +41,33 @@ function strings(value: unknown, found: string[] = []): string[] {
 }
 
 const publicCopy = strings({
-  activistChapter,
-  creatorChapter,
-  entrepreneurChapter,
-  performerChapter,
-  productChapter,
-  storyChapter,
+  aboutIntro,
+  aboutStories,
+  outside,
+  communityCases,
+  communityIntro,
+  communityService,
+  crewProject,
+  projectCards,
+  projectsIntro,
+  threads,
+  workClose,
+  workIntro,
   about,
-  activist,
   beliefs,
   booking,
   building,
   contactBlock,
   contactIntro,
-  creator,
-  entrepreneur,
   experience,
   experienceIntro,
   footerNav,
   hero,
+  poetry,
   hiPage,
   homeRecord,
   inquiries,
   nowPage,
-  performer,
-  product,
   projects,
   publicCv,
   publicResume,
@@ -108,12 +94,12 @@ test("public copy names the story and Bridger, and does not link a missing résu
   assert.equal(hero.headline, "Good ideas deserve to happen.");
   assert.match(hero.identity, /a creator, performer and entrepreneur/);
   assert.deepEqual(
-    storyNav.slice(0, 5).map((item) => item.label),
-    ["Senior Product Manager", "Creator", "Performer", "Entrepreneur", "Activist"]
+    storyNav.map((item) => item.label),
+    ["About", "Work", "Projects", "Community", "Writing", "Contact"]
   );
   assert.deepEqual(
-    storyNav.slice(0, 5).map((item) => item.href),
-    ["/product", "/creator", "/performer", "/entrepreneur", "/activist"]
+    storyNav.map((item) => item.href),
+    ["/about", "/work", "/projects", "/community", "/writing", "/contact"]
   );
   assert.match(joined, /https:\/\/bridger\.social/);
   assert.match(joined, /TestFlight/);

@@ -9,14 +9,12 @@ import { SiteFooter } from "@/components/sections/SiteFooter";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { identity, inquiries } from "@/content/site-content";
 import { hero } from "@/content/narrative";
-import { getPublicWriting } from "@/lib/writing/public-posts";
 
-export default async function MarketingLayout({
+export default function MarketingLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const writing = await getPublicWriting();
   const person = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -46,7 +44,7 @@ export default async function MarketingLayout({
       >
         Skip to content
       </a>
-      <SiteHeader showWriting={writing.show} />
+      <SiteHeader />
       <main id="content" className="flex-1">
         {children}
       </main>

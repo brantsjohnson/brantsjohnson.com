@@ -44,10 +44,10 @@ const config: Config = {
       // THIS SECTION DOES: name the type sizes used across the site
       fontSize: {
         // The home headline. Two lines on a phone, and still two lines on a desktop window.
-        display: ["clamp(2.8rem, 7vw, 6.5rem)", { lineHeight: "0.92", letterSpacing: "-0.025em" }],
-        h1: ["clamp(3rem, 7.5vw, 6.5rem)", { lineHeight: "0.92", letterSpacing: "-0.025em" }],
-        h2: ["clamp(1.9rem, 3.2vw, 2.75rem)", { lineHeight: "1.08", letterSpacing: "-0.01em" }],
-        h3: ["1.5rem", { lineHeight: "1.3" }],
+        display: ["clamp(3.4rem, 9.5vw, 9rem)", { lineHeight: "0.88", letterSpacing: "-0.03em" }],
+        h1: ["clamp(3.2rem, 8.5vw, 7.5rem)", { lineHeight: "0.9", letterSpacing: "-0.03em" }],
+        h2: ["clamp(2rem, 4vw, 3.4rem)", { lineHeight: "1.02", letterSpacing: "-0.015em" }],
+        h3: ["1.6rem", { lineHeight: "1.2" }],
         body: ["1.125rem", { lineHeight: "1.6" }],
         caption: ["0.875rem", { lineHeight: "1.4" }],
         stat: ["clamp(4.5rem, 6vw, 5.5rem)", { lineHeight: "0.9" }],
