@@ -8,11 +8,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SectionFrame } from "@/components/narrative/SectionFrame";
-import { areas } from "@/content/narrative";
 import { poems } from "@/content/poems";
 import { pageMetadata } from "@/lib/site/page-metadata";
-
-const area = areas[1];
 
 type PoemPageProps = { params: { slug: string } };
 
@@ -26,7 +23,7 @@ export function generateMetadata({ params }: PoemPageProps): Metadata {
   return pageMetadata({
     title: poem.title,
     description: `${poem.title}, ${poem.year}.`,
-    path: `/creator/poetry/${poem.slug}`,
+    path: `/projects/poetry/${poem.slug}`,
   });
 }
 
@@ -38,7 +35,7 @@ export default function PoemPage({ params }: PoemPageProps) {
   const next = poems[index + 1];
 
   return (
-    <SectionFrame id={poem.slug} kicker={`Poetry · ${poem.year}`} title={poem.title} pigment={area.pigment} plate={area.plate}>
+    <SectionFrame id={poem.slug} kicker={`Projects · Poetry · ${poem.year}`} title={poem.title}>
       {poem.credit ? <p className="text-caption text-text-secondary">{poem.credit}</p> : null}
       <div className="mt-8 max-w-reading font-serif text-h3 text-ink">
         {poem.stanzas.map((stanza, stanzaIndex) => (
@@ -54,7 +51,7 @@ export default function PoemPage({ params }: PoemPageProps) {
       <nav aria-label="Other poems" className="mt-4 flex flex-col gap-3 border-t border-border-subtle pt-6 sm:flex-row sm:justify-between">
         {previous ? (
           <Link
-            href={`/creator/poetry/${previous.slug}`}
+            href={`/projects/poetry/${previous.slug}`}
             className="inline-flex min-h-[44px] items-center text-ink underline decoration-accent decoration-2 underline-offset-4"
           >
             Previous poem: {previous.title}
@@ -64,7 +61,7 @@ export default function PoemPage({ params }: PoemPageProps) {
         )}
         {next ? (
           <Link
-            href={`/creator/poetry/${next.slug}`}
+            href={`/projects/poetry/${next.slug}`}
             className="inline-flex min-h-[44px] items-center text-ink underline decoration-accent decoration-2 underline-offset-4"
           >
             Next poem: {next.title}

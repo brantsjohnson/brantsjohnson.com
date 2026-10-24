@@ -7,7 +7,7 @@
 // ============================================
 
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
+import { Instrument_Serif, Hanken_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
 import { identity } from "@/content/site-content";
@@ -28,16 +28,17 @@ function metadataBaseUrl(): URL {
 
 const allowIndexing = process.env.SITE_INDEXABLE === "true";
 
-const serif = Cormorant_Garamond({
+const serif = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: "400",
+  style: ["normal", "italic"],
   variable: "--font-serif-file",
   display: "swap",
 });
 
-const sans = Source_Sans_3({
+const sans = Hanken_Grotesk({
   subsets: ["latin"],
-  weight: ["300", "400", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-sans-file",
   display: "swap",
 });
@@ -72,7 +73,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f4f2ec",
+  themeColor: "#fbf9f5",
   width: "device-width",
   initialScale: 1,
 };

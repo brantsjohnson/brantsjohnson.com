@@ -1,11 +1,11 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the homepage. It is a short overview: the headline and
-// five doors. Each door opens its own page.
+// This is the homepage: a magazine-style cover with the headshot,
+// an index of the main places, and three featured projects.
 // ============================================
 
 import type { Metadata } from "next";
-import { OverviewHome } from "@/components/narrative/OverviewHome";
+import { HomePage } from "@/components/editorial/HomePage";
 import { hero } from "@/content/narrative";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
@@ -18,6 +18,6 @@ export const metadata: Metadata = {
   title: { absolute: "Brant S. Johnson. Good ideas deserve to happen." },
 };
 
-export default function HomePage() {
-  return <OverviewHome />;
+export default function Home() {
+  return <HomePage />;
 }

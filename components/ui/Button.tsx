@@ -27,9 +27,9 @@ const baseClasses =
 
 const variantClasses: Record<"primary" | "ghost" | "line", string> = {
   // Gold with black text. White on this gold would fail contrast.
-  primary: "bg-accent text-ink hover:bg-accent-muted",
-  ghost: "border border-border-subtle text-ink hover:border-ink",
-  line: "border border-accent text-on-hero hover:bg-accent hover:text-ink",
+  primary: "bg-accent text-on-gold hover:bg-accent-bright",
+  ghost: "border border-border-subtle text-ink hover:border-accent",
+  line: "border border-accent text-on-hero hover:bg-accent hover:text-on-gold",
 };
 
 export function Button({

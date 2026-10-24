@@ -9,16 +9,21 @@ This is Brant S. Johnson's personal site (Next.js on Vercel). Read this file and
 Senior product manager, creator, performer, entrepreneur and activist from Utah. Thesis: "I build technology as a bridge to real human connection." Motto: "Good ideas deserve to happen."
 
 ## Site structure
-- Five sections, always in this order: **Product Manager, Creator, Performer, Entrepreneur, Activist**.
-- Home page: one short screen (no scrolling on desktop if you can help it) with five colorful "doors" that lead into each section page.
-- Every page keeps scrolling to a minimum. Split long stories into short panels instead of long scrolls.
-- Sections overlap on purpose. Tag cross-over work (BackLocal is Product, Creator and Entrepreneur; theater is Performer and Creator).
-- Write it as a story about Brant in first person, with links inside sentences that jump between sections, for example "see how I did the branding for Crew" linking to the Crew branding piece in Creator.
-- Poetry: one poem per page, line breaks kept exactly.
+- Six top-level menu items, always in this order: **About, Work, Projects, Community, Writing, Contact**. Do not add a seventh.
+- About: the personal story, what drives him, and a short "outside of work" section with a few photos. Hobbies do not get their own page.
+- Work: organized by theme (Building things, Storytelling, Organizing, Listening), not as a timeline, with a downloadable CV at the bottom.
+- Projects: a visual grid of cards, each opening a short case study or gallery.
+- Community: the Archway and the Resilience Scholarship lead, with their own pages. Public service (government, student leadership) sits beneath them.
+- Writing: the blog. Contact: email and socials.
+- Home page: a magazine-style cover with the headshot, an index of the main places, and three featured projects.
+- Write it as a story about Brant in first person, with links inside sentences that jump between pages.
+- Poetry: one poem per page, line breaks kept exactly (under Projects).
 - Footer on every page: See résumé (`/resume.pdf`) and See full CV (`/cv.pdf`). Keep the résumé link hidden until `public/resume.pdf` exists.
 
 ## Look and feel
-- Artistic, colorful, with depth (layers, shadows, color fields) and soft fades and transitions between pages.
+- Editorial magazine feel: warm white page, near-black type, lots of white space, large display serif. Gold is the one accent and is used sparingly (rules, small blocks, a word). No gold or black fills across big areas.
+- Soft fades, scroll reveals and hover captions. Photo captions show only on hover.
+- Crew illustrations have see-through backgrounds. Always set them on the cream ground (`CREW_GROUND` in `content/photos.ts`).
 - Respect `prefers-reduced-motion`: no animation or smooth scrolling when it is set.
 - Model on the best artistic personal portfolio sites. Do not reinvent patterns that already work. References in `docs/design-references.md`.
 - No empty frames. If a photo slot has no file, render nothing.

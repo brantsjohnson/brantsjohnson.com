@@ -64,7 +64,7 @@ export function AskConversation() {
             <p
               className={
                 turn.role === "user"
-                  ? "max-w-[36rem] rounded-panel bg-ink px-4 py-3 text-body text-on-hero"
+                  ? "max-w-[36rem] rounded-panel bg-surface-2 px-4 py-3 text-body text-on-hero"
                   : "max-w-[40rem] text-body text-text-secondary"
               }
             >

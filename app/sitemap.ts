@@ -13,23 +13,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const writing = await getPublicWriting();
   const paths = [
     "",
-    "/product",
-    "/creator",
-    "/creator/poetry",
-    "/creator/blog",
-    "/creator/crew",
-    "/performer",
-    "/entrepreneur",
-    "/activist",
-    "/story",
-    "/beliefs",
-    "/work",
     "/about",
+    "/work",
+    "/projects",
+    "/projects/crew",
+    "/projects/theater",
+    "/projects/backlocal",
+    "/projects/intro",
+    "/projects/bridger",
+    "/projects/poetry",
+    "/projects/handmade",
+    "/projects/chatbot",
+    "/community",
+    "/community/archway",
+    "/community/scholarship",
     "/contact",
     "/ask",
     "/now",
-    ...poems.map((poem) => `/creator/poetry/${poem.slug}`),
+    ...poems.map((poem) => `/projects/poetry/${poem.slug}`),
   ];
+
   if (writing.show) paths.push("/writing");
   const dated = new Date();
   return [

@@ -6,29 +6,27 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SectionFrame } from "@/components/narrative/SectionFrame";
-import { areas, creator } from "@/content/narrative";
+import { poetry } from "@/content/narrative";
 import { poems } from "@/content/poems";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
-const area = areas[1];
-
 export const metadata: Metadata = pageMetadata({
   title: "Poetry",
-  description: creator.poetry.intro,
-  path: "/creator/poetry",
+  description: poetry.intro,
+  path: "/projects/poetry",
 });
 
 export default function PoetryIndexPage() {
   return (
-    <SectionFrame id="poetry" kicker="Creator · Poetry" title={creator.poetry.title} pigment={area.pigment} plate={area.plate}>
-      <p className="max-w-reading text-body text-text-secondary">{creator.poetry.intro}</p>
-      <ul className="mt-8 grid gap-4">
+    <SectionFrame id="poetry" kicker="Projects · Poetry" title={poetry.title}>
+      <p className="max-w-reading text-body text-text-secondary">{poetry.intro}</p>
+      <ul className="mt-10 border-t border-border-subtle">
         {poems.map((poem) => (
           <li key={poem.slug}>
             <Link
-              href={`/creator/poetry/${poem.slug}`}
+              href={`/projects/poetry/${poem.slug}`}
               data-track={`link:poem_${poem.slug}:poetry`}
-              className="door-card flex min-h-[44px] items-baseline justify-between gap-4 rounded-panel border border-border-subtle bg-surface px-6 py-5 shadow-glass"
+              className="group flex min-h-[44px] items-baseline justify-between gap-4 border-b border-border-subtle py-6 transition-colors hover:border-accent"
             >
               <span className="font-serif text-h2 text-ink">{poem.title}</span>
               <span className="text-caption text-text-secondary">{poem.year}</span>
@@ -37,8 +35,8 @@ export default function PoetryIndexPage() {
         ))}
       </ul>
       <p className="mt-8">
-        <Link href="/creator" className="text-ink underline decoration-accent decoration-2 underline-offset-4">
-          Back to Creator
+        <Link href="/projects" className="text-ink underline decoration-accent decoration-2 underline-offset-4">
+          Back to Projects
         </Link>
       </p>
     </SectionFrame>

@@ -115,7 +115,7 @@ function ConfiguredChatWidget({ company, role, suggestions }: Omit<ChatWidgetPro
                 className={cn(
                   "max-w-[85%] rounded-2xl px-4 py-3 shadow-sm",
                   isUser
-                    ? "bg-accent text-ink"
+                    ? "bg-accent text-on-gold"
                     : "border border-border-subtle bg-surface text-text-primary"
                 )}
               >
@@ -188,7 +188,7 @@ function ConfiguredChatWidget({ company, role, suggestions }: Omit<ChatWidgetPro
             type="submit"
             disabled={isBusy || !input.trim()}
             aria-label="Send message"
-            className="rounded-xl bg-accent p-3 text-white transition-colors hover:bg-accent-muted disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-xl bg-accent p-3 text-on-gold transition-colors hover:bg-accent-muted disabled:cursor-not-allowed disabled:opacity-50"
           >
             <Send className="h-5 w-5" />
           </button>

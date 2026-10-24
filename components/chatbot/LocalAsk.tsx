@@ -81,7 +81,7 @@ export function LocalAsk() {
             <p
               className={
                 turn.role === "user"
-                  ? "max-w-[85%] rounded-panel bg-accent px-4 py-3 text-body text-ink"
+                  ? "max-w-[85%] rounded-panel bg-accent px-4 py-3 text-body text-on-gold"
                   : "max-w-[85%] whitespace-pre-wrap rounded-panel border border-border-subtle bg-surface px-4 py-3 text-body text-ink"
               }
             >
@@ -116,7 +116,7 @@ export function LocalAsk() {
         <button
           type="submit"
           data-track="button:send_question:chat"
-          className="min-h-[44px] rounded-control bg-accent px-4 font-semibold text-ink"
+          className="min-h-[44px] rounded-control bg-accent px-4 font-semibold text-on-gold"
         >
           Send
         </button>

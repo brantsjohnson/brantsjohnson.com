@@ -90,29 +90,23 @@ export const publicResume: { label: string; href: string | null } = {
 const footerItems: { label: string; href: string | null }[] = [
   publicResume,
   publicCv,
-  { label: "Writing", href: "/writing" },
   { label: "Ask about me", href: "/ask" },
   { label: "LinkedIn", href: identity.linkedin },
-  { label: "Contact", href: "/contact" },
-  { label: "Full work history", href: "/work" },
+  { label: "Substack", href: "https://brantsjohnson.substack.com" },
 ];
 
 export const footerNav: { label: string; href: string }[] = footerItems.filter(
   (item): item is { label: string; href: string } => typeof item.href === "string" && item.href.length > 0
 );
 
-// THIS SECTION DOES: the bar across the top. The wordmark is home.
-// The five rooms come first. Story and contact sit with them.
-// Ask stays the one chat entry. Writing and the full work history live in the footer.
+// THIS SECTION DOES: the bar across the top. Six places, in this order. The wordmark is home.
 export const primaryNav: NavItem[] = [
-  { label: "Product", kind: "route", href: "/product" },
-  { label: "Creator", kind: "route", href: "/creator" },
-  { label: "Performer", kind: "route", href: "/performer" },
-  { label: "Entrepreneur", kind: "route", href: "/entrepreneur" },
-  { label: "Activist", kind: "route", href: "/activist" },
-  { label: "Story", kind: "route", href: "/story" },
+  { label: "About", kind: "route", href: "/about" },
+  { label: "Work", kind: "route", href: "/work" },
+  { label: "Projects", kind: "route", href: "/projects" },
+  { label: "Community", kind: "route", href: "/community" },
+  { label: "Writing", kind: "route", href: "/writing" },
   { label: "Contact", kind: "route", href: "/contact" },
-  { label: "Ask about me", kind: "route", href: "/ask" },
 ];
 
 // THIS SECTION DOES: the home story lives in content/narrative.ts and is re-exported below.

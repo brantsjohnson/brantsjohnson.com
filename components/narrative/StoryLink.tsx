@@ -18,7 +18,7 @@ type StoryLinkProps = {
 
 export function StoryLink({ href, children, track }: StoryLinkProps) {
   const className =
-    "inline text-ink underline decoration-accent decoration-2 underline-offset-[0.2em]";
+    "inline text-ink underline decoration-accent decoration-2 underline-offset-[0.2em] transition-colors hover:text-accent-bright";
   const body = (
     <>
       {children}
