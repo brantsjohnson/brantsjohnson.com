@@ -10,15 +10,16 @@ Senior product manager, creator, performer, entrepreneur and activist from Utah.
 
 ## Site structure
 - Six top-level menu items, always in this order: **About, Work, Events, Community, Writing, Contact**. Do not add a seventh.
-- About: the personal story, what drives him, and a short "outside of work" section with a few photos. Hobbies do not get their own page.
-- Work: organized by theme (Building things, Storytelling, Organizing, Listening), not as a timeline, with a downloadable CV at the bottom.
-- Events: a visual grid of cards, each opening a short case study or gallery (the route is `/events`; the content still lives in `content/projects.ts`).
-- Community: the Archway and the Resilience Scholarship lead, with their own pages. Public service (government, student leadership) sits beneath them.
-- Writing: the blog. Contact: email and socials.
-- Home page: a magazine-style cover with the headshot, an index of the main places, and three featured projects.
+- About: the personal introduction, how he got here, parties, and two deeper pages: `/about/pre-college` and `/about/handmade`. Hobbies do not get their own top-level page.
+- Work: quick previews grouped by kind of work, each opening a longer story at `/work/[slug]` (Intro, Bridger, Crew, Crew brand, BackLocal, A chatbot of me). Full CV at the bottom.
+- Events: an archive grouped by kind (`/events`), with one page per event at `/events/[slug]`. Add a new event as one entry in `content/events.ts`. Do not claim he produced an event alone or that he attended every event in a portfolio.
+- Community: the Archway and the Resilience Scholarship lead, with their own pages. Public service and student government sit beneath them.
+- Writing: simple dated lists of Articles and Poetry. One poem per page under `/writing/poetry`, line breaks kept exactly.
+- Contact: email and a short form. Footer on every page: email, the menu, Full CV, Ask about me, LinkedIn, Substack. Keep the résumé link hidden until `public/resume.pdf` exists.
+- Home page: the headline "Good ideas deserve to happen." is the page's one h1, with the headshot, an index of the main places, and four places to start.
+- Copy source of truth: the approved copy doc (ideas, people and events edition). Where it says a detail is still to be confirmed (the Governor's Economic Summit year, Uintah County tourism events), leave the detail out.
+- Do not use Utah or Vernal as the site's brand identity, hero explanation or footer. Place names belong in the story of the project that happened there.
 - Write it as a story about Brant in first person, with links inside sentences that jump between pages.
-- Poetry: one poem per page, line breaks kept exactly (under Events).
-- Footer on every page: See résumé (`/resume.pdf`) and See full CV (`/cv.pdf`). Keep the résumé link hidden until `public/resume.pdf` exists.
 
 ## Look and feel
 - Editorial magazine feel: warm white page, near-black type, lots of white space, large display serif. Gold is the one accent and is used sparingly (rules, small blocks, a word). No gold or black fills across big areas.

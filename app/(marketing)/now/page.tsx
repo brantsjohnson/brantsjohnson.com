@@ -13,7 +13,7 @@ import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "Now",
-  description: "What Brant S. Johnson is doing this month.",
+  description: "What Brant Johnson is working on right now.",
   path: "/now",
 });
 
@@ -29,11 +29,11 @@ export default function NowPage() {
           </p>
         ))}
         <div className="flex flex-col gap-2">
-          <TextLink href="/work#intro" track="link:intro:now">
-            See Intro
+          <TextLink href="/work/intro" track="link:intro:now">
+            Intro
           </TextLink>
-          <TextLink href="/work#bridger" track="link:bridger:now">
-            See Bridger
+          <TextLink href="/work/bridger" track="link:bridger:now">
+            Bridger
           </TextLink>
         </div>
         </div>

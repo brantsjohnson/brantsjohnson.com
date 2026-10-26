@@ -1,45 +1,29 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// One project, as a short case study. The Crew brand and Poetry have
-// their own pages; every other project reads from content/projects.ts.
+// One event, as a short story with its photos. Every event in content/events.ts gets a page here.
 // ============================================
 
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CaseStudy } from "@/components/editorial/CaseStudy";
-import { getProject, projects } from "@/content/projects";
+import { DetailPage } from "@/components/editorial/DetailPage";
+import { findDetail } from "@/content/detail";
+import { eventDetails } from "@/content/events";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
-type ProjectPageProps = { params: { slug: string } };
-
-const own = new Set(["crew", "poetry"]);
+type PageProps = { params: { slug: string } };
 
 export function generateStaticParams() {
-  return projects.filter((project) => !own.has(project.slug)).map((project) => ({ slug: project.slug }));
+  return eventDetails.map((item) => ({ slug: item.slug }));
 }
 
-export function generateMetadata({ params }: ProjectPageProps): Metadata {
-  const project = getProject(params.slug);
-  if (!project || own.has(project.slug)) return {};
-  return pageMetadata({ title: project.title, description: project.blurb, path: project.href });
+export function generateMetadata({ params }: PageProps): Metadata {
+  const detail = findDetail(eventDetails, params.slug);
+  if (!detail) return {};
+  return pageMetadata({ title: detail.metaTitle, description: detail.description, path: detail.path });
 }
 
-export default function ProjectPage({ params }: ProjectPageProps) {
-  const project = getProject(params.slug);
-  if (!project || own.has(project.slug)) notFound();
-
-  return (
-    <CaseStudy
-      id={project.slug}
-      label={`Events · ${project.kind}`}
-      title={project.title}
-      lead={project.lead}
-      meta={project.meta}
-      stories={project.stories}
-      gallery={project.gallery}
-      galleryTitle="More photos"
-      links={project.links}
-      back={{ href: "/events", label: "All events" }}
-    />
-  );
+export default function EventPage({ params }: PageProps) {
+  const detail = findDetail(eventDetails, params.slug);
+  if (!detail) notFound();
+  return <DetailPage detail={detail} />;
 }

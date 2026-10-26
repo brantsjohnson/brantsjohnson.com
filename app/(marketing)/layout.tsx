@@ -22,13 +22,7 @@ export default function MarketingLayout({
     url: identity.siteUrl,
     email: inquiries.email,
     jobTitle: "Senior Product Manager",
-    description: `${hero.headline} ${hero.identity}`,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "American Fork",
-      addressRegion: "UT",
-      addressCountry: "US",
-    },
+    description: hero.description,
     alumniOf: {
       "@type": "CollegeOrUniversity",
       name: "Utah Valley University",

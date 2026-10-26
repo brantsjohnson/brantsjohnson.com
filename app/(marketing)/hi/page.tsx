@@ -17,8 +17,8 @@ import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = {
   ...pageMetadata({
-    title: "Hi",
-    description: "A short page for people who just met Brant S. Johnson.",
+    title: "Good to meet you",
+    description: "A quick introduction to Brant Johnson, Intro, Bridger, and how to keep in touch.",
     path: "/hi",
   }),
   robots: { index: false, follow: false },
@@ -61,29 +61,32 @@ export default async function HiPage({ searchParams }: HiPageProps) {
       </section>
       <section className="shell grid gap-10 border-t border-border-subtle py-16 pb-20 lg:grid-cols-[1.2fr_0.8fr] md:py-24">
         <div>
-          <h2 className="font-serif text-h2 text-ink">Stay in touch</h2>
+          <h2 className="font-serif text-h2 text-ink">Keep in touch</h2>
           <div className="mt-4 flex flex-col gap-2">
             <TextLink href={inquiries.href} track="link:inquiries:hi">
-              {inquiries.label}
+              Email me
             </TextLink>
             <TextLink href={booking.href} track="link:book_time:hi">
               {booking.label}
             </TextLink>
             <TextLink href={publicCv.href} track="link:public_cv:hi">
-              {publicCv.label}
+              Full CV
+            </TextLink>
+            <TextLink href="/about" track="link:about:hi">
+              More about me
             </TextLink>
           </div>
           <p className="mt-4 max-w-reading text-body text-text-secondary">
             {stored
               ? "Your name and note are stored so I can follow up. You can ask me to delete them by emailing me from the Contact page."
-              : "Sending opens your email app with this note. Nothing is kept on this site."}
+              : "This opens your email app with the note. Nothing is saved on this site."}
           </p>
           <div className="mt-8">
-            <NoteForm kind="hi" metAt={metAt} submitLabel="Send my note" track="button:submit_hi:hi" />
+            <NoteForm kind="hi" metAt={metAt} submitLabel="Open email draft" track="button:submit_hi:hi" />
           </div>
         </div>
         <div>
-          <h2 className="font-serif text-h2 text-ink">QR for this page</h2>
+          <h2 className="font-serif text-h2 text-ink">QR code for this page</h2>
           <div
             className="mt-4 max-w-[220px] bg-bg p-3"
             role="img"

@@ -1,6 +1,6 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// These are the two poems the narrative spec puts on the site.
+// These are the two poems on the site.
 // The lines are the document text, with each stanza kept in order.
 // To The Sky names its author, because the source document does.
 // This file only stores the words. The page decides how they look.
@@ -11,7 +11,9 @@ export type Poem = {
   title: string;
   year: string;
   stanzas: string[][];
-  credit?: string;
+  credit?: string; // shown in lists, only for a poem Brant did not write
+  byline: string; // shown under the poem's title
+  description: string; // the search description
 };
 
 export const poems: Poem[] = [
@@ -19,7 +21,9 @@ export const poems: Poem[] = [
     slug: "to-the-sky",
     title: "To The Sky",
     year: "2022",
-    credit: "Author: Kassidy J. Bowen, 2017 Uintah Alumni",
+    credit: "By Kassidy J. Bowen, a 2017 Uintah alumna",
+    byline: "By Kassidy J. Bowen, 2017 Uintah alumna · Shared here in 2022",
+    description: "To The Sky, a poem by Kassidy J. Bowen, shared with the Uintah archway project.",
     stanzas: [
       [
         "After drawing years of plans",
@@ -57,6 +61,8 @@ export const poems: Poem[] = [
     slug: "your-understanding-charm",
     title: "Your understanding charm",
     year: "2024",
+    byline: "2024",
+    description: "Your understanding charm, a poem shared in 2024.",
     stanzas: [
       [
         "Your understanding charm",

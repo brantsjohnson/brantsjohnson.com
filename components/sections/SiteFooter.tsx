@@ -2,7 +2,7 @@
 // WHAT THIS FILE DOES (plain English):
 // This is the footer on every page. It closes with the line "Good
 // ideas deserve to happen.", an email link, and quiet links to the
-// CV, Ask about me, LinkedIn and Substack. The résumé link appears
+// CV, Ask about me, LinkedIn and Substack. It states no place. The résumé link appears
 // only when its file exists. The six menu places repeat below.
 // ============================================
 
@@ -52,9 +52,9 @@ export function SiteFooter() {
           </a>
         </p>
 
-        <div className="mt-16 grid gap-10 border-t border-border-subtle pt-10 md:grid-cols-3">
+        <div className="mt-16 grid gap-10 border-t border-border-subtle pt-10 md:grid-cols-2">
           <nav aria-label="Footer menu">
-            <p className="label text-text-secondary">Menu</p>
+            <p className="label text-text-secondary">Find your way</p>
             <ul className="mt-3 flex flex-col">
               {primaryNav.map((item) => (
                 <li key={item.label}>
@@ -73,14 +73,10 @@ export function SiteFooter() {
               ))}
             </ul>
           </nav>
-          <div>
-            <p className="label text-text-secondary">Based in</p>
-            <p className="mt-3 text-caption text-ink">American Fork, Utah. Open to relocating.</p>
-          </div>
         </div>
 
         <p className="mt-12 text-caption text-text-secondary">
-          {year} {identity.fullName}
+          © {year} {identity.fullName}
         </p>
       </div>
     </footer>

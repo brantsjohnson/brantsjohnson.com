@@ -17,7 +17,7 @@ export type StoryLinkItem = { text: string; href: string; track: string };
 
 export type Story = {
   id: string;
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   body: Paragraph[];
   stats?: { value: string; label: string }[];
@@ -41,8 +41,8 @@ export function StoryRow({ story, flip = false }: StoryRowProps) {
       <div className="shell">
         <div className={clsx("grid items-start gap-10 lg:grid-cols-12 lg:gap-16", !hasMedia && "lg:grid-cols-12")}>
           <Reveal className={clsx(hasMedia ? "lg:col-span-5" : "lg:col-span-8", flip && hasMedia && "lg:order-2")}>
-            <p className="label text-accent-deep">{story.eyebrow}</p>
-            <h2 className="mt-4 font-serif text-h2 text-ink">{story.title}</h2>
+            {story.eyebrow ? <p className="label text-accent-deep">{story.eyebrow}</p> : null}
+            <h2 className={clsx("font-serif text-h2 text-ink", story.eyebrow && "mt-4")}>{story.title}</h2>
             <Prose body={story.body} className="mt-8" />
 
             {story.stats?.length ? (

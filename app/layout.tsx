@@ -13,7 +13,7 @@ import "@/styles/globals.css";
 import { identity } from "@/content/site-content";
 
 const description =
-  "Good ideas deserve to happen. I'm a senior product manager, a creator, performer and entrepreneur, and an activist for the places that raised me.";
+  "I'm Brant Johnson. I help people get their ideas built, put on events, and work on software that makes it easier for people to connect.";
 
 // THIS SECTION DOES: point share images at the preview while a preview is open,
 // and at the public domain everywhere else.

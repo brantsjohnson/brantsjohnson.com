@@ -1,41 +1,29 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// The archway and the scholarship each get their own page with
-// photos and, for the archway, the build video.
+// The archway and the scholarship each get their own page with photos and, for the archway, the build video.
 // ============================================
 
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CaseStudy } from "@/components/editorial/CaseStudy";
-import { communityCases, getCommunityCase } from "@/content/community";
+import { DetailPage } from "@/components/editorial/DetailPage";
+import { findDetail } from "@/content/detail";
+import { communityDetails } from "@/content/community";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
-type CommunityPageProps = { params: { slug: string } };
+type PageProps = { params: { slug: string } };
 
 export function generateStaticParams() {
-  return communityCases.map((item) => ({ slug: item.slug }));
+  return communityDetails.map((item) => ({ slug: item.slug }));
 }
 
-export function generateMetadata({ params }: CommunityPageProps): Metadata {
-  const item = getCommunityCase(params.slug);
-  if (!item) return {};
-  return pageMetadata({ title: item.title, description: item.blurb, path: item.href });
+export function generateMetadata({ params }: PageProps): Metadata {
+  const detail = findDetail(communityDetails, params.slug);
+  if (!detail) return {};
+  return pageMetadata({ title: detail.metaTitle, description: detail.description, path: detail.path });
 }
 
-export default function CommunityCasePage({ params }: CommunityPageProps) {
-  const item = getCommunityCase(params.slug);
-  if (!item) notFound();
-
-  return (
-    <CaseStudy
-      id={item.slug}
-      label={`Community · ${item.kind}`}
-      title={item.title}
-      lead={item.lead}
-      meta={item.meta}
-      stories={item.stories}
-      gallery={item.gallery}
-      back={{ href: "/community", label: "All community work" }}
-    />
-  );
+export default function CommunityPage({ params }: PageProps) {
+  const detail = findDetail(communityDetails, params.slug);
+  if (!detail) notFound();
+  return <DetailPage detail={detail} />;
 }

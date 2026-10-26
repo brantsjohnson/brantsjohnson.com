@@ -18,66 +18,114 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Figure } from "@/components/editorial/Figure";
-import { ProjectCard } from "@/components/editorial/ProjectCard";
 import { Reveal } from "@/components/editorial/Reveal";
 import { Button } from "@/components/ui/Button";
 import { hero } from "@/content/narrative";
-import { aboutPhoto, headshot, objectPositionFor, ph, type Photo } from "@/content/photos";
-import { projects } from "@/content/projects";
+import { aboutPhoto, crew, headshot, objectPositionFor, ph, type Photo } from "@/content/photos";
 import { publicResume } from "@/content/site-content";
 
 const hashRoutes: Record<string, string> = {
   "#product": "/work",
-  "#creator": "/events",
+  "#creator": "/work",
   "#performer": "/events/theater",
-  "#entrepreneur": "/work#building",
+  "#entrepreneur": "/work",
   "#activist": "/community",
   "#story": "/about",
-  "#beliefs": "/about#beliefs",
+  "#beliefs": "/about",
   "#contact": "/contact",
-  "#crew-brand": "/events/crew",
-  "#creator-backlocal": "/events/backlocal",
-  "#poetry": "/events/poetry",
+  "#crew-brand": "/work/crew-brand",
+  "#creator-backlocal": "/work/backlocal",
+  "#poetry": "/writing/poetry",
   "#writing": "/writing",
 };
 
-type IndexRow = { href: string; title: string; line: string; photo?: Photo; track: string };
+type IndexRow = { href: string; title: string; line: string; linkText: string; photo: Photo; track: string };
 
 const rows: IndexRow[] = [
   {
     href: "/about",
     title: "About",
-    line: "Where I come from, what drives me, and what I do outside of work.",
+    line: "The longer introduction, plus a few stories I'd have trouble fitting into a résumé.",
+    linkText: "Meet me",
     photo: aboutPhoto,
     track: "link:index_about:home",
   },
   {
     href: "/work",
     title: "Work",
-    line: "Four threads that run through every role: building, storytelling, organizing and listening.",
+    line: "Products I've built, teams I've worked with, and what I learned doing it.",
+    linkText: "See the work",
     photo: ph("general/pitching-to-vcs.webp", "Brant presenting a BackLocal slide to a small room, pointing at a screen that reads Problem: local companies do not have a large online presence.", undefined, { focus: { x: 0.49, y: 0.6 } }),
     track: "link:index_work:home",
   },
   {
     href: "/events",
     title: "Events",
-    line: "Shows, stages, brands and companies, each with its story.",
+    line: "Conferences I've helped put on, community events, parties, and performances.",
+    linkText: "Explore events",
     photo: ph("general/tedxsaltlakecity.webp", "The TEDxSaltLakeCity stage with glowing red and white letters, a red circle and a blue skyline backdrop.", undefined, { focus: { x: 0.55, y: 0.6 } }),
     track: "link:index_events:home",
   },
   {
     href: "/community",
     title: "Community",
-    line: "The archway, the scholarship and public service.",
+    line: "Things I've worked on because somebody cared enough to get them started.",
+    linkText: "Community work",
     photo: ph("general/brant-alone-at-the-archway.webp", "Brant standing alone on a long road beneath the Uintah arch.", undefined, { focus: { x: 0.5, y: 0.62 } }),
     track: "link:index_community:home",
   },
   {
     href: "/writing",
     title: "Writing",
-    line: "Essays on connection, craft and building with AI.",
+    line: "Articles and poetry. No elaborate introduction required.",
+    linkText: "Read something",
     photo: ph("general/brant-one-new-person-a-day-series7-overview.webp", "Handwritten notes on gray paper, each with a small instant photo clipped to it.", undefined, { focus: { x: 0.5, y: 0.45 } }),
     track: "link:index_writing:home",
+  },
+];
+
+type StartCard = { title: string; tag: string; line: string; href: string; linkText: string; photo: Photo; ratio: string; track: string };
+
+const starts: StartCard[] = [
+  {
+    title: "Bridger",
+    tag: "Social software",
+    line: "I'm building it to help people form friendships through the things they love and give third places better ways to bring people together.",
+    href: "/work/bridger",
+    linkText: "The Bridger story",
+    photo: { src: "/photos/bridger-live.webp", alt: "The live Bridger waitlist window.", width: 900, height: 989, position: "50% 0%" },
+    ratio: "4 / 5",
+    track: "link:start_bridger:home",
+  },
+  {
+    title: "Intro",
+    tag: "Events + AI",
+    line: "A tool I'm building for event organizers who want people to leave having met somebody useful, interesting, or worth seeing again.",
+    href: "/work/intro",
+    linkText: "How Intro started",
+    photo: { src: "/photos/intro-live.webp", alt: "The live Intro site, with the attendee experience on a phone.", width: 1200, height: 750, position: "30% 0%" },
+    ratio: "4 / 5",
+    track: "link:start_intro:home",
+  },
+  {
+    title: "Events I've helped put on",
+    tag: "Event work",
+    line: "Business conferences, community gatherings, and a few events that needed a lot of convincing before they happened.",
+    href: "/events",
+    linkText: "See the events",
+    photo: ph("general/brant-planning-conference-founder-friday.webp", "A group selfie at Founder Friday in front of a bright stage."),
+    ratio: "4 / 5",
+    track: "link:start_events:home",
+  },
+  {
+    title: "Crew",
+    tag: "Product + illustration",
+    line: "I helped build a banking product for families. I also ended up drawing a large part of its brand.",
+    href: "/work/crew",
+    linkText: "See Crew",
+    photo: crew("door-summer.webp", "A Crew illustration of a blue front door with a wreath and two shrubs."),
+    ratio: "4 / 5",
+    track: "link:start_crew:home",
   },
 ];
 
@@ -99,10 +147,6 @@ export function HomePage() {
       ? {}
       : { initial: { opacity: 0, y: 30 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] as const } };
 
-  const featured = ["crew", "theater", "backlocal"]
-    .map((slug) => projects.find((project) => project.slug === slug))
-    .filter((project): project is (typeof projects)[number] => Boolean(project));
-
   return (
     <>
       <section ref={heroRef} className="shell grid items-end gap-12 pb-20 pt-12 md:pb-28 md:pt-20 lg:grid-cols-12 lg:gap-10">
@@ -111,23 +155,20 @@ export function HomePage() {
             <span aria-hidden="true" className="inline-block h-px w-12 bg-accent" />
             {hero.eyebrow}
           </motion.p>
-          <motion.h1 {...rise(0.2)} className="mt-6 font-serif text-display text-ink">
-            Brant
-            <br />
-            S. Johnson
-          </motion.h1>
-          <motion.p {...rise(0.4)} className="mt-10 font-serif text-[clamp(1.8rem,3.4vw,3rem)] italic leading-[1.05] text-ink">
+          <motion.h1 {...rise(0.2)} className="mt-6 max-w-[12ch] font-serif text-display text-ink">
             {hero.headline}
-          </motion.p>
-          <motion.p {...rise(0.55)} className="mt-8 max-w-[42ch] text-[1.15rem] leading-relaxed text-text-secondary">
-            {hero.identity}
-          </motion.p>
+          </motion.h1>
+          <motion.div {...rise(0.45)} className="mt-10 flex max-w-[46ch] flex-col gap-5 text-[1.15rem] leading-relaxed text-text-secondary">
+            {hero.paragraphs.map((paragraph) => (
+              <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+            ))}
+          </motion.div>
           <motion.div {...rise(0.7)} className="mt-10 flex flex-wrap items-center gap-4">
-            <Button href="/about" track="button:read_story:home">
-              Read my story
+            <Button href="/about" track="button:get_to_know_me:home">
+              Get to know me
             </Button>
             <Button href="/work" variant="ghost" track="button:see_work:home">
-              See my work
+              See what I&apos;ve worked on
             </Button>
             {publicResume.href ? (
               <Button href={publicResume.href} variant="ghost" track="button:resume:home">
@@ -159,10 +200,10 @@ export function HomePage() {
         </motion.div>
       </section>
 
-      <section aria-label="Explore" className="border-t border-border-subtle">
+      <section aria-label="Take a look around" className="border-t border-border-subtle">
         <div className="shell grid gap-x-16 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <p className="label pt-10 text-text-secondary">Explore</p>
+            <p className="label pt-10 text-text-secondary">Take a look around</p>
             <ul onMouseLeave={() => setActive(0)}>
               {rows.map((row, index) => (
                 <li key={row.href} className="border-b border-border-subtle">
@@ -179,6 +220,7 @@ export function HomePage() {
                         {row.title}
                       </span>
                       <span className="mt-3 block max-w-[44ch] text-body text-text-secondary">{row.line}</span>
+                      <span className="label mt-4 block text-[0.68rem] text-accent-deep">{row.linkText}</span>
                     </span>
                     <span
                       aria-hidden="true"
@@ -225,57 +267,27 @@ export function HomePage() {
         </div>
       </section>
 
-      <section aria-labelledby="selected" className="py-24 md:py-36">
+      <section aria-labelledby="start" className="py-24 md:py-36">
         <div className="shell">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <div className="gold-rule" aria-hidden="true" />
-              <h2 id="selected" className="mt-6 font-serif text-h2 text-ink">
-                Selected stories
-              </h2>
-            </div>
-            <Link
-              href="/events"
-              data-track="link:all_events:home"
-              className="label inline-flex min-h-[44px] items-center gap-3 text-ink underline decoration-accent decoration-2 underline-offset-8 hover:text-accent-deep"
-            >
-              All events <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-          <ul className="mt-14 grid gap-x-8 gap-y-20 md:grid-cols-3">
-            {featured.map((project, index) => (
-              <li key={project.slug} className={index === 1 ? "md:mt-20" : undefined}>
-                <ProjectCard project={project} delay={index * 0.12} />
-              </li>
+          <div className="gold-rule" aria-hidden="true" />
+          <h2 id="start" className="mt-6 font-serif text-h2 text-ink">
+            A few places to start
+          </h2>
+          <ul className="mt-14 grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
+            {starts.map((item, index) => (
+              <Reveal as="li" key={item.href} delay={index * 0.08} className={index % 2 === 1 ? "lg:mt-16" : undefined}>
+                <Link href={item.href} data-track={item.track} className="group block">
+                  <Figure photo={item.photo} ratio={item.ratio} sizes="(min-width: 1024px) 22vw, 46vw" />
+                  <p className="label mt-5 text-[0.66rem] text-accent-deep">{item.tag}</p>
+                  <h3 className="mt-2 font-serif text-[1.8rem] leading-[1.05] text-ink">{item.title}</h3>
+                  <p className="mt-3 text-caption text-text-secondary">{item.line}</p>
+                  <p className="label mt-4 inline-flex items-center gap-2 text-[0.68rem] text-ink group-hover:text-accent-deep">
+                    {item.linkText} <span aria-hidden="true">→</span>
+                  </p>
+                </Link>
+              </Reveal>
             ))}
           </ul>
-        </div>
-      </section>
-
-      <section className="bg-bg-deep py-24 md:py-36">
-        <div className="shell grid items-center gap-12 lg:grid-cols-12">
-          <Reveal className="lg:col-span-7">
-            <p className="label text-accent-deep">What I believe</p>
-            <p className="mt-6 font-serif text-[clamp(2.2rem,4.6vw,4.2rem)] leading-[1.02] text-ink">
-              {hero.thesis}
-            </p>
-            <p className="mt-8">
-              <Link
-                href="/about#beliefs"
-                data-track="link:beliefs:home"
-                className="label inline-flex min-h-[44px] items-center gap-3 text-ink underline decoration-accent decoration-2 underline-offset-8 hover:text-accent-deep"
-              >
-                What drives me <span aria-hidden="true">→</span>
-              </Link>
-            </p>
-          </Reveal>
-          <div className="lg:col-span-5">
-            <Figure
-              photo={ph("general/brant-speaking-2.webp", "Brant speaking at a lectern in warm light.", "Speaking")}
-              ratio="4 / 5"
-              sizes="(min-width: 1024px) 36vw, 90vw"
-            />
-          </div>
         </div>
       </section>
     </>

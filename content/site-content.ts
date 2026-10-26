@@ -72,7 +72,7 @@ export const inquiries = {
 // THIS SECTION DOES: the résumé file in public/cv.pdf. The link is the file itself.
 export const publicCv = {
   href: "/cv.pdf",
-  label: "See full CV",
+  label: "Full CV",
 };
 
 // THIS SECTION DOES: the one-page résumé link. public/resume.pdf is not in the
@@ -152,7 +152,7 @@ export const building = {
     name: "Intro",
     role: "Founder and Product Lead",
     dates: "Nov 2025 to present",
-    summary: "AI agent software for live events.",
+    summary: "AI software that helps event organizers connect attendees and sponsors with people worth meeting.",
     href: "https://intro.events",
     hrefLabel: "Visit Intro",
   },
@@ -161,7 +161,7 @@ export const building = {
     role: "Founder",
     dates: "Apr 2025 to present",
     summary:
-      "An app that helps people become friends around what they love. In a TestFlight beta.",
+      "Social software I'm building to support friendships and help third places bring people together. It's in TestFlight beta.",
     href: "https://bridger.social",
     hrefLabel: "Visit Bridger",
   },
@@ -371,26 +371,26 @@ export const writingIntro = {
 // THIS SECTION DOES: the contact page. This is the one place the email address is shown.
 export const contactIntro = {
   eyebrow: "Contact",
-  title: "Write me.",
-  deck: "For a project, a partnership, or an event, write inquiries. I read them.",
+  title: "Get in touch",
+  deck: "Have an idea you're trying to get built, an event you're working on, or something you think I'd find interesting? Send me a note. Email is easiest.",
 };
 
 // THIS SECTION DOES: the short page he can text from an event
 export const hiPage = {
   eyebrow: "Hi",
   title: "Good to meet you.",
-  line: "Good ideas deserve to happen.",
-  deck: "I'm a senior product manager, a creator, performer and entrepreneur, and an activist for the places that raised me.",
+  line: "I'm Brant. I help people get their ideas built, including software and events.",
+  deck: "Here's the short version, in case we met somewhere noisy and didn't catch every word.",
 };
 
 // THIS SECTION DOES: the public Now page. One month, only checked facts.
 // TODO(brant): replace this with your own monthly note when you want a longer one.
 export const nowPage = {
   eyebrow: "Now",
-  title: "This month.",
+  title: "What I'm working on",
   paragraphs: [
-    "I am building Intro and Bridger. Good ideas deserve to happen.",
-    "I am in American Fork, Utah, and I am open to relocating.",
+    "Right now I'm building Intro to help organizers make better introductions at events and Bridger to help people make friends around shared interests, including at the places they already gather.",
+    "I'm open to meeting people working on useful ideas, especially projects that make it easier to bring people together.",
   ],
 };
 

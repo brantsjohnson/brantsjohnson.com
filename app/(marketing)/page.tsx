@@ -1,7 +1,7 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the homepage: a magazine-style cover with the headshot,
-// an index of the main places, and three featured projects.
+// an index of the main places, and four places to start.
 // ============================================
 
 import type { Metadata } from "next";
@@ -11,11 +11,11 @@ import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = {
   ...pageMetadata({
-    title: "Brant S. Johnson. Good ideas deserve to happen.",
-    description: hero.identity,
+    title: "Brant S. Johnson | Good ideas deserve to happen.",
+    description: hero.description,
     path: "/",
   }),
-  title: { absolute: "Brant S. Johnson. Good ideas deserve to happen." },
+  title: { absolute: "Brant S. Johnson | Good ideas deserve to happen." },
 };
 
 export default function Home() {

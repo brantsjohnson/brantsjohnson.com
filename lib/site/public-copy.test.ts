@@ -6,11 +6,12 @@
 
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { aboutIntro, aboutStories, outside } from "../../content/about";
-import { communityCases, communityIntro, serviceStories as communityService } from "../../content/community";
-import { crewProject, projects as projectCards, projectsIntro } from "../../content/projects";
-import { threads, workClose, workIntro } from "../../content/work";
-import { beliefs, contactBlock, hero, poetry, publishedWriting, story, storyNav } from "../../content/narrative";
+import { aboutDetails, aboutGallery, aboutIntro, aboutStories } from "../../content/about";
+import { communityDetails, communityIntro, communityLeads, publicService, serviceGallery, studentGovernment } from "../../content/community";
+import { eventDetails, eventGroups, eventsIntro } from "../../content/events";
+import { contactBlock, hero, publishedWriting, storyNav } from "../../content/narrative";
+import { poems } from "../../content/poems";
+import { crewBrandMedia, crewBrandPage, workDetails, workGroups, workIntro } from "../../content/work";
 import {
   about,
   booking,
@@ -41,20 +42,26 @@ function strings(value: unknown, found: string[] = []): string[] {
 }
 
 const publicCopy = strings({
+  aboutDetails,
+  aboutGallery,
   aboutIntro,
   aboutStories,
-  outside,
-  communityCases,
+  communityDetails,
   communityIntro,
-  communityService,
-  crewProject,
-  projectCards,
-  projectsIntro,
-  threads,
-  workClose,
+  communityLeads,
+  publicService,
+  serviceGallery,
+  studentGovernment,
+  eventDetails,
+  eventGroups,
+  eventsIntro,
+  crewBrandMedia,
+  crewBrandPage,
+  workDetails,
+  workGroups,
   workIntro,
+  poems,
   about,
-  beliefs,
   booking,
   building,
   contactBlock,
@@ -63,7 +70,6 @@ const publicCopy = strings({
   experienceIntro,
   footerNav,
   hero,
-  poetry,
   hiPage,
   homeRecord,
   inquiries,
@@ -73,7 +79,6 @@ const publicCopy = strings({
   publicResume,
   publishedWriting,
   serviceStories,
-  story,
   storyNav,
   referralVariantContent,
   defaultAndLinkedInSecurityLines,
@@ -89,10 +94,10 @@ test("public copy stays inside the voice rules", () => {
   }
 });
 
-test("public copy names the story and Bridger, and does not link a missing résumé", () => {
+test("public copy names the headline and Bridger, and does not link a missing résumé", () => {
   const joined = publicCopy.join("\n");
   assert.equal(hero.headline, "Good ideas deserve to happen.");
-  assert.match(hero.identity, /a creator, performer and entrepreneur/);
+  assert.match(hero.description, /get their ideas built/);
   assert.deepEqual(
     storyNav.map((item) => item.label),
     ["About", "Work", "Events", "Community", "Writing", "Contact"]
@@ -105,7 +110,7 @@ test("public copy names the story and Bridger, and does not link a missing résu
   assert.match(joined, /TestFlight/);
   assert.doesNotMatch(joined, /25 people/);
   assert.match(joined, /BYU Young Ambassadors/);
-  assert.match(joined, /interned in the Governor's Office and worked with the Governor's Office of Economic Development/);
+  assert.match(joined, /Utah Governor's Office and the state's economic development office/);
   assert.match(joined, /https:\/\/calendar\.app\.google\/qj9tb56BYCdppJPk9/);
   assert.match(joined, /\/cv\.pdf/);
   assert.equal(publicResume.href, null);
@@ -115,7 +120,7 @@ test("public copy names the story and Bridger, and does not link a missing résu
     false
   );
   assert.match(joined, /brantshanonjohnson@gmail.com/);
-  assert.match(joined, /constituent inquiries/);
+  assert.match(joined, /constituents/);
   assert.match(joined, /Crew wordmark Brant designed in 2024/);
   assert.doesNotMatch(joined, /I did not own a roadmap/);
   assert.doesNotMatch(joined, /That role ended in September 2021/);

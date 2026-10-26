@@ -100,6 +100,7 @@ export function AskConversation() {
           value={input}
           onChange={(event) => setInput(event.target.value)}
           aria-label="Ask a question about Brant"
+          placeholder="Ask me something…"
           className="min-h-[44px] flex-1 border-b border-ink bg-transparent text-body text-ink outline-none"
         />
         <Button type="submit" track="button:send_question:ask" ariaLabel="Send question">
