@@ -3,8 +3,9 @@
 // The home page, laid out like a magazine cover. A very large name
 // and the headline sit beside Brant's headshot, with a small gold
 // frame offset behind the photo. Below, a numbered index of the
-// five main places opens each one; a photo for that place appears
-// beside the row on hover. Three featured projects and a closing
+// five main places opens each one; the photo panel beside the list
+// changes to match the row under the pointer, so no photo ever
+// covers any words. Three featured projects and a closing
 // line follow. White space does most of the work. Old home anchors
 // (/#product and the rest) open the new pages.
 // ============================================
@@ -14,29 +15,29 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Figure } from "@/components/editorial/Figure";
 import { ProjectCard } from "@/components/editorial/ProjectCard";
 import { Reveal } from "@/components/editorial/Reveal";
 import { Button } from "@/components/ui/Button";
 import { hero } from "@/content/narrative";
-import { crew, headshot, ph, type Photo } from "@/content/photos";
+import { aboutPhoto, headshot, objectPositionFor, ph, type Photo } from "@/content/photos";
 import { projects } from "@/content/projects";
 import { publicResume } from "@/content/site-content";
 
 const hashRoutes: Record<string, string> = {
   "#product": "/work",
-  "#creator": "/projects",
-  "#performer": "/projects/theater",
+  "#creator": "/events",
+  "#performer": "/events/theater",
   "#entrepreneur": "/work#building",
   "#activist": "/community",
   "#story": "/about",
   "#beliefs": "/about#beliefs",
   "#contact": "/contact",
-  "#crew-brand": "/projects/crew",
-  "#creator-backlocal": "/projects/backlocal",
-  "#poetry": "/projects/poetry",
+  "#crew-brand": "/events/crew",
+  "#creator-backlocal": "/events/backlocal",
+  "#poetry": "/events/poetry",
   "#writing": "/writing",
 };
 
@@ -47,34 +48,35 @@ const rows: IndexRow[] = [
     href: "/about",
     title: "About",
     line: "Where I come from, what drives me, and what I do outside of work.",
-    photo: { ...headshot, position: "50% 20%" },
+    photo: aboutPhoto,
     track: "link:index_about:home",
   },
   {
     href: "/work",
     title: "Work",
     line: "Four threads that run through every role: building, storytelling, organizing and listening.",
-    photo: ph("general/crew-team-photo.webp", "The Crew team piled onto a yellow couch."),
+    photo: ph("general/pitching-to-vcs.webp", "Brant presenting a BackLocal slide to a small room, pointing at a screen that reads Problem: local companies do not have a large online presence.", undefined, { focus: { x: 0.49, y: 0.6 } }),
     track: "link:index_work:home",
   },
   {
-    href: "/projects",
-    title: "Projects",
-    line: "Brands, shows, companies and a few odd experiments.",
-    photo: crew("door-summer.webp", "A Crew illustration of a blue front door with a wreath."),
-    track: "link:index_projects:home",
+    href: "/events",
+    title: "Events",
+    line: "Shows, stages, brands and companies, each with its story.",
+    photo: ph("general/tedxsaltlakecity.webp", "The TEDxSaltLakeCity stage with glowing red and white letters, a red circle and a blue skyline backdrop.", undefined, { focus: { x: 0.55, y: 0.6 } }),
+    track: "link:index_events:home",
   },
   {
     href: "/community",
     title: "Community",
     line: "The archway, the scholarship and public service.",
-    photo: ph("general/brant-alone-at-the-archway.webp", "Brant standing alone on a long road beneath the Uintah arch.", undefined, { position: "50% 40%" }),
+    photo: ph("general/brant-alone-at-the-archway.webp", "Brant standing alone on a long road beneath the Uintah arch.", undefined, { focus: { x: 0.5, y: 0.62 } }),
     track: "link:index_community:home",
   },
   {
     href: "/writing",
     title: "Writing",
     line: "Essays on connection, craft and building with AI.",
+    photo: ph("general/brant-one-new-person-a-day-series7-overview.webp", "Handwritten notes on gray paper, each with a small instant photo clipped to it.", undefined, { focus: { x: 0.5, y: 0.45 } }),
     track: "link:index_writing:home",
   },
 ];
@@ -83,6 +85,7 @@ export function HomePage() {
   const router = useRouter();
   const reduce = useReducedMotion();
   const heroRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const drift = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 70]);
 
@@ -149,7 +152,7 @@ export function HomePage() {
                 sizes="(min-width: 1024px) 38vw, 90vw"
                 quality={85}
                 className="object-cover"
-                style={{ objectPosition: "50% 18%" }}
+                style={{ objectPosition: objectPositionFor(headshot, 4 / 4.6) }}
               />
             </div>
           </motion.div>
@@ -157,48 +160,68 @@ export function HomePage() {
       </section>
 
       <section aria-label="Explore" className="border-t border-border-subtle">
-        <div className="shell">
-          <p className="label pt-10 text-text-secondary">Explore</p>
-          <ul>
-            {rows.map((row, index) => (
-              <li key={row.href} className="group relative border-b border-border-subtle">
-                <Link
-                  href={row.href}
-                  data-track={row.track}
-                  className="grid items-center gap-x-8 gap-y-2 py-8 md:grid-cols-[4rem_1fr_minmax(0,22rem)_2rem] md:py-10"
-                >
-                  <span className="label text-accent-deep">{String(index + 1).padStart(2, "0")}</span>
-                  <span className="font-serif text-[clamp(2.6rem,7vw,6rem)] leading-[0.95] text-ink transition-transform duration-500 ease-brand md:group-hover:translate-x-3">
-                    {row.title}
-                  </span>
-                  <span className="max-w-[34ch] text-caption text-text-secondary md:justify-self-end md:text-right">{row.line}</span>
-                  <span
-                    aria-hidden="true"
-                    className="hidden font-serif text-3xl text-ink transition-all duration-500 ease-brand group-hover:translate-x-1 group-hover:text-accent-deep md:block"
+        <div className="shell grid gap-x-16 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <p className="label pt-10 text-text-secondary">Explore</p>
+            <ul onMouseLeave={() => setActive(0)}>
+              {rows.map((row, index) => (
+                <li key={row.href} className="border-b border-border-subtle">
+                  <Link
+                    href={row.href}
+                    data-track={row.track}
+                    onMouseEnter={() => setActive(index)}
+                    onFocus={() => setActive(index)}
+                    className="group grid grid-cols-[3rem_1fr_2rem] items-start gap-x-4 py-8 md:py-10"
                   >
-                    →
-                  </span>
-                </Link>
-                {row.photo ? (
+                    <span className="label pt-3 text-accent-deep">{String(index + 1).padStart(2, "0")}</span>
+                    <span>
+                      <span className="block font-serif text-[clamp(2.6rem,6vw,5rem)] leading-[0.95] text-ink transition-transform duration-500 ease-brand group-hover:translate-x-3">
+                        {row.title}
+                      </span>
+                      <span className="mt-3 block max-w-[44ch] text-body text-text-secondary">{row.line}</span>
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="pt-3 font-serif text-3xl text-ink transition-all duration-500 ease-brand group-hover:translate-x-1 group-hover:text-accent-deep"
+                    >
+                      →
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div aria-hidden="true" className="hidden lg:col-span-5 lg:block">
+            <div className="sticky top-28 pt-10">
+              <div className="relative aspect-[4/5] overflow-hidden bg-surface-2">
+                {rows.map((row, index) => (
                   <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute right-[24%] top-1/2 z-10 hidden h-[17rem] w-[13rem] -translate-y-1/2 scale-95 overflow-hidden opacity-0 shadow-glass transition-all duration-500 ease-brand group-hover:scale-100 group-hover:opacity-100 lg:block"
-                    style={{ background: row.photo.bg ?? "var(--color-surface-2)" }}
+                    key={row.href}
+                    className="absolute inset-0 transition-opacity duration-700 ease-brand"
+                    style={{ opacity: active === index ? 1 : 0, background: row.photo?.bg ?? "var(--color-surface-2)" }}
                   >
-                    <Image
-                      src={row.photo.src}
-                      alt=""
-                      fill
-                      sizes="208px"
-                      quality={70}
-                      loading="lazy"
-                      style={{ objectFit: row.photo.fit ?? "cover", objectPosition: row.photo.position ?? "50% 50%" }}
-                    />
+                    {row.photo ? (
+                      <Image
+                        src={row.photo.src}
+                        alt=""
+                        fill
+                        sizes="(min-width: 1024px) 38vw, 0px"
+                        quality={80}
+                        loading={index === 0 ? "eager" : "lazy"}
+                        className="transition-transform duration-[1400ms] ease-brand"
+                        style={{
+                          objectFit: row.photo.fit ?? "cover",
+                          objectPosition: objectPositionFor(row.photo, 4 / 5),
+                          transform: active === index ? "scale(1)" : "scale(1.05)",
+                        }}
+                      />
+                    ) : null}
                   </div>
-                ) : null}
-              </li>
-            ))}
-          </ul>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -208,15 +231,15 @@ export function HomePage() {
             <div>
               <div className="gold-rule" aria-hidden="true" />
               <h2 id="selected" className="mt-6 font-serif text-h2 text-ink">
-                Selected projects
+                Selected stories
               </h2>
             </div>
             <Link
-              href="/projects"
-              data-track="link:all_projects:home"
+              href="/events"
+              data-track="link:all_events:home"
               className="label inline-flex min-h-[44px] items-center gap-3 text-ink underline decoration-accent decoration-2 underline-offset-8 hover:text-accent-deep"
             >
-              All projects <span aria-hidden="true">→</span>
+              All events <span aria-hidden="true">→</span>
             </Link>
           </div>
           <ul className="mt-14 grid gap-x-8 gap-y-20 md:grid-cols-3">

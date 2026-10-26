@@ -1,6 +1,6 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// The Projects page: a visual grid of cards. Each card opens a
+// The Events page: a visual grid of cards. Each card opens a
 // short case study or gallery. Plenty of space between them.
 // ============================================
 
@@ -11,15 +11,15 @@ import { projects, projectsIntro } from "@/content/projects";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Projects",
+  title: "Events",
   description: projectsIntro.lead,
-  path: "/projects",
+  path: "/events",
 });
 
 export default function ProjectsPage() {
   return (
     <>
-      <PageHeader id="projects" label={projectsIntro.label} title={projectsIntro.title} lead={projectsIntro.lead} />
+      <PageHeader id="events" label={projectsIntro.label} title={projectsIntro.title} lead={projectsIntro.lead} />
       <div className="shell pb-24">
         <ul className="grid gap-x-8 gap-y-20 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (

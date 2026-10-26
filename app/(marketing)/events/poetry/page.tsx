@@ -13,18 +13,18 @@ import { pageMetadata } from "@/lib/site/page-metadata";
 export const metadata: Metadata = pageMetadata({
   title: "Poetry",
   description: poetry.intro,
-  path: "/projects/poetry",
+  path: "/events/poetry",
 });
 
 export default function PoetryIndexPage() {
   return (
-    <SectionFrame id="poetry" kicker="Projects · Poetry" title={poetry.title}>
+    <SectionFrame id="poetry" kicker="Events · Poetry" title={poetry.title}>
       <p className="max-w-reading text-body text-text-secondary">{poetry.intro}</p>
       <ul className="mt-10 border-t border-border-subtle">
         {poems.map((poem) => (
           <li key={poem.slug}>
             <Link
-              href={`/projects/poetry/${poem.slug}`}
+              href={`/events/poetry/${poem.slug}`}
               data-track={`link:poem_${poem.slug}:poetry`}
               className="group flex min-h-[44px] items-baseline justify-between gap-4 border-b border-border-subtle py-6 transition-colors hover:border-accent"
             >
@@ -35,8 +35,8 @@ export default function PoetryIndexPage() {
         ))}
       </ul>
       <p className="mt-8">
-        <Link href="/projects" className="text-ink underline decoration-accent decoration-2 underline-offset-4">
-          Back to Projects
+        <Link href="/events" className="text-ink underline decoration-accent decoration-2 underline-offset-4">
+          Back to Events
         </Link>
       </p>
     </SectionFrame>

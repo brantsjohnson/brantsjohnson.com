@@ -103,7 +103,7 @@ export const footerNav: { label: string; href: string }[] = footerItems.filter(
 export const primaryNav: NavItem[] = [
   { label: "About", kind: "route", href: "/about" },
   { label: "Work", kind: "route", href: "/work" },
-  { label: "Projects", kind: "route", href: "/projects" },
+  { label: "Events", kind: "route", href: "/events" },
   { label: "Community", kind: "route", href: "/community" },
   { label: "Writing", kind: "route", href: "/writing" },
   { label: "Contact", kind: "route", href: "/contact" },

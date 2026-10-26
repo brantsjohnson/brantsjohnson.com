@@ -31,7 +31,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
   return (
     <CaseStudy
       id={project.slug}
-      label={`Projects · ${project.kind}`}
+      label={`Events · ${project.kind}`}
       title={project.title}
       lead={project.lead}
       meta={project.meta}
@@ -39,7 +39,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
       gallery={project.gallery}
       galleryTitle="More photos"
       links={project.links}
-      back={{ href: "/projects", label: "All projects" }}
+      back={{ href: "/events", label: "All events" }}
     />
   );
 }

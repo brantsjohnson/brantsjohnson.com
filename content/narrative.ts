@@ -24,7 +24,7 @@ export type WritingShelfItem = {
 export const storyNav: StoryNavItem[] = [
   { label: "About", href: "/about" },
   { label: "Work", href: "/work" },
-  { label: "Projects", href: "/projects" },
+  { label: "Events", href: "/events" },
   { label: "Community", href: "/community" },
   { label: "Writing", href: "/writing" },
   { label: "Contact", href: "/contact" },

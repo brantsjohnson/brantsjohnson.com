@@ -12,7 +12,7 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { clsx } from "clsx";
-import type { Photo } from "@/content/photos";
+import { objectPositionFor, parseRatio, type Photo } from "@/content/photos";
 
 type FigureProps = {
   photo?: Photo;
@@ -47,7 +47,7 @@ export function Figure({ photo, sizes = "(min-width: 1024px) 40vw, 92vw", priori
         priority={priority}
         loading={priority ? undefined : "lazy"}
         className="transition-transform duration-[1200ms] ease-brand group-hover:scale-[1.035]"
-        style={{ objectFit: photo.fit ?? "cover", objectPosition: photo.position ?? "50% 50%" }}
+        style={{ objectFit: photo.fit ?? "cover", objectPosition: objectPositionFor(photo, parseRatio(ratio, photo.width / photo.height)) }}
       />
       {photo.caption ? (
         <figcaption className="caption label pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent px-4 pb-3 pt-12 text-[0.68rem] text-white">

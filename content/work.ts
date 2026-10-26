@@ -39,7 +39,7 @@ export const threads: Thread[] = [
     number: "01",
     title: "Building things",
     line: "I like to take something from a rough idea to a real product that people use, and to own the whole thing while I do.",
-    photo: ph("general/crew-team-photo.webp", "The Crew team piled onto a yellow couch.", "The Crew team"),
+    photo: ph("general/crew-team-photo.webp", "The Crew team piled onto a yellow couch.", "The Crew team", { focus: { x: 0.5, y: 0.55 } }),
     roles: [
       {
         org: "Intro",
@@ -47,7 +47,7 @@ export const threads: Thread[] = [
         dates: "Nov 2025 to present",
         summary:
           "AI agent software for live events of about 100 to 600 people. It matches attendees, sponsors and organizers and explains every recommendation in plain language. Success means accepted recommendations and completed meetings, not clicks.",
-        href: "/projects/intro",
+        href: "/events/intro",
         hrefLabel: "About Intro",
       },
       {
@@ -56,7 +56,7 @@ export const threads: Thread[] = [
         dates: "Apr 2025 to present",
         summary:
           "An app that helps people become friends around what they love. It is in a TestFlight beta, built with contracted engineers and designers.",
-        href: "/projects/bridger",
+        href: "/events/bridger",
         hrefLabel: "About Bridger",
       },
       {
@@ -65,7 +65,7 @@ export const threads: Thread[] = [
         dates: "Dec 2022 to Apr 2024",
         summary:
           "I owned the Visa card issuing program end to end: the card, KYC with banking and compliance partners, manufacturing and shipping, and onboarding for parent and kid, with PCI and COPPA requirements and 8 outside suppliers. A/B experiments cut onboarding time 50% and raised engagement 20%.",
-        href: "/projects/crew",
+        href: "/events/crew",
         hrefLabel: "The Crew brand",
       },
       {
@@ -74,7 +74,7 @@ export const threads: Thread[] = [
         dates: "Sept 2021 to Sept 2022",
         summary:
           "I ran more than 370 user interviews and led 5 engineers and 2 UX designers to a revenue-generating B2B launch in an 8-month program. We were one of only four teams with revenue at Demo Day.",
-        href: "/projects/backlocal",
+        href: "/events/backlocal",
         hrefLabel: "The BackLocal story",
       },
       {
@@ -99,7 +99,7 @@ export const threads: Thread[] = [
         dates: "Dec 2022 to Apr 2024",
         summary:
           "There was no outside brand partner that fit, so I sketched the brand on an iPad and carried it across the card, packaging, landing page, onboarding and app. I used symbols instead of drawings of families so every kind of family could feel included.",
-        href: "/projects/crew",
+        href: "/events/crew",
         hrefLabel: "See the Crew brand",
       },
       {
@@ -115,7 +115,7 @@ export const threads: Thread[] = [
         dates: "Apr 2021 to May 2023",
         summary:
           "The international musical theatre company. Year one was a brand-new, untested show that flopped and was cut. Year two was a well-tested show that toured South Korea. Even Broadway veterans fail when they skip testing.",
-        href: "/projects/theater",
+        href: "/events/theater",
         hrefLabel: "The theater work",
       },
       {
@@ -140,7 +140,7 @@ export const threads: Thread[] = [
     number: "03",
     title: "Organizing",
     line: "My job is usually getting the right people into one project and keeping it alive until it is finished.",
-    photo: ph("general/brant-arch-being-welded.webp", "Brant with two builders in front of the steel arch frame.", "The archway frame", { position: "50% 35%" }),
+    photo: ph("general/brant-arch-being-welded.webp", "Brant with two builders in front of the steel arch frame.", "The archway frame", { focus: { x: 0.35, y: 0.42 } }),
     roles: [
       {
         org: "Uintah Resilience Archway",
@@ -187,7 +187,7 @@ export const threads: Thread[] = [
     number: "04",
     title: "Listening",
     line: "Data raises confidence and interviews explain what the data can't. I want my instinct fed good information.",
-    photo: ph("general/mitt-romney-photo-with-brant.webp", "Brant and Senator Mitt Romney on a staircase.", "Washington, D.C."),
+    photo: ph("general/mitt-romney-photo-with-brant.webp", "Brant and Senator Mitt Romney on a staircase.", "Washington, D.C.", { focus: { x: 0.4, y: 0.4 } }),
     roles: [
       {
         org: "Divvy (now BILL)",

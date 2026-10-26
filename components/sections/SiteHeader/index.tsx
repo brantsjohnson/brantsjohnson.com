@@ -1,7 +1,7 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the bar at the top of every public page. It shows Brant's
-// name and the six places in the menu: About, Work, Projects,
+// name and the six places in the menu: About, Work, Events,
 // Community, Writing and Contact. On a narrow screen the menu opens
 // as a full-screen list of large links. Escape closes it. The bar is
 // quiet paper with a hairline, and a thin gold line fills as you scroll.

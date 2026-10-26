@@ -28,14 +28,14 @@ export const aboutStories: Story[] = [
     eyebrow: "Where I come from",
     title: "One person can touch hundreds of lives.",
     body: [story.paragraphs[0] as CopyPart[]],
-    photos: [ph("general/brant-alone-at-the-archway.webp", "Brant standing alone on a long road beneath the Uintah arch.", "Vernal, Utah", { position: "50% 40%" })],
+    photos: [ph("general/brant-alone-at-the-archway.webp", "Brant standing alone on a long road beneath the Uintah arch.", "Vernal, Utah", { focus: { x: 0.5, y: 0.62 } })],
   },
   {
     id: "posters",
     eyebrow: "Small ways first",
     title: "Proof that someone noticed.",
     body: [story.paragraphs[1] as CopyPart[]],
-    photos: [ph("general/brant-arch-being-welded.webp", "Brant smiling with two builders at the steel arch frame.", "The archway came next", { position: "50% 35%" })],
+    photos: [ph("general/brant-arch-being-welded.webp", "Brant smiling with two builders at the steel arch frame.", "The archway came next", { focus: { x: 0.35, y: 0.42 } })],
   },
   {
     id: "road",

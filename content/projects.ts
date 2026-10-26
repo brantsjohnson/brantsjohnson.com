@@ -1,6 +1,6 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// The Projects page: the creative and built work, as cards that open
+// The Events page: the stages, creative work and built work, as cards that open
 // a short case study or gallery. Each project also holds its own
 // story sections and photos. Facts come from docs/about-brant.md and
 // the earlier site copy. No dollar figures. Words only, no UI.
@@ -28,9 +28,9 @@ export type Project = {
 };
 
 export const projectsIntro = {
-  label: "Projects",
-  title: "Things I made.",
-  lead: "Brands, shows, companies and a few odd experiments. Each one opens into its story.",
+  label: "Events",
+  title: "Stages and things I made.",
+  lead: "Shows, stages, brands and companies. Each one opens into its story.",
 };
 
 export const projects: Project[] = [
@@ -39,7 +39,7 @@ export const projects: Project[] = [
     title: "Crew brand",
     kind: "Brand · Illustration · Product",
     blurb: "A family banking brand I sketched on an iPad.",
-    href: "/projects/crew",
+    href: "/events/crew",
     cover: { kind: "photo", photo: crew("door-summer.webp", "A Crew illustration of a blue front door with a wreath and two shrubs.") },
     lead: "No outside brand partner fit, so I sketched one.",
     meta: [],
@@ -50,7 +50,7 @@ export const projects: Project[] = [
     title: "Theater",
     kind: "Performance · Marketing",
     blurb: "From a high school stage in Vernal to Hale Centre Theatre.",
-    href: "/projects/theater",
+    href: "/events/theater",
     cover: {
       kind: "photo",
       photo: ph("elf-photos/53362776363-e26ba4db3a-o.webp", "Elves and a yellow taxi on the snowflake stage in Elf the Musical.", undefined, { position: "50% 55%" }),
@@ -150,10 +150,10 @@ export const projects: Project[] = [
     title: "BackLocal",
     kind: "Product · Brand · Venture",
     blurb: "Head of Product, and part of the brand, in BYU's Sandbox.",
-    href: "/projects/backlocal",
+    href: "/events/backlocal",
     cover: {
       kind: "photo",
-      photo: ph("general/backlocal-designs.webp", "Three people in BackLocal shirts at an outdoor event.", undefined, { position: "50% 35%" }),
+      photo: ph("general/backlocal-designs.webp", "Three people in BackLocal shirts at an outdoor event.", undefined, { focus: { x: 0.5, y: 0.42 } }),
     },
     lead: "We had revenue at Demo Day, before the code was fully there.",
     meta: [
@@ -206,7 +206,7 @@ export const projects: Project[] = [
     title: "Intro",
     kind: "Venture · AI · Product",
     blurb: "AI agents that match people at live events and explain why.",
-    href: "/projects/intro",
+    href: "/events/intro",
     cover: {
       kind: "photo",
       photo: {
@@ -263,7 +263,7 @@ export const projects: Project[] = [
     title: "Bridger",
     kind: "Venture · Mobile · Product",
     blurb: "An app that helps people become friends around what they love.",
-    href: "/projects/bridger",
+    href: "/events/bridger",
     cover: {
       kind: "photo",
       photo: {
@@ -307,7 +307,7 @@ export const projects: Project[] = [
     title: "Poetry",
     kind: "Writing",
     blurb: "Two poems, one to a page, with the line breaks kept exactly.",
-    href: "/projects/poetry",
+    href: "/events/poetry",
     cover: { kind: "text", big: "Each beam is raised to scrape the sky.", note: "From To The Sky, 2022" },
     lead: "",
     meta: [],
@@ -318,7 +318,7 @@ export const projects: Project[] = [
     title: "Handmade",
     kind: "Costume · Craft",
     blurb: "Sweaters, costumes, floats and 25-foot trees.",
-    href: "/projects/handmade",
+    href: "/events/handmade",
     cover: {
       kind: "photo",
       photo: ph("general/brant-ugly-sweaters.webp", "Brant in a handmade nutcracker costume covered in tinsel, saluting.", undefined, { position: "50% 20%" }),
@@ -346,7 +346,7 @@ export const projects: Project[] = [
     title: "A chatbot of me",
     kind: "AI · Experiment",
     blurb: "Forty-five pages of my life, turned into a chatbot.",
-    href: "/projects/chatbot",
+    href: "/events/chatbot",
     cover: { kind: "text", big: "45", note: "pages of source material" },
     lead: "AI knows a lot but will not share it unless you ask specifically.",
     meta: [
@@ -379,7 +379,7 @@ export function getProject(slug: string): Project | undefined {
 
 // THIS SECTION DOES: the Crew brand case study. It has its own page with videos and a drawing gallery.
 export const crewProject = {
-  label: "Projects · Brand",
+  label: "Events · Brand",
   title: "Crew brand",
   lead: "I sketched the brand on an iPad, and the CEO said run with it.",
   body: [

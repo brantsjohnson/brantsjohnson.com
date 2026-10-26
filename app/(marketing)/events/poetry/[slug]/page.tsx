@@ -23,7 +23,7 @@ export function generateMetadata({ params }: PoemPageProps): Metadata {
   return pageMetadata({
     title: poem.title,
     description: `${poem.title}, ${poem.year}.`,
-    path: `/projects/poetry/${poem.slug}`,
+    path: `/events/poetry/${poem.slug}`,
   });
 }
 
@@ -35,7 +35,7 @@ export default function PoemPage({ params }: PoemPageProps) {
   const next = poems[index + 1];
 
   return (
-    <SectionFrame id={poem.slug} kicker={`Projects · Poetry · ${poem.year}`} title={poem.title}>
+    <SectionFrame id={poem.slug} kicker={`Events · Poetry · ${poem.year}`} title={poem.title}>
       {poem.credit ? <p className="text-caption text-text-secondary">{poem.credit}</p> : null}
       <div className="mt-8 max-w-reading font-serif text-h3 text-ink">
         {poem.stanzas.map((stanza, stanzaIndex) => (
@@ -51,7 +51,7 @@ export default function PoemPage({ params }: PoemPageProps) {
       <nav aria-label="Other poems" className="mt-4 flex flex-col gap-3 border-t border-border-subtle pt-6 sm:flex-row sm:justify-between">
         {previous ? (
           <Link
-            href={`/projects/poetry/${previous.slug}`}
+            href={`/events/poetry/${previous.slug}`}
             className="inline-flex min-h-[44px] items-center text-ink underline decoration-accent decoration-2 underline-offset-4"
           >
             Previous poem: {previous.title}
@@ -61,7 +61,7 @@ export default function PoemPage({ params }: PoemPageProps) {
         )}
         {next ? (
           <Link
-            href={`/projects/poetry/${next.slug}`}
+            href={`/events/poetry/${next.slug}`}
             className="inline-flex min-h-[44px] items-center text-ink underline decoration-accent decoration-2 underline-offset-4"
           >
             Next poem: {next.title}

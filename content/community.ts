@@ -38,7 +38,7 @@ export const communityCases: CommunityCase[] = [
     blurb:
       "At eighteen I drew a new arch for my high school's road and spent about five years getting it built.",
     href: "/community/archway",
-    cover: ph("general/brant-alone-at-the-archway.webp", "Brant standing alone on a long road beneath the Uintah arch.", undefined, { position: "50% 40%" }),
+    cover: ph("general/brant-alone-at-the-archway.webp", "Brant standing alone on a long road beneath the Uintah arch.", undefined, { focus: { x: 0.5, y: 0.62 } }),
     lead: "Someone told me nothing like this ever gets done.",
     meta: [
       { label: "Where", value: "Vernal, Utah" },
@@ -97,7 +97,7 @@ export const communityCases: CommunityCase[] = [
     kind: "Founder · Scholarship",
     blurb: "A scholarship for seniors carrying things no transcript shows.",
     href: "/community/scholarship",
-    cover: ph("general/resilience-scholarship-2023.webp", "Two scholarship recipients on stage in front of a red and white Utes backdrop.", undefined, { position: "50% 35%" }),
+    cover: ph("general/resilience-scholarship-2023.webp", "Two scholarship recipients on stage in front of a red and white Utes backdrop.", undefined, { focus: { x: 0.5, y: 0.5 } }),
     lead: "Most scholarships reward lives that already make room for perfect grades.",
     meta: [
       { label: "Founded", value: "2020" },

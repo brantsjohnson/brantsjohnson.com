@@ -9,6 +9,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/editorial/Reveal";
+import { objectPositionFor, parseRatio } from "@/content/photos";
 import type { Project } from "@/content/projects";
 
 type ProjectCardProps = {
@@ -45,7 +46,7 @@ export function ProjectCard({ project, ratio = "4 / 5", delay = 0, sizes = "(min
               quality={80}
               priority={priority}
               className="transition-transform duration-[1200ms] ease-brand group-hover:scale-[1.04]"
-              style={{ objectFit: cover.photo.fit ?? "cover", objectPosition: cover.photo.position ?? "50% 50%" }}
+              style={{ objectFit: cover.photo.fit ?? "cover", objectPosition: objectPositionFor(cover.photo, parseRatio(ratio, 0.8)) }}
             />
           ) : (
             <div className="flex h-full flex-col justify-between p-8">

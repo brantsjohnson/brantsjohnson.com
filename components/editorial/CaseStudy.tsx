@@ -3,7 +3,7 @@
 // The page for one project or one community story. It has the big
 // title, a short lead, a quiet row of facts (role, dates, place),
 // the story rows with their photos, an optional photo gallery, and a
-// way back to the list. The Projects and Community pages share it.
+// way back to the list. The Events and Community pages share it.
 // ============================================
 
 import Link from "next/link";

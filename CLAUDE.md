@@ -9,15 +9,15 @@ This is Brant S. Johnson's personal site (Next.js on Vercel). Read this file and
 Senior product manager, creator, performer, entrepreneur and activist from Utah. Thesis: "I build technology as a bridge to real human connection." Motto: "Good ideas deserve to happen."
 
 ## Site structure
-- Six top-level menu items, always in this order: **About, Work, Projects, Community, Writing, Contact**. Do not add a seventh.
+- Six top-level menu items, always in this order: **About, Work, Events, Community, Writing, Contact**. Do not add a seventh.
 - About: the personal story, what drives him, and a short "outside of work" section with a few photos. Hobbies do not get their own page.
 - Work: organized by theme (Building things, Storytelling, Organizing, Listening), not as a timeline, with a downloadable CV at the bottom.
-- Projects: a visual grid of cards, each opening a short case study or gallery.
+- Events: a visual grid of cards, each opening a short case study or gallery (the route is `/events`; the content still lives in `content/projects.ts`).
 - Community: the Archway and the Resilience Scholarship lead, with their own pages. Public service (government, student leadership) sits beneath them.
 - Writing: the blog. Contact: email and socials.
 - Home page: a magazine-style cover with the headshot, an index of the main places, and three featured projects.
 - Write it as a story about Brant in first person, with links inside sentences that jump between pages.
-- Poetry: one poem per page, line breaks kept exactly (under Projects).
+- Poetry: one poem per page, line breaks kept exactly (under Events).
 - Footer on every page: See résumé (`/resume.pdf`) and See full CV (`/cv.pdf`). Keep the résumé link hidden until `public/resume.pdf` exists.
 
 ## Look and feel

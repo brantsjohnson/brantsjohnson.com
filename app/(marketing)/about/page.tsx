@@ -15,7 +15,7 @@ import { Prose } from "@/components/editorial/Prose";
 import { Reveal } from "@/components/editorial/Reveal";
 import { StoryRow } from "@/components/editorial/StoryRow";
 import { aboutIntro, aboutStories, beliefs, outside } from "@/content/about";
-import { headshot } from "@/content/photos";
+import { aboutPhoto } from "@/content/photos";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -43,7 +43,7 @@ export default function AboutPage() {
           </p>
         </Reveal>
         <div className="lg:col-span-5 lg:col-start-8">
-          <Figure photo={{ ...headshot, position: "50% 15%" }} ratio="4 / 4.6" priority sizes="(min-width: 1024px) 36vw, 90vw" />
+          <Figure photo={aboutPhoto} ratio="6 / 5" priority sizes="(min-width: 1024px) 40vw, 90vw" />
         </div>
       </section>
 

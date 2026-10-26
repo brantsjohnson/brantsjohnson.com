@@ -23,7 +23,7 @@ import { pageMetadata } from "@/lib/site/page-metadata";
 export const metadata: Metadata = pageMetadata({
   title: "Crew brand",
   description: crewProject.lead,
-  path: "/projects/crew",
+  path: "/events/crew",
 });
 
 export default function CrewPage() {
@@ -113,8 +113,8 @@ export default function CrewPage() {
       </section>
 
       <div className="shell border-t border-border-subtle py-12">
-        <Link href="/projects" className="label inline-flex min-h-[44px] items-center gap-3 text-ink transition-colors hover:text-accent-deep">
-          <span aria-hidden="true">←</span> All projects
+        <Link href="/events" className="label inline-flex min-h-[44px] items-center gap-3 text-ink transition-colors hover:text-accent-deep">
+          <span aria-hidden="true">←</span> All events
         </Link>
       </div>
     </>
