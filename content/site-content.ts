@@ -174,7 +174,7 @@ export const about = {
   paragraphs: [
     "I'm Brant Johnson. I'm a senior product manager, a creator, performer and entrepreneur, and an activist for the places that raised me.",
     "I build technology as a bridge to real human connection.",
-    "Good ideas deserve to happen.",
+    "Good things deserve to happen.",
   ],
   educationTitle: "Education",
   education:

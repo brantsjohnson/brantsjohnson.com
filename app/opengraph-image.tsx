@@ -9,7 +9,7 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 export const runtime = "nodejs";
-export const alt = "Brant S. Johnson. Good ideas deserve to happen.";
+export const alt = "Brant S. Johnson. Good things deserve to happen.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -53,7 +53,7 @@ export default async function OpenGraphImage() {
             maxWidth: 980,
           }}
         >
-          Good ideas deserve to happen.
+          Good things deserve to happen.
         </div>
       </div>
     ),

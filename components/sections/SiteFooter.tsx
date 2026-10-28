@@ -1,7 +1,7 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the footer on every page. It closes with the line "Good
-// ideas deserve to happen.", an email link, and quiet links to the
+// things deserve to happen.", an email link, and quiet links to the
 // CV, Ask about me, LinkedIn and Substack. It states no place. The résumé link appears
 // only when its file exists. The six menu places repeat below.
 // ============================================
@@ -40,7 +40,7 @@ export function SiteFooter() {
     <footer className="border-t border-border-subtle bg-bg-deep">
       <div className="shell py-16 md:py-24">
         <p className="max-w-[16ch] font-serif text-[clamp(2.6rem,6vw,5.4rem)] italic leading-[0.95] text-ink">
-          Good ideas deserve to happen.
+          Good things deserve to happen.
         </p>
         <p className="mt-8">
           <a

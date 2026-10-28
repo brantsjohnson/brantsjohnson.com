@@ -6,7 +6,7 @@ This is Brant S. Johnson's personal site (Next.js on Vercel). Read this file and
 - `docs/sources/credentials.md` lists his credentials, with images in `docs/sources/certs/`.
 
 ## Who Brant is (one line)
-Senior product manager, creator, performer, entrepreneur and activist from Utah. Thesis: "I build technology as a bridge to real human connection." Motto: "Good ideas deserve to happen."
+Senior product manager, creator, performer, entrepreneur and activist from Utah. Thesis: "I build technology as a bridge to real human connection." Motto: "Good things deserve to happen."
 
 ## Site structure
 - Six top-level menu items, always in this order: **About, Work, Events, Community, Writing, Contact**. Do not add a seventh.
