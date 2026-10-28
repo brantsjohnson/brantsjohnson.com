@@ -51,4 +51,4 @@ The rows above are the starter-kit draft. These rows name what this repository a
 |---|---|
 | `SUBSTACK_URL` | Publication root. Feed is `{url}/feed`. Signup is `{url}/subscribe` |
 | `INTRO_CRM_CAPTURE_URL` or `CRM_WEBHOOK_URL` | When set, contact and /hi notes are posted there and /hi may say they are stored |
-| Headline | Every visitor sees "Good ideas deserve to happen." A `?hero=` query does not change it. |
+| Headline | Every visitor sees "Good things deserve to happen." A `?hero=` query does not change it. |

@@ -46,7 +46,7 @@ The public Ask about me assistant reads `content/about-brant.md` only. `data/bra
 
 | Item | What shipped |
 |---|---|
-| Home | No portrait. The hero is the sentence "Good ideas deserve to happen." |
+| Home | No portrait. The hero is the sentence "Good things deserve to happen." |
 | Intro | `intro-live.jpg`, a crop of the live site at intro.events. |
 | Bridger | `bridger-live.jpg`, a crop of the live waitlist window at bridger.social. |
 | Header | The plain serif wordmark, Brant S. Johnson. The circle mark is not in the header or the favicon. |

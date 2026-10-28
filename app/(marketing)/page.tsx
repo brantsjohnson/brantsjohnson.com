@@ -11,11 +11,11 @@ import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = {
   ...pageMetadata({
-    title: "Brant S. Johnson | Good ideas deserve to happen.",
+    title: "Brant S. Johnson | Good things deserve to happen.",
     description: hero.description,
     path: "/",
   }),
-  title: { absolute: "Brant S. Johnson | Good ideas deserve to happen." },
+  title: { absolute: "Brant S. Johnson | Good things deserve to happen." },
 };
 
 export default function Home() {
