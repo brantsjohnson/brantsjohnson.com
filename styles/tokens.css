@@ -9,27 +9,32 @@
    ============================================ */
 
 :root {
-  /* THIS SECTION DOES: set the paper, ink, and black bands */
-  --color-bg: #f4f2ec; /* warm off-white page background */
-  --color-surface: #fffdf8; /* solid card fill on the paper */
-  --color-ink: #000000; /* true black for text on paper and for hero bands */
-  --color-on-hero: #f4f2ec; /* paper colored text that sits on a black band */
-  --color-glass: rgba(244, 242, 236, 0.82); /* sticky nav, light and slightly see-through */
-  --color-border-subtle: rgba(0, 0, 0, 0.12); /* hairline on paper */
-  --color-hero-line: rgba(233, 191, 133, 0.45); /* gold hairline used on black bands */
+  /* THIS SECTION DOES: set the page. A warm white, like good paper, with lots of room around everything. */
+  --color-bg: #fbf9f5; /* warm white page */
+  --color-bg-deep: #f2ece1; /* the quiet cream band behind a section */
+  --color-surface: #ffffff; /* a card on the page */
+  --color-surface-2: #f6f1e8; /* a second, softer layer */
+  --color-ink: #16130e; /* near-black for headings and links */
+  --color-on-hero: #ffffff; /* white text that sits on a photo */
+  --color-on-gold: #16130e; /* dark text for anything that sits on gold */
+  --color-glass: rgba(251, 249, 245, 0.86); /* sticky nav, see-through paper */
+  --color-border-subtle: rgba(22, 19, 14, 0.12); /* hairline on the page */
+  --color-hero-line: rgba(138, 100, 40, 0.4);
 
-  /* THIS SECTION DOES: set text colors that stay readable on the paper */
-  --color-text-primary: #000000; /* headings and body on paper */
-  --color-text-secondary: #3f3d39; /* supporting text, darkened from the brand gray so it passes WCAG AA on paper */
-  --color-muted: #8f8f8f; /* the Wix gray, for large labels and rules only, never small body text */
+  /* THIS SECTION DOES: set text colors that stay readable on the page */
+  --color-text-primary: #16130e;
+  --color-text-secondary: #554e42; /* body text, passes WCAG AA on the page */
+  --color-muted: #8d8576; /* large labels and rules only, never small body text */
 
-  /* THIS SECTION DOES: set the single gold accent */
-  --color-accent: #e9bf85; /* Wix gold for headlines on black, rules, and the main button */
-  --color-accent-muted: #d7ae72; /* slightly deeper gold for hover, still dark enough under black text */
+  /* THIS SECTION DOES: set the gold. It is a quiet, deeper gold used sparingly: a rule, a word, a small block. */
+  --color-accent: #c9a25a; /* gold for rules, small blocks and the main button */
+  --color-accent-muted: #b98f44; /* hover on gold */
+  --color-accent-bright: #e3c58d; /* a pale gold wash */
+  --color-accent-deep: #8a6428; /* gold used as text, dark enough to read on the page */
 
   /* THIS SECTION DOES: name the two typefaces. Next.js fills the file variables. */
-  --font-serif: var(--font-serif-file), "Cormorant Garamond", "Palatino Linotype", Palatino, Georgia, serif;
-  --font-sans: var(--font-sans-file), "Source Sans 3", "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  --font-serif: var(--font-serif-file), "Instrument Serif", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-sans: var(--font-sans-file), "Hanken Grotesk", "Avenir Next", Avenir, "Segoe UI", sans-serif;
 
   /* THIS SECTION DOES: set the shared spacing steps (8px rhythm) */
   --space-1: 4px;
@@ -44,16 +49,16 @@
   --space-32: 128px;
 
   /* THIS SECTION DOES: set how wide the page and the reading column may grow */
-  --shell-max: 1200px;
+  --shell-max: 1320px;
   --reading-max: 66ch;
-  --page-gutter: clamp(20px, 4vw, 56px);
+  --page-gutter: clamp(20px, 5vw, 72px);
 
   /* THIS SECTION DOES: set corner roundness. Buttons are soft. Story blocks are nearly square. */
-  --radius-panel: 18px;
-  --radius-control: 999px; /* pill buttons, a small bit of fun against the serious type */
+  --radius-panel: 4px;
+  --radius-control: 2px; /* buttons are crisp rectangles, like an editorial layout */
 
   /* THIS SECTION DOES: set a soft shadow used rarely, never as a card stack */
-  --shadow-glass: 0 18px 50px rgba(0, 0, 0, 0.16);
+  --shadow-glass: 0 18px 50px rgba(22, 19, 14, 0.10);
 
   /* THIS SECTION DOES: set shared motion numbers */
   --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);

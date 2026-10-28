@@ -11,7 +11,7 @@ import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "Ask about me",
-  description: "Short answers about Brant S. Johnson from the public notes on this site.",
+  description: "Ask a chatbot about Brant Johnson's work, projects, and background using public notes.",
   path: "/ask",
 });
 
@@ -21,7 +21,7 @@ export default function AskPage() {
       <PageHero
         eyebrow="Ask"
         title="Ask about me."
-        deck="Short answers from the public notes. If a fact is not in those notes, it will say so."
+        deck="I've worked on a lot of different things. If you'd rather ask a question than scroll through the site, there's a chatbot trained on my public notes about them. It answers from those public notes. If the answer isn't there, it should say so."
       />
       <AskConversation />
     </>

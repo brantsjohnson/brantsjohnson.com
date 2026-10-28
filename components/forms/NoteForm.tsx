@@ -77,7 +77,7 @@ export function NoteForm({ kind, metAt = "", submitLabel, track }: NoteFormProps
 
   const showPhone = kind === "hi";
   const showMessage = kind !== "newsletter";
-  const messageLabel = kind === "hi" ? "What are you working on?" : "Note";
+  const messageLabel = kind === "hi" ? "What you're working on (optional)" : "Message";
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-5" noValidate>
@@ -91,11 +91,11 @@ export function NoteForm({ kind, metAt = "", submitLabel, track }: NoteFormProps
         track={`form_field:email:${kind}`}
       />
       {showPhone && (
-        <Field label="Phone" name="phone" type="tel" autoComplete="tel" track="form_field:phone:hi" />
+        <Field label="Phone (optional)" name="phone" type="tel" autoComplete="tel" track="form_field:phone:hi" />
       )}
       {kind === "hi" && (
         <Field
-          label="Where we met"
+          label="Where we met (optional)"
           name="metAt"
           defaultValue={metAt}
           track="form_field:met_at:hi"
@@ -106,7 +106,7 @@ export function NoteForm({ kind, metAt = "", submitLabel, track }: NoteFormProps
           {messageLabel}
           <textarea
             name="message"
-            required
+            required={kind !== "hi"}
             rows={kind === "hi" ? 3 : 5}
             data-track={`form_field:message:${kind}`}
             className="rounded-panel border border-border-subtle bg-surface px-4 py-3 text-body text-ink"

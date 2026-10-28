@@ -1,66 +1,82 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the Work page. Intro and Bridger sit together under the
-// title, each with a live screenshot. The experience timeline follows.
-// The public CV is the file at /cv.pdf.
+// The Work page: quick previews of the work, grouped by kind. Each
+// item opens into a longer story. The full CV closes the page.
 // ============================================
 
 import type { Metadata } from "next";
-import { PageHero } from "@/components/sections/PageHero";
-import { ProductPair } from "@/components/sections/ProductPair";
-import { TextLink } from "@/components/ui/TextLink";
-import { experience, experienceIntro, publicCv } from "@/content/site-content";
+import Link from "next/link";
+import { PageHeader } from "@/components/editorial/PageHeader";
+import { Reveal } from "@/components/editorial/Reveal";
+import { Button } from "@/components/ui/Button";
+import { workGroups, workIntro } from "@/content/work";
+import { publicCv, publicResume } from "@/content/site-content";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Full work history",
-  description: experienceIntro.deck,
+  title: "Work",
+  description: workIntro.description,
   path: "/work",
 });
 
 export default function WorkPage() {
   return (
     <>
-      <PageHero eyebrow="Work" title="Full work history." deck={experienceIntro.deck} />
+      <PageHeader id="work" label={workIntro.label} title={workIntro.title} lead={workIntro.lead}>
+        <p className="mt-6 max-w-reading text-text-secondary">{workIntro.second}</p>
+      </PageHeader>
 
-      <section id="projects" className="shell scroll-mt-24 pb-16 md:pb-24">
-        <h2 className="sr-only">Selected projects.</h2>
-        <ProductPair page="work" />
-      </section>
+      {workGroups.map((group) => (
+        <section key={group.id} id={group.id} aria-labelledby={`${group.id}-title`} className="scroll-mt-24 border-t border-border-subtle py-14 md:py-20">
+          <div className="shell grid gap-10 lg:grid-cols-12">
+            <Reveal className="lg:col-span-4">
+              <h2 id={`${group.id}-title`} className="font-serif text-h2 text-ink">
+                {group.title}
+              </h2>
+            </Reveal>
+            <ol className="lg:col-span-8">
+              {group.items.map((item, index) => (
+                <Reveal as="li" key={item.org} delay={index * 0.04} className="border-t border-border-subtle py-8 first:border-t-0 first:pt-0">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                    <h3 className="font-serif text-[1.9rem] leading-tight text-ink">{item.org}</h3>
+                    {item.dates ? <p className="label text-[0.66rem] text-text-secondary">{item.dates}</p> : null}
+                  </div>
+                  {item.role ? <p className="label mt-2 text-[0.68rem] text-accent-deep">{item.role}</p> : null}
+                  <p className="mt-4 max-w-reading text-body text-text-secondary">{item.summary}</p>
+                  {item.links?.length ? (
+                    <p className="mt-4 flex flex-wrap gap-x-8 gap-y-2">
+                      {item.links.map((link) => (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          data-track={`link:work_item:${link.href.split("/").pop()}`}
+                          className="text-caption text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-deep"
+                        >
+                          {link.text} →
+                        </Link>
+                      ))}
+                    </p>
+                  ) : null}
+                </Reveal>
+              ))}
+            </ol>
+          </div>
+        </section>
+      ))}
 
-      <section className="shell border-t border-border-subtle py-16 md:py-24">
-        <h2 className="font-serif text-h2 text-ink">The record.</h2>
-        <ol className="mt-8">
-          {experience
-            .filter((role) => role.org !== "Intro" && role.org !== "Bridger")
-            .map((role) => (
-              <li
-                key={`${role.org}-${role.dates}`}
-                className="grid gap-3 border-t border-border-subtle py-8 md:grid-cols-[11rem_1fr] md:gap-12 md:py-10"
-              >
-                <div>
-                  <p className="text-body text-text-secondary">{role.dates}</p>
-                  {role.place && <p className="mt-1 text-caption text-text-secondary">{role.place}</p>}
-                </div>
-                <div>
-                  <h3 className="font-serif text-h3 text-ink">{role.role}</h3>
-                  <p className="mt-2 text-body text-ink">{role.org}</p>
-                  <p className="mt-4 max-w-reading text-body text-text-secondary">{role.summary}</p>
-                  {role.href && role.hrefLabel && (
-                    <div className="mt-4">
-                      <TextLink href={role.href} track={`link:visit_${role.org.toLowerCase()}:work`}>
-                        {role.hrefLabel}
-                      </TextLink>
-                    </div>
-                  )}
-                </div>
-              </li>
-            ))}
-        </ol>
-        <div className="border-t border-border-subtle pt-8">
-          <TextLink href={publicCv.href} track="link:public_cv:work">
-            {publicCv.label}
-          </TextLink>
+      <section className="border-t border-border-subtle bg-bg-deep py-16 md:py-24">
+        <div className="shell flex flex-wrap items-center justify-between gap-6">
+          <h2 className="font-serif text-h2 text-ink">The full list</h2>
+          <div className="flex flex-wrap gap-4">
+            {publicResume.href ? (
+              <Button href={publicResume.href} track="button:resume:work">
+                {publicResume.label}
+              </Button>
+            ) : null}
+            <Button href={publicCv.href} variant={publicResume.href ? "ghost" : "primary"} track="button:cv:work">
+              Full CV
+            </Button>
+          </div>
         </div>
       </section>
     </>

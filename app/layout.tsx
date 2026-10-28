@@ -7,13 +7,13 @@
 // ============================================
 
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
+import { Instrument_Serif, Hanken_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
 import { identity } from "@/content/site-content";
 
 const description =
-  "Good ideas deserve to happen. I'm a senior product manager, a creator, performer and entrepreneur, and an activist for the places that raised me.";
+  "I'm Brant Johnson. I help people get their ideas built, put on events, and work on software that makes it easier for people to connect.";
 
 // THIS SECTION DOES: point share images at the preview while a preview is open,
 // and at the public domain everywhere else.
@@ -28,16 +28,17 @@ function metadataBaseUrl(): URL {
 
 const allowIndexing = process.env.SITE_INDEXABLE === "true";
 
-const serif = Cormorant_Garamond({
+const serif = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: "400",
+  style: ["normal", "italic"],
   variable: "--font-serif-file",
   display: "swap",
 });
 
-const sans = Source_Sans_3({
+const sans = Hanken_Grotesk({
   subsets: ["latin"],
-  weight: ["300", "400", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-sans-file",
   display: "swap",
 });
@@ -72,7 +73,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f4f2ec",
+  themeColor: "#fbf9f5",
   width: "device-width",
   initialScale: 1,
 };

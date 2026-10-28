@@ -1,10 +1,12 @@
 /* ============================================
    WHAT THIS FILE DOES (plain English):
    This is the main stylesheet the whole site loads.
-   It pulls in the design tokens and Tailwind layers, then sets a
-   few base page rules (background, text color, default font, and a
-   reusable centered content shell). Page-specific looks do not live
-   here; they live in their own components.
+   It pulls in the design tokens and Tailwind layers, then sets the base
+   page rules: warm white paper, near-black type, a quiet gold accent,
+   and a few reusable editorial pieces (a hairline rule, a big display
+   word, a hover-reveal caption). Page layouts live in their own
+   components. Every animation here is cut to nothing when the visitor
+   asks their device for less motion.
    ============================================ */
 
 @import "./tokens.css";
@@ -21,36 +23,39 @@ body {
 
 html {
   scroll-behavior: smooth; /* gentle jump when clicking in-page anchors */
+  background: var(--color-bg);
 }
 
 body {
   background: var(--color-bg);
-  color: var(--color-text-secondary); /* 18px reading text stays softer than the black titles */
-  font-family: var(--font-sans); /* light sans for reading, serif stays on headings */
+  color: var(--color-text-secondary);
+  font-family: var(--font-sans);
   font-weight: 400;
-  font-size: 1.125rem;
-  line-height: 1.6;
+  font-size: 1.0625rem;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
 
 ::selection {
-  background: var(--color-accent);
+  background: var(--color-accent-bright);
   color: var(--color-ink);
 }
 
-/* THIS SECTION DOES: give every heading the serif typeface so the name and titles feel editorial */
+/* THIS SECTION DOES: give every heading the display serif so titles feel editorial */
 h1,
 h2,
 h3 {
   font-family: var(--font-serif);
-  font-weight: 500;
+  font-weight: 400;
+  color: var(--color-ink);
 }
 
 /* --- ACCESSIBILITY: keep a clearly visible focus ring for keyboard users --- */
 :focus-visible {
   outline: 2px solid var(--color-ink);
   outline-offset: 3px;
-  box-shadow: 0 0 0 6px var(--color-accent);
+  box-shadow: 0 0 0 5px var(--color-accent-bright);
 }
 
 /* THIS SECTION DOES: turn off nonessential motion when the visitor asks their device for less movement */
@@ -63,6 +68,7 @@ h3 {
   *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
     transition-duration: 0.001ms !important;
   }
 }
@@ -76,23 +82,39 @@ h3 {
     padding-inline: var(--page-gutter);
   }
 
-  /* THIS SECTION DOES: the only small caps style, used for labels */
+  /* THIS SECTION DOES: the small caps style, used for labels and meta text */
   .label {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     line-height: 1.4;
     font-weight: 600;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
+  }
+
+  /* THIS SECTION DOES: a gold word. Gold text stays dark enough to read on the page. */
+  .gold-text {
+    color: var(--color-accent-deep);
+  }
+
+  /* THIS SECTION DOES: a thin rule, the main divider on the page */
+  .rule {
+    height: 1px;
+    background: var(--color-border-subtle);
+  }
+
+  /* THIS SECTION DOES: a short gold rule that opens a section */
+  .gold-rule {
+    height: 2px;
+    width: 3rem;
+    background: var(--color-accent);
   }
 }
 
-/* THIS SECTION DOES: fade and rise a page when the visitor opens it.
-   The template remounts on each route, so the animation plays again.
-   Reduced motion, below, cuts the duration to nothing. */
+/* THIS SECTION DOES: fade and rise a page when the visitor opens it. */
 @keyframes page-rise {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -101,26 +123,37 @@ h3 {
 }
 
 .page-enter {
-  animation: page-rise 520ms var(--ease-brand) both;
+  animation: page-rise 650ms var(--ease-brand) both;
 }
 
-/* THIS SECTION DOES: let the homepage fill the first screen on a desktop window.
-   The header and footer sit outside this block. */
-@media (min-width: 1024px) {
-  .overview-stage {
-    min-height: calc(100dvh - 12.5rem);
+/* THIS SECTION DOES: a photo that wipes open from the bottom when it scrolls into view */
+@keyframes image-wipe {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
   }
 }
 
-/* THIS SECTION DOES: lift a colored door on hover. Pointer tilt is added in script
-   and only for a mouse, and only when the visitor allows motion. */
-@media (prefers-reduced-motion: no-preference) and (hover: hover) {
-  .door-card {
-    transition: transform 220ms var(--ease-brand), box-shadow 220ms var(--ease-brand);
-  }
+/* THIS SECTION DOES: hide the scrollbar on horizontal photo rows while keeping them scrollable */
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 
-  .door-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 36px rgba(12, 20, 32, 0.22);
-  }
+/* THIS SECTION DOES: a caption that stays out of the way until the photo is hovered or focused */
+.has-caption .caption {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 300ms var(--ease-brand), transform 300ms var(--ease-brand);
+}
+
+.has-caption:hover .caption,
+.has-caption:focus-within .caption,
+.has-caption:focus .caption {
+  opacity: 1;
+  transform: none;
 }
