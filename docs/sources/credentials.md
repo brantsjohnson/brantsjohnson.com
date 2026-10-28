@@ -18,6 +18,7 @@ Education line on the same page: BYU, Business Strategy, Emphasis Product Manage
 | 10 | Python Data Analysis (2020) | LinkedIn Learning | Oct 2022 | https://www.linkedin.com/learning/certificates/1100937b5cb81a977f86160be222b89a50db1eeee48714e1960ac3825fc31da0 | certs/python-data-analysis.jpg |
 | 11 | Social Media Marketing: Strategy and Optimization | LinkedIn Learning | Oct 2022 | https://www.linkedin.com/learning/certificates/b24970d3b19a26c556cf88863e9704bfe86911de88644b1ff034046338948ffe | certs/social-media-marketing.jpg |
 | 12 | The Non-Technical Skills of Effective Data Scientists | LinkedIn Learning | Feb 2022 | https://www.linkedin.com/learning/certificates/392d011f3789f229adb3f92918123114d88bbda1035c9f1c66a5c908ad3fdc91 | certs/non-technical-skills-data-scientists.jpg |
+| 13 | Introduction to SQL | Sololearn | Oct 2026 | https://www.sololearn.com/certificates/CC-DLJGLGLN | certs/sololearn-intro-to-sql.pdf |
 
 Notes:
 - LinkedIn Learning certificate IDs are the hex string in each URL. The `?u=2153100` org parameter was dropped from the links.
