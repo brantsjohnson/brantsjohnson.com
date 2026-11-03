@@ -27,6 +27,18 @@ export async function saveEvent(event: StoredEvent): Promise<void> {
   }
 }
 
+// THIS SECTION DOES: one tiny read, so a free Supabase project never looks idle and never pauses.
+// The daily job calls this. Returns whether the database answered.
+export async function keepAlive(): Promise<boolean> {
+  if (!analyticsConfigured()) return false;
+  try {
+    const { error } = await createServerClient().schema("site").from("analytics_events").select("id").limit(1);
+    return !error;
+  } catch {
+    return false;
+  }
+}
+
 // THIS SECTION DOES: read the events from the last N days, a page at a time, up to a sensible cap
 export async function readEvents(days: number): Promise<{ events: StoredEvent[]; truncated: boolean }> {
   const since = new Date(Date.now() - days * 86_400_000).toISOString();

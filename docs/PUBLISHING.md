@@ -127,7 +127,7 @@ What it records: a one-way daily visitor code (not an IP address), the page, the
 
 ### One-time setup (Brant or an agent with Vercel and Supabase access)
 
-1. **Database.** In the Supabase project, apply `supabase/migrations/20261103_000002_analytics.sql`. Then Settings, API, Exposed schemas: add `site`.
+1. **Database.** A free Supabase project pauses after about a week with no activity. The daily job in `vercel.json` makes one small read each day to keep it awake; if it ever pauses anyway, press Resume project in the Supabase dashboard (data is kept). In the Supabase project, apply `supabase/migrations/20261103_000002_analytics.sql`. Then Settings, API, Exposed schemas: add `site`.
 2. **Vercel settings** (Production and Preview): `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `ANALYTICS_SALT` (any long random string), `REVALIDATE_SECRET` (any long random string).
 3. **Admin sign-in.** On your own computer run `node tools/admin/hash-password.mjs "a long password"`. Put the two lines it prints (`ADMIN_PASSWORD_HASH` and `JWT_SECRET`) into the Vercel settings. The password itself is never stored.
 4. **The AI chatbot.** Set `OPENAI_API_KEY` (optionally `AI_MODEL`). Without it, `/ask` still answers from the public notes with no model.
