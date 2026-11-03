@@ -1,61 +1,61 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This saves visitor events to the database and reads them back for
-// the admin page. It uses the existing Supabase project, in the
-// "site" schema, table analytics_events (see
-// supabase/migrations/20261103_000002_analytics.sql). If the database
-// settings are not there, saving quietly does nothing and the admin
-// page explains what to set up. Server only.
+// This connects the analytics to the database. It looks for the
+// database address in the site's settings (ANALYTICS_DATABASE_URL, or
+// the POSTGRES_URL or DATABASE_URL that Vercel adds when a Neon
+// database is connected to the project). With no address, saving
+// quietly does nothing and the admin page explains what to set up.
+// The table makes itself the first time. Server only.
 // ============================================
 
 import "server-only";
-import { createServerClient } from "@/lib/supabase";
+import { Pool } from "pg";
+import { createStore } from "@/lib/analytics/db";
 import type { StoredEvent } from "@/lib/analytics/types";
 
+function connectionString(): string | null {
+  const value = process.env.ANALYTICS_DATABASE_URL || process.env.POSTGRES_URL || process.env.DATABASE_URL;
+  return value && value.startsWith("postgres") ? value : null;
+}
+
 export function analyticsConfigured(): boolean {
-  return Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
+  return connectionString() !== null;
+}
+
+// One shared connection pool per server process.
+const globalForPool = globalThis as unknown as { __analyticsStore?: ReturnType<typeof createStore> };
+
+function store() {
+  const url = connectionString();
+  if (!url) return null;
+  if (!globalForPool.__analyticsStore) {
+    const pool = new Pool({ connectionString: url, max: 3, idleTimeoutMillis: 10_000, connectionTimeoutMillis: 8_000 });
+    pool.on("error", (error) => console.error("analytics database error:", error.message));
+    globalForPool.__analyticsStore = createStore(pool);
+  }
+  return globalForPool.__analyticsStore;
 }
 
 // THIS SECTION DOES: save one event. Failures are logged, never shown to the visitor.
 export async function saveEvent(event: StoredEvent): Promise<void> {
-  if (!analyticsConfigured()) return;
+  const db = store();
+  if (!db) return;
   try {
-    const { error } = await createServerClient().schema("site").from("analytics_events").insert(event);
-    if (error) console.error("analytics insert failed:", error.message);
+    await db.save(event);
   } catch (error) {
-    console.error("analytics insert failed:", error instanceof Error ? error.message : error);
+    console.error("analytics save failed:", error instanceof Error ? error.message : error);
   }
 }
 
-// THIS SECTION DOES: one tiny read, so a free Supabase project never looks idle and never pauses.
-// The daily job calls this. Returns whether the database answered.
+// THIS SECTION DOES: one tiny read each day, so a sleepy database stays warm and the daily job can report if it is down
 export async function keepAlive(): Promise<boolean> {
-  if (!analyticsConfigured()) return false;
-  try {
-    const { error } = await createServerClient().schema("site").from("analytics_events").select("id").limit(1);
-    return !error;
-  } catch {
-    return false;
-  }
+  const db = store();
+  return db ? db.ping() : false;
 }
 
-// THIS SECTION DOES: read the events from the last N days, a page at a time, up to a sensible cap
+// THIS SECTION DOES: the events from the last N days for the admin page
 export async function readEvents(days: number): Promise<{ events: StoredEvent[]; truncated: boolean }> {
-  const since = new Date(Date.now() - days * 86_400_000).toISOString();
-  const client = createServerClient().schema("site");
-  const events: StoredEvent[] = [];
-  const pageSize = 1000;
-  const maxPages = 60;
-  for (let page = 0; page < maxPages; page += 1) {
-    const { data, error } = await client
-      .from("analytics_events")
-      .select("at,visitor,type,path,name,referrer,seen,depth,device,source,country")
-      .gte("at", since)
-      .order("at", { ascending: true })
-      .range(page * pageSize, page * pageSize + pageSize - 1);
-    if (error) throw new Error(error.message);
-    events.push(...((data ?? []) as StoredEvent[]));
-    if (!data || data.length < pageSize) return { events, truncated: false };
-  }
-  return { events, truncated: true };
+  const db = store();
+  if (!db) return { events: [], truncated: false };
+  return db.read(days);
 }

@@ -8,7 +8,9 @@
 import assert from "node:assert/strict";
 import { randomBytes, scryptSync } from "node:crypto";
 import { test } from "node:test";
+import { newDb } from "pg-mem";
 import { groupReferrer, summarize } from "./aggregate";
+import { createStore, type Queryable } from "./db";
 import type { StoredEvent } from "./types";
 import { makeSession, passwordMatches, sessionValid } from "../admin/session";
 
@@ -58,4 +60,32 @@ test("admin password and session cookie checks", () => {
   assert.equal(sessionValid(session.value, 2_000 + 13 * 3_600_000), false); // expired
   assert.equal(sessionValid(`${session.value.split(".")[0]}.deadbeef`, 2_000), false); // forged
   assert.equal(sessionValid(undefined, 2_000), false);
+});
+
+test("the database layer creates its own table, saves events and reads them back", async () => {
+  const { Pool } = newDb().adapters.createPg();
+  const store = createStore(new Pool() as unknown as Queryable);
+
+  assert.equal(await store.ping(), true);
+  const now = new Date().toISOString();
+  await store.save(event({ at: now, visitor: "a1", type: "view", path: "/work", referrer: "substack.com", seen: ["link:index_work:home"], device: "mobile", source: "newsletter" }));
+  await store.save(event({ at: now, visitor: "a1", type: "click", path: "/work", name: "link:index_work:home" }));
+  await store.save(event({ at: now, visitor: "a1", type: "scroll", path: "/work", depth: 75 }));
+  await store.save(event({ at: "2020-01-01T00:00:00.000Z", visitor: "old", type: "view", path: "/" })); // outside the window
+
+  const { events, truncated } = await store.read(7);
+  assert.equal(truncated, false);
+  assert.equal(events.length, 3);
+  assert.deepEqual(events.find((e) => e.type === "view")?.seen, ["link:index_work:home"]);
+  assert.equal(events.find((e) => e.type === "scroll")?.depth, 75);
+  assert.equal(events.find((e) => e.type === "click")?.name, "link:index_work:home");
+
+  // The same events feed the dashboard math.
+  const summary = summarize(events);
+  assert.equal(summary.visitors, 1);
+  assert.equal(summary.clicks, 1);
+  assert.equal(summary.referrers[0].name, "newsletter"); // a link's utm_source wins over the referring site
+
+  // The table rules reject bad data.
+  await assert.rejects(() => store.save(event({ type: "scroll", depth: 33 })));
 });

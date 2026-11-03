@@ -122,9 +122,9 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: { 
       {!analyticsConfigured() ? (
         <Panel title="Set up the database">
           <p className="max-w-reading text-body text-text-secondary">
-            The site is not connected to its analytics database yet, so nothing has been recorded. Apply
-            supabase/migrations/20261103_000002_analytics.sql, expose the site schema in Supabase, and set NEXT_PUBLIC_SUPABASE_URL and
-            SUPABASE_SERVICE_ROLE_KEY. The steps are in docs/PUBLISHING.md, under Analytics.
+            The site is not connected to an analytics database yet, so nothing has been recorded. In Vercel, open Storage, add a free
+            Neon database and connect it to this project, then redeploy. The table creates itself. The steps are in docs/PUBLISHING.md,
+            under Analytics.
           </p>
         </Panel>
       ) : failure ? (
