@@ -127,11 +127,15 @@ What it records: a one-way daily visitor code (not an IP address), the page, the
 
 ### One-time setup (Brant or an agent with Vercel access)
 
-1. **Database (free, no SQL).** In Vercel, open the project, then **Storage**, add a free **Neon** (Postgres) database and connect it to this project. Vercel adds `DATABASE_URL` and `POSTGRES_URL` for you. The analytics table creates itself the first time a visit is saved. (Any Postgres works: set `ANALYTICS_DATABASE_URL` by hand instead.) Keep this database for analytics only; do not reuse the database of another product.
-2. **Vercel settings** (Production and Preview): `ANALYTICS_SALT` and `REVALIDATE_SECRET` (any long random strings; make each with `openssl rand -hex 32`).
-3. **Admin sign-in.** On your own computer run `node tools/admin/hash-password.mjs "a long password"`. Put the two lines it prints (`ADMIN_PASSWORD_HASH` and `JWT_SECRET`) into the Vercel settings. The password itself is never stored.
-4. **The AI chatbot.** Set `OPENAI_API_KEY` (optionally `AI_MODEL`). Without it, `/ask` still answers from the public notes with no model.
-5. Redeploy. Open `/admin/login`, sign in once on each of your own devices so your visits are not counted.
+Only three things, and two of them are one click each:
+
+1. **Database (free, no SQL).** In Vercel, open the project, then **Storage**, add a free **Neon** (Postgres) database and connect it to this project (Production and Preview). The site finds its address on its own, whatever prefix was chosen, and creates the analytics table the first time a visit is saved. Keep this database for analytics only. (Or set `ANALYTICS_DATABASE_URL` by hand to any Postgres address.)
+2. **Admin password.** Add one setting in Vercel, named `ADMIN_PASSWORD`, with a long password of your choice (turn Sensitive on). That is the whole sign-in setup. (`ADMIN_PASSWORD_HASH`, a one-way scrypt hash from `tools/admin/hash-password.mjs`, works instead for anyone who prefers not to store the plain password.)
+3. **The AI chatbot.** Set `OPENAI_API_KEY` (optionally `AI_MODEL`). Without it, `/ask` still answers from the public notes with no model.
+
+Then redeploy, open `/admin/login`, and sign in once on each of your own devices so your visits are not counted.
+
+**Optional settings.** None of these are needed to start. `REVALIDATE_SECRET`: lets an agent refresh the site instantly with `/api/revalidate` (without it, pages refresh about hourly). `CRON_SECRET`: extra protection for the daily job (without it, only Vercel's own scheduler is accepted). `INDEXNOW_KEY`: a fixed IndexNow key (without it, one is made from the admin password setting). `ANALYTICS_SALT`: extra randomness for the anonymous visitor codes. `JWT_SECRET`: a separate key for the sign-in cookie.
 
 Vercel Web Analytics is also on (`@vercel/analytics`) and works with no setup beyond enabling it in the Vercel dashboard.
 
@@ -192,4 +196,4 @@ Nothing is edited or deployed on release day. Posts flip on their own: the Writi
 
 ### One-time setup for this
 
-Vercel settings (Production): `CRON_SECRET` (any long random string, so the daily job is allowed), `INDEXNOW_KEY` (8 to 128 letters, numbers or hyphens), `REVALIDATE_SECRET` (see section 2), and `SITE_INDEXABLE=true` on the day the domain moves. Then submit the sitemap in Google Search Console.
+Vercel settings (Production): nothing is required in advance. On the day the domain moves, set `SITE_INDEXABLE=true` and redeploy. Set `REVALIDATE_SECRET` if an agent will call the refresh command in step 3. Then submit the sitemap in Google Search Console.

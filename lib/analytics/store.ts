@@ -13,9 +13,17 @@ import { Pool } from "pg";
 import { createStore } from "@/lib/analytics/db";
 import type { StoredEvent } from "@/lib/analytics/types";
 
+const isPostgres = (value: string | undefined): value is string => Boolean(value && /^postgres(ql)?:\/\//.test(value));
+
+// Known names first. Then any setting whose value is a Postgres address, so a custom
+// prefix chosen when connecting the database in Vercel (such as STORAGE_URL) still works.
 function connectionString(): string | null {
-  const value = process.env.ANALYTICS_DATABASE_URL || process.env.POSTGRES_URL || process.env.DATABASE_URL;
-  return value && value.startsWith("postgres") ? value : null;
+  for (const name of ["ANALYTICS_DATABASE_URL", "POSTGRES_URL", "DATABASE_URL"]) {
+    const value = process.env[name];
+    if (isPostgres(value)) return value;
+  }
+  const pooled = Object.entries(process.env).find(([name, value]) => isPostgres(value) && !/UNPOOLED|NON_POOLING|PRISMA|NO_SSL/i.test(name));
+  return pooled ? (pooled[1] as string) : null;
 }
 
 export function analyticsConfigured(): boolean {

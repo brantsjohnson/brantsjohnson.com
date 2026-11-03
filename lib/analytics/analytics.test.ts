@@ -62,6 +62,19 @@ test("admin password and session cookie checks", () => {
   assert.equal(sessionValid(undefined, 2_000), false);
 });
 
+test("one ADMIN_PASSWORD setting is enough to sign in", () => {
+  delete process.env.ADMIN_PASSWORD_HASH;
+  delete process.env.JWT_SECRET;
+  process.env.ADMIN_PASSWORD = "a plain password 123";
+  assert.equal(passwordMatches("a plain password 123"), true);
+  assert.equal(passwordMatches("a plain password 124"), false);
+  const session = makeSession(1_000);
+  assert.equal(sessionValid(session.value, 2_000), true);
+  process.env.ADMIN_PASSWORD = "changed password 456";
+  assert.equal(sessionValid(session.value, 2_000), false); // changing the password signs everyone out
+  delete process.env.ADMIN_PASSWORD;
+});
+
 test("the database layer creates its own table, saves events and reads them back", async () => {
   const { Pool } = newDb().adapters.createPg();
   const store = createStore(new Pool() as unknown as Queryable);

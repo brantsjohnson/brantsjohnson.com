@@ -11,7 +11,7 @@ export const runtime = "nodejs";
 
 export async function POST(request: Request) {
   if (!adminConfigured()) {
-    return Response.json({ error: "Admin sign-in is not set up. Set ADMIN_PASSWORD_HASH and JWT_SECRET." }, { status: 503 });
+    return Response.json({ error: "Admin sign-in is not set up. Set ADMIN_PASSWORD in Vercel." }, { status: 503 });
   }
   if (!rateLimit(`admin-login:${getClientIp(request)}`, 5, 60_000).allowed) {
     return Response.json({ error: "Too many tries. Wait a minute." }, { status: 429 });

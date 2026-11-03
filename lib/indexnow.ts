@@ -10,12 +10,17 @@
 // ============================================
 
 import "server-only";
+import { createHash } from "node:crypto";
 
 export const INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow";
 
+// The key is INDEXNOW_KEY if set. Otherwise it is made (one-way) from the admin password setting,
+// so nothing extra needs to be configured. It is not secret: IndexNow publishes it at /indexnow-key.txt.
 export function indexNowKey(): string | null {
   const key = process.env.INDEXNOW_KEY?.trim();
-  return key && /^[A-Za-z0-9-]{8,128}$/.test(key) ? key : null;
+  if (key && /^[A-Za-z0-9-]{8,128}$/.test(key)) return key;
+  const seed = process.env.JWT_SECRET || process.env.ADMIN_PASSWORD_HASH || process.env.ADMIN_PASSWORD;
+  return seed ? createHash("sha256").update(`indexnow|${seed}`).digest("hex").slice(0, 32) : null;
 }
 
 // THIS SECTION DOES: send up to 10,000 addresses from this site to IndexNow

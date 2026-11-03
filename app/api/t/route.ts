@@ -57,7 +57,7 @@ export async function POST(request: Request) {
     : null;
 
   const day = new Date().toISOString().slice(0, 10);
-  const salt = process.env.ANALYTICS_SALT || process.env.JWT_SECRET || "brantsjohnson";
+  const salt = process.env.ANALYTICS_SALT || process.env.JWT_SECRET || process.env.ADMIN_PASSWORD_HASH || process.env.ADMIN_PASSWORD || "brantsjohnson";
   const visitor = createHash("sha256").update(`${salt}|${day}|${ip}|${userAgent}`).digest("hex").slice(0, 16);
 
   await saveEvent({

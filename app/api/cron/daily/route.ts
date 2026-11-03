@@ -15,8 +15,12 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
+  // With CRON_SECRET set, Vercel sends it and it must match. Without it, only Vercel's own scheduler
+  // (its user agent) is allowed. The job only refreshes pages, so this is a safe default.
   const secret = process.env.CRON_SECRET;
-  if (!secret || request.headers.get("authorization") !== `Bearer ${secret}`) {
+  const fromVercel = (request.headers.get("user-agent") ?? "").startsWith("vercel-cron/");
+  const allowed = secret ? request.headers.get("authorization") === `Bearer ${secret}` : fromVercel;
+  if (!allowed) {
     return Response.json({ error: "Not allowed." }, { status: 401 });
   }
   revalidateTag(WRITING_TAG);

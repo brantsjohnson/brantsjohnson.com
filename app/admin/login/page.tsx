@@ -21,7 +21,7 @@ export default function AdminLoginPage() {
           <LoginForm />
         ) : (
           <p className="max-w-reading text-body text-text-secondary">
-            Admin sign-in is not set up yet. Set ADMIN_PASSWORD_HASH and JWT_SECRET in the site settings. The steps are in docs/PUBLISHING.md,
+            Admin sign-in is not set up yet. Add a setting named ADMIN_PASSWORD in Vercel (your password) and redeploy. The steps are in docs/PUBLISHING.md,
             under Analytics.
           </p>
         )}
