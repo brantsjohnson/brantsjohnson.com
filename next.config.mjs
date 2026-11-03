@@ -64,6 +64,18 @@ const wixToNextRedirects = [
 const nextConfig = {
   reactStrictMode: true,
 
+  // Files read at request time must be packed into the serverless functions.
+  experimental: {
+    outputFileTracingIncludes: {
+      "/**": ["./content/posts/**/*", "./content/about-brant.md"],
+    },
+  },
+
+  // /writing/<slug>.md serves the post as plain markdown for AI tools and agents.
+  async rewrites() {
+    return [{ source: "/writing/:slug.md", destination: "/api/post-md/:slug" }];
+  },
+
   async redirects() {
     return wixToNextRedirects.map(({ old, next }) => ({
       source: old,

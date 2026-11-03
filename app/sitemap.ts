@@ -10,10 +10,10 @@ import { eventDetails } from "@/content/events";
 import { poems } from "@/content/poems";
 import { identity } from "@/content/site-content";
 import { workDetails } from "@/content/work";
-import { getPublicWriting } from "@/lib/writing/public-posts";
+import { availablePosts } from "@/lib/posts/load";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const writing = await getPublicWriting();
+  const posts = availablePosts();
   const paths = [
     "",
     "/about",
@@ -28,6 +28,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...communityDetails.map((item) => item.path),
     "/writing",
     "/writing/poetry",
+    "/writing/archive",
+    ...posts.map((post) => `/writing/${post.slug}`),
     ...poems.map((poem) => `/writing/poetry/${poem.slug}`),
     "/contact",
     "/ask",
@@ -35,16 +37,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   const dated = new Date();
-  return [
-    ...paths.map((path) => ({
-      url: `${identity.siteUrl}${path || "/"}`,
-      lastModified: dated,
-    })),
-    ...writing.posts
-      .filter((post) => !post.external)
-      .map((post) => ({
-        url: `${identity.siteUrl}${post.href}`,
-        lastModified: dated,
-      })),
-  ];
+  const written = new Map(posts.map((post) => [`/writing/${post.slug}`, new Date(`${post.written}T12:00:00Z`)]));
+  return paths.map((path) => ({
+    url: `${identity.siteUrl}${path || "/"}`,
+    lastModified: written.get(path) ?? dated,
+  }));
 }

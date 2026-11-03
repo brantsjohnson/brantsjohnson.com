@@ -16,6 +16,8 @@ import { readFileSync } from "fs";
 import { join } from "path";
 import brantKnowledge from "@/data/brant-knowledge.json";
 import { articleDate, articles } from "@/content/writing/articles";
+import { listedPosts } from "@/lib/posts/load";
+import { postDate } from "@/lib/posts/model";
 
 // THIS SECTION DOES: describe the shape of the facts file so the rest of the
 // code gets type help. Optional sections may or may not be present.
@@ -100,8 +102,10 @@ export function generateKnowledgeBaseText(): string {
   const notes = readFileSync(notesPath, "utf8");
   // Articles come from content/writing/articles.ts, so a new article is known
   // to the assistant as soon as it is added there. No change to the notes is needed.
-  const list = articles
-    .map((article) => `- "${article.title}" (${articleDate(article.date)}): ${article.url}${article.summary ? ` ${article.summary}` : ""}`)
-    .join("\n");
+  // Only posts already listed on the site are included. Unlisted posts stay out of the chat until their release day.
+  const list = [
+    ...listedPosts().map((post) => `- "${post.title}" (${postDate(post.releaseDate)}): /writing/${post.slug} ${post.summary}`),
+    ...articles.map((article) => `- "${article.title}" (${articleDate(article.date)}): ${article.url}${article.summary ? ` ${article.summary}` : ""}`),
+  ].join("\n");
   return list ? `${notes}\n\n## Published articles\n\n${list}\n` : notes;
 }

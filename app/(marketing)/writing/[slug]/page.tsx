@@ -1,62 +1,97 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is one essay or letter. If the piece is a mirror of a
-// newsletter, the page points at the original and tells search
-// engines that original is the canonical copy.
+// One post, written on this site. Every post that is not a draft has a
+// working page. A post whose release day has not come yet is
+// "unlisted": the page works and search engines and AI tools can read
+// it (it is in the sitemap and llms.txt), but the site does not list it
+// anywhere and the page shows no date. On its release day it becomes
+// "listed" on its own and the date appears. Everyone, human or
+// machine, sees the same page; nothing is hidden from visitors or
+// shown only to crawlers. See docs/PUBLISHING.md.
 // ============================================
 
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getWritingPost, writingPosts } from "@/content/writing/posts";
+import { Markdown } from "@/components/editorial/Markdown";
+import { PageHeader } from "@/components/editorial/PageHeader";
+import { StoryLink } from "@/components/narrative/StoryLink";
+import { availablePosts, getPost } from "@/lib/posts/load";
+import { postJsonLd } from "@/lib/posts/jsonld";
+import { postDate } from "@/lib/posts/model";
+import { indexingRobots } from "@/lib/site/indexing";
+import { pageMetadata } from "@/lib/site/page-metadata";
+import { siteOrigin } from "@/lib/site/origin";
 
 type PageProps = { params: { slug: string } };
 
+// Rebuilt about hourly so a post flips from unlisted to listed on its release day without anyone editing anything.
+export const revalidate = 3600;
+
 export function generateStaticParams() {
-  return writingPosts.map((post) => ({ slug: post.slug }));
+  return availablePosts().map((post) => ({ slug: post.slug }));
 }
 
-export const dynamicParams = false;
-
 export function generateMetadata({ params }: PageProps): Metadata {
-  const post = getWritingPost(params.slug);
-  if (!post) return { title: "Writing" };
-  return {
+  const found = getPost(params.slug);
+  if (!found) return {};
+  const { post, state } = found;
+  const base = pageMetadata({
     title: post.title,
-    description: post.excerpt,
-    alternates: post.canonicalUrl ? { canonical: post.canonicalUrl } : undefined,
+    description: post.summary,
+    path: `/writing/${post.slug}`,
+    image: post.cover ? { photo: { src: post.cover.src, alt: post.cover.alt, width: 1200, height: 630 } } : { kicker: "Writing" },
+    article: state === "listed" ? { publishedTime: post.releaseDate } : undefined,
+  });
+  return {
+    ...base,
+    // Unlisted is not private: once the site is open to indexing, so is this page.
+    robots: indexingRobots(),
+    alternates: { canonical: `/writing/${post.slug}`, types: { "text/markdown": `/writing/${post.slug}.md` } },
   };
 }
 
+function Tags({ tags }: { tags: string[] }) {
+  if (tags.length === 0) return null;
+  return (
+    <ul className="mt-8 flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <li key={tag} className="label rounded-control border border-border-subtle px-3 py-1 text-[0.66rem] text-text-secondary">
+          {tag}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default function WritingPostPage({ params }: PageProps) {
-  const post = getWritingPost(params.slug);
-  if (!post) notFound();
+  const found = getPost(params.slug);
+  if (!found) notFound();
+  const { post, state } = found;
+  const jsonLd = postJsonLd(post, state, siteOrigin());
 
   return (
-    <article className="shell max-w-reading py-16">
-      <p className="text-caption uppercase tracking-[0.18em] text-text-secondary">
-        {post.kind === "essay" ? "Government reform" : "Newsletter"} · {post.published}
-      </p>
-      <h1 className="mt-4 font-serif text-h1 text-ink">{post.title}</h1>
-      <div className="mt-8 flex flex-col gap-6">
-        {post.paragraphs.map((paragraph) => (
-          <p key={paragraph.slice(0, 32)} className="text-body">
-            {paragraph}
+    <article>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <PageHeader id={post.slug} label={state === "listed" ? `Writing · ${postDate(post.releaseDate)}` : "Writing"} title={post.title} lead={post.summary} />
+      <div className="shell pb-24">
+        <div className="max-w-reading">
+          <Markdown source={post.body} />
+          <Tags tags={post.tags} />
+          {post.substackUrl ? (
+            <p className="mt-10">
+              <StoryLink href={post.substackUrl} track={`link:substack:post_${post.slug}`}>
+                Also on Substack
+              </StoryLink>
+            </p>
+          ) : null}
+          <p className="mt-10">
+            <Link href="/writing" data-track="link:writing_index:post" className="label inline-flex min-h-[44px] items-center gap-3 text-ink hover:text-accent-deep">
+              <span aria-hidden="true">←</span> All writing
+            </Link>
           </p>
-        ))}
+        </div>
       </div>
-      {post.canonicalUrl && (
-        <p className="mt-10 text-body">
-          <a href={post.canonicalUrl} data-track={`link:canonical:${post.slug}`} className="underline decoration-accent underline-offset-4">
-            Read the original
-          </a>
-        </p>
-      )}
-      <p className="mt-10">
-        <Link href="/writing" data-track="link:writing_index:post" className="text-body underline decoration-accent underline-offset-4">
-          All writing
-        </Link>
-      </p>
     </article>
   );
 }

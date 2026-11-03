@@ -12,10 +12,14 @@
 //     -d '{"paths":["/writing","/work/crew"]}'
 //
 // Leaving the body empty refreshes the writing feeds and the main pages.
+// Add "indexnow": true to also notify search engines about every post right now.
 // ============================================
 
 import { timingSafeEqual } from "node:crypto";
 import { revalidatePath, revalidateTag } from "next/cache";
+import { submitToIndexNow } from "@/lib/indexnow";
+import { availablePosts } from "@/lib/posts/load";
+import { siteOrigin } from "@/lib/site/origin";
 import { WRITING_TAG } from "@/lib/writing/feeds";
 import { getClientIp, rateLimit } from "@/lib/utils/rate-limit";
 
@@ -40,7 +44,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "Not allowed." }, { status: 401 });
   }
 
-  let body: { paths?: unknown } = {};
+  let body: { paths?: unknown; indexnow?: unknown } = {};
   try {
     body = await request.json();
   } catch {
@@ -51,5 +55,19 @@ export async function POST(request: Request) {
 
   revalidateTag(WRITING_TAG);
   for (const path of paths) revalidatePath(path);
-  return Response.json({ ok: true, refreshed: paths, tag: WRITING_TAG });
+  for (const path of ["/writing/archive", "/llms.txt", "/llms-full.txt", "/sitemap.xml"]) revalidatePath(path);
+
+  // With "indexnow": true, also tell search engines (and through Bing, AI search) about every available post now.
+  let indexnow: Awaited<ReturnType<typeof submitToIndexNow>> | undefined;
+  if (body.indexnow === true) {
+    const origin = siteOrigin();
+    indexnow = await submitToIndexNow(origin, [
+      `${origin}/`,
+      `${origin}/writing`,
+      `${origin}/writing/archive`,
+      ...availablePosts().map((post) => `${origin}/writing/${post.slug}`),
+      ...paths.map((path) => `${origin}${path}`),
+    ]);
+  }
+  return Response.json({ ok: true, refreshed: paths, tag: WRITING_TAG, indexnow });
 }

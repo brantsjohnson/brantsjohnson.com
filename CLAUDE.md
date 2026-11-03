@@ -15,6 +15,7 @@ Senior product manager, creator, performer, entrepreneur and activist from Utah.
 - Events: an archive grouped by kind (`/events`), with one page per event at `/events/[slug]`. Add a new event as one entry in `content/events.ts`. Do not claim he produced an event alone or that he attended every event in a portfolio.
 - Community: the Archway and the Resilience Scholarship lead, with their own pages. Public service and student government sit beneath them.
 - Writing: simple dated lists of Articles and Poetry. One poem per page under `/writing/poetry`, line breaks kept exactly.
+- Posts written on this site live in `content/posts/*.md`. Each is unlisted (page works, in the sitemap, `llms.txt` and the archive, not listed on the site) until its `releaseDate`, then listed automatically. Never show crawlers different content than visitors. Details in `docs/PUBLISHING.md`, section 10.
 - Contact: email and a short form. Footer on every page: email, the menu, Full CV, Ask about me, LinkedIn, Substack. Keep the résumé link hidden until `public/resume.pdf` exists.
 - Home page: the headline "Good things deserve to happen." is the page's one h1, with the headshot, an index of the main places, and four places to start.
 - Copy source of truth: the approved copy doc (ideas, people and events edition). Where it says a detail is still to be confirmed (the Governor's Economic Summit year, Uintah County tourism events), leave the detail out.

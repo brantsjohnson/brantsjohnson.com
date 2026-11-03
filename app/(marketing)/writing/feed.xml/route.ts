@@ -1,50 +1,46 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the RSS feed for pieces published on this site. It is
-// available only when a real local post exists. Newsletter mirrors
-// point their canonical link at the original.
+// The RSS feed for posts written on this site. It lists only posts
+// that are "listed" today, so readers who subscribe see one post a day
+// as each release day arrives. Search engines and AI tools get every
+// post from the sitemap and llms.txt instead.
 // ============================================
 
-import { identity } from "@/content/site-content";
-import { postsNewestFirst } from "@/content/writing/posts";
+import { listedPosts } from "@/lib/posts/load";
+import { siteOrigin } from "@/lib/site/origin";
+
+export const revalidate = 3600;
 
 function escapeXml(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+  return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
 export function GET() {
-  const posts = postsNewestFirst();
+  const origin = siteOrigin();
+  const posts = listedPosts();
   if (posts.length === 0) {
     return new Response("No posts yet.", { status: 404 });
   }
   const items = posts
     .map((post) => {
-      const link = post.canonicalUrl ?? `${identity.siteUrl}/writing/${post.slug}`;
+      const link = `${origin}/writing/${post.slug}`;
       return `<item>
         <title>${escapeXml(post.title)}</title>
         <link>${escapeXml(link)}</link>
-        <guid>${escapeXml(`${identity.siteUrl}/writing/${post.slug}`)}</guid>
-        <pubDate>${escapeXml(new Date(post.published).toUTCString())}</pubDate>
-        <description>${escapeXml(post.excerpt)}</description>
+        <guid>${escapeXml(link)}</guid>
+        <pubDate>${new Date(`${post.releaseDate}T12:00:00Z`).toUTCString()}</pubDate>
+        <description>${escapeXml(post.summary)}</description>
       </item>`;
     })
-    .join("");
-
+    .join("\n");
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>${escapeXml(identity.fullName)} writing</title>
-    <link>${identity.siteUrl}/writing</link>
-    <description>Government reform essays and newsletter letters.</description>
+    <title>Brant S. Johnson</title>
+    <link>${escapeXml(`${origin}/writing`)}</link>
+    <description>Writing by Brant S. Johnson.</description>
     ${items}
   </channel>
 </rss>`;
-
-  return new Response(xml, {
-    headers: { "Content-Type": "application/rss+xml; charset=utf-8" },
-  });
+  return new Response(xml, { headers: { "Content-Type": "application/rss+xml; charset=utf-8" } });
 }

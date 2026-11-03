@@ -10,6 +10,7 @@ Rules that never change (also in `CLAUDE.md`): first person, plain and warm; no 
 
 | You are publishing | It lives in | It shows up on |
 |---|---|---|
+| A post written on this site, pre-written and released one a day | `content/posts/<slug>.md` (see section 10) | `/writing` once released; findable by search and AI from day one |
 | A Substack article (articles, events newsletter, GitHub newsletter) | The newsletter itself. The site reads its feed. Optional extras in `content/writing/articles.ts` | `/writing`, a "Read more" link on any page it is about, the "Ask about me" chatbot |
 | A Crew article (or any article about a role) | `content/writing/articles.ts` with `about: ["work/crew"]` | `/writing`, plus "Read more" under Crew Finance on `/work` and on `/work/crew` |
 | A change to what a role says (a bullet) | `content/work.ts` (the item's `summary`) | `/work` and the matching `/work/<slug>` page |
@@ -147,3 +148,48 @@ Vercel Web Analytics is also on (`@vercel/analytics`) and works with no setup be
 - Mastercard or Visa for the Crew card program (see section 4).
 - Feed addresses for the events newsletter and the GitHub newsletter, when they exist.
 - The year and exact role for the Governor's Economic Summit, and the named Uintah County tourism events, before those pages say more.
+
+## 10. Pre-write posts and release one a day (unlisted, but findable)
+
+**The idea.** Write 20 posts now. Search engines and AI tools can find and read all 20 immediately, but the site lists only one a day. Each post has three states, decided by its `releaseDate` in Denver time:
+
+| State | When | Page works | In sitemap, llms.txt, archive | On `/writing`, in the feed, on Work/Event "Read more", known to the chatbot | Date shown |
+|---|---|---|---|---|---|
+| draft | `draft: true` | no (404) | no | no | no |
+| **unlisted** | before `releaseDate` | yes | **yes** | no | no |
+| **listed** | from `releaseDate` | yes | yes | **yes** | yes |
+
+Nothing is edited or deployed on release day. Posts flip on their own: the Writing page and files rebuild about hourly, and a daily job (`vercel.json`, shortly after midnight Denver) refreshes them. Everyone, human or machine, sees the same page; nothing is shown only to crawlers.
+
+### Steps for an agent
+
+1. For each post add `content/posts/<slug>.md` using the template in `content/posts/README.md`. Stagger `releaseDate` (one per day). Set `written` to today.
+2. `npm test` must pass (it names any mistake). Open a pull request. Merge only after Brant approves.
+3. After the merge deploys, run the refresh with the search notice:
+   ```
+   curl -X POST https://www.brantsjohnson.com/api/revalidate \
+     -H "x-revalidate-secret: $REVALIDATE_SECRET" -H "Content-Type: application/json" \
+     -d '{"indexnow":true}'
+   ```
+4. Each day, to market a post, share its address (`https://www.brantsjohnson.com/writing/<slug>`). When you post it to Substack, add `substackUrl:` to the file in a small pull request. The site then shows its own version once, and the Substack link on the page.
+5. To pull a post back, set `draft: true`. To change a release day, change `releaseDate`.
+
+### What makes it findable
+
+- `sitemap.xml` lists every non-draft post. `llms.txt` is a plain-text map of the site and every post, for AI tools. `llms-full.txt` is the full text of every post. `/writing/<slug>.md` is any post as plain markdown. `/writing/archive` is a crawlable list of everything, linked from nowhere on the site.
+- Each post page carries `Article` structured data (title, author, summary, topics, word count). Before release it gives only the date written, never a future published date.
+- `robots.txt` welcomes search engines and the main AI crawlers (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot, Bingbot and others), and keeps `/admin` and `/api` closed. **This only applies once the site is live on the real domain with `SITE_INDEXABLE=true`.** Until the move off Wix, the site and its previews tell every crawler to stay out. Set `SITE_INDEXABLE=true` in Vercel and **redeploy** (pages read it when they are built).
+- **IndexNow** (`/api/revalidate` with `"indexnow": true`) tells Bing and other search engines at once. Bing's index feeds ChatGPT search, Copilot and Perplexity. Set `INDEXNOW_KEY` in Vercel.
+- **Google** does not use IndexNow. Once, in Google Search Console, add the site and submit `sitemap.xml`. Google then reads it on its own schedule. "Request indexing" can speed up single pages, with a small daily limit.
+
+### Honest limits
+
+- **Unlisted is not private.** Anyone with a post's address, or who finds it through search or `/writing/archive`, can read it. Do not use this for anything embargoed or sensitive. For that, keep it as a draft.
+- Nobody can make an AI tool or search engine index a page on a set day. These steps remove the obstacles (no link to follow, no sitemap entry, nothing to tell them) so discovery usually takes days, not the 20 days of waiting.
+- Do not show crawlers different content than visitors. Search engines treat that as cloaking and can drop the site. This setup avoids it on purpose.
+- The "Ask about me" chatbot only knows listed posts, so it never reveals an unlisted one early.
+- If a post is on Substack **and** here, they are duplicates. This site's page is the canonical one. Add "Originally published at brantsjohnson.com/writing/<slug>" to the Substack post.
+
+### One-time setup for this
+
+Vercel settings (Production): `CRON_SECRET` (any long random string, so the daily job is allowed), `INDEXNOW_KEY` (8 to 128 letters, numbers or hyphens), `REVALIDATE_SECRET` (see section 2), and `SITE_INDEXABLE=true` on the day the domain moves. Then submit the sitemap in Google Search Console.

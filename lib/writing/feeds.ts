@@ -13,6 +13,7 @@
 import "server-only";
 import { articleDate, articles, type Article } from "@/content/writing/articles";
 import { writingSources, type WritingSource } from "@/content/writing/sources";
+import { listedPosts } from "@/lib/posts/load";
 
 export const WRITING_TAG = "writing";
 
@@ -24,6 +25,7 @@ export type WritingItem = {
   dateLabel: string;
   source: WritingSource["id"];
   summary?: string;
+  internal?: boolean; // a post written on this site (opens here, not in a new tab)
 };
 
 export type WritingGroup = { source: WritingSource; items: WritingItem[] };
@@ -102,7 +104,24 @@ export async function getWritingGroups(): Promise<WritingGroup[]> {
     const saved = articles.filter((article) => article.source === source.id).map(fromArticle);
     const savedKeys = new Set(saved.map((item) => pathKey(item.url)));
     const live = (await readFeed(source)).filter((item) => !savedKeys.has(pathKey(item.url)));
-    const items = [...saved, ...live].sort((a, b) => (a.dateIso < b.dateIso ? 1 : -1));
+    // Posts written on this site join the main Articles list once their release day arrives.
+    const written: WritingItem[] =
+      source.id === "articles"
+        ? listedPosts().map((post) => ({
+            id: `post:${post.slug}`,
+            title: post.title,
+            url: `/writing/${post.slug}`,
+            dateIso: post.releaseDate,
+            dateLabel: articleDate(post.releaseDate),
+            source: "articles" as const,
+            summary: post.summary,
+            internal: true,
+          }))
+        : [];
+    // If a post is also on Substack, show the site's version once.
+    const onSite = new Set(listedPosts().filter((post) => post.substackUrl).map((post) => pathKey(post.substackUrl as string)));
+    const others = [...saved, ...live].filter((item) => !onSite.has(pathKey(item.url)));
+    const items = [...written, ...others].sort((a, b) => (a.dateIso < b.dateIso ? 1 : -1));
     groups.push({ source, items });
   }
   return groups;

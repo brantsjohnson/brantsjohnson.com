@@ -54,15 +54,25 @@ export default async function WritingPage() {
                   <li key={item.id} className="grid gap-1 border-t border-border-subtle py-6 first:border-t-0 first:pt-0 sm:grid-cols-[9rem_1fr] sm:gap-6">
                     <p className="label pt-2 text-[0.68rem] text-text-secondary">{item.dateLabel}</p>
                     <div>
-                      <a
-                        href={item.url}
-                        data-track={`link:open_writing:${item.source}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-serif text-[1.7rem] leading-tight text-ink underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:decoration-accent"
-                      >
-                        {item.title}
-                      </a>
+                      {item.internal ? (
+                        <Link
+                          href={item.url}
+                          data-track={`link:open_writing:${item.source}`}
+                          className="font-serif text-[1.7rem] leading-tight text-ink underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:decoration-accent"
+                        >
+                          {item.title}
+                        </Link>
+                      ) : (
+                        <a
+                          href={item.url}
+                          data-track={`link:open_writing:${item.source}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-serif text-[1.7rem] leading-tight text-ink underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:decoration-accent"
+                        >
+                          {item.title}
+                        </a>
+                      )}
                       {item.summary ? <p className="mt-2 max-w-reading text-caption text-text-secondary">{item.summary}</p> : null}
                     </div>
                   </li>
