@@ -16,8 +16,8 @@ function sentences(answer: string): string[] {
 test("preset answers stay short and on topic", () => {
   const expected = [
     { question: PRESET_QUESTIONS[0], include: /Intro/i, also: /Bridger/i, exclude: /Romney|Archway|TEDx|Utah Valley|\$|TestFlight|1,778/i },
-    { question: PRESET_QUESTIONS[1], include: /Utah Valley University/i, exclude: /Archway|TEDx|Pendo|Habitat|student body|scholarship|Crew/i },
-    { question: PRESET_QUESTIONS[2], include: /Crew/i, exclude: /Utah Valley|Bridger|Archway|TEDx|\$/i },
+    { question: PRESET_QUESTIONS[1], include: /Crew/i, also: /Mastercard/i, exclude: /Utah Valley|Bridger|Archway|TEDx|Visa|\$/i },
+    { question: PRESET_QUESTIONS[2], include: /Archway/i, exclude: /Utah Valley|Bridger|Crew|TEDx|\$/i },
     { question: PRESET_QUESTIONS[3], include: /me@brantsjohnson.com/i, exclude: /Archway|TEDx|Crew|Utah Valley/i },
   ];
 

@@ -13,12 +13,14 @@ import { PageHeader } from "@/components/editorial/PageHeader";
 import { Prose } from "@/components/editorial/Prose";
 import { Reveal } from "@/components/editorial/Reveal";
 import { eventGroups, eventsIntro } from "@/content/events";
+import { sectionCovers } from "@/content/covers";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "Events",
   description: eventsIntro.description,
   path: "/events",
+  image: { photo: sectionCovers.events },
 });
 
 export default function EventsPage() {

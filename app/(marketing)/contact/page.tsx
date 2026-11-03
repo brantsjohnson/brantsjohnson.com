@@ -16,6 +16,7 @@ export const metadata: Metadata = pageMetadata({
   title: "Contact",
   description: "Get in touch with Brant Johnson by email or LinkedIn.",
   path: "/contact",
+  image: { kicker: "Contact" },
 });
 
 export default function ContactPage() {
@@ -31,10 +32,6 @@ export default function ContactPage() {
             </TextLink>
           </div>
           <div className="mt-8 flex flex-col gap-1">
-          <p className="label mb-1 text-text-secondary">Other email</p>
-          <TextLink href={`mailto:${identity.email}`} track="link:email:contact">
-            {identity.email}
-          </TextLink>
           <TextLink href={identity.linkedin} track="link:linkedin:contact">
             LinkedIn
           </TextLink>

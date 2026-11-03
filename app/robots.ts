@@ -11,7 +11,7 @@ import { identity } from "@/content/site-content";
 export default function robots(): MetadataRoute.Robots {
   if (process.env.SITE_INDEXABLE === "true") {
     return {
-      rules: { userAgent: "*", allow: "/" },
+      rules: { userAgent: "*", allow: ["/", "/og/"], disallow: ["/admin", "/api/"] },
       sitemap: `${identity.siteUrl}/sitemap.xml`,
       host: identity.siteUrl,
     };

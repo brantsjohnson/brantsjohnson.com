@@ -44,6 +44,7 @@ Senior product manager, creator, performer, entrepreneur and activist from Utah.
 - No secrets, API keys or tokens in the repo. The site needs none.
 
 ## How to work
+- Publishing guide for agents: `docs/PUBLISHING.md`. It says where each kind of content lives (articles, events, work stories, poems, CV, photos), the exact fields, how a new Substack article reaches the site, how share previews work, and the analytics and admin setup. Read it first.
 - Work on a branch and open a pull request. Do not push to `main`.
 - Before asking for review, run locally: `npm ci`, `npm test`, `npm run typecheck`, `npm run lint`, `npm run build`. GitHub Actions is turned off, so local checks are the gate.
 - Also check built pages for em dashes and the word "actually".

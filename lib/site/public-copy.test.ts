@@ -119,7 +119,8 @@ test("public copy names the headline and Bridger, and does not link a missing r�
     footerNav.some((item) => item.href === "/resume.pdf" || item.label === "See résumé"),
     false
   );
-  assert.match(joined, /brantshanonjohnson@gmail.com/);
+  assert.match(joined, /me@brantsjohnson.com/);
+  assert.doesNotMatch(joined, /gmail/);
   assert.match(joined, /constituents/);
   assert.match(joined, /Crew wordmark Brant designed in 2024/);
   assert.doesNotMatch(joined, /I did not own a roadmap/);

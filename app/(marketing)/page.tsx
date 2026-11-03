@@ -7,6 +7,7 @@
 import type { Metadata } from "next";
 import { HomePage } from "@/components/editorial/HomePage";
 import { hero } from "@/content/narrative";
+import { headshot } from "@/content/photos";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
     title: "Brant S. Johnson | Good ideas deserve to happen.",
     description: hero.description,
     path: "/",
+    image: { photo: headshot },
   }),
   title: { absolute: "Brant S. Johnson | Good ideas deserve to happen." },
 };

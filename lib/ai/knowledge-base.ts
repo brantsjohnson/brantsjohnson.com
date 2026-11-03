@@ -15,6 +15,7 @@ import "server-only";
 import { readFileSync } from "fs";
 import { join } from "path";
 import brantKnowledge from "@/data/brant-knowledge.json";
+import { articleDate, articles } from "@/content/writing/articles";
 
 // THIS SECTION DOES: describe the shape of the facts file so the rest of the
 // code gets type help. Optional sections may or may not be present.
@@ -96,5 +97,11 @@ export function getBrantKnowledge(): BrantKnowledge {
 // source the public chatbot may use.
 export function generateKnowledgeBaseText(): string {
   const notesPath = join(process.cwd(), "content", "about-brant.md");
-  return readFileSync(notesPath, "utf8");
+  const notes = readFileSync(notesPath, "utf8");
+  // Articles come from content/writing/articles.ts, so a new article is known
+  // to the assistant as soon as it is added there. No change to the notes is needed.
+  const list = articles
+    .map((article) => `- "${article.title}" (${articleDate(article.date)}): ${article.url}${article.summary ? ` ${article.summary}` : ""}`)
+    .join("\n");
+  return list ? `${notes}\n\n## Published articles\n\n${list}\n` : notes;
 }

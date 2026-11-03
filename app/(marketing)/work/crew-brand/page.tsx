@@ -24,6 +24,7 @@ export const metadata: Metadata = pageMetadata({
   title: crewBrandPage.metaTitle,
   description: crewBrandPage.description,
   path: crewBrandPage.path,
+  image: { photo: crewBrandMedia.drawings[1] },
 });
 
 export default function CrewBrandPage() {

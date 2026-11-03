@@ -69,7 +69,6 @@ export const metadata: Metadata = {
     title: identity.fullName,
     description,
   },
-  icons: { icon: "/favicon.svg" },
 };
 
 export const viewport: Viewport = {

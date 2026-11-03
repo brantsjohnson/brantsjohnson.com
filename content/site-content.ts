@@ -64,8 +64,8 @@ export const booking = {
 
 // THIS SECTION DOES: the studio inquiries address. The site did not already have one.
 export const inquiries = {
-  email: "brantshanonjohnson@gmail.com",
-  href: "mailto:brantshanonjohnson@gmail.com",
+  email: "me@brantsjohnson.com",
+  href: "mailto:me@brantsjohnson.com",
   label: "Inquiries",
 };
 
@@ -229,7 +229,7 @@ export const experience: ExperienceRole[] = [
     dates: "Dec 2022 to Apr 2024",
     place: "Remote",
     summary:
-      "I was the first employee and the only product manager. I owned the Visa card issuing program, set up KYC with banking and compliance partners, and ran onboarding experiments that cut onboarding time in half. I built the financial models for a raise, and I led the brand identity as lead illustrator.",
+      "I was the first employee and the only product manager. I owned the Mastercard card issuing program, set up KYC with banking and compliance partners, and ran onboarding experiments that cut onboarding time in half. I built the financial models for a raise, and I led the brand identity as lead illustrator.",
   },
   {
     org: "Office of Senator Mitt Romney",

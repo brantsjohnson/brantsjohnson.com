@@ -15,6 +15,7 @@ export const metadata: Metadata = pageMetadata({
   title: "Now",
   description: "What Brant Johnson is working on right now.",
   path: "/now",
+  image: { kicker: "Now" },
 });
 
 export default function NowPage() {

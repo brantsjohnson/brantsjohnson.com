@@ -25,13 +25,14 @@ const RATE_LIMIT_MAX = 20; // most messages one visitor can send...
 const RATE_LIMIT_WINDOW_MS = 60_000; // ...in this many milliseconds (1 minute)
 const MAX_MESSAGES = 20; // ignore anything older than the last 20 turns
 const MAX_MESSAGE_CHARS = 4000; // reject a single question longer than this
-const MAX_OUTPUT_TOKENS = 800; // cap the length of each AI answer
+const MAX_OUTPUT_TOKENS = 1200; // cap the length of each AI answer (room for the model to think first)
 
-// THIS SECTION DOES: pick which AI model to use. It defaults to Brant's
-// fine-tuned model, but can be overridden with the AI_MODEL environment
-// variable (for example to fall back to a base model like gpt-4o-mini).
-const MODEL_ID =
-  process.env.AI_MODEL ?? "ft:gpt-4o-mini-2024-07-18:personal:brantchat-trained:CdRL5IwO";
+// THIS SECTION DOES: pick which AI model to use. The default is a small,
+// inexpensive base model that is grounded by the public notes in the prompt.
+// Set the AI_MODEL environment variable to use a different one. The older
+// fine-tuned model is not the default, because it was trained on a file that
+// still held unverified claims.
+const MODEL_ID = process.env.AI_MODEL?.trim() || "gpt-6-luna";
 
 // THIS SECTION DOES: pull the newest visitor question text out of a message
 // so we can measure its length for the safety cap
@@ -102,7 +103,8 @@ export async function POST(request: Request) {
     system,
     messages: await convertToModelMessages(trimmedMessages),
     maxOutputTokens: MAX_OUTPUT_TOKENS,
-    temperature: 0.7,
+    maxRetries: 1, // fail fast so the page can fall back to the public notes
+    abortSignal: AbortSignal.timeout(25_000),
   });
 
   return result.toUIMessageStreamResponse();

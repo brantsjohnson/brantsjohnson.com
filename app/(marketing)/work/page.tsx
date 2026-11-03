@@ -9,14 +9,17 @@ import Link from "next/link";
 import { PageHeader } from "@/components/editorial/PageHeader";
 import { Reveal } from "@/components/editorial/Reveal";
 import { Button } from "@/components/ui/Button";
+import { articleDate, articlesAbout } from "@/content/writing/articles";
 import { workGroups, workIntro } from "@/content/work";
 import { publicCv, publicResume } from "@/content/site-content";
+import { sectionCovers } from "@/content/covers";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "Work",
   description: workIntro.description,
   path: "/work",
+  image: { photo: sectionCovers.work },
 });
 
 export default function WorkPage() {
@@ -56,6 +59,25 @@ export default function WorkPage() {
                         </Link>
                       ))}
                     </p>
+                  ) : null}
+                  {articlesAbout(`work/${item.id}`).length ? (
+                    <ul className="mt-4 flex flex-col gap-1">
+                      {articlesAbout(`work/${item.id}`).map((article) => (
+                        <li key={article.id} className="text-caption text-text-secondary">
+                          Read more:{" "}
+                          <a
+                            href={article.url}
+                            data-track={`link:article:work_${item.id}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-deep"
+                          >
+                            {article.title}
+                          </a>{" "}
+                          ({articleDate(article.date)})
+                        </li>
+                      ))}
+                    </ul>
                   ) : null}
                 </Reveal>
               ))}

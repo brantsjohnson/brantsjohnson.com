@@ -5,6 +5,7 @@
 // for search engines. Every public page uses this wrapper.
 // ============================================
 
+import { Tracker } from "@/components/analytics/Tracker";
 import { SiteFooter } from "@/components/sections/SiteFooter";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { identity, inquiries } from "@/content/site-content";
@@ -38,6 +39,7 @@ export default function MarketingLayout({
       >
         Skip to content
       </a>
+      <Tracker />
       <SiteHeader />
       <main id="content" className="flex-1">
         {children}

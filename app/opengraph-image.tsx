@@ -1,7 +1,9 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This paints the image that shows when someone shares the site.
-// Paper card, black serif, the one public sentence.
+// This paints the default share image used by any page that does not
+// pick its own: a warm white card with a short gold rule, the name,
+// and the one public sentence. Pages with a cover photo or a title
+// card use /og/photo and /og/card instead (see lib/site/page-metadata.ts).
 // ============================================
 
 import { readFile } from "node:fs/promises";
@@ -22,39 +24,23 @@ export default async function OpenGraphImage() {
         style={{
           width: "100%",
           height: "100%",
-          background: "#f4f2ec",
-          color: "#000000",
+          background: "#fbf9f5",
+          color: "#16130e",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          padding: "68px 72px",
+          padding: "72px 80px",
+          fontFamily: "Cormorant Garamond",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-            fontSize: 22,
-            letterSpacing: 3,
-            fontFamily: "Cormorant Garamond",
-          }}
-        >
-          <div style={{ display: "flex" }}>SENIOR PRODUCT MANAGER</div>
-          <div style={{ display: "flex", color: "#3f3d39" }}>BRANT S. JOHNSON</div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", width: 72, height: 4, background: "#c9a25a" }} />
+          <div style={{ display: "flex", marginTop: 28, fontSize: 24, letterSpacing: 5, color: "#8a6428" }}>BRANT S. JOHNSON</div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            fontSize: 84,
-            lineHeight: 0.95,
-            letterSpacing: -1.5,
-            fontFamily: "Cormorant Garamond",
-            maxWidth: 980,
-          }}
-        >
+        <div style={{ display: "flex", fontSize: 112, lineHeight: 0.98, letterSpacing: -2, maxWidth: 980 }}>
           Good ideas deserve to happen.
         </div>
+        <div style={{ display: "flex", fontSize: 28, color: "#554e42" }}>brantsjohnson.com</div>
       </div>
     ),
     {

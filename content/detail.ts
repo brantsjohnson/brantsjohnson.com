@@ -14,6 +14,7 @@ import type { Photo } from "@/content/photos";
 export type Crumb = { label: string; href?: string };
 
 export type Detail = {
+  cover?: Photo; // the share picture. Left out, the first photo on the page is used.
   slug: string;
   path: string;
   title: string; // the page's one h1
@@ -35,4 +36,13 @@ export const go = (text: string, href: string, track: string): StoryLinkItem => 
 // THIS SECTION DOES: find one detail page by its slug
 export function findDetail(list: Detail[], slug: string): Detail | undefined {
   return list.find((item) => item.slug === slug);
+}
+
+// THIS SECTION DOES: pick the photo a shared link to this page should show
+export function detailCover(detail: Detail): Photo | undefined {
+  if (detail.cover) return detail.cover;
+  for (const section of detail.sections) {
+    if (section.photos?.length) return section.photos[0];
+  }
+  return detail.gallery?.photos[0];
 }

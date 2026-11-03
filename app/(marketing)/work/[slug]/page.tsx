@@ -6,7 +6,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DetailPage } from "@/components/editorial/DetailPage";
-import { findDetail } from "@/content/detail";
+import { articlesAbout } from "@/content/writing/articles";
+import { detailCover, findDetail } from "@/content/detail";
 import { workDetails } from "@/content/work";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
@@ -19,11 +20,16 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: PageProps): Metadata {
   const detail = findDetail(workDetails, params.slug);
   if (!detail) return {};
-  return pageMetadata({ title: detail.metaTitle, description: detail.description, path: detail.path });
+  return pageMetadata({
+    title: detail.metaTitle,
+    description: detail.description,
+    path: detail.path,
+    image: { photo: detailCover(detail), kicker: "Work" },
+  });
 }
 
 export default function WorkPage({ params }: PageProps) {
   const detail = findDetail(workDetails, params.slug);
   if (!detail) notFound();
-  return <DetailPage detail={detail} />;
+  return <DetailPage detail={detail} articles={articlesAbout(`work/${detail.slug}`)} />;
 }

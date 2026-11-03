@@ -11,6 +11,7 @@ import { go, type Detail } from "@/content/detail";
 import { crew, ph, type Photo } from "@/content/photos";
 
 export type WorkItem = {
+  id: string; // short key. An article that is "about" work/<id> shows under this item.
   org: string;
   role: string;
   dates?: string;
@@ -34,6 +35,7 @@ export const workGroups: WorkGroup[] = [
     title: "What I'm building now",
     items: [
       {
+        id: "bridger",
         org: "Bridger",
         role: "Founder",
         dates: "2025 to present",
@@ -42,6 +44,7 @@ export const workGroups: WorkGroup[] = [
         links: [{ text: "About Bridger", href: "/work/bridger" }],
       },
       {
+        id: "intro",
         org: "Intro",
         role: "Founder and Product Lead",
         dates: "2025 to present",
@@ -55,6 +58,7 @@ export const workGroups: WorkGroup[] = [
     title: "Products I've worked on",
     items: [
       {
+        id: "crew",
         org: "Crew Finance",
         role: "Senior Product Manager and first employee",
         dates: "Dec 2022 to Apr 2024",
@@ -66,6 +70,7 @@ export const workGroups: WorkGroup[] = [
         ],
       },
       {
+        id: "backlocal",
         org: "BackLocal",
         role: "Head of Product, BYU Sandbox",
         dates: "Sep 2021 to Sep 2022",
@@ -79,6 +84,7 @@ export const workGroups: WorkGroup[] = [
     title: "Creative work and experiments",
     items: [
       {
+        id: "crew-brand",
         org: "Crew brand",
         role: "",
         summary:
@@ -86,6 +92,7 @@ export const workGroups: WorkGroup[] = [
         links: [{ text: "See the illustrations", href: "/work/crew-brand" }],
       },
       {
+        id: "ai-chatbot",
         org: "A chatbot of me",
         role: "",
         summary:
@@ -99,6 +106,7 @@ export const workGroups: WorkGroup[] = [
     title: "Experience beyond the product teams",
     items: [
       {
+        id: "utah-business",
         org: "Utah Business Magazine and Deseret News",
         role: "Account Executive",
         dates: "Oct 2024 to Nov 2025",
@@ -107,6 +115,7 @@ export const workGroups: WorkGroup[] = [
         links: [{ text: "The events", href: "/events/utah-business" }],
       },
       {
+        id: "tedx",
         org: "TEDxSaltLakeCity",
         role: "Organization Assistant",
         dates: "Jan to Sep 2021",
@@ -114,12 +123,14 @@ export const workGroups: WorkGroup[] = [
         links: [{ text: "TEDx event work", href: "/events/tedx" }],
       },
       {
+        id: "divvy",
         org: "Divvy (now BILL)",
         role: "Product Management Analyst Intern",
         dates: "Jun to Sep 2022",
         summary: "Improved Pendo instrumentation and reporting, trained thirteen teams, and helped bring analytics accuracy to 93%.",
       },
       {
+        id: "birmingham",
         org: "Regional volunteer organization, Birmingham, England",
         role: "Product and volunteer leadership",
         dates: "2017 to 2019",
@@ -127,18 +138,21 @@ export const workGroups: WorkGroup[] = [
           "Built three reporting tools that took a recurring task from about two days to three hours, and helped train volunteers across more than twenty regions.",
       },
       {
+        id: "public-ethics-lab",
         org: "BYU Public Ethics Lab",
         role: "Product and Data Analyst",
         dates: "2020 to 2021",
         summary: "Worked with research drawn from 250 interviews with local-government leaders.",
       },
       {
+        id: "senate",
         org: "U.S. Senate, Office of Senator Mitt Romney",
         role: "Congressional Intern",
         dates: "2022",
         summary: "Handled constituent correspondence and condensed a lengthy nuclear-licensing policy file into a short briefing.",
       },
       {
+        id: "governors-office",
         org: "Utah Governor's Office and Economic Development",
         role: "Internships",
         dates: "2019 to 2020",
@@ -351,7 +365,7 @@ export const workDetails: Detail[] = [
     path: "/work/crew",
     title: "Crew Finance",
     metaTitle: "Crew Finance",
-    description: "Product management work on Crew's family banking product, Visa card program, and onboarding.",
+    description: "Product management work on Crew's family banking product, card program, and onboarding.",
     crumbs: crumbs("Crew Finance"),
     label: T,
     lead: [

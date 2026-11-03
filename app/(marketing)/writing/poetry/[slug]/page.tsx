@@ -27,6 +27,7 @@ export function generateMetadata({ params }: PoemPageProps): Metadata {
     title: `${poem.title} | Poetry`,
     description: poem.description,
     path: `/writing/poetry/${poem.slug}`,
+    image: { kicker: "Poetry" },
   });
 }
 

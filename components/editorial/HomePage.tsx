@@ -21,7 +21,8 @@ import { Figure } from "@/components/editorial/Figure";
 import { Reveal } from "@/components/editorial/Reveal";
 import { Button } from "@/components/ui/Button";
 import { hero } from "@/content/narrative";
-import { aboutPhoto, crew, headshot, objectPositionFor, ph, type Photo } from "@/content/photos";
+import { sectionCovers } from "@/content/covers";
+import { crew, headshot, objectPositionFor, ph, type Photo } from "@/content/photos";
 import { publicResume } from "@/content/site-content";
 
 const hashRoutes: Record<string, string> = {
@@ -47,7 +48,7 @@ const rows: IndexRow[] = [
     title: "About",
     line: "The longer introduction, plus a few stories I'd have trouble fitting into a résumé.",
     linkText: "Meet me",
-    photo: aboutPhoto,
+    photo: sectionCovers.about,
     track: "link:index_about:home",
   },
   {
@@ -55,7 +56,7 @@ const rows: IndexRow[] = [
     title: "Work",
     line: "Products I've built, teams I've worked with, and what I learned doing it.",
     linkText: "See the work",
-    photo: ph("general/pitching-to-vcs.webp", "Brant presenting a BackLocal slide to a small room, pointing at a screen that reads Problem: local companies do not have a large online presence.", undefined, { focus: { x: 0.49, y: 0.6 } }),
+    photo: sectionCovers.work,
     track: "link:index_work:home",
   },
   {
@@ -63,7 +64,7 @@ const rows: IndexRow[] = [
     title: "Events",
     line: "Conferences I've helped put on, community events, parties, and performances.",
     linkText: "Explore events",
-    photo: ph("general/tedxsaltlakecity.webp", "The TEDxSaltLakeCity stage with glowing red and white letters, a red circle and a blue skyline backdrop.", undefined, { focus: { x: 0.55, y: 0.6 } }),
+    photo: sectionCovers.events,
     track: "link:index_events:home",
   },
   {
@@ -71,7 +72,7 @@ const rows: IndexRow[] = [
     title: "Community",
     line: "Things I've worked on because somebody cared enough to get them started.",
     linkText: "Community work",
-    photo: ph("general/brant-alone-at-the-archway.webp", "Brant standing alone on a long road beneath the Uintah arch.", undefined, { focus: { x: 0.5, y: 0.62 } }),
+    photo: sectionCovers.community,
     track: "link:index_community:home",
   },
   {
@@ -79,7 +80,7 @@ const rows: IndexRow[] = [
     title: "Writing",
     line: "Articles and poetry. No elaborate introduction required.",
     linkText: "Read something",
-    photo: ph("general/brant-one-new-person-a-day-series7-overview.webp", "Handwritten notes on gray paper, each with a small instant photo clipped to it.", undefined, { focus: { x: 0.5, y: 0.45 } }),
+    photo: sectionCovers.writing,
     track: "link:index_writing:home",
   },
 ];

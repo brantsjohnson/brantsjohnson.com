@@ -14,6 +14,7 @@ export const metadata: Metadata = pageMetadata({
   title: "Poetry",
   description: "Poetry collected on Brant Johnson's website.",
   path: "/writing/poetry",
+  image: { kicker: "Writing" },
 });
 
 const byYear = [...poems].sort((a, b) => Number(b.year) - Number(a.year));

@@ -15,12 +15,14 @@ import { Prose } from "@/components/editorial/Prose";
 import { Reveal } from "@/components/editorial/Reveal";
 import { StoryLink } from "@/components/narrative/StoryLink";
 import { communityIntro, communityLeads, publicService, serviceGallery, studentGovernment } from "@/content/community";
+import { sectionCovers } from "@/content/covers";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "Community",
   description: communityIntro.description,
   path: "/community",
+  image: { photo: sectionCovers.community },
 });
 
 export default function CommunityPage() {

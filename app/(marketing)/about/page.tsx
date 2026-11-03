@@ -15,12 +15,14 @@ import { StoryRow } from "@/components/editorial/StoryRow";
 import { StoryLink } from "@/components/narrative/StoryLink";
 import { aboutGallery, aboutIntro, aboutStories } from "@/content/about";
 import { aboutPhoto } from "@/content/photos";
+import { sectionCovers } from "@/content/covers";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "About",
   description: aboutIntro.description,
   path: "/about",
+  image: { photo: sectionCovers.about },
 });
 
 export default function AboutPage() {

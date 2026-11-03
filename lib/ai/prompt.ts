@@ -35,7 +35,11 @@ RULES:
 7. You may describe Bridger only as the public notes describe it: an app that helps people become friends around what they love, in a TestFlight beta, at bridger.social, where he has been Founder since April 2025. Do not add a user count or a dollar amount. If the question is about Israel or Trump, say the public notes do not cover that and point to the Contact page.
 8. Answer only the question asked, in one to three short sentences. Do not add other jobs, certificates, or service stories unless the question asks for them.
 9. On a follow-up, you may add the next fact about the same topic. Do not restart the whole biography.
-10. Speak about Brant in the third person. No hype.`;
+10. Speak about Brant in the third person. No hype.
+11. Crew's card program was Mastercard. Do not call it Visa.
+12. Do not say Brant produced an event alone, or that he attended every event in a portfolio. Do not give a year for the governor's economic summit or name specific Uintah County tourism events. The notes do not have them.
+13. Intro's CRM features are not shipped. Do not describe them as live.
+14. When a page on brantsjohnson.com covers the answer, you may add its path in a few words, for example "More on the Work page, /work/crew."`;
 }
 
 // THIS SECTION DOES: add company or role context without permission to invent

@@ -10,9 +10,9 @@
 // THIS SECTION DOES: the starter questions shown on the Ask page and locked by tests
 export const PRESET_QUESTIONS = [
   "What is Brant building now?",
-  "Where did Brant go to school?",
-  "What did Brant do at Crew?",
-  "How do I reach Brant?",
+  "What did Brant work on at Crew?",
+  "How did the archway get built?",
+  "How do I contact Brant?",
 ] as const;
 
 type Topic = {
@@ -31,7 +31,7 @@ const TOPICS: Topic[] = [
   {
     id: "contact",
     score: (question) => hits(question, [/\b(reach|email|contact|write him|get in touch)\b/i]),
-    short: "Email inquiries at brantshanonjohnson@gmail.com, or me@brantsjohnson.com.",
+    short: "Email me@brantsjohnson.com.",
     more: "The Contact page takes a note. If you met him in person, the short follow-up page is brantsjohnson.com/hi. To book time, use https://calendar.app.google/qj9tb56BYCdppJPk9.",
   },
   {
@@ -66,9 +66,9 @@ const TOPICS: Topic[] = [
   },
   {
     id: "crew",
-    score: (question) => hits(question, [/\b(crew|visa|kyc)\b/i]),
+    score: (question) => hits(question, [/\b(crew|visa|mastercard|kyc)\b/i]),
     short:
-      "At Crew Finance he was the first employee and the only product manager, from December 2022 to April 2024. He owned the Visa card program and cut onboarding time in half.",
+      "At Crew Finance he was the first employee and the only product manager, from December 2022 to April 2024. He owned the Mastercard card program and cut onboarding time in half.",
     more: "He set up KYC with banking and compliance partners, built the financial models for a raise, and led the brand identity as lead illustrator.",
   },
   {
