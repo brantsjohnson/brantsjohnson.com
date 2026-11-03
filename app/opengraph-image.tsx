@@ -11,7 +11,7 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 export const runtime = "nodejs";
-export const alt = "Brant S. Johnson. Good ideas deserve to happen.";
+export const alt = "Brant S. Johnson. Good things deserve to happen.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -38,7 +38,7 @@ export default async function OpenGraphImage() {
           <div style={{ display: "flex", marginTop: 28, fontSize: 24, letterSpacing: 5, color: "#8a6428" }}>BRANT S. JOHNSON</div>
         </div>
         <div style={{ display: "flex", fontSize: 112, lineHeight: 0.98, letterSpacing: -2, maxWidth: 980 }}>
-          Good ideas deserve to happen.
+          Good things deserve to happen.
         </div>
         <div style={{ display: "flex", fontSize: 28, color: "#554e42" }}>brantsjohnson.com</div>
       </div>

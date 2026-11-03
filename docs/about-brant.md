@@ -44,7 +44,7 @@ How he works: owns the whole product, feeds instinct with good data and intervie
 - **Bridger** (bridger.social), Founder, Apr 2025 to present. An app that helps people become friends around what they love. In TestFlight beta with contracted engineers and designers. User count: **confirm with Brant** before showing any number.
 - **BackLocal**, see above.
 - **Filibusters** and **National Call** (a nonpartisan civic listening project spun out of Filibusters): leave off until Brant confirms they are public.
-- "I can build by myself. I don't want to. I'd rather build big things with a great team." "Good ideas deserve to happen."
+- "I can build by myself. I don't want to. I'd rather build big things with a great team." "Good things deserve to happen."
 
 ## Activist
 - **Uintah Resilience Archway.** At 18 he designed a new arch for his high school's road and cold-called companies for money, steel, engineering and labor. About five years, three principals, two school boards, two superintendents. About 25 feet tall and 63 feet wide. His job was getting the right people into one project and keeping it alive.

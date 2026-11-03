@@ -34,7 +34,7 @@ export const storyNav: StoryNavItem[] = [
 export const hero = {
   eyebrow: "Brant S. Johnson",
   name: "Brant S. Johnson",
-  headline: "Good ideas deserve to happen.",
+  headline: "Good things deserve to happen.",
   description:
     "I'm Brant Johnson. I help people get their ideas built, put on events, and work on software that makes it easier for people to connect.",
   paragraphs: [

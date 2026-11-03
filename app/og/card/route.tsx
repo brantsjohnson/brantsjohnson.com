@@ -17,7 +17,7 @@ const clip = (value: string | null, limit: number) => (value ?? "").replace(/\s+
 
 export async function GET(request: Request) {
   const params = new URL(request.url).searchParams;
-  const title = clip(params.get("title"), 90) || "Good ideas deserve to happen.";
+  const title = clip(params.get("title"), 90) || "Good things deserve to happen.";
   const kicker = clip(params.get("kicker"), 40);
   const font = await readFile(join(process.cwd(), "app/fonts/CormorantGaramond-Medium.ttf"));
   const size = title.length > 60 ? 64 : title.length > 36 ? 80 : 96;
@@ -48,7 +48,7 @@ export async function GET(request: Request) {
         <div style={{ display: "flex", fontSize: size, lineHeight: 1.02, letterSpacing: -1.5, maxWidth: 1000 }}>{title}</div>
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 28, color: "#554e42" }}>
           <div style={{ display: "flex" }}>Brant S. Johnson</div>
-          <div style={{ display: "flex", fontStyle: "italic" }}>Good ideas deserve to happen.</div>
+          <div style={{ display: "flex", fontStyle: "italic" }}>Good things deserve to happen.</div>
         </div>
       </div>
     ),

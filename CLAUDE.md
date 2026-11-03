@@ -6,7 +6,7 @@ This is Brant S. Johnson's personal site (Next.js on Vercel). Read this file and
 - `docs/sources/credentials.md` lists his credentials, with images in `docs/sources/certs/`.
 
 ## Who Brant is (one line)
-Senior product manager, creator, performer, entrepreneur and activist from Utah. Thesis: "I build technology as a bridge to real human connection." Motto: "Good ideas deserve to happen."
+Senior product manager, creator, performer, entrepreneur and activist from Utah. Thesis: "I build technology as a bridge to real human connection." Motto: "Good things deserve to happen."
 
 ## Site structure
 - Six top-level menu items, always in this order: **About, Work, Events, Community, Writing, Contact**. Do not add a seventh.
@@ -16,7 +16,7 @@ Senior product manager, creator, performer, entrepreneur and activist from Utah.
 - Community: the Archway and the Resilience Scholarship lead, with their own pages. Public service and student government sit beneath them.
 - Writing: simple dated lists of Articles and Poetry. One poem per page under `/writing/poetry`, line breaks kept exactly.
 - Contact: email and a short form. Footer on every page: email, the menu, Full CV, Ask about me, LinkedIn, Substack. Keep the résumé link hidden until `public/resume.pdf` exists.
-- Home page: the headline "Good ideas deserve to happen." is the page's one h1, with the headshot, an index of the main places, and four places to start.
+- Home page: the headline "Good things deserve to happen." is the page's one h1, with the headshot, an index of the main places, and four places to start.
 - Copy source of truth: the approved copy doc (ideas, people and events edition). Where it says a detail is still to be confirmed (the Governor's Economic Summit year, Uintah County tourism events), leave the detail out.
 - Do not use Utah or Vernal as the site's brand identity, hero explanation or footer. Place names belong in the story of the project that happened there.
 - Write it as a story about Brant in first person, with links inside sentences that jump between pages.

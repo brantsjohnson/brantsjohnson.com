@@ -96,7 +96,7 @@ test("public copy stays inside the voice rules", () => {
 
 test("public copy names the headline and Bridger, and does not link a missing résumé", () => {
   const joined = publicCopy.join("\n");
-  assert.equal(hero.headline, "Good ideas deserve to happen.");
+  assert.equal(hero.headline, "Good things deserve to happen.");
   assert.match(hero.description, /get their ideas built/);
   assert.deepEqual(
     storyNav.map((item) => item.label),

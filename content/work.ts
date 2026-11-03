@@ -125,7 +125,7 @@ export const workGroups: WorkGroup[] = [
       {
         id: "divvy",
         org: "Divvy (now BILL)",
-        role: "Product Management Analyst Intern",
+        role: "Associate Product Management Analyst (internship)",
         dates: "Jun to Sep 2022",
         summary: "Improved Pendo instrumentation and reporting, trained thirteen teams, and helped bring analytics accuracy to 93%.",
       },

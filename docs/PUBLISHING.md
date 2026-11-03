@@ -2,6 +2,8 @@
 
 Read this before you add or change anything on brantsjohnson.com. It says **where each kind of thing lives**, **the exact fields**, and **the steps to publish** it. The site is Next.js on Vercel. Content lives in `content/` as plain TypeScript, so a change is a small, reviewable edit.
 
+The motto is "Good things deserve to happen." (set 2026-11-03).
+
 Rules that never change (also in `CLAUDE.md`): first person, plain and warm; no em dashes; never the word "actually"; no dollar figures unless Brant approves; no health, family, relationship or job-search details; no home address or phone number; use only facts from `docs/about-brant.md`, `content/about-brant.md` and the content files. If a fact is missing, leave it out and ask Brant. Work on a branch and open a pull request. Never push to `main`.
 
 ## 1. The map: what goes where
@@ -143,6 +145,5 @@ Vercel Web Analytics is also on (`@vercel/analytics`) and works with no setup be
 ## 9. Open questions for Brant
 
 - Mastercard or Visa for the Crew card program (see section 4).
-- The motto: the site says "Good ideas deserve to happen." The control-center plan says "Good things deserve to happen."
 - Feed addresses for the events newsletter and the GitHub newsletter, when they exist.
 - The year and exact role for the Governor's Economic Summit, and the named Uintah County tourism events, before those pages say more.

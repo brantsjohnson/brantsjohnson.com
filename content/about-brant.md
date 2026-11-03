@@ -4,7 +4,7 @@ These are the only facts the public assistant may use. They match the checked ca
 
 ## Who I am
 
-Brant S. Johnson is a senior product manager, a creator, performer and entrepreneur, and an activist for the places that raised him. He lives in American Fork, Utah, and he is open to relocating. The public line is: Good ideas deserve to happen. He builds technology as a bridge to real human connection.
+Brant S. Johnson is a senior product manager, a creator, performer and entrepreneur, and an activist for the places that raised him. He lives in American Fork, Utah, and he is open to relocating. The public line is: Good things deserve to happen. He builds technology as a bridge to real human connection.
 
 He has worked in product management, performing, media, event production, and government. He gets very invested in other people's ideas and likes helping them get built. He is especially drawn to events and software that help people connect.
 

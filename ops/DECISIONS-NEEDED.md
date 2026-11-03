@@ -11,6 +11,6 @@ The site ships without these. Nothing below was invented. Items marked TODO are 
 7. **Chat budget across servers.** The AI chat cap is `CHAT_MONTHLY_USD` in one server process. That cap resets on restart and is not shared across copies. Ask about me still answers from the public notes when no AI key is set.
 8. **Bridger on the public site.** Resolved. Home and Work show it beside Intro, with a live screenshot of bridger.social. About, Now, Ask, and /hi name it as a socialization app in a beta of about 25 people, with a link. The role is Founder, April 2025 to present. Older user counts and dollar amounts stay off the site.
 9. **Public CV.** Resolved. The file is `public/cv.pdf`, linked as Public CV from Work, About, and /hi. The private Drive file is not linked.
-10. **Homepage headline.** Resolved. Every visitor sees "Good ideas deserve to happen." The old `?hero=` alternates are not shown.
+10. **Homepage headline.** Resolved. Every visitor sees "Good things deserve to happen." The old `?hero=` alternates are not shown.
 11. **Themes from the redo plan.** Self-sabotage, the 80/20, and friction are named in the plan and are not written out as public sentences in this repo, so they are not on the site. TODO(brant): send the sentences if you want them on Now.
 12. **Monthly Now note.** /now says he is building Intro and Bridger, and that he is open to relocating. TODO(brant): replace that with your own note for the month.
