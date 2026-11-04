@@ -1,13 +1,15 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the footer on every page. It closes with the line "Good
-// things deserve to happen.", an email link, and quiet links to the
-// CV, Ask about me, LinkedIn and Substack. It states no place. The résumé link appears
-// only when its file exists. The six menu places repeat below.
+// things deserve to happen." and a Contact button. The email stays
+// on the Contact page. Quiet links cover the menu, the CV, the chat,
+// LinkedIn, and Substack. It states no place. The résumé link appears
+// only when its file exists.
 // ============================================
 
 import Link from "next/link";
-import { footerNav, identity, inquiries, primaryNav } from "@/content/site-content";
+import { Button } from "@/components/ui/Button";
+import { footerNav, identity, primaryNav } from "@/content/site-content";
 
 function FooterLink({ href, label }: { href: string; label: string }) {
   const className = "inline-flex min-h-[44px] items-center text-caption text-ink transition-colors hover:text-accent-deep";
@@ -35,28 +37,25 @@ function FooterLink({ href, label }: { href: string; label: string }) {
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
+  const menu = [...primaryNav, { label: "Contact", href: "/contact" }];
 
   return (
     <footer className="border-t border-border-subtle bg-bg-deep">
       <div className="shell py-16 md:py-24">
-        <p className="max-w-[16ch] font-serif text-[clamp(2.6rem,6vw,5.4rem)] italic leading-[0.95] text-ink">
+        <p className="max-w-[16ch] font-serif text-[clamp(2.6rem,6vw,5.4rem)] leading-[0.95] text-ink">
           Good things deserve to happen.
         </p>
-        <p className="mt-8">
-          <a
-            href={inquiries.href}
-            data-track="link:email:footer"
-            className="font-serif text-[clamp(1.3rem,2.4vw,2rem)] text-ink underline decoration-accent decoration-2 underline-offset-8 transition-colors hover:text-accent-deep"
-          >
-            {inquiries.email}
-          </a>
-        </p>
+        <div className="mt-8">
+          <Button href="/contact" track="button:contact:footer">
+            Contact
+          </Button>
+        </div>
 
         <div className="mt-16 grid gap-10 border-t border-border-subtle pt-10 md:grid-cols-2">
           <nav aria-label="Footer menu">
             <p className="label text-text-secondary">Find your way</p>
             <ul className="mt-3 flex flex-col">
-              {primaryNav.map((item) => (
+              {menu.map((item) => (
                 <li key={item.label}>
                   <FooterLink href={item.href ?? "/"} label={item.label} />
                 </li>

@@ -14,7 +14,7 @@ import { getWritingGroups } from "@/lib/writing/feeds";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Writing",
+  title: "Articles",
   description: "Articles and poetry collected on Brant Johnson's website.",
   path: "/writing",
   image: { photo: sectionCovers.writing },

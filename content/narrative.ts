@@ -23,11 +23,10 @@ export type WritingShelfItem = {
 // THIS SECTION DOES: the six places in the top menu, in order
 export const storyNav: StoryNavItem[] = [
   { label: "About", href: "/about" },
-  { label: "Work", href: "/work" },
+  { label: "Experience", href: "/work" },
   { label: "Events", href: "/events" },
-  { label: "Community", href: "/community" },
-  { label: "Writing", href: "/writing" },
-  { label: "Contact", href: "/contact" },
+  { label: "Leadership", href: "/community" },
+  { label: "Articles", href: "/writing" },
 ];
 
 // THIS SECTION DOES: the opening of the home page. The large line is the headline and the page's one h1.

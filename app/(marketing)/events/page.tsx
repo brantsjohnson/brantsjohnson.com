@@ -27,7 +27,7 @@ export default function EventsPage() {
   return (
     <>
       <PageHeader id="events" label={eventsIntro.label} title={eventsIntro.title} lead={eventsIntro.lead}>
-        <Prose body={eventsIntro.body} className="mt-8" />
+        <Prose body={eventsIntro.body} className="mt-5" />
       </PageHeader>
 
       {eventGroups.map((group) => (

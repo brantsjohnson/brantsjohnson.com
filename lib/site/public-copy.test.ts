@@ -100,11 +100,11 @@ test("public copy names the headline and Bridger, and does not link a missing rÃ
   assert.match(hero.description, /get their ideas built/);
   assert.deepEqual(
     storyNav.map((item) => item.label),
-    ["About", "Work", "Events", "Community", "Writing", "Contact"]
+    ["About", "Experience", "Events", "Leadership", "Articles"]
   );
   assert.deepEqual(
     storyNav.map((item) => item.href),
-    ["/about", "/work", "/events", "/community", "/writing", "/contact"]
+    ["/about", "/work", "/events", "/community", "/writing"]
   );
   assert.match(joined, /https:\/\/bridger\.social/);
   assert.match(joined, /TestFlight/);

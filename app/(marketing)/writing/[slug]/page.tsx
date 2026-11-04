@@ -87,7 +87,7 @@ export default function WritingPostPage({ params }: PageProps) {
           ) : null}
           <p className="mt-10">
             <Link href="/writing" data-track="link:writing_index:post" className="label inline-flex min-h-[44px] items-center gap-3 text-ink hover:text-accent-deep">
-              <span aria-hidden="true">←</span> All writing
+              <span aria-hidden="true">←</span> All articles
             </Link>
           </p>
         </div>

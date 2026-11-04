@@ -54,9 +54,9 @@ const rows: IndexRow[] = [
   },
   {
     href: "/work",
-    title: "Work",
+    title: "Experience",
     line: "Products I've built, teams I've worked with, and what I learned doing it.",
-    linkText: "See the work",
+    linkText: "See the experience",
     photo: sectionCovers.work,
     track: "link:index_work:home",
   },
@@ -70,17 +70,17 @@ const rows: IndexRow[] = [
   },
   {
     href: "/community",
-    title: "Community",
-    line: "Things I've worked on because somebody cared enough to get them started.",
-    linkText: "Community work",
+    title: "Leadership",
+    line: "Service, the archway, the scholarship, and the other work I stayed with.",
+    linkText: "See leadership",
     photo: sectionCovers.community,
     track: "link:index_community:home",
   },
   {
     href: "/writing",
-    title: "Writing",
+    title: "Articles",
     line: "Articles and poetry. No elaborate introduction required.",
-    linkText: "Read something",
+    linkText: "Read the articles",
     photo: sectionCovers.writing,
     track: "link:index_writing:home",
   },
@@ -169,11 +169,8 @@ export function HomePage() {
             <Button href="/about" track="button:get_to_know_me:home">
               Get to know me
             </Button>
-            <Button href="/ask" track="button:ask_about_me:home_hero" className="min-h-[56px] px-8 text-[1.15rem]">
-              Ask about me
-            </Button>
-            <Button href="/work" variant="ghost" track="button:see_work:home">
-              See what I&apos;ve worked on
+            <Button href="/contact" variant="ghost" track="button:contact:home">
+              Contact
             </Button>
             {publicResume.href ? (
               <Button href={publicResume.href} variant="ghost" track="button:resume:home">
@@ -205,7 +202,7 @@ export function HomePage() {
         </motion.div>
       </section>
 
-      <AskPanel where="home" />
+      <AskPanel />
 
       <section aria-label="Take a look around" className="border-t border-border-subtle">
         <div className="shell grid gap-x-16 lg:grid-cols-12">

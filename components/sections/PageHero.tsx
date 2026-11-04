@@ -1,8 +1,7 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the top of a quieter inner page (Contact, Ask, Now, Hi).
-// It uses the same colored title card as the other pages, so every
-// page opens the way the main site opens a section.
+// It uses the same paper title as the other pages.
 // ============================================
 
 import { PageHeader } from "@/components/editorial/PageHeader";

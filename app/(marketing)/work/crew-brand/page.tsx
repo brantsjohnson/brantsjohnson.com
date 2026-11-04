@@ -33,7 +33,7 @@ export default function CrewBrandPage() {
       <div className="shell pt-10">
         <nav aria-label="Breadcrumb" className="label flex items-center gap-3 text-[0.66rem] text-text-secondary">
           <Link href="/work" className="text-ink transition-colors hover:text-accent-deep">
-            Work
+            Experience
           </Link>
           <span aria-hidden="true">/</span>
           <span aria-current="page">Crew brand</span>

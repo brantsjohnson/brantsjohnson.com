@@ -99,14 +99,14 @@ export const footerNav: { label: string; href: string }[] = footerItems.filter(
   (item): item is { label: string; href: string } => typeof item.href === "string" && item.href.length > 0
 );
 
-// THIS SECTION DOES: the bar across the top. Six places, in this order. The wordmark is home.
+// THIS SECTION DOES: the bar across the top. The wordmark is home.
+// Contact stays a page, reached from the home buttons and the footer, not from this bar.
 export const primaryNav: NavItem[] = [
   { label: "About", kind: "route", href: "/about" },
-  { label: "Work", kind: "route", href: "/work" },
+  { label: "Experience", kind: "route", href: "/work" },
   { label: "Events", kind: "route", href: "/events" },
-  { label: "Community", kind: "route", href: "/community" },
-  { label: "Writing", kind: "route", href: "/writing" },
-  { label: "Contact", kind: "route", href: "/contact" },
+  { label: "Leadership", kind: "route", href: "/community" },
+  { label: "Articles", kind: "route", href: "/writing" },
 ];
 
 // THIS SECTION DOES: the home story lives in content/narrative.ts and is re-exported below.

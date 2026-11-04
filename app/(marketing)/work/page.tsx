@@ -16,7 +16,7 @@ import { sectionCovers } from "@/content/covers";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Work",
+  title: "Experience",
   description: workIntro.description,
   path: "/work",
   image: { photo: sectionCovers.work },

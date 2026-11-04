@@ -12,7 +12,6 @@ import { PageHeader } from "@/components/editorial/PageHeader";
 import { Prose } from "@/components/editorial/Prose";
 import { Reveal } from "@/components/editorial/Reveal";
 import { StoryRow } from "@/components/editorial/StoryRow";
-import { AskPanel } from "@/components/ask/AskPanel";
 import { OnwardLinks } from "@/components/editorial/OnwardLinks";
 import { aboutGallery, aboutIntro, aboutStories } from "@/content/about";
 import { aboutPhoto } from "@/content/photos";
@@ -40,8 +39,6 @@ export default function AboutPage() {
           <Figure photo={aboutPhoto} ratio="6 / 5" priority sizes="(min-width: 1024px) 40vw, 90vw" />
         </div>
       </section>
-
-      <AskPanel where="about" />
 
       {aboutStories.map((story, index) => (
         <StoryRow key={story.id} story={story} flip={index % 2 === 1} />

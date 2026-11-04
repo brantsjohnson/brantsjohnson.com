@@ -18,7 +18,7 @@ import { sectionCovers } from "@/content/covers";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Community",
+  title: "Leadership",
   description: communityIntro.description,
   path: "/community",
   image: { photo: sectionCovers.community },

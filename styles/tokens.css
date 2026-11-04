@@ -33,7 +33,7 @@
   --color-accent-deep: #8a6428; /* gold used as text, dark enough to read on the page */
 
   /* THIS SECTION DOES: name the two typefaces. Next.js fills the file variables. */
-  --font-serif: var(--font-serif-file), "Instrument Serif", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-serif: var(--font-serif-file), "Christea", "Palatino Linotype", Palatino, Georgia, serif;
   --font-sans: var(--font-sans-file), "Hanken Grotesk", "Avenir Next", Avenir, "Segoe UI", sans-serif;
 
   /* THIS SECTION DOES: set the shared spacing steps (8px rhythm) */

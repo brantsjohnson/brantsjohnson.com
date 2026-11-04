@@ -12,6 +12,7 @@ import { PageHeader } from "@/components/editorial/PageHeader";
 import { Prose } from "@/components/editorial/Prose";
 import { StoryRow } from "@/components/editorial/StoryRow";
 import { OnwardLinks } from "@/components/editorial/OnwardLinks";
+import { sectionName } from "@/components/editorial/section-name";
 import type { Detail } from "@/content/detail";
 import { articleDate, type Article } from "@/content/writing/articles";
 
@@ -27,10 +28,10 @@ export function DetailPage({ detail, articles = [] }: { detail: Detail; articles
             <span key={crumb.label} className="inline-flex items-center gap-3">
               {crumb.href ? (
                 <Link href={crumb.href} className="text-ink transition-colors hover:text-accent-deep">
-                  {crumb.label}
+                  {sectionName(crumb.label)}
                 </Link>
               ) : (
-                <span aria-current="page">{crumb.label}</span>
+                <span aria-current="page">{sectionName(crumb.label)}</span>
               )}
               {index < detail.crumbs.length - 1 ? <span aria-hidden="true">/</span> : null}
             </span>

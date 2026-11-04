@@ -25,7 +25,7 @@ export default function PoetryIndexPage() {
       <div className="shell pt-10">
         <nav aria-label="Breadcrumb" className="label flex items-center gap-3 text-[0.66rem] text-text-secondary">
           <Link href="/writing" className="text-ink transition-colors hover:text-accent-deep">
-            Writing
+            Articles
           </Link>
           <span aria-hidden="true">/</span>
           <span aria-current="page">Poetry</span>
@@ -54,7 +54,7 @@ export default function PoetryIndexPage() {
         </ul>
         <p className="mt-10">
           <Link href="/writing" className="label inline-flex min-h-[44px] items-center gap-3 text-ink hover:text-accent-deep">
-            <span aria-hidden="true">←</span> Back to Writing
+            <span aria-hidden="true">←</span> Back to Articles
           </Link>
         </p>
       </div>

@@ -7,7 +7,8 @@
 // ============================================
 
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Hanken_Grotesk } from "next/font/google";
+import localFont from "next/font/local";
+import { Hanken_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
 import { identity } from "@/content/site-content";
@@ -28,10 +29,12 @@ function metadataBaseUrl(): URL {
 
 const allowIndexing = process.env.SITE_INDEXABLE === "true";
 
-const serif = Instrument_Serif({
-  subsets: ["latin"],
+// THIS SECTION DOES: load Christea for the name and every heading.
+// The file is the one Brant supplied. Body text stays the sans.
+const serif = localFont({
+  src: "./fonts/Christea-Regular.otf",
   weight: "400",
-  style: ["normal", "italic"],
+  style: "normal",
   variable: "--font-serif-file",
   display: "swap",
 });

@@ -51,24 +51,11 @@ h3 {
   color: var(--color-ink);
 }
 
-/* THIS SECTION DOES: the colored title card copied from the main site.
-   Titles on that card are paper-colored, and sized like the main site's
-   page titles, so they stay readable and do not compete with the home headline. */
-.page-masthead h1,
-.page-masthead h2,
-.page-masthead .label {
+/* THIS SECTION DOES: the home-page chat panel is the one dark rounded block.
+   Its title and sentence stay paper-colored so they can be read on the navy. */
+.ask-panel h2,
+.ask-panel .ask-copy {
   color: var(--color-on-hero);
-}
-
-.page-masthead .label {
-  opacity: 0.85;
-}
-
-.page-masthead h1 {
-  font-size: clamp(2.75rem, 5vw, 4.5rem);
-  line-height: 0.98;
-  letter-spacing: -0.025em;
-  font-weight: 500;
 }
 
 /* --- ACCESSIBILITY: keep a clearly visible focus ring for keyboard users --- */
