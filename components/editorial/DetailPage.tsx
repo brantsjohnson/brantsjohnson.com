@@ -39,7 +39,7 @@ export function DetailPage({ detail, articles = [] }: { detail: Detail; articles
         </nav>
       </div>
 
-      <PageHeader id={detail.slug} label={detail.label} title={detail.title} lead={lead} />
+      <PageHeader id={detail.slug} label={detail.title} title={detail.title} lead={lead} />
 
       {rest.length > 0 || (!lead && first) ? (
         <div className="shell -mt-4 pb-10">
@@ -48,21 +48,19 @@ export function DetailPage({ detail, articles = [] }: { detail: Detail; articles
       ) : null}
 
       {detail.glance?.length ? (
-        <div className="shell">
-          <dl className="grid gap-6 border-y border-border-subtle py-6 sm:grid-cols-2 lg:grid-cols-3">
-            {detail.glance.map((item) => (
-              <div key={item.label}>
-                <dt className="label text-[0.66rem] text-text-secondary">{item.label}</dt>
-                <dd className="m-0 mt-1 font-serif text-[1.3rem] text-ink">{item.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+        <dl className="shell mt-8 flex flex-wrap gap-x-12 gap-y-5">
+          {detail.glance.map((item) => (
+            <div key={item.label}>
+              <dt className="label text-[0.66rem] text-text-secondary">{item.label}</dt>
+              <dd className="m-0 mt-1 font-sans text-body text-ink">{item.value}</dd>
+            </div>
+          ))}
+        </dl>
       ) : null}
 
-      <div className="mt-8">
+      <div className="mt-6">
         {detail.sections.map((section, index) => (
-          <StoryRow key={section.id} story={section} flip={index % 2 === 1} />
+          <StoryRow key={section.id} story={section} flip={index % 2 === 1} index={index} />
         ))}
       </div>
 

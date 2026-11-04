@@ -39,7 +39,7 @@ export default function WorkPage() {
             </Reveal>
             <ol className="lg:col-span-8">
               {group.items.map((item, index) => (
-                <Reveal as="li" key={item.org} delay={index * 0.04} className="border-t border-border-subtle py-8 first:border-t-0 first:pt-0">
+                <Reveal as="li" key={item.org} delay={index * 0.04} className="py-8 first:pt-0">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
                     <h3 className="font-serif text-[1.9rem] leading-tight text-ink">{item.org}</h3>
                     {item.dates ? <p className="label text-[0.66rem] text-text-secondary">{item.dates}</p> : null}

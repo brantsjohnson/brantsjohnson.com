@@ -30,20 +30,26 @@ export type Story = {
 type StoryRowProps = {
   story: Story;
   flip?: boolean;
+  index?: number;
 };
 
-export function StoryRow({ story, flip = false }: StoryRowProps) {
+export function StoryRow({ story, flip = false, index }: StoryRowProps) {
   const photos = story.photos ?? [];
   const hasMedia = photos.length > 0 || Boolean(story.video);
 
   return (
-    <article id={story.id} className="scroll-mt-24 border-t border-border-subtle py-16 md:py-24">
+    <article id={story.id} className="scroll-mt-28 border-t border-border-subtle py-10 md:py-14">
       <div className="shell">
         <div className={clsx("grid items-start gap-10 lg:grid-cols-12 lg:gap-16", !hasMedia && "lg:grid-cols-12")}>
           <Reveal className={clsx(hasMedia ? "lg:col-span-5" : "lg:col-span-8", flip && hasMedia && "lg:order-2")}>
             {story.eyebrow ? <p className="label text-accent-deep">{story.eyebrow}</p> : null}
-            <h2 className={clsx("font-serif text-h2 text-ink", story.eyebrow && "mt-4")}>{story.title}</h2>
-            <Prose body={story.body} className="mt-8" />
+            <h2 className={clsx("flex items-baseline gap-4 font-serif text-h2 text-ink", story.eyebrow && "mt-4")}>
+              {typeof index === "number" ? (
+                <span className="font-sans text-[1rem] font-medium text-accent-deep">{String(index + 1).padStart(2, "0")}</span>
+              ) : null}
+              {story.title}
+            </h2>
+            <Prose body={story.body} className="mt-4" />
 
             {story.stats?.length ? (
               <dl className="mt-10 flex flex-wrap gap-x-12 gap-y-6">
@@ -51,7 +57,7 @@ export function StoryRow({ story, flip = false }: StoryRowProps) {
                   <div key={stat.label}>
                     <dt className="sr-only">{stat.label}</dt>
                     <dd className="m-0">
-                      <span className="block font-serif text-[clamp(2.4rem,4.4vw,3.8rem)] leading-none text-ink">{stat.value}</span>
+                      <span className="block font-sans text-[clamp(2rem,3.4vw,2.8rem)] leading-none text-ink">{stat.value}</span>
                       <span className="label mt-2 block text-[0.66rem] text-text-secondary">{stat.label}</span>
                     </dd>
                   </div>

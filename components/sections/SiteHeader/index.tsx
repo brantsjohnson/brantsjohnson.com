@@ -1,8 +1,8 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the bar at the top of every public page. It shows Brant's
-// name and the six places in the menu: About, Work, Events,
-// Community, Writing and Contact. On a narrow screen the menu opens
+// name and the menu: Home, About, Experience, Events, Leadership,
+// and Articles. On a narrow screen the menu opens
 // as a full-screen list of large links. Escape closes it. The bar is
 // quiet paper with a hairline, and a thin gold line fills as you scroll.
 // ============================================
@@ -40,7 +40,11 @@ export function SiteHeader() {
     };
   }, [menuOpen]);
 
-  const isActive = (href?: string) => Boolean(href && (pathname === href || pathname.startsWith(`${href}/`)));
+  const isActive = (href?: string) => {
+    if (!href) return false;
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   return (
     <header className="sticky top-0 z-sticky border-b border-border-subtle bg-glass backdrop-blur-glass">

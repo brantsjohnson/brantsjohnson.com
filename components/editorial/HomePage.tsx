@@ -273,8 +273,7 @@ export function HomePage() {
 
       <section aria-labelledby="start" className="py-24 md:py-36">
         <div className="shell">
-          <div className="gold-rule" aria-hidden="true" />
-          <h2 id="start" className="mt-6 font-serif text-h2 text-ink">
+          <h2 id="start" className="font-serif text-h2 text-ink">
             A few places to start
           </h2>
           <ul className="mt-14 grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">

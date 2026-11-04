@@ -1,9 +1,9 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // The top of every inner page, on the same warm paper as the home
-// page. A short gold rule, then one large title. If the small label
-// would repeat that title, it is left off. The lead sits under the
-// title in the reading column, not inside a colored box.
+// page. The section name sits close above one large title. If they
+// would repeat, only the title shows. There is no short rule above
+// the title. The lead sits under it in the reading column.
 // ============================================
 
 import type { ReactNode } from "react";
@@ -23,13 +23,12 @@ export function PageHeader({ id, label, title, lead, children }: PageHeaderProps
   const showLabel = shownLabel.toLowerCase() !== shownTitle.toLowerCase();
 
   return (
-    <header className="shell pb-8 pt-14 md:pb-12 md:pt-20">
-      <div className="gold-rule" aria-hidden="true" />
-      {showLabel ? <p className="label mt-6 text-accent-deep">{shownLabel}</p> : null}
+    <header className="shell pb-4 pt-8 md:pb-6 md:pt-12">
+      {showLabel ? <p className="label text-accent-deep">{shownLabel}</p> : null}
       <h1
         id={id}
         tabIndex={-1}
-        className={`scroll-mt-24 font-serif text-h1 text-ink outline-none ${showLabel ? "mt-4" : "mt-6"}`}
+        className={`scroll-mt-24 font-serif text-h1 text-ink outline-none ${showLabel ? "mt-5" : ""}`}
       >
         {shownTitle}
       </h1>

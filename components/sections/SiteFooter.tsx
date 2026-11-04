@@ -42,8 +42,10 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-border-subtle bg-bg-deep">
       <div className="shell py-16 md:py-24">
-        <p className="max-w-[16ch] font-serif text-[clamp(2.6rem,6vw,5.4rem)] leading-[0.95] text-ink">
-          Good things deserve to happen.
+        <p className="max-w-[12ch] font-serif text-[clamp(2.6rem,6vw,5.4rem)] italic leading-[0.95] text-ink">
+          Good things deserve
+          <br />
+          to happen.
         </p>
         <div className="mt-8">
           <Button href="/contact" track="button:contact:footer">

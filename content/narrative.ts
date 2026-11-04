@@ -20,8 +20,9 @@ export type WritingShelfItem = {
   href: string;
 };
 
-// THIS SECTION DOES: the six places in the top menu, in order
+// THIS SECTION DOES: the places in the top menu, in order. Home is first.
 export const storyNav: StoryNavItem[] = [
+  { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Experience", href: "/work" },
   { label: "Events", href: "/events" },

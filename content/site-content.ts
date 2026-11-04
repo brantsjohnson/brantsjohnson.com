@@ -102,6 +102,7 @@ export const footerNav: { label: string; href: string }[] = footerItems.filter(
 // THIS SECTION DOES: the bar across the top. The wordmark is home.
 // Contact stays a page, reached from the home buttons and the footer, not from this bar.
 export const primaryNav: NavItem[] = [
+  { label: "Home", kind: "route", href: "/" },
   { label: "About", kind: "route", href: "/about" },
   { label: "Experience", kind: "route", href: "/work" },
   { label: "Events", kind: "route", href: "/events" },
