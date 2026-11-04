@@ -10,7 +10,7 @@ import { clsx } from "clsx";
 import { Figure } from "@/components/editorial/Figure";
 import { Prose, type Paragraph } from "@/components/editorial/Prose";
 import { Reveal } from "@/components/editorial/Reveal";
-import { StoryLink } from "@/components/narrative/StoryLink";
+import { OnwardLinks } from "@/components/editorial/OnwardLinks";
 import type { Photo, Video } from "@/content/photos";
 
 export type StoryLinkItem = { text: string; href: string; track: string };
@@ -65,17 +65,7 @@ export function StoryRow({ story, flip = false }: StoryRowProps) {
               </blockquote>
             ) : null}
 
-            {story.links?.length ? (
-              <ul className="mt-8 flex flex-col gap-3">
-                {story.links.map((item) => (
-                  <li key={item.href}>
-                    <StoryLink href={item.href} track={item.track}>
-                      {item.text}
-                    </StoryLink>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
+            {story.links?.length ? <OnwardLinks links={story.links} className="mt-8" /> : null}
           </Reveal>
 
           {hasMedia ? (

@@ -8,7 +8,8 @@
 
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { AskSuggestions } from "@/components/ask/AskSuggestions";
 import { PRESET_QUESTIONS } from "@/lib/ai/answer-question";
 import { Button } from "@/components/ui/Button";
 
@@ -19,6 +20,7 @@ export function AskConversation() {
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   async function ask(question: string) {
     const trimmed = question.trim();
@@ -47,8 +49,15 @@ export function AskConversation() {
     }
   }
 
+  // A suggestion only fills the box. The visitor presses Send.
+  function pick(question: string) {
+    setInput(question);
+    inputRef.current?.focus();
+  }
+
   return (
-    <div className="shell flex flex-col gap-8 py-8 pb-20">
+    <div className="shell pb-20">
+      <div className="flex flex-col gap-8 rounded-[18px] border border-border-subtle bg-surface px-5 py-6 shadow-glass md:px-8 md:py-8">
       <ol className="flex min-h-[8rem] flex-col gap-4" aria-live="polite">
         {turns.length === 0 && (
           <li className="max-w-[40rem] text-body text-text-secondary">
@@ -64,7 +73,7 @@ export function AskConversation() {
             <p
               className={
                 turn.role === "user"
-                  ? "max-w-[36rem] rounded-panel bg-surface-2 px-4 py-3 text-body text-on-hero"
+                  ? "max-w-[36rem] rounded-[18px] bg-ink px-4 py-3 text-body text-on-hero"
                   : "max-w-[40rem] text-body text-text-secondary"
               }
             >
@@ -74,35 +83,26 @@ export function AskConversation() {
         ))}
       </ol>
 
-      <div className="flex flex-wrap gap-2" aria-label="Suggested questions">
-        {PRESET_QUESTIONS.map((question) => (
-          <button
-            key={question}
-            type="button"
-            disabled={busy}
-            onClick={() => void ask(question)}
-            className="inline-flex min-h-[44px] items-center rounded-full border border-border-subtle px-4 text-left text-body text-ink disabled:opacity-50"
-            data-track="button:preset_question:ask"
-          >
-            {question}
-          </button>
-        ))}
-      </div>
+      <AskSuggestions questions={PRESET_QUESTIONS} disabled={busy} onPick={pick} />
 
       <form
         onSubmit={(event) => {
           event.preventDefault();
           void ask(input);
         }}
-        className="flex items-center gap-3"
+        className="flex flex-col gap-3 sm:flex-row sm:items-center"
       >
+        <label className="sr-only" htmlFor="ask-notes-question">
+          Your question
+        </label>
         <input
+          id="ask-notes-question"
+          ref={inputRef}
           value={input}
           onChange={(event) => setInput(event.target.value)}
-          aria-label="Ask a question about Brant"
-          className="min-h-[44px] flex-1 border-b border-ink bg-transparent text-body text-ink outline-none"
+          className="min-h-[52px] flex-1 rounded-[18px] border border-border-subtle bg-bg px-4 text-body text-ink outline-none"
         />
-        <Button type="submit" track="button:send_question:ask" ariaLabel="Send question">
+        <Button type="submit" track="button:send_question:ask" ariaLabel="Send question" className="min-h-[52px] px-8">
           {busy ? "Sending" : "Send"}
         </Button>
       </form>
@@ -111,6 +111,7 @@ export function AskConversation() {
           {error}
         </p>
       )}
+      </div>
     </div>
   );
 }

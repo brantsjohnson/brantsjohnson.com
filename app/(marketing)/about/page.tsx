@@ -12,7 +12,8 @@ import { PageHeader } from "@/components/editorial/PageHeader";
 import { Prose } from "@/components/editorial/Prose";
 import { Reveal } from "@/components/editorial/Reveal";
 import { StoryRow } from "@/components/editorial/StoryRow";
-import { StoryLink } from "@/components/narrative/StoryLink";
+import { AskPanel } from "@/components/ask/AskPanel";
+import { OnwardLinks } from "@/components/editorial/OnwardLinks";
 import { aboutGallery, aboutIntro, aboutStories } from "@/content/about";
 import { aboutPhoto } from "@/content/photos";
 import { sectionCovers } from "@/content/covers";
@@ -33,20 +34,14 @@ export default function AboutPage() {
       <section className="shell grid items-start gap-12 pb-24 lg:grid-cols-12 lg:gap-16">
         <Reveal className="lg:col-span-6">
           <Prose body={aboutIntro.body} />
-          <ul className="mt-8 flex flex-wrap gap-x-10 gap-y-3">
-            {aboutIntro.links.map((item) => (
-              <li key={item.href}>
-                <StoryLink href={item.href} track={item.track}>
-                  {item.text}
-                </StoryLink>
-              </li>
-            ))}
-          </ul>
+          <OnwardLinks links={aboutIntro.links} className="mt-8" />
         </Reveal>
         <div className="lg:col-span-5 lg:col-start-8">
           <Figure photo={aboutPhoto} ratio="6 / 5" priority sizes="(min-width: 1024px) 40vw, 90vw" />
         </div>
       </section>
+
+      <AskPanel where="about" />
 
       {aboutStories.map((story, index) => (
         <StoryRow key={story.id} story={story} flip={index % 2 === 1} />

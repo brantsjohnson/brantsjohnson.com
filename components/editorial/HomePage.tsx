@@ -19,6 +19,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Figure } from "@/components/editorial/Figure";
 import { Reveal } from "@/components/editorial/Reveal";
+import { AskPanel } from "@/components/ask/AskPanel";
 import { Button } from "@/components/ui/Button";
 import { hero } from "@/content/narrative";
 import { sectionCovers } from "@/content/covers";
@@ -168,6 +169,9 @@ export function HomePage() {
             <Button href="/about" track="button:get_to_know_me:home">
               Get to know me
             </Button>
+            <Button href="/ask" track="button:ask_about_me:home_hero" className="min-h-[56px] px-8 text-[1.15rem]">
+              Ask about me
+            </Button>
             <Button href="/work" variant="ghost" track="button:see_work:home">
               See what I&apos;ve worked on
             </Button>
@@ -200,6 +204,8 @@ export function HomePage() {
           </motion.div>
         </motion.div>
       </section>
+
+      <AskPanel where="home" />
 
       <section aria-label="Take a look around" className="border-t border-border-subtle">
         <div className="shell grid gap-x-16 lg:grid-cols-12">

@@ -7,13 +7,12 @@
 // ============================================
 
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Figure } from "@/components/editorial/Figure";
 import { Gallery } from "@/components/editorial/Gallery";
 import { PageHeader } from "@/components/editorial/PageHeader";
 import { Prose } from "@/components/editorial/Prose";
 import { Reveal } from "@/components/editorial/Reveal";
-import { StoryLink } from "@/components/narrative/StoryLink";
+import { OnwardLinks } from "@/components/editorial/OnwardLinks";
 import { communityIntro, communityLeads, publicService, serviceGallery, studentGovernment } from "@/content/community";
 import { sectionCovers } from "@/content/covers";
 import { pageMetadata } from "@/lib/site/page-metadata";
@@ -33,14 +32,13 @@ export default function CommunityPage() {
       <section aria-label="Lead stories" className="shell grid gap-x-10 gap-y-20 pb-24 md:grid-cols-2">
         {communityLeads.map((item, index) => (
           <Reveal key={item.slug} delay={index * 0.12} className={index === 1 ? "md:mt-24" : undefined}>
-            <Link href={item.href} data-track={`link:${item.slug}:community`} className="group block">
-              <Figure photo={item.photo} ratio={index === 0 ? "4 / 5" : "1 / 1"} priority sizes="(min-width: 768px) 46vw, 92vw" />
-              <h2 className="mt-6 font-serif text-[clamp(2rem,3.4vw,3rem)] leading-[1.02] text-ink">{item.title}</h2>
-              <p className="mt-4 max-w-[40ch] text-body text-text-secondary">{item.body}</p>
-              <p className="label mt-5 inline-flex items-center gap-3 text-ink group-hover:text-accent-deep">
-                {item.linkText} <span aria-hidden="true">→</span>
-              </p>
-            </Link>
+            <Figure photo={item.photo} ratio={index === 0 ? "4 / 5" : "1 / 1"} priority sizes="(min-width: 768px) 46vw, 92vw" />
+            <h2 className="mt-6 font-serif text-[clamp(2rem,3.4vw,3rem)] leading-[1.02] text-ink">{item.title}</h2>
+            <p className="mt-4 max-w-[40ch] text-body text-text-secondary">{item.body}</p>
+            <OnwardLinks
+              className="mt-5"
+              links={[{ text: item.linkText, href: item.href, track: `link:${item.slug}:community` }]}
+            />
           </Reveal>
         ))}
       </section>
@@ -67,11 +65,7 @@ export default function CommunityPage() {
           </Reveal>
           <Reveal className="lg:col-span-7" delay={0.1}>
             <Prose body={studentGovernment.body} />
-            <p className="mt-6">
-              <StoryLink href={studentGovernment.link.href} track={studentGovernment.link.track}>
-                {studentGovernment.link.text}
-              </StoryLink>
-            </p>
+            <OnwardLinks className="mt-6" links={[studentGovernment.link]} />
             <p className="mt-8 max-w-reading text-body text-text-secondary">{studentGovernment.extra}</p>
           </Reveal>
         </div>

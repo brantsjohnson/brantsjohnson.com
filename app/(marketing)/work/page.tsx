@@ -5,9 +5,9 @@
 // ============================================
 
 import type { Metadata } from "next";
-import Link from "next/link";
 import { PageHeader } from "@/components/editorial/PageHeader";
 import { Reveal } from "@/components/editorial/Reveal";
+import { OnwardLinks } from "@/components/editorial/OnwardLinks";
 import { Button } from "@/components/ui/Button";
 import { articleDate, articlesAbout } from "@/content/writing/articles";
 import { workGroups, workIntro } from "@/content/work";
@@ -47,18 +47,14 @@ export default function WorkPage() {
                   {item.role ? <p className="label mt-2 text-[0.68rem] text-accent-deep">{item.role}</p> : null}
                   <p className="mt-4 max-w-reading text-body text-text-secondary">{item.summary}</p>
                   {item.links?.length ? (
-                    <p className="mt-4 flex flex-wrap gap-x-8 gap-y-2">
-                      {item.links.map((link) => (
-                        <Link
-                          key={link.href}
-                          href={link.href}
-                          data-track={`link:work_item:${link.href.split("/").pop()}`}
-                          className="text-caption text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-deep"
-                        >
-                          {link.text} →
-                        </Link>
-                      ))}
-                    </p>
+                    <OnwardLinks
+                      className="mt-5"
+                      links={item.links.map((link) => ({
+                        text: link.text,
+                        href: link.href,
+                        track: `link:work_item:${link.href.split("/").pop()}`,
+                      }))}
+                    />
                   ) : null}
                   {articlesAbout(`work/${item.id}`).length ? (
                     <ul className="mt-4 flex flex-col gap-1">

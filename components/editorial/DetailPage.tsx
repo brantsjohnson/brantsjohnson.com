@@ -11,7 +11,7 @@ import { Gallery } from "@/components/editorial/Gallery";
 import { PageHeader } from "@/components/editorial/PageHeader";
 import { Prose } from "@/components/editorial/Prose";
 import { StoryRow } from "@/components/editorial/StoryRow";
-import { StoryLink } from "@/components/narrative/StoryLink";
+import { OnwardLinks } from "@/components/editorial/OnwardLinks";
 import type { Detail } from "@/content/detail";
 import { articleDate, type Article } from "@/content/writing/articles";
 
@@ -95,17 +95,7 @@ export function DetailPage({ detail, articles = [] }: { detail: Detail; articles
       {detail.gallery ? <Gallery title={detail.gallery.title} intro={detail.gallery.intro} photos={detail.gallery.photos} /> : null}
 
       <div className="shell border-t border-border-subtle py-12">
-        {detail.links?.length ? (
-          <ul className="mb-8 flex flex-wrap gap-x-10 gap-y-3">
-            {detail.links.map((item) => (
-              <li key={item.href}>
-                <StoryLink href={item.href} track={item.track}>
-                  {item.text}
-                </StoryLink>
-              </li>
-            ))}
-          </ul>
-        ) : null}
+        {detail.links?.length ? <OnwardLinks links={detail.links} className="mb-8" /> : null}
         <Link href={detail.back.href} className="label inline-flex min-h-[44px] items-center gap-3 text-ink transition-colors hover:text-accent-deep">
           <span aria-hidden="true">←</span> {detail.back.label}
         </Link>

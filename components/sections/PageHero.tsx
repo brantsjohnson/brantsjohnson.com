@@ -1,8 +1,11 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the top of an inner page. It sits on the cream paper with
-// a large serif title and a quiet eyebrow, in the same rhythm as home.
+// This is the top of a quieter inner page (Contact, Ask, Now, Hi).
+// It uses the same colored title card as the other pages, so every
+// page opens the way the main site opens a section.
 // ============================================
+
+import { PageHeader } from "@/components/editorial/PageHeader";
 
 type PageHeroProps = {
   eyebrow: string;
@@ -11,11 +14,6 @@ type PageHeroProps = {
 };
 
 export function PageHero({ eyebrow, title, deck }: PageHeroProps) {
-  return (
-    <header className="shell pb-12 pt-16 md:pb-16 md:pt-24">
-      <p className="label text-text-secondary">{eyebrow}</p>
-      <h1 className="mt-4 font-serif text-h1 text-ink">{title}</h1>
-      {deck && <p className="mt-6 text-body text-text-secondary">{deck}</p>}
-    </header>
-  );
+  const id = eyebrow.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "page";
+  return <PageHeader id={id} label={eyebrow} title={title} lead={deck} />;
 }

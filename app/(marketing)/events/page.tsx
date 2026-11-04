@@ -7,10 +7,10 @@
 // ============================================
 
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Figure } from "@/components/editorial/Figure";
 import { PageHeader } from "@/components/editorial/PageHeader";
 import { Prose } from "@/components/editorial/Prose";
+import { OnwardLinks } from "@/components/editorial/OnwardLinks";
 import { Reveal } from "@/components/editorial/Reveal";
 import { eventGroups, eventsIntro } from "@/content/events";
 import { sectionCovers } from "@/content/covers";
@@ -45,15 +45,16 @@ export default function EventsPage() {
                     <p className="label text-[0.66rem] text-accent-deep">{item.tag}</p>
                     <h3 className="mt-2 font-serif text-[1.9rem] leading-tight text-ink">{item.title}</h3>
                     <p className="mt-3 max-w-reading text-body text-text-secondary">{item.summary}</p>
-                    <p className="mt-4">
-                      <Link
-                        href={item.href}
-                        data-track={`link:event:${item.href.split("/").pop()}`}
-                        className="text-caption text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-deep"
-                      >
-                        {item.linkText} →
-                      </Link>
-                    </p>
+                    <OnwardLinks
+                      className="mt-5"
+                      links={[
+                        {
+                          text: item.linkText,
+                          href: item.href,
+                          track: `link:event:${item.href.split("/").pop()}`,
+                        },
+                      ]}
+                    />
                   </div>
                   {item.photo ? <Figure photo={item.photo} ratio="4 / 5" sizes="11rem" className="hidden sm:block" /> : null}
                 </Reveal>

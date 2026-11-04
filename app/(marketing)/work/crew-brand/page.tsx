@@ -15,7 +15,7 @@ import { Gallery } from "@/components/editorial/Gallery";
 import { PageHeader } from "@/components/editorial/PageHeader";
 import { Prose } from "@/components/editorial/Prose";
 import { Reveal } from "@/components/editorial/Reveal";
-import { StoryLink } from "@/components/narrative/StoryLink";
+import { OnwardLinks } from "@/components/editorial/OnwardLinks";
 import { CREW_GROUND } from "@/content/photos";
 import { crewBrandMedia, crewBrandPage } from "@/content/work";
 import { pageMetadata } from "@/lib/site/page-metadata";
@@ -123,15 +123,7 @@ export default function CrewBrandPage() {
       </section>
 
       <div className="shell border-t border-border-subtle py-12">
-        <ul className="mb-8 flex flex-wrap gap-x-10 gap-y-3">
-          {crewBrandPage.links.map((item) => (
-            <li key={item.href}>
-              <StoryLink href={item.href} track={item.track}>
-                {item.text}
-              </StoryLink>
-            </li>
-          ))}
-        </ul>
+        <OnwardLinks links={crewBrandPage.links} className="mb-8" />
         <Link href="/work" className="label inline-flex min-h-[44px] items-center gap-3 text-ink transition-colors hover:text-accent-deep">
           <span aria-hidden="true">←</span> All work
         </Link>

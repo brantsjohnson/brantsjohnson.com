@@ -1,13 +1,14 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the Contact page, and it is the one place the email
-// addresses are printed. The form is the filled button. Inquiries,
-// LinkedIn, and Book time are text links.
+// address is printed. Email, LinkedIn, and Book time are real
+// buttons. The form is the way to send a note. The address comes
+// from the shared inquiries record so it stays one email.
 // ============================================
 
 import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
-import { TextLink } from "@/components/ui/TextLink";
+import { Button } from "@/components/ui/Button";
 import { NoteForm } from "@/components/forms/NoteForm";
 import { booking, contactIntro, identity, inquiries } from "@/content/site-content";
 import { pageMetadata } from "@/lib/site/page-metadata";
@@ -25,20 +26,24 @@ export default function ContactPage() {
       <PageHero eyebrow={contactIntro.eyebrow} title={contactIntro.title} deck={contactIntro.deck} />
       <div className="shell grid gap-12 pb-20 md:grid-cols-[0.8fr_1.1fr]">
         <div>
-          <p className="label text-text-secondary">Email</p>
-          <div className="mt-2">
-            <TextLink href={inquiries.href} track="link:inquiries:contact">
-              {inquiries.email}
-            </TextLink>
-          </div>
-          <div className="mt-8 flex flex-col gap-1">
-          <TextLink href={identity.linkedin} track="link:linkedin:contact">
-            LinkedIn
-          </TextLink>
-          <TextLink href={booking.href} track="link:book_time:contact">
-            {booking.label}
-          </TextLink>
-          </div>
+          <h2 className="font-serif text-h3 text-ink">Ways to reach me</h2>
+          <ul className="mt-5 flex flex-col gap-3">
+            <li>
+              <Button href={inquiries.href} track="link:inquiries:contact" className="w-full justify-start">
+                Email {inquiries.email}
+              </Button>
+            </li>
+            <li>
+              <Button href={identity.linkedin} variant="ghost" track="link:linkedin:contact" className="w-full justify-start">
+                LinkedIn
+              </Button>
+            </li>
+            <li>
+              <Button href={booking.href} variant="ghost" track="link:book_time:contact" className="w-full justify-start">
+                {booking.label}
+              </Button>
+            </li>
+          </ul>
         </div>
         <NoteForm kind="contact" submitLabel="Send message" track="button:submit_contact:contact" />
       </div>
