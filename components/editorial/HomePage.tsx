@@ -38,7 +38,7 @@ const hashRoutes: Record<string, string> = {
   "#crew-brand": "/work/crew-brand",
   "#creator-backlocal": "/work/backlocal",
   "#poetry": "/writing/poetry",
-  "#writing": "/writing",
+  "#writing": "/articles",
 };
 
 type IndexRow = { href: string; title: string; line: string; linkText: string; photo: Photo; track: string };
@@ -77,7 +77,7 @@ const rows: IndexRow[] = [
     track: "link:index_community:home",
   },
   {
-    href: "/writing",
+    href: "/articles",
     title: "Articles",
     line: "Articles and poetry. No elaborate introduction required.",
     linkText: "Read the articles",
@@ -151,16 +151,21 @@ export function HomePage() {
 
   return (
     <>
-      <section ref={heroRef} className="shell grid items-end gap-12 pb-20 pt-12 md:pb-28 md:pt-20 lg:grid-cols-12 lg:gap-10">
+      <section ref={heroRef} className="shell pb-20 pt-12 md:pb-28 md:pt-20">
+        <motion.p {...rise(0.1)} className="label flex items-center gap-4 text-accent-deep">
+          <span aria-hidden="true" className="inline-block h-px w-12 bg-accent" />
+          {hero.eyebrow}
+        </motion.p>
+        <motion.h1
+          {...rise(0.2)}
+          className="mt-6 font-serif text-[clamp(2.15rem,5.5vw,5.6rem)] leading-[1.22] tracking-normal text-ink"
+        >
+          <span className="block">Good things deserve</span>
+          <span className="block">to happen.</span>
+        </motion.h1>
+        <div className="mt-12 grid items-end gap-12 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-7">
-          <motion.p {...rise(0.1)} className="label flex items-center gap-4 text-accent-deep">
-            <span aria-hidden="true" className="inline-block h-px w-12 bg-accent" />
-            {hero.eyebrow}
-          </motion.p>
-          <motion.h1 {...rise(0.2)} className="mt-6 max-w-[12ch] font-serif text-display text-ink">
-            {hero.headline}
-          </motion.h1>
-          <motion.div {...rise(0.45)} className="mt-10 flex max-w-[46ch] flex-col gap-5 text-[1.15rem] leading-relaxed text-text-secondary">
+          <motion.div {...rise(0.45)} className="flex max-w-[46ch] flex-col gap-5 text-[1.15rem] leading-relaxed text-text-secondary">
             {hero.paragraphs.map((paragraph) => (
               <p key={paragraph.slice(0, 24)}>{paragraph}</p>
             ))}
@@ -200,6 +205,7 @@ export function HomePage() {
             </div>
           </motion.div>
         </motion.div>
+        </div>
       </section>
 
       <AskPanel />
