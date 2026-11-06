@@ -75,9 +75,9 @@ test("Crew page keeps the approved lead facts and sourced program language", () 
 test("Crew page keeps its existing article links and uses the final titles", () => {
   const links = [...(crew?.sections ?? []).flatMap((section) => section.links ?? []), ...(crew?.links ?? [])];
   const textByHref = new Map(links.map((link) => [link.href, link.text]));
-  assert.equal(textByHref.get("/writing/what-happens-when-you-tap-your-card"), "Inside a Card Payment: Authorization to Settlement");
-  assert.equal(textByHref.get("/writing/the-bank-integrations-nobody-mentions-in-a-startup-pitch"), "The Integration Work Behind a Banking App");
-  assert.equal(textByHref.get("/writing/why-mailing-a-debit-card-can-become-a-manufacturing-problem"), "The Manufacturing Economics of Card Mailers");
+  assert.equal(textByHref.get("/writing/inside-a-card-payment-authorization-to-settlement"), "Inside a Card Payment: Authorization to Settlement");
+  assert.equal(textByHref.get("/writing/the-integration-work-behind-a-banking-app"), "The Integration Work Behind a Banking App");
+  assert.equal(textByHref.get("/writing/the-manufacturing-economics-of-card-mailers"), "The Manufacturing Economics of Card Mailers");
 });
 
 test("Crew app-design gallery uses real in-product screens and stays hidden without photos", () => {
