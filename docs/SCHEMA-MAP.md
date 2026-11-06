@@ -44,7 +44,8 @@ The rows above are the starter-kit draft. These rows name what this repository a
 | `/writing` and `/writing/[slug]` | On-site posts | Always. Listed posts also appear on `/articles` and Work Read more once `releaseDate` has arrived |
 | `content/posts/*.md` | Local articles | Nine Crew posts, 2026-10-28 through 2026-11-05, about `work/crew` |
 | `/hi` | Unlisted event follow-up | Not in the nav |
-| `/cv.pdf` | Public CV file | Linked from Work, About, and /hi |
+| `/cv.pdf` | Public CV file | The footer Full CV link, plus Work, About, and /hi. Footer does not link a Google Doc. |
+| `POST /api/ask` | Ask about me answers | Short topic replies first, then the closest notes section. Instruction lines in the notes are not spoken. |
 | `/admin` and seven sub-pages | Private tool shells | Removed 2026-10-23. They were not part of the public site. |
 | `lib/ai-settings/` | Shared AI call settings | Copied from the starter kit. Ask does not call it yet. |
 

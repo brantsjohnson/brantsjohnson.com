@@ -141,7 +141,7 @@ test("the nine Crew articles use the approved dates and stay listed", () => {
   assert.match(metal?.body ?? "", /Idemia/);
   assert.match(metal?.body ?? "", /CompoSecure/);
   const mailer = posts.find((post) => post.slug === "why-mailing-a-debit-card-can-become-a-manufacturing-problem");
-  assert.match(mailer?.body ?? "", /Private draft, unapproved/);
+  assert.doesNotMatch(mailer?.body ?? "", /Private draft, unapproved/);
   assert.match(mailer?.body ?? "", /\$7,333/);
 });
 

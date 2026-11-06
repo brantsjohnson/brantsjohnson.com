@@ -10,13 +10,19 @@ import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { composeAnswer } from "./closest-notes";
 import { PRESET_QUESTIONS, answerFromNotes } from "./answer-question";
+import { answerFromNotesAndSearch } from "./public-ask";
 
 function notesBank(): string {
   return `${readFileSync("content/about-brant.md", "utf8")}\n${readFileSync("content/about-me.md", "utf8")}`;
 }
 
 function sentences(answer: string): string[] {
-  return answer.split(/[.!?]+/).map((part) => part.trim()).filter(Boolean);
+  // Keep "D.C." as one unit so a Washington answer is not counted as extra sentences.
+  return answer
+    .replace(/\b([A-Z])\./g, "$1\u0000")
+    .split(/[.!?]+/)
+    .map((part) => part.replace(/\u0000/g, ".").trim())
+    .filter(Boolean);
 }
 
 test("preset answers stay short and on topic", () => {
@@ -136,4 +142,80 @@ test("public answers skip withheld topics and dollar figures", () => {
 
   const reach = answerFromNotes("Tell me more", ["How do I reach Brant?"]);
   assert.match(reach, /calendar\.app\.google\/ENDtr2C17GdEqLSYA/);
+});
+
+// Assistant-only lines that must never be spoken to a visitor.
+const instructionLeak =
+  /(?:^|\.\s)Do not |These are the only facts|If a question is not covered|public assistant|Use that record|Ignore older|Use these corrections|visitors never|checked career record|not a claim/i;
+
+test("POST /api/ask answers ten public questions from the right section without leaking instructions", () => {
+  const notes = notesBank();
+  const cases: { question: string; include: RegExp; also?: RegExp; exclude: RegExp }[] = [
+    {
+      question: "What degree does Brant have?",
+      include: /Utah Valley University/i,
+      also: /Business and Analysis/i,
+      exclude: /Contact email|Little Mermaid|Young Ambassadors|Hale/i,
+    },
+    {
+      question: "What is Bridger?",
+      include: /Bridger/i,
+      also: /friends|TestFlight|bridger\.social/i,
+      exclude: /AI software for event organizers|intro\.events/i,
+    },
+    {
+      question: "Where did Brant go to school?",
+      include: /Utah Valley University/i,
+      exclude: /Little Mermaid|Young Ambassadors|Hale|Elf the Musical/i,
+    },
+    {
+      question: "How do I contact Brant?",
+      include: /me@brantsjohnson.com/i,
+      exclude: /Archway|Utah Valley|Bridger|Crew Finance/i,
+    },
+    {
+      question: "What did Brant work on at Crew?",
+      include: /Crew/i,
+      also: /Mastercard/i,
+      exclude: /Utah Valley|Bridger|Visa|\$/i,
+    },
+    {
+      question: "What is Brant building now?",
+      include: /Intro/i,
+      also: /Bridger/i,
+      exclude: /Romney|Archway|TEDx|Utah Valley/i,
+    },
+    {
+      question: "How did the archway get built?",
+      include: /Archway/i,
+      exclude: /Utah Valley|Bridger|Crew Finance|TEDx/i,
+    },
+    {
+      question: "Where does Brant live?",
+      include: /American Fork, Utah/i,
+      exclude: /Contact email|Utah Valley|Crew Finance/i,
+    },
+    {
+      question: "What did Brant do for Senator Romney?",
+      include: /constituent inquiries/i,
+      exclude: /50 to 200|500 pages|Utah Valley|Bridger/i,
+    },
+    {
+      question: "What certificates does he have?",
+      include: /Pendo/i,
+      exclude: /Archway|Habitat|student body|Utah Valley University/i,
+    },
+  ];
+
+  assert.equal(cases.length, 10);
+  for (const item of cases) {
+    const answer = answerFromNotesAndSearch(notes, item.question);
+    assert.match(answer, item.include, `${item.question} -> ${answer}`);
+    if (item.also) assert.match(answer, item.also, `${item.question} -> ${answer}`);
+    assert.doesNotMatch(answer, item.exclude, `${item.question} -> ${answer}`);
+    assert.doesNotMatch(answer, instructionLeak, `${item.question} leaked instructions: ${answer}`);
+    assert.doesNotMatch(answer, /\$|—/, `${item.question} -> ${answer}`);
+    assert.ok(sentences(answer).length <= 3, `${item.question} has too many sentences: ${answer}`);
+    assert.ok(answer.length <= 360, `${item.question} is too long: ${answer}`);
+  }
 });

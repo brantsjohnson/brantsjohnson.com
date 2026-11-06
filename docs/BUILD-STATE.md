@@ -1,6 +1,6 @@
 # BUILD-STATE
 
-Status: Crew experience expansion is on a pull request branch. Nine on-site Crew articles are listed with Brant-approved dates from 2026-10-28 through 2026-11-05. Positioning is unchanged. Not merged. Not deployed to the production domain. Engineering VP is the merge gate. A pull request is not a launch. GitHub Actions is off, so the gates below were run locally.
+Status: Crew experience expansion is on a pull request branch, with Ask matching, Articles feed, footer CV, and article-9 draft-line fixes on the same branch. Nine on-site Crew articles are listed with Brant-approved dates from 2026-10-28 through 2026-11-05. Positioning is unchanged. Not merged. Not deployed to the production domain. Engineering VP is the merge gate. A pull request is not a launch. GitHub Actions is off, so the gates below were run locally.
 
 ## What this build is
 
@@ -12,9 +12,9 @@ Photos in `public/photos` are crops of intro.events and bridger.social. The olde
 
 ## Checks
 
-Recorded on `cursor/crew-experience-expansion-7de9` after the Crew expansion. A pull request is not a launch.
+Recorded on `cursor/crew-experience-expansion-7de9` after the Ask, Articles, footer, and article-9 fixes. A pull request is not a launch.
 
-- `npm test` passed (29 tests), including the nine Crew article dates and Work Read more.
+- `npm test` passed (31 tests), including the ten-question Ask acceptance test, Substack starter-post filter, footer `/cv.pdf` only, and the ninth article no longer carrying "Private draft, unapproved."
 - `npm run typecheck` passed.
 - `npm run lint` passed. Existing `ArticleShelf` `<img>` warnings only.
 - `npm run build` passed. Nine `/writing/<slug>` routes are in the route list.

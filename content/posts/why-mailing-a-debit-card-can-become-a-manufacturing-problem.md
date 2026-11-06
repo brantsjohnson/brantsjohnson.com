@@ -8,7 +8,7 @@ about: [work/crew]
 draft: false
 ---
 
-**Private draft, unapproved.** This article combines the author's firsthand recollections of Willow/Crew prototypes with generally applicable manufacturing and payment-card fulfillment principles. It does **not** establish Crew's final supplier, production line, labor rate, or that the foldable airplane mailer was ultimately shipped. Supplier-sensitive details need a confidentiality review.
+This article combines the author's firsthand recollections of Willow/Crew prototypes with generally applicable manufacturing and payment-card fulfillment principles. It does **not** establish Crew's final supplier, production line, labor rate, or that the foldable airplane mailer was ultimately shipped. Supplier-sensitive details need a confidentiality review.
 
 Most people see the package their debit card arrives in for about 30 seconds. Then they throw it away.
 

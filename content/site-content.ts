@@ -94,10 +94,10 @@ export const publicResume: { label: string; href: string | null } = {
 
 // THIS SECTION DOES: the footer row on every page, in this order.
 // A null href (the résumé, until the PDF exists) is left out.
+// The CV link is /cv.pdf only. The Google Doc is not a footer item.
 const footerItems: { label: string; href: string | null }[] = [
   publicResume,
-  publicCv,
-  publicCvDownload,
+  { label: "Full CV", href: "/cv.pdf" },
   { label: "Ask about me", href: "/ask" },
   { label: "LinkedIn", href: identity.linkedin },
   { label: "Substack", href: "https://brantsjohnson.substack.com" },

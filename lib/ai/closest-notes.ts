@@ -66,6 +66,13 @@ function expand(question: string, own: string[]): { strong: string[]; soft: stri
   if (/\b(ai|model|cursor|lovable|chatbot)\b/i.test(question)) {
     soft.push("intro", "gemini", "openai", "chatbot");
   }
+  // School and degree questions should land on Education, not a high-school theater paragraph.
+  if (
+    /\b(degree|college|university|uvu|woodbury|bachelor|graduat|major|studied|study)\b/i.test(question) ||
+    /\b(go to school|went to school|did .* school)\b/i.test(question)
+  ) {
+    strong.push("education", "uvu", "woodbury", "bachelor", "university", "valley", "degree");
+  }
   return { strong, soft };
 }
 
@@ -74,8 +81,43 @@ function speakable(sentence: string): boolean {
   const text = sentence.trim();
   if (text.length < 20) return false;
   if (/\$|£/.test(text)) return false;
-  if (/\bdo not\b|\bchecked public record\b|\bif someone asks\b|\bignore older\b|^use\b/i.test(text)) return false;
+  if (
+    /\bdo not\b|\bdon't\b|\bchecked public record\b|\bif someone asks\b|\bignore older\b|^use\b|\bpublic assistant\b|\bthe only facts\b|\bnot covered here\b|\bnot in these notes\b|\buse that record\b|\buse these corrections\b|\bvisitors never\b|\bnot a claim\b|\bleave out\b|\bchecked career\b/i.test(
+      text
+    )
+  ) {
+    return false;
+  }
   return true;
+}
+
+// THIS SECTION DOES: give a heading extra weight when the question is clearly about that heading
+function headingAliasScore(title: string, question: string): number {
+  let extra = 0;
+  if (/education/i.test(title) && /\b(degree|college|university|school|bachelor|uvu|woodbury|major|studied|study)\b/i.test(question)) {
+    extra += 14;
+  }
+  if (/what he is building/i.test(title) && /\b(bridger|intro)\b/i.test(question)) {
+    extra += 14;
+  }
+  if (
+    /what he is building/i.test(title) &&
+    /\bbuilding\b/i.test(question) &&
+    !/\b(archway|arch)\b/i.test(question)
+  ) {
+    extra += 14;
+  }
+  if (/how to reach/i.test(title) && /\b(contact|email|reach)\b/i.test(question)) {
+    extra += 14;
+  }
+  if (/\bcrew\b/i.test(title) && /\bcrew\b/i.test(question)) {
+    extra += 14;
+  }
+  // A degree question should not win on a theater or high-school heading just because "school" appears there.
+  if (/\b(performing|theater)\b/i.test(title) && /\b(degree|college|university|uvu|bachelor)\b/i.test(question)) {
+    extra -= 10;
+  }
+  return extra;
 }
 
 function sentencesOf(text: string): string[] {
@@ -127,11 +169,11 @@ function countStem(words: string[], stemWord: string): number {
   return words.filter((word) => stem(word) === stemWord).length;
 }
 
-function scoreSection(section: Section, strong: string[], soft: string[]): number {
+function scoreSection(section: Section, strong: string[], soft: string[], question: string): number {
   const titleWords = tokens(section.title);
   const bodyWords = tokens(section.sentences.join(" "));
   const strongStems = strong.map(stem);
-  let score = 0;
+  let score = headingAliasScore(section.title, question);
   let matched = 0;
   for (const word of strongStems) {
     const inTitle = titleWords.some((titleWord) => stem(titleWord) === word);
@@ -151,12 +193,18 @@ function scoreSection(section: Section, strong: string[], soft: string[]): numbe
   return score;
 }
 
-function bestSection(sections: Section[], strong: string[], soft: string[], skip?: Section): Section | undefined {
+function bestSection(
+  sections: Section[],
+  strong: string[],
+  soft: string[],
+  question: string,
+  skip?: Section
+): Section | undefined {
   let winner: Section | undefined;
   let best = 0;
   for (const section of sections) {
     if (section === skip) continue;
-    const score = scoreSection(section, strong, soft);
+    const score = scoreSection(section, strong, soft, question);
     if (score > best) {
       best = score;
       winner = section;
@@ -178,17 +226,22 @@ function alreadySaid(sentence: string, history: ChatTurn[]): boolean {
   return sharedRatio(sentence, said) >= 0.55;
 }
 
-// A chat reply should read like a story. A handful of sentences, stopped before it becomes the whole file.
-const STORY_SENTENCES = 8;
-const STORY_CHARS = 1200;
+// A first reply stays short. A follow-up can add a few more sentences from the same section.
+const FIRST_SENTENCES = 3;
+const FIRST_CHARS = 480;
+const FOLLOW_SENTENCES = 6;
+const FOLLOW_CHARS = 900;
 
 function pack(sentences: string[], history: ChatTurn[], start: number): string | null {
+  const first = !history.some((turn) => turn.role === "assistant");
+  const limit = first ? FIRST_SENTENCES : FOLLOW_SENTENCES;
+  const maxChars = first ? FIRST_CHARS : FOLLOW_CHARS;
   const next: string[] = [];
   let chars = 0;
   for (const sentence of sentences.slice(start)) {
     if (alreadySaid(sentence, history)) continue;
-    if (next.length >= STORY_SENTENCES) break;
-    if (next.length > 0 && chars + sentence.length > STORY_CHARS) break;
+    if (next.length >= limit) break;
+    if (next.length > 0 && chars + sentence.length > maxChars) break;
     next.push(sentence);
     chars += sentence.length + 1;
   }
@@ -214,7 +267,7 @@ function nextFromThread(sections: Section[], history: ChatTurn[]): string | null
   if (bestOverlap < 0.45) section = undefined;
   if (!section && lastQuestion) {
     const query = expand(lastQuestion, tokens(lastQuestion));
-    section = bestSection(sections, query.strong, query.soft);
+    section = bestSection(sections, query.strong, query.soft, lastQuestion);
   }
   if (!section) return null;
 
@@ -225,7 +278,7 @@ function nextFromThread(sections: Section[], history: ChatTurn[]): string | null
   if (next) return next;
 
   const again = expand(lastQuestion, tokens(lastQuestion));
-  const elsewhere = bestSection(sections, again.strong, again.soft, section);
+  const elsewhere = bestSection(sections, again.strong, again.soft, lastQuestion, section);
   return elsewhere ? pack(elsewhere.sentences, history, 0) : null;
 }
 
@@ -255,16 +308,11 @@ function overview(sections: Section[]): string | null {
   return picked.length ? picked.join(" ") : null;
 }
 
-// A how or why question should open on the sentence that answers it. "Tell me about Crew" should start at the beginning.
-function startAtBestSentence(question: string): boolean {
-  return /\b(how|why|like|learn|learned|lesson)\b/i.test(question) && tokens(question).length >= 3;
-}
-
 // THIS SECTION DOES: pick the closest section, then enough sentences to tell that part of the story
 function closestSentences(sections: Section[], question: string): string | null {
   const query = expand(question, tokens(question));
   const words = [...query.strong, ...query.soft];
-  const section = bestSection(sections, query.strong, query.soft);
+  const section = bestSection(sections, query.strong, query.soft, question);
   if (!section) return null;
   // A rare word in the section matters more than a word that is in the heading and repeated throughout.
   const sectionText = section.sentences.join(" ");
@@ -283,7 +331,8 @@ function closestSentences(sections: Section[], question: string): string | null 
       bestAt = index;
     }
   });
-  const start = startAtBestSentence(question) && best > 0 ? bestAt : 0;
+  // Start on the sentence that names the thing asked, so "What is Bridger?" does not open on Intro.
+  const start = best > 0 ? bestAt : 0;
   return pack(section.sentences, [], start);
 }
 

@@ -116,6 +116,15 @@ test("public copy names the headline and Bridger, and does not link a missing rÃ
   assert.match(joined, /Utah Governor's Office and the state's economic development office/);
   assert.match(joined, /https:\/\/calendar\.app\.google\/ENDtr2C17GdEqLSYA/);
   assert.match(joined, /\/cv\.pdf/);
+  const footerCv = footerNav.filter(
+    (item) => item.href === "/cv.pdf" || /cv/i.test(item.label) || /docs\.google/i.test(item.href)
+  );
+  assert.equal(footerCv.length, 1);
+  assert.equal(footerCv[0]?.href, "/cv.pdf");
+  assert.equal(
+    footerNav.some((item) => /docs\.google/i.test(item.href)),
+    false
+  );
   assert.equal(publicResume.href, null);
   assert.doesNotMatch(joined, /resume\.pdf/);
   assert.equal(
