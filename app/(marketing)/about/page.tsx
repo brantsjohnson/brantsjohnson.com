@@ -44,14 +44,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section aria-labelledby="life-story" className="border-t border-border-subtle">
-        <div className="shell pb-2 pt-14 md:pt-20">
-          <h2 id="life-story" className="max-w-reading font-serif text-h2 text-ink">
+      <section aria-labelledby="life-story">
+        <div className="shell pb-2 pt-4 md:pt-6">
+          <h2 id="life-story" className="max-w-reading font-serif text-h1 text-ink">
             {aboutLife.intro.title}
           </h2>
         </div>
-        {aboutLife.sections.map((section) => (
-          <LifeStory key={section.id} section={section} />
+        {aboutLife.sections.map((section, index) => (
+          <LifeStory key={section.id} section={section} rule={index > 0} />
         ))}
       </section>
     </>

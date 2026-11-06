@@ -35,11 +35,13 @@ function paragraphs(text: string) {
     .filter(Boolean);
 }
 
-export function LifeStory({ section }: { section: LifeSection }) {
+// rule draws the hairline above a section. The first section leaves it off
+// so the large "This is my story:" heading is not boxed between two lines.
+export function LifeStory({ section, rule = true }: { section: LifeSection; rule?: boolean }) {
   const more = paragraphs(section.expanded);
 
   return (
-    <article id={section.id} className="scroll-mt-28 border-t border-border-subtle py-10 md:py-14">
+    <article id={section.id} className={`scroll-mt-28 py-10 md:py-14${rule ? " border-t border-border-subtle" : ""}`}>
       <div className="shell">
         <Reveal>
           <p className="label text-text-secondary">{section.subtitle}</p>
