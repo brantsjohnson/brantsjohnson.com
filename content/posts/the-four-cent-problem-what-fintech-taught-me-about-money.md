@@ -1,6 +1,6 @@
 ---
-title: "The Four-Cent Problem: What Fintech Taught Me About Money"
-summary: "What small processing fees and household card use taught me about how a family banking product could earn money."
+title: "The Unit Economics of Family Banking"
+summary: "The first time I saw a processing quote for a few cents per transaction, I thought, okay. That's manageable."
 releaseDate: 2026-10-31
 written: 2026-10-31
 tags: [crew, product, economics]
@@ -8,70 +8,62 @@ about: [work/crew]
 draft: false
 ---
 
-Let’s talk about fintech unit economics, starting with a processing fee of just a few cents per card transaction.
+Then I put it in a spreadsheet.
 
-In January 2023, our founder shared a spreadsheet with me about card transactions. We were estimating how many times a family might use their cards each month.
+This was early in Willow, before we became Crew. We were building banking products for families, which meant multiple cards, multiple account holders, recurring payments, savings balances, and a pretty ambitious rewards proposition. A small fee on one purchase seems trivial. Put it across thousands of households, and that fee starts appearing everywhere.
 
-The processing fee we were looking at was around 2.5 to 4 cents per transaction.
+I got very interested in the part of banking most customers never see: what it costs to serve an account before you've made a dollar from it.
 
-If you told me a few years earlier that I would become extremely interested in a fee that small, I would have asked if you were okay.
+## First, how many cards does a family use?
 
-But when you're building a fintech, that four cents can matter a lot.
+In January 2023, we were working through an i2c processing model that assumed about 3.5 cards per household.
 
-## Start with the household
+One early model used 36 transactions a month for the entire family. Thirty-four were adult transactions and two came from children. That worked out to about 10 transactions per card.
 
-One of our early models used approximately 3.5 cards per family. It estimated 36 transactions per household each month.
+At the same time, Gentry said his own household was making roughly 150 to 170 transactions a month. You can see the problem immediately. Our expected card activity and a real-world example were nowhere near one another.
 
-Gentry compared that with his own household, where he and Megan had made about 150–170 transactions in the previous 30 days.
+The processing pricing we were discussing was about 2.5 to 4 cents a transaction. At 36 transactions, that adds up to roughly 90 cents to $1.44 a month for a family, before all the other costs. At 160 transactions, it's $4 to $6.40.
 
-One family is not a representative sample. But those differences change your forecast in a hurry.
+That's still not a huge number. Until you acquire 100,000 families.
 
-At 36 transactions, a four-cent processing charge is $1.44 per family per month. At 160 transactions, it's $6.40. Multiply that by thousands of customers, then add other operational fees.
+At that scale, the second scenario would be $400,000 to $640,000 a month in processing fees using those illustrative rates. You need to know which behavior you're actually buying infrastructure for.
 
-The annoying answer to "how much does a customer cost us?" is that you need to know how they use the product.
+## Then there was interchange
 
-## Then consider the card itself
+When a customer pays a merchant with a card, the merchant's cost includes multiple pieces. One is interchange, which generally flows toward the card issuer under the network's rules. The acquiring side, payment processor and card network all have their economics too.
 
-Our original Willow idea included a premium family credit card with unusually generous rewards.
+People hear "interchange" and assume that every swipe is a free little revenue stream for the company whose logo is on the card.
 
-We studied an offer with 1% cashback, plus an extra 1% tied to paying early. I researched how programs like X1, Chase, and Capital One structured their rewards, redemption rules, and restrictions.
+I wish.
 
-It was incredibly useful because the advertising number and the financial mechanism underneath it are two different things.
+Your share depends on the issuing arrangement, the card type, the merchant category, network rules and your contracts. Then you have processing expenses, fraud losses, disputes, customer support, fulfillment and whatever rewards you've promised.
 
-Interchange revenue can help fund card rewards, but it gets shared according to program agreements and regulations. The merchant pays for card acceptance through a broader mix of fees, and the fintech doesn't simply get to keep all of that money.
+We were exploring generous cashback. One early credit-card concept had a 1% base reward and another 1% when balances were paid early. I researched competitors, including X1, Chase and Venture X, to understand how other card programs structured earnings, caps, redemptions and annual fees.
 
-You also have costs for processing, disputes, fraud, support, and the rewards themselves. Some transactions are more profitable than others. Not every customer spends the same amount.
+You can't judge a rewards program by the number printed on the advertisement. You have to know the denominator, what actions qualify, how points convert and what the program costs when customers use it exactly as intended.
 
-A generous offer might still make sense, depending on the economics. But you have to show your work.
+## Savings accounts were a separate financial model
 
-## And then there are deposits
+Our earliest discussions also involved paying customers an attractive rate on their deposits.
 
-One of our early questions was how much interest we could pass back to customers.
+We were comparing interest-rate benchmarks such as SOFR with possible customer APYs and what the banking partner and platform provider would retain. That's where basis points become your second language.
 
-I had to learn the difference between rates like SOFR, the Fed's policy tools, what banks earn on their assets, and what savings accounts offer depositors.
+A basis point is one-hundredth of a percentage point. Fifty basis points is half a percentage point. On $100 million, 50 basis points is $500,000 a year. If the share falls to 10 basis points, it's $100,000.
 
-A bank can earn income by deploying deposit funding, subject to its asset mix, capital and liquidity requirements, operating costs, and market risks. When fintech companies partner with banks, the commercial agreement can determine who keeps which share of earnings.
+That difference can pay for a lot of card manufacturing.
 
-Our early provider discussions had tiered economics based on deposit balances and payment volume. The pricing could look different at $5 million in deposits than at $300 million.
+A bank's economics involve the yield it earns on assets, what it pays depositors, funding costs, risk and operating expenses. A fintech sharing in deposit economics may have a separate negotiated revenue split. So when somebody asks, "Why can't banks pay everyone more interest?" the answer depends on which institution we're talking about, what it earns and what the contracts permit.
 
-These were negotiation proposals, not a published Crew profit-and-loss statement. I still think the underlying question is fascinating: how much more of the value could the customer receive if the product were designed differently?
+Those were things I had to learn to ask.
 
-## A few other fees that surprised me
+## And there were all the annoying little fees
 
-Same-day ACH, bank wires, checks, returns, disputes, physical cards, and replacement cards can all have separate prices.
+ACH transfers, same-day ACH, checks, wires, replacement cards, disputes, returns, account maintenance. They all carry different costs and different operational implications.
 
-Then there are fixed costs that don't care how many customers you have. Setup fees. Vendor minimums. Integration work. Security. Manufacturing inventory.
+One early banking-platform negotiation had ACH prices falling at higher volumes, with same-day transfers carrying an additional fee. Even the price of receiving a returned ACH mattered.
 
-A price sheet can contain dozens of tiny charges. Nobody will open a bank account because they admire the issuer's dispute-processing fee schedule. But if you're building that bank, you're responsible for the consequences of the schedule.
+I liked working on these models because the spreadsheet exposed what a product idea was asking the company to subsidize.
 
-## What the spreadsheet was telling us
+Free accounts are not necessarily free to operate. A rewards program is a recurring liability. A family with six cards may earn you less than a family with two. And a feature can look harmless until you multiply it by how often people actually use it.
 
-I like making a product look simple. The four-cent problem was one of my first experiences seeing how much complexity the simplicity depends on.
-
-I couldn't reasonably advocate for better rewards, high savings rates, premium physical cards, and completely free services without understanding where the money would come from.
-
-And I couldn't know whether the model worked without understanding customer behavior.
-
-The numbers became a way to make product decisions. They were never the whole story, but I couldn't ignore them either.
-
-So yes, I spent a meaningful portion of my early twenties learning to care about four cents.
+We were trying to build a product that gave more value back to customers. That only works if someone does the math with enough care to keep the company alive.

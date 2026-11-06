@@ -1,6 +1,6 @@
 ---
-title: "What Happens When You Tap Your Card?"
-summary: "A walk through what has to happen in the background when a payment card is tapped, from networks to processors."
+title: "Inside a Card Payment: Authorization to Settlement"
+summary: "Every time a card terminal says APPROVED, a surprisingly large number of companies have just managed to agree with each other in a couple of seconds."
 releaseDate: 2026-10-29
 written: 2026-10-29
 tags: [crew, product, payments]
@@ -8,72 +8,50 @@ about: [work/crew]
 draft: false
 ---
 
-Let’s talk about what happens when you tap a debit card, and why building a fintech card program made me care about every company behind that little beep.
+I learned how much work was packed into that little moment while we were building Crew's debit-card program. We had to understand the issuing bank, the card network, the processor, the account ledger, the authorization controls and what happens after the customer walks away.
 
-There is a little beep at the grocery store that represents a completely unreasonable amount of engineering.
+There's a good reason payment engineers are so obsessed with edge cases.
 
-You tap your card. The cashier hands you a receipt. Everyone moves on with their life.
+## Start at the coffee shop
 
-When I was helping build the debit-card program for Willow and Crew, I found myself learning the systems that make those few seconds possible. Now I can't use a card without thinking about the companies involved. Very normal hobby.
+You tap a Mastercard at a merchant's terminal. The terminal communicates with the merchant's acquirer, usually through the merchant's payment processor. The request travels over Mastercard's network toward the issuer processor responsible for the card.
 
-## First, someone has to issue the thing
+The authorization request carries information the system needs to make a decision: merchant category, amount, currency, card and transaction data, and indicators describing how the card was used. With a contactless EMV card, the chip produces transaction-specific cryptographic data. That makes cloning a static magnetic-stripe number a very different proposition from producing a valid chip transaction.
 
-An app called Crew can provide the experience customers see without being the legal issuer of their bank accounts and cards.
+The issuer processor applies the relevant controls. Is the card active? Has it been frozen? Is that amount allowed? Is the account in good standing? Does the available balance support the purchase? A bank or its designated providers may handle additional risk and compliance decisions. Then an approval or decline travels back along the network to the terminal.
 
-Crew's debit card was issued by Bangor Savings Bank, on the Mastercard network. That relationship matters because the issuer is part of the regulated banking system. The fintech develops the product, but it needs partners for the infrastructure and obligations it cannot just conjure into existence.
+It feels instantaneous because the whole system is engineered to make it feel instantaneous.
 
-The network, issuer processor, ledger, fraud controls, manufacturing provider, and fulfillment process all have their own jobs. Sometimes those functions are bundled. Sometimes they are delivered by separate companies. The exact contracts matter.
+When we were mapping Crew's product, the interesting part was figuring out which provider owned each decision. A button in your app that says 'Freeze card' is only useful if its instruction reaches the system making authorization decisions. An interface can promise anything. The processor still has to enforce it.
 
-We explored options including Unit and i2c while building. My January 2023 journal even talks about evaluating i2c as a way to use an existing technology platform and move faster. Researching a vendor is different from proving it was the final processor, so I'll keep that distinction clear.
+## Approval and settlement are separate events
 
-## The tap
+Suppose you buy $40 of groceries. The issuer can authorize $40 and reduce your available balance immediately, even though the merchant hasn't received final settlement of those funds.
 
-A contactless card communicates with the terminal using NFC, a short-range radio technology. For EMV contactless transactions, the payment application can produce transaction-specific cryptographic data. That is one reason a chip card is different from a static number printed on plastic.
+Later, the merchant submits the transaction for clearing. The network and the participating financial institutions reconcile the finalized amount and settle the obligations through their respective accounts and arrangements.
 
-The terminal and merchant's payments infrastructure pass an authorization request toward the issuer. Usually this travels through an acquiring processor, a card network, and an issuer processor.
+That's why pending transactions exist. It's also why a restaurant tip can change the final amount, a hotel can place a hold much larger than a room charge, and a refund doesn't always appear the moment the cashier presses a button.
 
-The issuer side checks whether the transaction should be approved according to account status, available funds, fraud rules, and card program controls. The decision then returns to the merchant.
+If you're designing a banking app, you need to represent that difference accurately in the ledger and available balance. Otherwise the customer sees numbers that contradict what happened at the terminal.
 
-That's the beep.
+## The PIN isn't sitting in your startup's database
 
-The exact route and who operates each piece depend on the program. The general architecture was something I had to understand while coordinating our own card work.
+Debit cards introduce another part of the system: personal identification numbers.
 
-## Approved and settled are different words
+A PIN is sensitive authentication information. Payment programs use secure cryptographic systems and specialized hardware security modules, or HSMs, so that clear PINs and encryption keys aren't handled like ordinary application data. The issuer processor and its partners typically provide the secure PIN services and verification flows.
 
-This is the part that surprises people.
+We had to account for PIN creation, PIN changes, resets and what would happen when a customer used an ATM. That doesn't mean I was personally handling PIN encryption. It means the product team had to know who provided it, what our integration could support and how the customer would experience it.
 
-When the terminal says approved, the merchant has an authorization. The actual exchange and reconciliation of money generally follow through clearing and settlement.
+That distinction matters on a regulated product. Your team can own the experience without taking custody of every dangerous secret underneath it.
 
-That's why an authorization can be pending, adjusted, reversed, or eventually posted at a different amount. Think hotel deposits, gas stations, restaurant tips. A hold on your account is not automatically the same thing as a final settled charge.
+## A card has two very different kinds of plumbing
 
-When you're building the customer-facing experience, those distinctions become support questions. Why is my available balance lower? Why is the charge still pending? Why didn't my refund arrive immediately?
+One of the easiest mistakes to make in fintech is to use 'payment processing' as though it describes a single system.
 
-Somebody on the product team has to know enough about the payment lifecycle to make those screens and explanations accurate.
+A debit-card purchase follows card-network authorization, clearing and settlement rules. Moving someone's paycheck or funding an account from another bank commonly uses ACH, with a different set of banking relationships and settlement windows.
 
-## And what about the PIN?
+I spent a lot of time reading about those systems. *The Anatomy of the Swipe* was one of the books I used to understand the mechanics. Brett King's *Bank 4.0* helped me think about where banking was going as a product.
 
-Now add ATM withdrawals and PIN-authorized debit transactions.
+At Crew, we were stitching together a customer experience over those existing rails. The difficult questions weren't visible to customers: which provider sees a balance change first, who owns a failed transaction, when a hold expires, and how an account recovers when one of the systems is late.
 
-A PIN needs to be handled through secure cryptographic processes, typically involving processors, protected key management, and hardware security modules. It's not something an app team should see in plaintext or put in a customer database.
-
-Our job wasn't to invent an encryption standard. We needed to understand who was responsible for PIN creation and management, how the customer would set or reset one, and what the program would support.
-
-I find this part of fintech strangely satisfying. The best product architecture is often knowing which incredibly important thing your company *should not* handle directly.
-
-## The card in your hand is also engineered
-
-Even after you have an issuing relationship and authorization path, you still have to deliver a usable card.
-
-The chip and contactless antenna need to work. The physical card needs to meet network and manufacturing requirements. Customer-specific data needs secure personalization. The card needs to reach the right person and activate correctly.
-
-At Crew I researched those manufacturing options and had physical prototypes made. A few of our ideas, including a premium metal construction, raised interesting questions about contactless antenna compatibility.
-
-A metal card is gorgeous until it can't talk to the terminal.
-
-## The most useful part of learning all this
-
-I wasn't writing cryptographic firmware or running the issuing bank. I was doing product work across specialized partners, commercial constraints, physical design, and the customer journey.
-
-The reason I learned the anatomy of a payment wasn't because I wanted to sound impressive talking about EMV. I needed to understand what could go wrong, what we were paying for, and which partner we needed when something didn't work.
-
-The next time you tap your card and hear that little beep, there are a whole lot of people you can silently thank.
+I still think it's remarkable that a $4 coffee can involve this much infrastructure. And that, most of the time, we get the coffee and never think about any of it.

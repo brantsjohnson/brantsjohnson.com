@@ -1,6 +1,6 @@
 ---
-title: "I Made a Metal Credit Card That Never Launched"
-summary: "How a premium metal family card concept ran into manufacturing and cost questions before the product moved to debit."
+title: "Designing Crew’s Metal Card"
+summary: "I had a brass-colored metal card made for a fintech that hadn't launched yet."
 releaseDate: 2026-10-28
 written: 2026-10-28
 tags: [crew, product, cards]
@@ -8,72 +8,38 @@ about: [work/crew]
 draft: false
 ---
 
-Let’s talk about what it takes to design and manufacture a premium metal credit card for a fintech. I helped build that concept at Willow, before the company became Crew.
+It was a gorgeous little thing. We wanted the kind of payment card people would take out at dinner and immediately ask about. It had a metal core with PVC on the outside, a warm finish, and fine striations across the surface. I ordered samples so we could feel the weight, study the texture and hold the actual thing in our hands.
 
-I have a brass-colored payment card sample somewhere. Well, a few samples, I think. I had them manufactured and shipped to me while we were building a fintech called Willow, which eventually became Crew.
+The company was called Willow then. We eventually became Crew. At the beginning, we were planning a premium credit card for families, and our founder, Gentry, wanted the unboxing experience to compete with the nicest cards on the market. I took that seriously. I also had to work out whether it could be manufactured and shipped without bankrupting the customer-acquisition budget.
 
-It is one of my favorite things from that job, and it never became the card customers carried.
+## A metal card is a stack of engineering decisions
 
-We wanted a premium family credit card. Our founder, Gentry, liked the way a beautifully packaged card could become something people wanted to photograph. I understood the attraction immediately. You spend money with a card every day. Why shouldn't it be beautiful?
+Metal cards come in several constructions. You can have a full-metal body, a metal core sandwiched between PVC layers, or a much thinner metallic veneer. The difference shows up in the price, the weight, how you personalize the card and how the contactless antenna works.
 
-Of course, the second you try to turn that idea into an actual card program, you get an education.
+The antenna was one of my favorite complications. A contactless payment uses near-field communication. The antenna couples with the payment terminal's field and powers the chip so it can exchange transaction data. Put enough conductive metal in the wrong place and you've changed its behavior. That's why manufacturers use particular layer stacks, shielding arrangements or antenna designs for metal cards.
 
-## What does a metal card even mean?
+Then you've got the EMV chip module. Its position is standardized. So are a lot of the usable areas on the card. Our artwork had to be designed around those constraints. We discussed a vertical format, too, with a cleaner front that could be photographed without broadcasting someone's card number. Embossed numbers, flat printing, laser engraving and printing the PAN on the back all affect personalization equipment and sometimes the quote. You don't just tell the factory to put the numbers wherever they look nicest.
 
-I assumed we would choose a card material, send a design to a supplier, and be done. That is an adorable way to think about manufacturing.
+And of course there is the finish. We wanted brass, partly because silver metal cards were everywhere and Robinhood had made gold a thing. We experimented with textured striations, coatings and lower-cost ways to make the card feel expensive. I remember debating surface treatments down to the tiniest detail. It was oddly fun.
 
-There were fully metal cards, metal-core constructions with PVC outside layers, metal veneers, and different finishes. There were weights to compare. Different methods for printing and engraving. Even the depth of a surface texture mattered.
+## The quote changes the conversation
 
-The design we were exploring had a brass-colored finish with subtle striations across the top. It was meant to look distinctive and expensive. My recollection is that we chose a less expensive surface treatment, though I still haven't recovered the exact process. I don't want to call it laser-etched just because that sounds impressive.
+My supplier notes from March 2023 have basic plastic around $2 per card and one metal-sandwich option around $16–$20, with a 5,000-card minimum order quantity. These were options we researched, rather than a final production invoice.
 
-I had prototypes made so we could handle them. A beautiful render tells you nothing about how heavy a card feels when it lands in your hand.
+Do the math at $16. Five thousand cards is $80,000, before you've added the setup costs, secure personalization, fancy packaging, postage or replacements. The same quantity of $2 plastic bodies would be $10,000.
 
-Then there was the antenna.
+And the bill doesn't disappear after the first shipment. A lost card costs money. A damaged one costs money. Stock sitting in a warehouse costs money. You need enough of the right chip profile and artwork version to fulfill future orders without holding absurd amounts of dead inventory.
 
-## The contactless antenna has opinions
+I was researching companies like Idemia, Perfect Plastic, CPI, Tag Systems and CompoSecure, along with the other processors, banking partners and card-program suppliers we'd need to coordinate. I helped manage work involving eight external suppliers over my time at Crew. Some were only candidates; others became part of the actual work. My job was to understand the handoffs well enough that we could make decisions with real costs attached.
 
-A payment card has to survive all kinds of mundane encounters: wallets, pockets, store terminals, and the occasional washing machine. Contactless payments add another complication. The card needs an antenna that can communicate with a terminal using radio-frequency energy. Metal can interfere with that communication.
+## I even built the box
 
-A metal-core card therefore isn't just a heavier piece of plastic. The construction and antenna need to work together. The chip has its own placement constraints, as do other physical features.
+I drew packaging schematics. I made prototypes by hand. One was based on those mechanical wallets where you press a button and the cards fan upward. It looked terrific when all the cards fit.
 
-We were also considering a vertical layout and cleaner card faces. I wanted a design people could photograph without putting sensitive details on display. A great brand idea becomes a manufacturing conversation pretty quickly.
+We were building for families, though. Six cards might fit beautifully. What happens when the family has seven members? Or a parent replaces one card later? What if four children want the same color? The premium box was getting expensive and logistically ridiculous.
 
-The specific reason we passed on the vertical layout is still missing from my notes. I remember the network and placement requirements being part of the discussion, but I won't pretend I've recovered the exact decision.
+We explored a mailer that folded into a paper airplane instead. A little family activity, a recognizable bit of branding and a much simpler object to produce. I loved that idea more than the expensive case, which was mildly annoying after how much time I'd put into it.
 
-## The quotes made everything more interesting
+The card concept eventually changed with the business. We couldn't secure the credit facility for the original premium credit product, so we moved toward debit. That changed the economics of putting a heavy metal card in every customer's wallet.
 
-My March 2023 notes listed suppliers and companies we were researching: Idemia, Perfect Plastic, CPI, Tag Systems, and CompoSecure, among others. That list doesn't prove each was hired. It shows the amount of discovery we were doing.
-
-The numbers were memorable. Basic plastic could be as low as approximately $2 per card. One metal-sandwich option came in around $16–$20, with a minimum order of 5,000 cards.
-
-At $16, a 5,000-unit run is $80,000 in card bodies. At $2, the equivalent plastic run is $10,000. And then you still have to think about setup, personalization, shipping, replacements, and which inventory you'll be stuck with if the design changes.
-
-These were researched vendor figures, not executed invoices. They were enough to make the tradeoff painfully clear.
-
-I loved the metal card. I also loved figuring out what it would really cost to put one in somebody's hand.
-
-## And then I started building the box
-
-Gentry wanted an unboxing experience that felt prestigious. Think of those premium cards that arrive in a box that looks like it belongs to a much more expensive object.
-
-I drew packaging schematics and made prototypes by hand. One idea looked like a mechanical wallet: press a button and the cards would rise and fan out. It was so fun.
-
-It was also designed around the uncomfortable fact that our customer was a family. The packaging might work perfectly for six cards. What happens when the family has seven? Or two cards are replaced? Or four children choose the same color?
-
-We looked at different card colors and coordinating envelopes. Every personalization decision multiplied the order combinations the fulfillment process had to support.
-
-Eventually we explored a simple mailer that could fold into a paper airplane. I still adore that. You could open your family's new cards and then turn the packaging into a small activity. Something worth remembering, without an expensive plastic case taking up space in the closet.
-
-I like that we found something more human by trying to reduce costs.
-
-## The product changed
-
-We couldn't secure the credit facility needed for our original premium credit-card plan. The company moved toward debit, and a lot of the premium-card economics stopped making sense.
-
-So the metal card didn't launch.
-
-I don't think that makes the work a failure. I researched specialized manufacturing, worked with physical samples, negotiated or compared production tradeoffs, prototyped mechanisms, and learned what the infrastructure would support. We got far enough to make an informed decision about what *not* to spend money on.
-
-I spent a lot of my time at Crew doing exactly that: turning a beautiful idea into a version you could put in the real world.
-
-And somewhere, I still have that brass-colored sample. I need to photograph it.
+I still count the brass card as some of my favorite product work. I got to design the object, hold the samples, learn how the chip and antenna constrained it, understand the factory's economics and work out what the company could afford. It was a proper physical product development project, hiding inside a fintech startup.

@@ -1,6 +1,6 @@
 ---
-title: "How Do You Advertise a Bank Nobody Knows Yet?"
-summary: "Early thinking on how a new family bank could get attention without a known brand, including creator partnerships."
+title: "The Digital Billboard Attribution Strategy I Designed"
+summary: "When we were building Crew, our founder wanted billboards."
 releaseDate: 2026-11-03
 written: 2026-11-03
 tags: [crew, growth, marketing]
@@ -8,58 +8,70 @@ about: [work/crew]
 draft: false
 ---
 
-Let’s talk about marketing a bank nobody knows yet. At Crew we explored billboards, influencer deals and customer acquisition while trying to earn something harder than attention: trust.
+I understood why. Homie had made billboards a recognizable part of its growth in Utah. When you're introducing a company nobody knows, there's something appealing about getting your name on a giant sign beside the freeway. It makes the business feel real.
 
-I worked on early growth ideas for a fintech startup whose product asked people to do one of the least fun things imaginable: change banks.
+I was the annoying person asking how we'd measure whether any of that spending worked.
 
-Our founder loved the idea of billboards. I understood why. Homie had made bold marketing feel like something a local company could do, and we wanted people to know Crew existed.
+Financial products are expensive to market because getting someone's attention is a very long way from getting them to move their money. We could spend thousands on outdoor advertising, but if someone opened a Crew account three weeks later, how would we know the billboard had anything to do with it?
 
-I was thinking about what we would learn from the money we spent.
+I kept pushing on that question. Eventually I came up with an approach that made the billboard itself a reason for people to create measurable activity.
 
-## The billboard photo idea
+## The problem with counting cars
 
-One idea I developed was to feature real families on the billboards in a way that would make them want to photograph and share their appearance.
+Traditional outdoor advertising comes with estimates of impressions, traffic, location and audience composition. Those are useful for media planning. They don't tell you exactly how many people became customers because they saw your ad.
 
-The company gets a physical ad. The family gets a moment. Their friends might see it on social media, and we can at least measure some of that spread.
+A good placement can help brand awareness and search demand, but the attribution is messy. Someone might see a billboard, later hear about you from a friend, search your name and then sign up. The analytics dashboard credits the search. The billboard disappears from the story.
 
-I liked the idea because it made a static billboard participatory.
+That is painful when you're a startup with a small budget and a lot to prove.
 
-It still wouldn't tell us whether the campaign caused people to open and fund accounts. Likes and views don't magically equal customers. To understand lift, we'd need better comparisons across time or markets, plus signals such as branded search and funded accounts.
+I wanted to get closer to an observable action. Something beyond a car passing a sign.
 
-But the photo idea gave us a way to think about the experience of the advertisement itself.
+## We met with billboard companies
 
-## The influencer rabbit hole
+We talked with Reagan and another outdoor advertising provider while exploring options. I also looked at the way digital billboard inventory could be purchased and changed. We considered different networks; Blip was one of the names in the mix, although it wasn't the one we chose for the concept.
 
-I also worked on influencer marketing research. This wasn't a plan to simply find a famous person and ask them to smile at our debit card.
+Digital outdoor inventory made the idea much more interesting. Instead of paying to print and install one creative and leaving it there, we could rotate the artwork.
 
-I researched how creator contracts work: flat fees, performance-based commissions, hybrid agreements, content usage rights, and terms for what counts as an attributed conversion.
+Different family every day? Potentially. Different message every week? Easy to imagine. The creative no longer had to stay frozen for the length of a conventional print run.
 
-I interviewed someone at Gabb who worked in influencer marketing. My notes covered outreach volume, response rates, commissions, and typical agreement lengths in *their* program.
+That flexibility suggested an experiment.
 
-That conversation was incredibly useful because it described the operating reality. Finding the right creators, pitching them, negotiating expectations, handling content, and measuring what happens afterward.
+## Put actual families on the billboard
 
-Some people assume creators get paid simply because they have followers. Sometimes they do. Sometimes they're paid only when a customer takes a specific action. Plenty of agreements live somewhere in between.
+My idea was to make the billboard personal to the families we wanted to reach.
 
-## A banking customer is not a page view
+Feature a family on a digital billboard, give them the location and approximate time to see it, and make it something they'd want to photograph and share. The post might appear in an Instagram story, a group chat, or a social feed. The family could tag Crew. Friends would see people they knew on a billboard for a brand they hadn't heard of.
 
-Financial products add another problem: getting someone to sign up doesn't mean they passed identity checks, funded the account, transferred a paycheck, or stayed.
+Now we could observe something.
 
-I wanted us to think about what we were buying at each step. A creator with a smaller, trusted audience might be more valuable than someone with a million followers whose audience wasn't interested in moving money.
+We could track public tagged posts, mentions, story interactions where available, referral links, profile visits, branded search volume and new signups in the relevant windows. With unique landing pages or codes for a specific activation, we could follow part of that activity further into account creation and funding.
 
-That isn't a universal rule. It's a reason to measure.
+The billboard could become the event that generated the content, rather than relying entirely on a photograph of our logo by the highway.
 
-We also experimented with referral economics. Early Willow materials proposed temporary cashback boosts, and Crew later launched a savings APY referral incentive after my departure. Those rewards have different costs and behavior patterns.
+And because the sign was digital, the families and creative could rotate. It gave us opportunities to test which messages and visuals prompted engagement, what kind of reach the posts generated and whether the activity carried into the acquisition funnel.
 
-A post could bring in traffic. The actual business needed active accounts.
+I loved the mechanics of that idea. A static media purchase could have an experiment attached to it.
 
-## What I took from the whole exercise
+## What would have counted as a win?
 
-I like advertising. I like branding. I enjoy watching something creative get people excited.
+The trick is choosing the metric before the campaign runs.
 
-I just also want to know what happened afterward.
+Photos and likes would show participation. Reach and impressions would show distribution. Profile visits and branded searches would help indicate interest. Completed applications, funded accounts and active users would tell us whether we had created something commercially valuable.
 
-Working in fintech made that distinction sharper because the thing we were asking customers to do was so consequential. We weren't selling a T-shirt. We were asking people to trust a startup with their financial routines.
+Those are different questions, and I'd want to see all of them.
 
-The best campaign in the world can't compensate forever for a product people don't want to switch to. That was why I cared so much about getting the product proposition right at the same time as the acquisition plan.
+I would also compare markets, creative rotations and time periods where possible. The people most likely to post about being on a billboard are also likely to be excited about the experience, so social engagement alone wouldn't prove incremental customer acquisition. You still need a sensible control or baseline.
 
-And I still think it would've been extremely fun to put families on their own billboards.
+That was the entire reason I objected to an expensive unmeasured campaign in the first place. I wasn't against billboards because they're old-fashioned. I wanted a way to learn from spending the money.
+
+## I was trying to build an acquisition system
+
+The broader growth work at Crew included referral concepts, social campaigns and influencer marketing. I interviewed someone at Gabb about how their influencer program worked, including creator outreach, commission structures and agreements.
+
+Those conversations gave me a better feel for the gap between paying for content and paying for customers. A flat-fee sponsorship, affiliate commission, pay-per-acquisition deal and hybrid arrangement put different incentives on the people involved.
+
+We were asking families to choose a new banking product. I wanted every part of our marketing strategy to reflect how consequential that decision was.
+
+It's easy to buy visibility if you have money. When you have to explain the cost to a company that's still building its first product, I'd rather create a campaign that teaches us something.
+
+The digital billboard idea was my attempt to make that possible, and I still think it's a really fun way to approach outdoor advertising.

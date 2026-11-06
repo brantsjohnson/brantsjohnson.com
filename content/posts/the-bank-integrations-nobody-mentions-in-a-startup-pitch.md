@@ -1,6 +1,6 @@
 ---
-title: "The Bank Integrations Nobody Mentions in a Startup Pitch"
-summary: "The behind-the-scenes bank, processor, and data connections a new banking product has to line up before anyone can sign up."
+title: "The Integration Work Behind a Banking App"
+summary: "I once spent a surprising amount of time looking at a spreadsheet of banks and asking whether we could actually connect to them."
 releaseDate: 2026-11-04
 written: 2026-11-04
 tags: [crew, product, integrations]
@@ -8,68 +8,60 @@ about: [work/crew]
 draft: false
 ---
 
-Let’s talk about fintech integrations: banking platforms, issuer processors, account verification, payments and all the systems customers never see.
+It had columns for account-owner verification, balance checks and account aggregation. Some institutions supported all three. Others had gaps, odd authentication requirements or connections that needed to be reset. We ended up researching 41 institutions across two MX compatibility sheets.
 
-The first time I saw the infrastructure behind a consumer fintech product, I had a very optimistic idea of what an integration meant.
+This was part of building Crew, and I loved it.
 
-You find the right provider. You connect their API. The app works.
+The customer sees a button that says "Connect your bank." I was looking at the collection of systems that could make that button succeed, fail or behave strangely.
 
-Then you discover that the bank, the processor, the network, the compliance system, and the customer's old bank all have their own requirements. Sometimes they have different ideas about when a transaction exists.
+## Linking an account is several different jobs
 
-I spent a lot of my time at Willow and Crew learning to navigate those dependencies.
+A startup might need to confirm that someone owns an external account, fetch balances and retrieve transaction data. Those sound similar when they're listed on a product roadmap. They aren't the same capability.
 
-## Our first technology choices
+Account-owner verification helps establish who controls or owns the account. Balance data can help decide whether an external transfer is likely to have sufficient funds, though it isn't a guarantee. Aggregation provides transaction and account information used for features such as financial insights.
 
-My January 3, 2023 journal describes meeting with the team behind i2c, a processor and technology platform we were evaluating to help us move quickly.
+A provider might support one capability for a bank and not another. Authentication may happen through an OAuth connection, credential-based flow or an institution-specific route. An institution can change its login process or require a user to reauthenticate.
 
-I liked the prospect of building on infrastructure that already existed. The harder work was figuring out whether it fit the product we wanted, whether our issuing partner supported it, and what it would cost when customers used their accounts.
+All of that becomes your problem when your interface tells the customer it should work.
 
-We also considered other banking-as-a-service arrangements in the early stages. Vendor research isn't the same as a signed contract. Some old notes list i2c, Unit, and bank candidates, while later Crew materials confirm Bangor Savings Bank and Treasury Prime in the operating stack.
+We compared the support matrix rather than assuming that a familiar bank name meant full functionality. Navy Federal and USAA, for example, raised different capability questions in our research, while other institutions had reauthorization issues. Those were research observations at the time, not promises about what any institution supports today.
 
-I still have a few gaps in the original provider timeline. I'd rather leave them visible than combine every vendor into one imaginary architecture.
+## Then the money has to move
 
-## Connecting to another bank isn't one feature
+A connected account doesn't automatically mean a transfer is instant.
 
-In August 2023, we created two MX compatibility sheets covering 41 financial institutions.
+Ordinary ACH is a batch-based payment system with banking-day settlement schedules. An ACH credit and an ACH debit have different operational risks. If a fintech allows a user to spend incoming money before that debit has settled, somebody has decided to advance availability and take on the possibility of a return.
 
-We were investigating account owner verification, balance checks, and account aggregation. Those sound related, but a bank connection can support one and struggle with another. Some institutions require reauthentication. Some have gaps in coverage.
+Think about a Saturday transfer. The app can record your instruction immediately. The actual ACH settlement process doesn't operate like an always-on chat message.
 
-That spreadsheet was a reminder that "Connect your existing bank" isn't a single universally reliable operation.
+That's why Venmo and other apps may distinguish a standard bank transfer from an instant one. Instant payouts commonly use eligible card push-payment rails or real-time payment infrastructure, with their own pricing and participation requirements. You can't simply mark a transfer "instant" in a user interface and wish the underlying system into it.
 
-And because we were trying to help customers switch banks, we couldn't treat it as a tiny edge case.
+We had to think about that timing for a family banking product. A parent might move money into a child's spending balance. A family might move money into a designated savings pocket. A debit-card transaction might arrive while another transfer was still pending.
 
-## What happens if it's Saturday?
+Every visible balance is an assertion about what money is available, and it had better be a defensible one.
 
-Traditional ACH settlement runs on banking days. Funds availability, risk, and posting conventions can be different from what the customer expects when they hit Transfer.
+## There are ledgers underneath the design
 
-If the app displays money as available before an incoming transfer has settled, somebody is making a risk and liquidity decision. Same-day ACH has different windows and pricing; instant rails exist, but participating institutions and use cases matter.
+An internal ledger tracks balances and movements between accounts or categories. It's usually built around balanced accounting entries, with separate treatment for holds, pending transfers and settled transactions.
 
-Our early provider conversations explicitly priced standard and same-day ACH differently.
+If you move $25 from a groceries pocket to a school-supplies pocket within the same underlying account, that may only require an internal ledger change. Move $25 to somebody else's bank, and you're involving an external rail.
 
-It wasn't enough for us to build a transfer button. We had to understand what we were promising.
+Those two buttons might look almost identical.
 
-## The weird little questions are real
+The ledger also needs to agree with what the bank and processors report. Reconciliation is where a lot of apparently tiny integration mistakes become expensive.
 
-What happens when an ACH transfer is returned?
+I was learning the landscape of banking infrastructure from the ground up. Early on we evaluated providers such as i2c and discussed Unit's pricing and card-program capabilities. The later Crew banking product involved Bangor Savings Bank and Treasury Prime. Different providers occupied different positions in the stack, and the responsibilities mattered more than the marketing descriptions.
 
-Who handles a debit-card dispute?
+The job was to map what each could deliver, what the contract charged for and which handoff made the customer promise possible.
 
-How does a customer securely set or change a card PIN?
+## The other parts everyone forgets
 
-Who pays when they use an ATM outside the preferred network?
+There are ATMs, PIN services, lost-card workflows, issuer authorization rules, card-personalization bureaus, disputes, returns and all the other things customers expect banks to handle.
 
-If a child has a card, which account controls can the processor enforce, and which controls are just a visual setting in the app?
+PIN verification belongs in secure payment infrastructure, generally using encrypted PIN blocks, key management and hardware security modules. A startup product team shouldn't be collecting clear PINs in an ordinary application database. It still needs to build a safe customer flow for creating and resetting them.
 
-I was constantly trying to answer questions like these. The details varied by vendor. Some responsibilities belonged to our banking partners and processors, and that was fine. We needed to design the customer experience around what those partners could do.
+ATM access carries its own network arrangements and potential surcharge or reimbursement economics. A "free ATM" promise needs somebody to pay the bill.
 
-## I liked this work more than I should've
+I liked having the actual dependency map in front of me. When the customer says a feature doesn't work, the important question is which system is failing and what responsibility we agreed each provider would carry.
 
-I also worked on illustrations, card finishes, customer discovery, and marketing. It might sound like I changed jobs every week.
-
-I didn't see it that way. All of those decisions shaped whether someone would trust a new financial product and whether the product could keep its promises.
-
-There were days when I was comparing metal card weights and days when I was learning why a banking connector couldn't verify an account holder.
-
-I was learning an entire industry while trying to help build something real inside it.
-
-I still find that fascinating. The next time a bank app tells me a transfer will take three business days, I can practically see the meeting that produced that sentence.
+The spreadsheet wasn't especially beautiful. But it was the kind of work that makes a banking app possible in the first place.

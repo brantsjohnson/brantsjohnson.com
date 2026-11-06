@@ -1,6 +1,6 @@
 ---
-title: "What Does It Cost to Give a Family Six Debit Cards?"
-summary: "Why family size, card colors, and replacements turn a debit-card order into a fulfillment problem."
+title: "Designing Crew’s Card Packaging and Fulfillment"
+summary: "The prototype worked perfectly."
 releaseDate: 2026-11-01
 written: 2026-11-01
 tags: [crew, product, fulfillment]
@@ -8,68 +8,48 @@ about: [work/crew]
 draft: false
 ---
 
-Let’s talk about the logistics of issuing debit cards to entire families, because six cards, six colors and one mailer create more problems than you might expect.
+I pressed the button and the cards fanned out, one above another, like one of those mechanical wallets. It looked like a proper premium banking product. I had built the thing by hand, drawn the schematics and hunted down the parts and suppliers.
 
-A question I never expected to spend so much time on was: how do you send a family their debit cards?
+Then I looked at it and thought about a family with seven people.
 
-Not electronically. In the mail, with real cards, packaging, and everything that comes with it.
+We were building Willow, later Crew, and I was responsible for working through what the physical card experience could look like. Our founder wanted something with the prestige of the best metal credit-card packaging. People love opening a beautiful box. They take photographs, share it online, show it to their friends. I understood exactly why that mattered for a brand nobody knew yet.
 
-One person ordering one card is fairly manageable. Family banking introduces an unreasonable number of combinations.
+But most premium card packages are designed to deliver one card to one person. Our product could mean several cards going to the same household. Suddenly the nice box had to accommodate an unpredictable little family reunion.
 
-## Six colors and a lot of possibilities
+## Six colors makes an inventory problem
 
-At one point we explored six card colors, with matching envelopes.
+We explored a system with six card colors and matching envelopes.
 
-That sounds like a manageable brand decision until you start working through orders. What if a family chooses four cards in one color and one in another? If your fulfillment system assumes one envelope per color, you have a problem.
+That sounds like a design choice until you try to fulfill an actual order. Suppose a family orders five cards: four blue and one green. You need four correctly personalized blue cards, one green card, matching packaging, the right names and addresses, and a way to match the physical pieces to that specific household.
 
-Now multiply that across different family sizes and replacement scenarios. Does a parent order an extra card? Does a child's card get reissued separately? How much inventory of each color do you keep? Who assembles the package?
+A supplier can print a thousand identical envelopes easily. A household order with multiple personalized cards is a different operation.
 
-I was thinking through these constraints while we designed our card and packaging options.
+There are card bodies, chip configurations, artwork versions, personalization files, packaging stock keeping units and postage formats. Some combinations can be configured into an automated line; others need assembly by hand. And you have to think about replacements. If somebody loses the green card, are we sending a whole new presentation box for one replacement?
 
-The customer sees a color picker. Someone in operations sees inventory math.
+Every variation creates its own small logistical obligation.
 
-## Our prestige-box era
+## The presentation box was a legitimate supply-chain project
 
-Gentry liked the idea of a premium presentation, like the fancy consumer-tech products you see in unboxing videos.
+We tested different physical cases. Some looked a bit like cigarette boxes; others used the pop-up wallet mechanism.
 
-I did too. I started drawing the box concepts and making physical prototypes. I researched suppliers and tried designs that looked like small presentation wallets.
+I drew and built prototypes rather than waiting for someone to produce another beautiful mockup. I wanted to know how the hinges worked, how much room the cards needed, what happened if we changed the order, and how it would survive the mail.
 
-One prototype used a mechanical idea like a push-button cardholder. You press it and the cards fan out.
+There's also shipping weight. When we were discussing metal cards, even the card body could weigh about 15 or 16 grams. Add several cards, a case, printing and protective materials, and the cost of mailing that little brand moment changes.
 
-It looked fantastic. Then you have to answer a perfectly ordinary question: what if there are seven people in the family?
+Now think about the cost of stocking the cases. Or producing them in a custom color. Or having someone hand-place every card into its slot in a secure fulfillment environment.
 
-A rigid case sized for six cards is suddenly a problem. You could change the case size, add an extra envelope, create multiple configurations, or force everyone into a one-size-fits-all product that doesn't really fit everyone.
+It's the kind of project where the render costs nothing and the physical world charges you for everything.
 
-Every option affects cost and the experience.
+## I liked the paper airplane better
 
-## The airplane
+We eventually explored a much simpler mailer that could be folded into a paper airplane.
 
-We eventually explored a very different mailer. It could be folded into a paper airplane.
+I loved it because it turned the opening of the package into a family activity. It also had the potential to work with a much simpler print-and-mail process.
 
-I still think this was wonderful.
+Some card-fulfillment lines can automatically personalize a card, attach it to a printed carrier and insert the carrier into an envelope. If your design can work within that automation, you avoid asking a person to hand-assemble thousands of packages.
 
-A family receives their new cards, gets a small activity out of the packaging, and doesn't need to keep an expensive plastic case. The presentation becomes something they do together instead of something they leave on a shelf.
+You still have to follow the card program's security and fulfillment controls. The account-specific data has to reach the correct person, every spoiled card needs to be accounted for, and the finished piece needs to survive mailing. The simplicity is what made the airplane idea appealing.
 
-We were also trying to reduce the fulfillment cost. A historical résumé credits packaging work with saving about $4.85 per customer. I can't independently verify that calculation today, so it stays an internal estimate until I find the original model.
+I had come in wanting to help make a beautiful card arrive in an impressive box. I ended up thinking about machinery, labor, family-size distributions, card inventory and what customers might actually keep.
 
-What I know from memory is that I built prototypes, drew designs, and worked through how much all of it would cost to ship.
-
-## Packaging is part of the product
-
-There is a useful temptation to treat a physical card mailer as somebody else's problem. The design team chooses a box. Operations mails it. Done.
-
-But for a new bank, this is the customer's first physical experience with a company they're trusting with their money.
-
-The contents need to be correct. The account and card details need to remain secure. The card should be easy to activate. And the package should be reasonably economical to assemble and send.
-
-I wanted our brand to feel special, but I was also thinking about how these decisions would scale. The point of having a beautiful experience isn't to make the warehouse miserable.
-
-## I'm glad we did the expensive experiments
-
-The original premium credit-card concept changed when the company moved toward debit. Our physical-product plan changed with it.
-
-That didn't make the mockups and homemade prototypes worthless. We found out which options were exciting, which were awkward, and which became too expensive as soon as you did the math.
-
-And we found one direction that was both cheaper and more memorable.
-
-I would still happily spend an afternoon folding that mailer into paper airplanes.
+That is a pretty good summary of why I love product work. I get fascinated by the details other people never have to see.

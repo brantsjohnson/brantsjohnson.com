@@ -1,6 +1,6 @@
 ---
-title: "I Kept Asking Why Anyone Would Switch Banks"
-summary: "Customer discovery on why a family would leave a bank they already use, and what that meant for the product."
+title: "Why Would a Family Switch Banks?"
+summary: "For a long time, the pitch at Willow and then Crew was banking built for families."
 releaseDate: 2026-10-30
 written: 2026-10-30
 tags: [crew, product, discovery]
@@ -8,66 +8,52 @@ about: [work/crew]
 draft: false
 ---
 
-Let’s talk about customer discovery in banking, especially the question I kept bringing back to Crew: what would persuade someone to switch?
+I understood it. I liked the ambition. But I kept coming back to a problem I couldn't get past: why would a family go through the hassle of moving its money to us?
 
-One of the questions I wouldn't stop asking at Crew was: why would somebody move their money to us?
+People already have bank accounts. Their paychecks go there. Their utility bills come out automatically. Their cards are saved in Apple Wallet, on Amazon and on every subscription they've forgotten to cancel. Moving banks is a pain.
 
-I know. Extremely inconvenient question when you're trying to build a bank.
+If our entire answer was 'we're for families,' I didn't think that was enough.
 
-We started as Willow with a pretty ambitious premise. Banking for families. Great interest rates. A premium credit card. Youth features. Better ways to teach kids about money.
+## The original credit-card assumption bothered me
 
-I believed there was something there. I also thought we had to be more specific about which problem was painful enough to make a person change banks.
+One early idea was a premium credit-card product with a card for parents and ways to bring children into the financial experience. Our founder was confident parents would be interested.
 
-## A segment is easy to name
+When I talked with potential customers, I found hesitation around giving children credit cards. That was an important distinction. People could want their kids to learn about money without wanting to introduce revolving credit into the lesson.
 
-"Families" is a recognizable market. It includes parents, kids, shared finances, allowances, and a bunch of money decisions people don't always want to discuss.
+I pushed that concern. It's difficult to argue with someone's vision when you're the person responsible for turning it into a product, but I wanted the product to fit what people were telling us.
 
-But a family already has a bank. Often several. Their paycheck goes somewhere. Their rent comes out somewhere. They have subscriptions they forgot they signed up for. Their card information is saved in far too many places.
+The credit facility we needed for the original program didn't come together, and we moved toward debit. That solved one constraint. We still had to solve the harder adoption question.
 
-Asking them to download an app is one thing. Asking them to move their primary financial relationship is an entirely different proposition.
+## I went to the mall
 
-I wanted us to be able to answer what they would get on an ordinary Tuesday that they couldn't get from their current bank.
+We didn't have a mature analytics function telling us exactly why people opened an account, funded it and stayed. I wanted evidence beyond our own conversations in the office.
 
-## The children's credit-card idea was a tough sell for some parents
+So I went and talked to potential customers, including parents at shopping centers. I studied the objections. I looked at competing products. I tried to separate the features people thought sounded nice from the problems they'd go to the trouble of fixing.
 
-Our early credit concept was ambitious. The pitch imagined a family premium card, with children learning about credit and rewards.
+One pattern kept bothering me: family banking was a category, but the financial problem people actually dealt with happened every day. They had money spread across expenses, goals, children's spending, upcoming bills and whatever emergency had arrived that week.
 
-During customer discovery, I heard hesitation about giving children access to credit. Not every parent objected, and I don't have a recovered survey showing a definitive percentage. But I heard enough of it that I wanted us to take the concern seriously.
+They wanted to understand what their money could safely do.
 
-We eventually pivoted to debit because we couldn't secure the credit facility the original plan required. So the product direction changed regardless. Still, the research had been asking the right kind of question: did the customer want what we thought we were selling?
+## I got interested in envelopes
 
-That distinction matters to me. I get very excited about an idea. Then I want people to tell me where I'm wrong before we spend months building it.
+Envelope budgeting is wonderfully uncomplicated. You set aside money for groceries, rent, a trip or the kids. Traditional envelopes contain cash. Digital pockets can apply a similar concept to a banking experience.
 
-## I became a little obsessed with envelopes
+There's a technical decision hidden inside that simple interface. Are the pockets separate deposit accounts, subaccounts on a banking platform, or categories inside an internal ledger? What happens when someone spends with a debit card? Which balance funds it? Are purchases blocked when a pocket is empty, or is the organization purely informational?
 
-There is an ancient, very boring way to budget: put your rent money in an envelope. Put grocery money in another. Don't spend the rent envelope at the movies.
+The answer determines the actual benefit. A colorful chart doesn't help very much if the customer's money is still impossible to manage.
 
-I kept coming back to that behavior while working on Crew.
+I kept exploring pockets and envelope-style organization because I thought they offered a specific reason to choose a bank: the money could be easier to plan around and use.
 
-You could represent those envelopes digitally as pockets or buckets. The money in a checking account suddenly had purposes. You could see what was genuinely available for an impulse purchase without performing mental accounting every time you opened the app.
+## Building trust is part of the feature
 
-It's easy to pitch that as a budgeting feature. The more important possibility was that it could give somebody a reason to keep using the product.
+It's especially difficult to acquire customers for a new financial institution because the user is being asked to trust you with their paycheck.
 
-Every payday, you organize the money. Every grocery trip, you check the balance you meant for groceries. The app becomes part of a habit instead of an app you opened once when your card arrived.
+You can't measure the entire funnel with downloaded apps. A signup can finish onboarding and never fund the account. Someone can fund it once and then move back to their old bank. The real signals are things like funded accounts, direct-deposit adoption, active spending, retained balances and whether someone chooses your product as their primary financial relationship.
 
-I wasn't the only person who could see the potential in that kind of feature. My point is that I was advocating for it when our positioning still emphasized family banking and premium credit.
+That changes how you think about acquisition. A feature that makes people say 'that's neat' is competing against a very large pile of inconveniences.
 
-## I went looking for answers
+I was vocal about that inside Crew. I wanted the product to give people a reason to make the switch.
 
-A later document I wrote about my experience describes interviewing potential customers at malls and doing after-hours analysis because I didn't have all the dashboards I wanted.
+Crew's later public positioning put more emphasis on pockets, budgeting and automation. I'm glad those ideas became important. I don't claim to have personally built every version that came later. I do know what I was arguing for, what I heard in customer conversations and why I believed it mattered.
 
-That sounds scrappy because it was. I wanted to hear someone struggle with the actual experience instead of presenting another beautiful mockup to people who were already invested in the concept.
-
-I paid attention to hesitation. A person might understand the features and still not trust us with their paycheck. A parent might like the financial education idea and still dislike the credit concept. A potential customer might care much more about keeping bills organized than a flashy metal card.
-
-Those responses are product data, even when they don't arrive in a nice event-stream dashboard.
-
-## What happened afterward
-
-Crew's positioning evolved after I left. Its later materials increasingly emphasized budgeting and pockets. That is useful context, though it doesn't prove that my earlier advocacy caused the subsequent roadmap.
-
-I can't make that claim, and I don't need to.
-
-I remember the customer conversations. I remember pushing for a more specific switching reason. I remember thinking we could build a much more useful bank if we were willing to hear the unglamorous answer.
-
-Sometimes that answer is an envelope.
+It's one of the clearest examples I have of product research changing the way I looked at a company's strategy.
