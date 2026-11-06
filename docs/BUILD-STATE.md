@@ -12,12 +12,12 @@ Photos in `public/photos` are crops of intro.events and bridger.social. The olde
 
 ## Checks
 
-Recorded on `cursor/crew-experience-expansion-7de9` after the Ask, Articles, footer, and article-9 fixes. A pull request is not a launch.
+Recorded on `cursor/crew-experience-expansion-7de9` after rebasing onto `origin/main` (includes main's favicon, sitemap, photo routing, Features and Events updates, and Substack starter filtering merged with this PR's feed-filters helper). Exact commit for the run is the current branch head in the pull request. A pull request is not a launch.
 
-- `npm test` passed (31 tests), including the ten-question Ask acceptance test, Substack starter-post filter, footer `/cv.pdf` only, and the ninth article no longer carrying "Private draft, unapproved."
+- `npm ci` then `npm test` passed (36 tests), including the ten-question Ask acceptance test, Substack starter-post filter (URL and title via `lib/writing/feed-filters.ts`), sitemap-data tests, footer `/cv.pdf` only, and the ninth article no longer carrying "Private draft, unapproved."
 - `npm run typecheck` passed.
 - `npm run lint` passed. Existing `ArticleShelf` `<img>` warnings only.
-- `npm run build` passed. Nine `/writing/<slug>` routes are in the route list.
+- `npm run build` passed. Nine `/writing/<slug>` routes are in the route list (`/events/aicd-virtual` and other main updates present).
 - `python3 tools/ci/no-stubs` passed.
 - `node tools/ci/no-stubs.mjs` failed on pre-existing `content/about-me.md` lines that mention Marriott School and "business strategy" as corrections, not as public page copy. Same matches exist on `origin/main`. Not changed in this PR.
 - Search engines are still blocked until `SITE_INDEXABLE=true`.
