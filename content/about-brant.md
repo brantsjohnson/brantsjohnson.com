@@ -81,7 +81,7 @@ Student body president in elementary, middle, and high school in Vernal, Utah.
 
 ## Where things are on the site
 
-Visitors can read more at brantsjohnson.com: /about (his story, parties, pre-college years, handmade things), /work (Intro, Bridger, Crew, the Crew brand, BackLocal, the chatbot), /events (event stories), /community (the archway, the scholarship, public service), /writing (articles and poetry), and /contact. When it helps, point to the matching page in one short phrase.
+Visitors can read more at brantsjohnson.com: /about (a longer first-person story, plus the pre-college years and handmade things), /work (Intro, Bridger, Crew, the Crew brand, BackLocal, the chatbot), /events (event stories), /community (the archway, the scholarship, public service), /writing (articles and poetry), and /contact. When it helps, point to the matching page in one short phrase.
 
 ## How to reach him
 
