@@ -151,60 +151,65 @@ export function HomePage() {
 
   return (
     <>
-      <section ref={heroRef} className="shell pb-20 pt-12 md:pb-28 md:pt-20">
-        <motion.p {...rise(0.1)} className="label flex items-center gap-4 text-accent-deep">
-          <span aria-hidden="true" className="inline-block h-px w-12 bg-accent" />
-          {hero.eyebrow}
-        </motion.p>
-        <motion.h1
-          {...rise(0.2)}
-          className="mt-6 font-serif text-[clamp(2.15rem,5.5vw,5.6rem)] leading-[1.22] tracking-normal text-ink"
-        >
-          <span className="block">Good things deserve</span>
-          <span className="block">to happen.</span>
-        </motion.h1>
-        <div className="mt-12 grid items-end gap-12 lg:grid-cols-12 lg:gap-10">
-        <div className="lg:col-span-7">
-          <motion.div {...rise(0.45)} className="flex max-w-[46ch] flex-col gap-5 text-[1.15rem] leading-relaxed text-text-secondary">
-            {hero.paragraphs.map((paragraph) => (
-              <p key={paragraph.slice(0, 24)}>{paragraph}</p>
-            ))}
-          </motion.div>
-          <motion.div {...rise(0.7)} className="mt-10 flex flex-wrap items-center gap-4">
-            <Button href="/about" track="button:get_to_know_me:home">
-              Get to know me
-            </Button>
-            <Button href="/contact" variant="ghost" track="button:contact:home">
-              Contact
-            </Button>
-            {publicResume.href ? (
-              <Button href={publicResume.href} variant="ghost" track="button:resume:home">
-                {publicResume.label}
-              </Button>
-            ) : null}
-          </motion.div>
-        </div>
+      <section ref={heroRef} className="shell pb-16 pt-6 md:pb-24 md:pt-10">
+        {/* The portrait shares the top row with the headline on a wide screen,
+            and sits under the headline, above the buttons, on a phone. */}
+        <div className="grid items-start gap-8 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-7">
+            <motion.p {...rise(0.1)} className="label flex items-center gap-4 text-accent-deep">
+              <span aria-hidden="true" className="inline-block h-px w-12 bg-accent" />
+              {hero.eyebrow}
+            </motion.p>
+            <motion.h1
+              {...rise(0.2)}
+              className="mt-5 font-serif text-[clamp(2.75rem,4.8vw,4.75rem)] leading-[0.98] tracking-normal text-ink"
+            >
+              <span className="block">Good things deserve</span>
+              <span className="block">to happen.</span>
+            </motion.h1>
+          </div>
 
-        <motion.div {...rise(0.3)} className="lg:col-span-5">
-          <motion.div style={{ y: drift }} className="relative mx-auto max-w-[30rem] lg:max-w-none">
-            <div
-              aria-hidden="true"
-              className="absolute -bottom-5 -right-5 left-5 top-5 border border-accent"
-            />
-            <div className="relative aspect-[4/4.6] overflow-hidden bg-surface-2">
-              <Image
-                src={headshot.src}
-                alt={headshot.alt}
-                fill
-                priority
-                sizes="(min-width: 1024px) 38vw, 90vw"
-                quality={85}
-                className="object-cover"
-                style={{ objectPosition: objectPositionFor(headshot, 4 / 4.6) }}
+          <motion.div {...rise(0.3)} className="lg:col-span-5 lg:row-span-2">
+            <motion.div style={{ y: drift }} className="relative">
+              <div
+                aria-hidden="true"
+                className="absolute -bottom-5 -right-5 left-5 top-5 border border-accent"
               />
-            </div>
+              <div className="relative aspect-[4/4.6] overflow-hidden bg-surface-2">
+                <Image
+                  src={headshot.src}
+                  alt={headshot.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 38vw, 90vw"
+                  quality={85}
+                  className="object-cover"
+                  style={{ objectPosition: objectPositionFor(headshot, 4 / 4.6) }}
+                />
+              </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
+
+          <div className="lg:col-span-7">
+            <motion.div {...rise(0.45)} className="flex max-w-[46ch] flex-col gap-5 text-[1.15rem] leading-relaxed text-text-secondary">
+              {hero.paragraphs.map((paragraph) => (
+                <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+              ))}
+            </motion.div>
+            <motion.div {...rise(0.7)} className="mt-8 flex flex-wrap items-center gap-4">
+              <Button href="/about" track="button:get_to_know_me:home">
+                Get to know me
+              </Button>
+              <Button href="/contact" variant="ghost" track="button:contact:home">
+                Contact
+              </Button>
+              {publicResume.href ? (
+                <Button href={publicResume.href} variant="ghost" track="button:resume:home">
+                  {publicResume.label}
+                </Button>
+              ) : null}
+            </motion.div>
+          </div>
         </div>
       </section>
 
