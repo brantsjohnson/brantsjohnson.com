@@ -38,7 +38,7 @@ The rows above are the starter-kit draft. These rows name what this repository a
 |---|---|---|
 | `/` | Home | Always |
 | `/work` | Intro, Bridger, then the experience timeline | Always |
-| `/work/crew` | Fuller Crew case study: debit-card program, manufacturing, brand, modeled research | Always. App-design gallery hidden until `appDesignGallery.photos` has files |
+| `/work/crew` | Fuller Crew case study: debit-card program, manufacturing, brand, modeled research, app-design gallery | Always. App-design gallery renders when `appDesignGallery.photos` has files |
 | `Story.bullets` / `Story.modeled` | Optional lists on a detail section | Rendered only when the section supplies items. Other work/event/community pages omit them |
 | `Detail.appDesignGallery` | Optional app-screenshot gallery on a detail page | Hidden when missing or when `photos` is empty. `hasGalleryPhotos()` is the gate |
 | `/about` | Story and service, including the archway and the scholarship | Always |

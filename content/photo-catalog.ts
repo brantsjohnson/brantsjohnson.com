@@ -25,7 +25,7 @@ export function photoRecord(src: string): PhotoRecord | null {
   if (!file || file.endsWith(".svg")) return null;
   if (file.includes("screenshot") || file.includes("icon") || file.includes("wordmark") || file.includes("certificate") || file.includes("scholarship-2023")) return null;
   if (file.includes("blueprint") && !file.includes("archway")) return null;
-  if (folder.includes("/crew-illustrations") || folder.includes("/backlocal-icons") || file.startsWith("certificate")) return null;
+  if (folder.includes("/crew-illustrations") || folder.includes("/crew-app-design") || folder.includes("/backlocal-icons") || file.startsWith("certificate")) return null;
   if (file.includes("aicd-virtual")) {
     return {
       src,

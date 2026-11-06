@@ -256,6 +256,12 @@ export const crewBrandPage = {
   links: [go("Crew product work", "/work/crew", "link:crew_product:crew_brand"), go("All work", "/work", "link:work:crew_brand")],
 };
 
+// THIS SECTION DOES: build one Crew app screenshot for the /work/crew gallery.
+// Dark screens sit on black so letterboxed phones keep their edges. Light
+// screens sit on white. contain keeps the whole phone visible.
+const crewApp = (file: string, alt: string, caption: string, dark = false): Photo =>
+  ph(`crew-app-design/${file}`, alt, caption, { bg: dark ? "#000000" : "#ffffff", fit: "contain" });
+
 export const workDetails: Detail[] = [
   {
     slug: "intro",
@@ -496,7 +502,7 @@ export const workDetails: Detail[] = [
           ph("crew-illustrations/img-3719.webp", "A grid of Crew paint swatches in purple, yellow, red and green.", "The palette", { fit: "contain", bg: "#ffffff" }),
           crew("tandem-2-seat-still.webp", "A Crew illustration of a two-seat tandem bike.", "Tandem"),
         ],
-        links: [go("See the Crew illustrations", "/work/crew-brand", "link:crew_brand_section:work_crew")],
+        links: [go("See the drawings I made for Crew", "/work/crew-brand", "link:crew_brand_section:work_crew")],
       },
       {
         id: "demonstrates",
@@ -511,12 +517,103 @@ export const workDetails: Detail[] = [
           "Physical samples and prototypes informed what not to pursue. The unlaunched metal card was a real investigation, not a customer product, and I do not quantify savings I cannot presently verify.",
         ],
         links: [
-          go("See the Crew illustrations", "/work/crew-brand", "link:crew_brand_close:work_crew"),
+          go("See the drawings I made for Crew", "/work/crew-brand", "link:crew_brand_close:work_crew"),
           go("What happens when you tap your card", "/writing/what-happens-when-you-tap-your-card", "link:crew_tap_close:work_crew"),
         ],
       },
     ],
-    links: [go("See the Crew illustrations", "/work/crew-brand", "link:crew_brand:work_crew"), go("All work", "/work", "link:work:work_crew")],
+    // THIS SECTION DOES: show real Crew app screens on /work/crew. The
+    // illustrations on these screens are Brant's drawings, still in use.
+    appDesignGallery: {
+      title: "App design",
+      intro:
+        "These are Crew screens from the product. The illustrations are my own drawings for Crew, and they are still used today.",
+      photos: [
+        crewApp(
+          "img-3756.webp",
+          "Crew sign-in screen with a drawn teal door, balloons, a gift, and a Welcome ribbon. Sign in and Apply now sit below.",
+          "Sign in",
+          true
+        ),
+        crewApp(
+          "img-0538.webp",
+          "Crew application-under-review page on apply.trycrew.com, with a drawn desk, a sleeping dog, and a teal filing cabinet.",
+          "Application under review"
+        ),
+        crewApp(
+          "img-0544.webp",
+          "Crew approved page asking the visitor to download the app, with a drawn purple van packed with household things, plus App Store and Google Play buttons.",
+          "Approved"
+        ),
+        crewApp(
+          "img-0546.webp",
+          "Apple App Store listing for Crew Finance, with the six-dot icon and a preview of a drawn claw-foot bathtub.",
+          "App Store"
+        ),
+        crewApp(
+          "img-1615.webp",
+          "Apple App Store listing for Crew Finance showing preview cards of a family member named Amelia and a drawn bathtub.",
+          "App Store previews"
+        ),
+        crewApp(
+          "img-3955.webp",
+          "Crew Menu screen with Profile, Linked bank accounts, Settings, Contact Crew, and Log out, plus a drawn red toolbox.",
+          "Menu"
+        ),
+        crewApp(
+          "img-4335.webp",
+          "Crew screen inviting a family to combine checking and savings into a high-yield checking account, with a drawn tandem bicycle.",
+          "Combine accounts",
+          true
+        ),
+        crewApp(
+          "img-4336.webp",
+          "Crew Family tab for a Business pocket, with an empty recent-activity state and a drawn treadmill carrying clothes.",
+          "Recent activity",
+          true
+        ),
+        crewApp(
+          "img-4338.webp",
+          "Crew Family tab offering to order a physical or virtual debit card, with a drawn spotted dog holding a treat.",
+          "Order a card",
+          true
+        ),
+        crewApp(
+          "img-4339.webp",
+          "Crew month-in-review opening screen for May, with a drawn pig wearing a party hat.",
+          "Month in review",
+          true
+        ),
+        crewApp(
+          "img-4340.webp",
+          "Crew month-in-review Interest screen, with a drawn dog sitting on a purple sofa looking out a window.",
+          "Interest",
+          true
+        ),
+        crewApp(
+          "img-4341.webp",
+          "Crew month-in-review Spending screen with a drawn treadmill of clothes and no card activity in May.",
+          "Spending",
+          true
+        ),
+        crewApp(
+          "img-4343.webp",
+          "Crew month-in-review Money out screen for Travel's account, with a drawn piggy bank and an Order card link.",
+          "Money out",
+          true
+        ),
+        crewApp(
+          "img-4344.webp",
+          "Crew month-in-review closing screen with a drawn finish-line banner and confetti.",
+          "See you next month",
+          true
+        ),
+      ],
+    },
+    links: [
+      go("See the drawings I made for Crew", "/work/crew-brand", "link:crew_brand:work_crew"),
+      go("All work", "/work", "link:work:work_crew"),
+    ],
     back: { href: "/work", label: "All work" },
   },
   {
