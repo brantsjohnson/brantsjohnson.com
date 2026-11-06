@@ -19,10 +19,11 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Figure } from "@/components/editorial/Figure";
 import { Reveal } from "@/components/editorial/Reveal";
+import { AskPanel } from "@/components/ask/AskPanel";
 import { Button } from "@/components/ui/Button";
+import { homeIndex, homeStarts } from "@/content/home-media";
 import { hero } from "@/content/narrative";
-import { sectionCovers } from "@/content/covers";
-import { crew, headshot, objectPositionFor, ph, type Photo } from "@/content/photos";
+import { headshot, objectPositionFor } from "@/content/photos";
 import { publicResume } from "@/content/site-content";
 
 const hashRoutes: Record<string, string> = {
@@ -37,98 +38,8 @@ const hashRoutes: Record<string, string> = {
   "#crew-brand": "/work/crew-brand",
   "#creator-backlocal": "/work/backlocal",
   "#poetry": "/writing/poetry",
-  "#writing": "/writing",
+  "#writing": "/articles",
 };
-
-type IndexRow = { href: string; title: string; line: string; linkText: string; photo: Photo; track: string };
-
-const rows: IndexRow[] = [
-  {
-    href: "/about",
-    title: "About",
-    line: "The longer introduction, plus a few stories I'd have trouble fitting into a résumé.",
-    linkText: "Meet me",
-    photo: sectionCovers.about,
-    track: "link:index_about:home",
-  },
-  {
-    href: "/work",
-    title: "Work",
-    line: "Products I've built, teams I've worked with, and what I learned doing it.",
-    linkText: "See the work",
-    photo: sectionCovers.work,
-    track: "link:index_work:home",
-  },
-  {
-    href: "/events",
-    title: "Events",
-    line: "Conferences I've helped put on, community events, parties, and performances.",
-    linkText: "Explore events",
-    photo: sectionCovers.events,
-    track: "link:index_events:home",
-  },
-  {
-    href: "/community",
-    title: "Community",
-    line: "Things I've worked on because somebody cared enough to get them started.",
-    linkText: "Community work",
-    photo: sectionCovers.community,
-    track: "link:index_community:home",
-  },
-  {
-    href: "/writing",
-    title: "Writing",
-    line: "Articles and poetry. No elaborate introduction required.",
-    linkText: "Read something",
-    photo: sectionCovers.writing,
-    track: "link:index_writing:home",
-  },
-];
-
-type StartCard = { title: string; tag: string; line: string; href: string; linkText: string; photo: Photo; ratio: string; track: string };
-
-const starts: StartCard[] = [
-  {
-    title: "Bridger",
-    tag: "Social software",
-    line: "I'm building it to help people form friendships through the things they love and give third places better ways to bring people together.",
-    href: "/work/bridger",
-    linkText: "The Bridger story",
-    photo: { src: "/photos/bridger-live.webp", alt: "The live Bridger waitlist window.", width: 900, height: 989, position: "50% 0%" },
-    ratio: "4 / 5",
-    track: "link:start_bridger:home",
-  },
-  {
-    title: "Intro",
-    tag: "Events + AI",
-    line: "A tool I'm building for event organizers who want people to leave having met somebody useful, interesting, or worth seeing again.",
-    href: "/work/intro",
-    linkText: "How Intro started",
-    photo: { src: "/photos/intro-live.webp", alt: "The live Intro site, with the attendee experience on a phone.", width: 1200, height: 750, position: "30% 0%" },
-    ratio: "4 / 5",
-    track: "link:start_intro:home",
-  },
-  {
-    title: "Events I've helped put on",
-    tag: "Event work",
-    line: "Business conferences, community gatherings, and a few events that needed a lot of convincing before they happened.",
-    href: "/events",
-    linkText: "See the events",
-    photo: ph("general/brant-planning-conference-founder-friday.webp", "A group selfie at Founder Friday in front of a bright stage."),
-    ratio: "4 / 5",
-    track: "link:start_events:home",
-  },
-  {
-    title: "Crew",
-    tag: "Product + illustration",
-    line: "I helped build a banking product for families. I also ended up drawing a large part of its brand.",
-    href: "/work/crew",
-    linkText: "See Crew",
-    photo: crew("door-summer.webp", "A Crew illustration of a blue front door with a wreath and two shrubs."),
-    ratio: "4 / 5",
-    track: "link:start_crew:home",
-  },
-];
 
 export function HomePage() {
   const router = useRouter();
@@ -150,63 +61,76 @@ export function HomePage() {
 
   return (
     <>
-      <section ref={heroRef} className="shell grid items-end gap-12 pb-20 pt-12 md:pb-28 md:pt-20 lg:grid-cols-12 lg:gap-10">
-        <div className="lg:col-span-7">
-          <motion.p {...rise(0.1)} className="label flex items-center gap-4 text-accent-deep">
-            <span aria-hidden="true" className="inline-block h-px w-12 bg-accent" />
-            {hero.eyebrow}
-          </motion.p>
-          <motion.h1 {...rise(0.2)} className="mt-6 max-w-[12ch] font-serif text-display text-ink">
-            {hero.headline}
-          </motion.h1>
-          <motion.div {...rise(0.45)} className="mt-10 flex max-w-[46ch] flex-col gap-5 text-[1.15rem] leading-relaxed text-text-secondary">
-            {hero.paragraphs.map((paragraph) => (
-              <p key={paragraph.slice(0, 24)}>{paragraph}</p>
-            ))}
-          </motion.div>
-          <motion.div {...rise(0.7)} className="mt-10 flex flex-wrap items-center gap-4">
-            <Button href="/about" track="button:get_to_know_me:home">
-              Get to know me
-            </Button>
-            <Button href="/work" variant="ghost" track="button:see_work:home">
-              See what I&apos;ve worked on
-            </Button>
-            {publicResume.href ? (
-              <Button href={publicResume.href} variant="ghost" track="button:resume:home">
-                {publicResume.label}
-              </Button>
-            ) : null}
-          </motion.div>
-        </div>
+      <section ref={heroRef} className="shell pb-16 pt-6 md:pb-24 md:pt-10">
+        {/* The portrait shares the top row with the headline on a wide screen,
+            and sits under the headline, above the buttons, on a phone. */}
+        <div className="grid items-start gap-8 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-7">
+            <motion.p {...rise(0.1)} className="label flex items-center gap-4 text-accent-deep">
+              <span aria-hidden="true" className="inline-block h-px w-12 bg-accent" />
+              {hero.eyebrow}
+            </motion.p>
+            <motion.h1
+              {...rise(0.2)}
+              className="mt-5 font-serif text-[clamp(2.75rem,4.8vw,4.75rem)] leading-[0.98] tracking-normal text-ink"
+            >
+              <span className="block">Good things deserve</span>
+              <span className="block">to happen.</span>
+            </motion.h1>
+          </div>
 
-        <motion.div {...rise(0.3)} className="lg:col-span-5">
-          <motion.div style={{ y: drift }} className="relative mx-auto max-w-[30rem] lg:max-w-none">
-            <div
-              aria-hidden="true"
-              className="absolute -bottom-5 -right-5 left-5 top-5 border border-accent"
-            />
-            <div className="relative aspect-[4/4.6] overflow-hidden bg-surface-2">
-              <Image
-                src={headshot.src}
-                alt={headshot.alt}
-                fill
-                priority
-                sizes="(min-width: 1024px) 38vw, 90vw"
-                quality={85}
-                className="object-cover"
-                style={{ objectPosition: objectPositionFor(headshot, 4 / 4.6) }}
+          <motion.div {...rise(0.3)} className="lg:col-span-5 lg:row-span-2">
+            <motion.div style={{ y: drift }} className="relative">
+              <div
+                aria-hidden="true"
+                className="absolute -bottom-5 -right-5 left-5 top-5 border border-accent"
               />
-            </div>
+              <div className="relative aspect-[4/4.6] overflow-hidden bg-surface-2">
+                <Image
+                  src={headshot.src}
+                  alt={headshot.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 38vw, 90vw"
+                  quality={85}
+                  className="object-cover"
+                  style={{ objectPosition: objectPositionFor(headshot, 4 / 4.6) }}
+                />
+              </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
+
+          <div className="lg:col-span-7">
+            <motion.div {...rise(0.45)} className="flex max-w-[46ch] flex-col gap-5 text-[1.15rem] leading-relaxed text-text-secondary">
+              {hero.paragraphs.map((paragraph) => (
+                <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+              ))}
+            </motion.div>
+            <motion.div {...rise(0.7)} className="mt-8 flex flex-wrap items-center gap-4">
+              <Button href="/about" track="button:get_to_know_me:home">
+                Get to know me
+              </Button>
+              <Button href="/contact" variant="ghost" track="button:contact:home">
+                Contact
+              </Button>
+              {publicResume.href ? (
+                <Button href={publicResume.href} variant="ghost" track="button:resume:home">
+                  {publicResume.label}
+                </Button>
+              ) : null}
+            </motion.div>
+          </div>
+        </div>
       </section>
+
+      <AskPanel />
 
       <section aria-label="Take a look around" className="border-t border-border-subtle">
         <div className="shell grid gap-x-16 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <p className="label pt-10 text-text-secondary">Take a look around</p>
             <ul onMouseLeave={() => setActive(0)}>
-              {rows.map((row, index) => (
+              {homeIndex.map((row, index) => (
                 <li key={row.href} className="border-b border-border-subtle">
                   <Link
                     href={row.href}
@@ -238,7 +162,7 @@ export function HomePage() {
           <div aria-hidden="true" className="hidden lg:col-span-5 lg:block">
             <div className="sticky top-28 pt-10">
               <div className="relative aspect-[4/5] overflow-hidden bg-surface-2">
-                {rows.map((row, index) => (
+                {homeIndex.map((row, index) => (
                   <div
                     key={row.href}
                     className="absolute inset-0 transition-opacity duration-700 ease-brand"
@@ -270,12 +194,11 @@ export function HomePage() {
 
       <section aria-labelledby="start" className="py-24 md:py-36">
         <div className="shell">
-          <div className="gold-rule" aria-hidden="true" />
-          <h2 id="start" className="mt-6 font-serif text-h2 text-ink">
+          <h2 id="start" className="font-serif text-h2 text-ink">
             A few places to start
           </h2>
           <ul className="mt-14 grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
-            {starts.map((item, index) => (
+            {homeStarts.map((item, index) => (
               <Reveal as="li" key={item.href} delay={index * 0.08} className={index % 2 === 1 ? "lg:mt-16" : undefined}>
                 <Link href={item.href} data-track={item.track} className="group block">
                   <Figure photo={item.photo} ratio={item.ratio} sizes="(min-width: 1024px) 22vw, 46vw" />

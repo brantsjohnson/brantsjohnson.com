@@ -10,7 +10,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
 import { NoteForm } from "@/components/forms/NoteForm";
 import { TextLink } from "@/components/ui/TextLink";
-import { booking, building, hiPage, identity, inquiries, publicCv } from "@/content/site-content";
+import { booking, building, hiPage, identity, inquiries, publicCv, publicCvDownload } from "@/content/site-content";
 import { notesAreStored } from "@/lib/forms/deliver-note";
 import { hiQrSvg } from "@/lib/hi-qr";
 import { pageMetadata } from "@/lib/site/page-metadata";
@@ -70,7 +70,10 @@ export default async function HiPage({ searchParams }: HiPageProps) {
               {booking.label}
             </TextLink>
             <TextLink href={publicCv.href} track="link:public_cv:hi">
-              Full CV
+              {publicCv.label}
+            </TextLink>
+            <TextLink href={publicCvDownload.href} track="link:download_cv:hi">
+              {publicCvDownload.label}
             </TextLink>
             <TextLink href="/about" track="link:about:hi">
               More about me

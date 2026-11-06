@@ -49,8 +49,8 @@ export function crew(file: string, alt: string, caption?: string, extra?: Partia
 // THIS SECTION DOES: the headshot, used on the home page and About
 export const headshot: Photo = {
   focus: { x: 0.5, y: 0.32 },
-  src: "/images/brant-headshot.webp",
-  alt: "Brant S. Johnson smiling in a black suit and tie against a soft white background.",
+  src: "/images/brant-s-johnson.jpg",
+  alt: "Official portrait of Brant S. Johnson, founder of Bridger and Intro, smiling in a black suit and tie.",
   width: 876,
   height: 974,
 };

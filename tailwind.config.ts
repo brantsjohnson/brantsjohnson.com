@@ -45,8 +45,11 @@ const config: Config = {
       fontSize: {
         // The home headline. Two lines on a phone, and still two lines on a desktop window.
         display: ["clamp(3.4rem, 9.5vw, 9rem)", { lineHeight: "0.88", letterSpacing: "-0.03em" }],
-        h1: ["clamp(3.2rem, 8.5vw, 7.5rem)", { lineHeight: "0.9", letterSpacing: "-0.03em" }],
-        h2: ["clamp(2rem, 4vw, 3.4rem)", { lineHeight: "1.02", letterSpacing: "-0.015em" }],
+        h1: ["clamp(2.75rem, 6vw, 5.25rem)", { lineHeight: "1.05", letterSpacing: "-0.02em" }],
+        // Section headers. The floor stays above the entry title (text-h3)
+        // so a group name still reads as the header on a phone, where the
+        // old size sat almost on top of the titles under it.
+        h2: ["clamp(2.35rem, 4.8vw, 3.2rem)", { lineHeight: "1.1", letterSpacing: "0" }],
         h3: ["1.6rem", { lineHeight: "1.2" }],
         body: ["1.125rem", { lineHeight: "1.6" }],
         caption: ["0.875rem", { lineHeight: "1.4" }],

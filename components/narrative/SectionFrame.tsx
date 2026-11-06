@@ -1,8 +1,8 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the top of the quieter pages (poetry and the like): a
-// small label, one very large title (the page's only h1) and the
-// content below it, all on the white page with generous space.
+// This is the top of the quieter pages (poetry and the like): the
+// same colored title card as the other pages, then the content below
+// it on the paper.
 // ============================================
 
 import type { ReactNode } from "react";

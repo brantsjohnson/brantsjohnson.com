@@ -45,9 +45,12 @@ export function Button({
   const classes = clsx(baseClasses, variantClasses[variant], className);
 
   if (href) {
-    const external = href.startsWith("http") || href.startsWith("mailto:");
+    // A web address opens in a new tab. A mailto link opens the mail app
+    // in place, so the visitor is not left with a blank browser tab.
+    const web = href.startsWith("http");
+    const mail = href.startsWith("mailto:");
     const file = href.endsWith(".pdf");
-    if (external || file) {
+    if (web || mail || file) {
       return (
         <a
           href={href}
@@ -55,8 +58,9 @@ export function Button({
           aria-label={ariaLabel}
           data-track={track}
           onClick={onClick}
-          target={external ? "_blank" : undefined}
-          rel={external ? "noopener noreferrer" : undefined}
+          target={web ? "_blank" : undefined}
+          rel={web ? "noopener noreferrer" : undefined}
+          download={file ? "" : undefined}
         >
           {children}
         </a>

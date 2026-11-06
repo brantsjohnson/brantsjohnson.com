@@ -1,11 +1,13 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// The top of every inner page: a small label, one very large title
-// (the page's only h1), and a short lead line, with plenty of white
-// space around them. A short gold rule opens the page.
+// The top of every inner page, on the same warm paper as the home
+// page. The section name sits close above one large title. If they
+// would repeat, only the title shows. There is no short rule above
+// the title. The lead sits under it in the reading column.
 // ============================================
 
 import type { ReactNode } from "react";
+import { sectionName } from "@/components/editorial/section-name";
 
 type PageHeaderProps = {
   id: string;
@@ -16,14 +18,21 @@ type PageHeaderProps = {
 };
 
 export function PageHeader({ id, label, title, lead, children }: PageHeaderProps) {
+  const shownLabel = sectionName(label);
+  const shownTitle = sectionName(title);
+  const showLabel = shownLabel.toLowerCase() !== shownTitle.toLowerCase();
+
   return (
-    <header className="shell pb-10 pt-16 md:pb-16 md:pt-24">
-      <div className="gold-rule" aria-hidden="true" />
-      <p className="label mt-6 text-accent-deep">{label}</p>
-      <h1 id={id} tabIndex={-1} className="mt-4 scroll-mt-24 font-serif text-h1 text-ink outline-none">
-        {title}
+    <header className="shell pb-4 pt-8 md:pb-6 md:pt-12">
+      {showLabel ? <p className="label text-accent-deep">{shownLabel}</p> : null}
+      <h1
+        id={id}
+        tabIndex={-1}
+        className={`scroll-mt-24 font-serif text-h1 text-ink outline-none ${showLabel ? "mt-5" : ""}`}
+      >
+        {shownTitle}
       </h1>
-      {lead ? <p className="mt-8 max-w-[40ch] font-serif text-[clamp(1.5rem,2.6vw,2.2rem)] leading-[1.2] text-ink">{lead}</p> : null}
+      {lead ? <p className="mt-6 max-w-reading text-body leading-relaxed text-text-secondary">{lead}</p> : null}
       {children}
     </header>
   );

@@ -20,14 +20,14 @@ export type WritingShelfItem = {
   href: string;
 };
 
-// THIS SECTION DOES: the six places in the top menu, in order
+// THIS SECTION DOES: the places in the top menu, in order. Home is first.
 export const storyNav: StoryNavItem[] = [
+  { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Work", href: "/work" },
+  { label: "Experience", href: "/work" },
   { label: "Events", href: "/events" },
-  { label: "Community", href: "/community" },
-  { label: "Writing", href: "/writing" },
-  { label: "Contact", href: "/contact" },
+  { label: "Leadership", href: "/community" },
+  { label: "Articles", href: "/articles" },
 ];
 
 // THIS SECTION DOES: the opening of the home page. The large line is the headline and the page's one h1.
@@ -36,9 +36,9 @@ export const hero = {
   name: "Brant S. Johnson",
   headline: "Good things deserve to happen.",
   description:
-    "I'm Brant Johnson. I help people get their ideas built, put on events, and work on software that makes it easier for people to connect.",
+    "I'm Brant S. Johnson, from Vernal, Utah. I help people get their ideas built, put on events, and work on software that makes it easier for people to connect.",
   paragraphs: [
-    "I love helping people get their ideas built. I've worked on software, helped put on a lot of events, and gotten involved in a few ideas that required more people than anyone expected.",
+    "I'm Brant S. Johnson, from Vernal, Utah. I love helping people get their ideas built. I've worked on software, helped put on a lot of events, and gotten involved in a few ideas that required more people than anyone expected.",
     "These days I'm building Intro and Bridger, two projects that grew out of my favorite part of the work: helping people find each other so they can make something happen.",
   ],
 };

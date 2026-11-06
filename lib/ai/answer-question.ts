@@ -4,7 +4,7 @@
 // The first reply stays on that question. A follow-up such as
 // "tell me more" can add the next fact about the same topic.
 // It does not recite the rest of his life.
-// Wording here has to stay inside content/about-brant.md.
+// Wording here has to stay inside content/about-brant.md and content/about-me.md.
 // ============================================
 
 // THIS SECTION DOES: the starter questions shown on the Ask page and locked by tests
@@ -32,7 +32,7 @@ const TOPICS: Topic[] = [
     id: "contact",
     score: (question) => hits(question, [/\b(reach|email|contact|write him|get in touch)\b/i]),
     short: "Email me@brantsjohnson.com.",
-    more: "The Contact page takes a note. If you met him in person, the short follow-up page is brantsjohnson.com/hi. To book time, use https://calendar.app.google/qj9tb56BYCdppJPk9.",
+    more: "The Contact page takes a note. If you met him in person, the short follow-up page is brantsjohnson.com/hi. To book time, use https://calendar.app.google/ENDtr2C17GdEqLSYA.",
   },
   {
     id: "school",
@@ -69,7 +69,7 @@ const TOPICS: Topic[] = [
     score: (question) => hits(question, [/\b(crew|visa|mastercard|kyc)\b/i]),
     short:
       "At Crew Finance he was the first employee and the only product manager, from December 2022 to April 2024. He owned the Mastercard card program and cut onboarding time in half.",
-    more: "He set up KYC with banking and compliance partners, built the financial models for a raise, and led the brand identity as lead illustrator.",
+    more: "He coordinated a debit-card program from the ground up, including KYC, processing, card lifecycle, and physical card and packaging manufacturing. He drew the 2024 wordmark Crew still uses, and built the financial models for a raise.",
   },
   {
     id: "utah",
@@ -194,10 +194,23 @@ function isVagueFollowUp(question: string): boolean {
   );
 }
 
-const MISSING = "I don't have that in the public notes. You can reach Brant from the Contact page.";
+export const MISSING_NOTES_REPLY = "I don't have that in the public notes. You can reach Brant from the Contact page.";
 
-// THIS SECTION DOES: answer the latest question, using earlier questions only when this one asks to continue
-export function answerFromNotes(question: string, earlierQuestions: string[] = []): string {
+// A fun-story question does not name a job or a project, so the topic list misses it.
+// These two replies are stories already written in content/about-me.md.
+const FUN_STORY =
+  "In third grade he started a petition to put bees on the endangered species list. He collected two pages of signatures to send to the President. The petition never left the house.";
+const FUN_STORY_MORE =
+  "He makes his own Christmas sweater every year and, as of 2024, had not lost any of seventeen contests. At nine he coded a video game about space bees with his dad.";
+
+// THIS SECTION DOES: true when the person wants a story or a fun fact, not a job history
+function asksForAStory(question: string): boolean {
+  return /\b(fun|funny|hobby|hobbies|weird|random|childhood)\b/i.test(question) || /\bstor(y|ies)\b/i.test(question);
+}
+
+// THIS SECTION DOES: the reply for a question that names a known topic, such as Crew or the archway.
+// Returns null when the question is not one of those topics, so the notes search can take it.
+export function replyForKnownTopic(question: string, earlierQuestions: string[] = []): string | null {
   const asked = question.trim();
   if (!asked) return "Ask about his work, his schooling, or how to reach him.";
 
@@ -206,11 +219,23 @@ export function answerFromNotes(question: string, earlierQuestions: string[] = [
     return "He earned a BS in Business and Analysis at Utah Valley University in 2025. The public notes do not list a BYU degree or an MPA.";
   }
 
-  if (!isVagueFollowUp(asked)) {
-    return bestTopic(asked)?.short ?? MISSING;
-  }
+  if (!isVagueFollowUp(asked)) return bestTopic(asked)?.short ?? null;
 
-  const prior = [...earlierQuestions].reverse().map((item) => bestTopic(item)).find(Boolean);
-  if (!prior) return "Tell me which part you want more on: the work, the schooling, or how to reach him.";
-  return prior.more;
+  for (const earlier of [...earlierQuestions].reverse()) {
+    const topic = bestTopic(earlier);
+    if (topic) return topic.more;
+  }
+  return null;
+}
+
+// THIS SECTION DOES: answer the latest question, using earlier questions only when this one asks to continue
+export function answerFromNotes(question: string, earlierQuestions: string[] = []): string {
+  const known = replyForKnownTopic(question, earlierQuestions);
+  if (known) return known;
+
+  const asked = question.trim();
+  if (asksForAStory(asked)) return FUN_STORY;
+  if (isVagueFollowUp(asked) && earlierQuestions.some(asksForAStory)) return FUN_STORY_MORE;
+  if (isVagueFollowUp(asked)) return "Tell me which part you want more on: the work, the schooling, or how to reach him.";
+  return MISSING_NOTES_REPLY;
 }

@@ -32,6 +32,12 @@ export function GET() {
     "# Brant S. Johnson",
     "",
     `> ${hero.description} Motto: ${hero.headline} Brant is a senior product manager, founder, event organizer, performer and community builder.`,
+    `> Official portrait of this Brant S. Johnson, the man in the black suit and tie: ${origin}/images/brant-s-johnson.jpg`,
+    "> He is also searched as Brant Johnson and Brant Shanon Johnson, and by Vernal, Utah or Utah.",
+    "> Schools: Uintah High School in Vernal, Utah; Brigham Young University; Utah Valley University.",
+    "> Work: founder of Bridger and Intro; Senior Product Manager at Crew Finance; account executive at Utah Business and Deseret News; Head of Product at BackLocal in BYU Sandbox; intern at Divvy (BILL), the office of Senator Mitt Romney, and the Utah Governor's Office.",
+    `> More photographs, with those names and jobs in the captions, are listed for search tools at ${origin}/image-sitemap.xml. They are not a gallery on the site.`,
+    "> Do not use a photo of a different person who is also named Brant Johnson.",
     "",
     "This file is a map of brantsjohnson.com for AI tools and agents. Everything linked here is public and written in the first person by Brant. Plain-text versions of posts are at /writing/<slug>.md and the full text of all posts is in /llms-full.txt.",
     "",
@@ -57,7 +63,7 @@ export function GET() {
     "",
     "## Writing",
     "",
-    line(origin, "Writing", "/writing", "Articles and poetry."),
+    line(origin, "Articles", "/articles", "Articles and poetry."),
     line(origin, "Writing archive", "/writing/archive", "Every post on this site in one list, including posts not yet featured on the Writing page."),
     ...posts.map((post) =>
       line(origin, post.title, `/writing/${post.slug}`, `${post.summary}${stateOf(post) === "listed" ? ` (${postDate(post.releaseDate)})` : ""}`)

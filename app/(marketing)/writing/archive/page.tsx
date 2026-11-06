@@ -52,7 +52,7 @@ export default function WritingArchivePage() {
         </ul>
         {posts.length === 0 ? <p className="mt-6 text-text-secondary">Nothing here yet.</p> : null}
         <p className="mt-10">
-          <Link href="/writing" className="label inline-flex min-h-[44px] items-center gap-3 text-ink hover:text-accent-deep">
+          <Link href="/articles" className="label inline-flex min-h-[44px] items-center gap-3 text-ink hover:text-accent-deep">
             <span aria-hidden="true">←</span> Writing
           </Link>
         </p>

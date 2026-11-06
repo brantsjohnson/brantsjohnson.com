@@ -26,9 +26,19 @@ export type Detail = {
   glance?: { label: string; value: string }[];
   sections: Story[];
   gallery?: { title: string; intro?: string; photos: Photo[] };
+  // App-design screenshots for a work story. Hidden until real photos exist.
+  // Do not put an empty object here. Crew turns this on with files in
+  // public/images/brant-uploads/crew-app-design/.
+  appDesignGallery?: { title: string; intro?: string; photos: Photo[] };
   links?: StoryLinkItem[];
   back: { href: string; label: string };
 };
+
+// THIS SECTION DOES: decide whether a gallery band should render. No photos
+// means no markup, so the page never shows an empty slot or reserved band.
+export function hasGalleryPhotos(gallery?: { photos: Photo[] }): gallery is { photos: Photo[] } {
+  return Boolean(gallery && gallery.photos.length > 0);
+}
 
 // THIS SECTION DOES: a link that stays on the site
 export const go = (text: string, href: string, track: string): StoryLinkItem => ({ text, href, track });

@@ -40,6 +40,31 @@ export const eventGroups: EventGroup[] = [
     title: "Conferences, summits, and business events",
     items: [
       {
+        title: "AI Teammates at Work",
+        tag: "Upcoming talk",
+        summary: "I will speak online at AICD Virtual on November 10, 2026. The session is on Microsoft Teams.",
+        href: "/events/aicd-virtual",
+        linkText: "See the session",
+        photo: ph(
+          "general/aicd-virtual-2026-poster.webp",
+          "The AICD Virtual speaker poster for AI Teammates at Work, listing Brant Johnson as Founder of Bridger and Intro.",
+          "AICD Virtual"
+        ),
+      },
+      {
+        title: "Begin Again",
+        tag: "Featured speaker",
+        summary: "I was a featured speaker at Begin Again in Salt Lake City, an evening with Utah tech leaders.",
+        href: "/events/begin-again",
+        linkText: "See Begin Again",
+        photo: ph(
+          "general/begin-again-speaking.webp",
+          "Brant speaking into a microphone on the Begin Again panel in Salt Lake City.",
+          "Begin Again",
+          { focus: { x: 0.58, y: 0.32 } }
+        ),
+      },
+      {
         title: "Utah Business events",
         tag: "Event production + sponsorships",
         summary:
@@ -153,6 +178,112 @@ const back = { href: "/events", label: "All events" };
 const L = "Events";
 
 export const eventDetails: Detail[] = [
+  {
+    slug: "aicd-virtual",
+    path: "/events/aicd-virtual",
+    title: "AI Teammates at Work",
+    metaTitle: "AI Teammates at Work",
+    description: "I will speak at AICD Virtual, AI Teammates at Work, an online conference on November 10, 2026.",
+    crumbs: crumbs("AICD Virtual"),
+    label: L,
+    lead: [
+      "I will be speaking at AICD Virtual: AI Teammates at Work. It is an online conference on Microsoft Teams, put on by AI Community Days.",
+    ],
+    glance: [
+      { label: "Role", value: "Speaker" },
+      { label: "When", value: "November 10, 2026" },
+      { label: "Where", value: "Online, Microsoft Teams" },
+    ],
+    sections: [
+      {
+        id: "the-session",
+        title: "The session",
+        body: [
+          "My session is called Lock It: Running a Small Company With a Team of AI Agents on a Small Budget. It is about how I run Bridger and Intro with AI agents, what broke, and the rules that keep the work in check.",
+          "The program lists it from 12:50 to 1:20 AM Paris time on November 11, which is 4:50 PM in Utah on November 10. The speaker poster names me Founder of Bridger and Intro.",
+        ],
+        photos: [
+          ph(
+            "general/aicd-virtual-2026-poster.webp",
+            "The AICD Virtual speaker poster for AI Teammates at Work, listing Brant Johnson as Founder of Bridger and Intro.",
+            "Speaker poster"
+          ),
+        ],
+      },
+    ],
+    links: [
+      go("The session listing", "https://aicommunitydays.ai/events/aicd-virtual-01", "link:aicd:aicd_virtual"),
+      go("Register", "https://aicommunitydays.ai/events/aicd-virtual-01#register", "link:aicd_register:aicd_virtual"),
+      go("All events", "/events", "link:events:aicd_virtual"),
+    ],
+    back,
+  },
+  {
+    slug: "begin-again",
+    path: "/events/begin-again",
+    title: "Begin Again",
+    metaTitle: "Begin Again",
+    description: "I was a featured speaker at Begin Again in Salt Lake City, an evening with Utah tech leaders.",
+    crumbs: crumbs("Begin Again"),
+    label: L,
+    lead: [
+      "I was a featured speaker at Begin Again in Salt Lake City. It was an evening of conversation with tech leaders, and I was glad to be one of the voices on the panel.",
+    ],
+    glance: [
+      { label: "Role", value: "Featured speaker" },
+      { label: "When", value: "June 1, 2026" },
+      { label: "Where", value: "Salt Lake City" },
+    ],
+    sections: [
+      {
+        id: "the-evening",
+        title: "The evening",
+        body: [
+          "The full name was Begin Again: An Evening of Networking and Inspiration with Tech Leaders. Silicon Slopes listed it. The AI Collective hosted it with Women Tech Council and ElizaChat, at HAVN.",
+          "The speaker card named me as CEO and Founder of Intro. I spoke from the podium and sat on the panel with a microphone.",
+        ],
+        photos: [
+          ph(
+            "general/begin-again-speaking.webp",
+            "Brant speaking into a microphone on the Begin Again panel in Salt Lake City.",
+            "On the panel",
+            { focus: { x: 0.58, y: 0.32 } }
+          ),
+          ph(
+            "general/begin-again-podium.webp",
+            "Brant at the podium during Begin Again in Salt Lake City.",
+            "At the podium",
+            { focus: { x: 0.68, y: 0.36 } }
+          ),
+          ph(
+            "general/begin-again-panel.webp",
+            "The Begin Again panel on stage in Salt Lake City, with Brant seated in a teal turtleneck.",
+            "The panel",
+            { focus: { x: 0.72, y: 0.4 } }
+          ),
+        ],
+      },
+    ],
+    gallery: {
+      title: "The speaker card",
+      photos: [
+        ph(
+          "general/begin-again-speaker-card.webp",
+          "The Begin Again speaker card naming Brant Johnson, CEO and Founder of Intro, as a featured speaker.",
+          "Featured speaker"
+        ),
+      ],
+    },
+    links: [
+      go(
+        "The Silicon Slopes listing",
+        "https://www.siliconslopes.com/c/events/begin-again-an-evening-of-networking-inspiration-with-tech-leaders",
+        "link:silicon_slopes:begin_again"
+      ),
+      go("All events", "/events", "link:events:begin_again"),
+    ],
+    back,
+  },
   {
     slug: "utah-business",
     path: "/events/utah-business",

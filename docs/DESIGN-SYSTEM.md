@@ -1,5 +1,7 @@
 # DESIGN SYSTEM
 
+The shipped look (headers, spacing, type, motion, mobile) is in `docs/SITE-UPDATE-GUIDE.md`. This file is an empty draft. Do not invent tokens from it, and do not let it override that guide.
+
 Purpose: Brand and approved UI contracts.
 Status: Draft. Populate with sourced project-specific decisions. Mark uncertainty [OPEN] and irrelevant topics Not applicable with reason.
 

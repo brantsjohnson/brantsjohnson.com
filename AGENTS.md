@@ -2,6 +2,8 @@
 
 Read docs/INDEX.md and the top of docs/BUILD-STATE.md first. Open the relevant full spec and founder WHY as needed; do not load every document.
 
+For a page, an article, the chat, spacing, a header, a slug, motion, mobile, or an analytics name, follow docs/SITE-UPDATE-GUIDE.md. It wins where an older note disagrees.
+
 Before feature code: research, visualize UX, define data, permissions, schema, analytics, tests and acceptance criteria. Follow docs/STANDARDS-AND-GATES.md.
 
 Never change explicitly locked UI without approval. Keep docs/SCHEMA-MAP.md and ops/HANDOFFS.md current. Reproduce bugs and write regression tests.

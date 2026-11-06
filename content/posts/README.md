@@ -2,7 +2,7 @@
 
 One markdown file per post written on this site. The file name is the address: `crew-onboarding.md` becomes `brantsjohnson.com/writing/crew-onboarding`. Lowercase words joined by hyphens.
 
-Posts are **unlisted until their release day, then listed automatically**. See `docs/PUBLISHING.md`, section "Pre-write posts and release one a day". Do not add sample or placeholder posts here. This folder is empty until a real post exists.
+Posts are **unlisted until their release day, then listed automatically**. See `docs/PUBLISHING.md`, section "Pre-write posts and release one a day". Do not add sample or placeholder posts. The Crew series is the first set of real posts.
 
 ## Template
 

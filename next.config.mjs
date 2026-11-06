@@ -26,11 +26,12 @@ const wixToNextRedirects = [
   { old: "/services", next: "/community" },
   { old: "/career", next: "/work" },
   { old: "/cv", next: "/cv.pdf" },
-  { old: "/articles", next: "/writing" },
   { old: "/leadership", next: "/community" },
   { old: "/civic-engagement", next: "/community" },
   { old: "/blank-4", next: "/about" },
-  { old: "/about-1", next: "/about" },
+  // Google still shows this old Wix address. Send it home, so the result
+  // people see for Brant's name is the homepage.
+  { old: "/about-1", next: "/" },
   { old: "/skills", next: "/about" },
   { old: "/blog", next: "/writing" },
   { old: "/blog/:slug", next: "/writing/:slug" },
@@ -77,11 +78,15 @@ const nextConfig = {
   },
 
   async redirects() {
-    return wixToNextRedirects.map(({ old, next }) => ({
-      source: old,
-      destination: next,
-      statusCode: 301,
-    }));
+    return [
+      ...wixToNextRedirects.map(({ old, next }) => ({
+        source: old,
+        destination: next,
+        statusCode: 301,
+      })),
+      // The articles list used to live at /writing. Poem and post pages stay under /writing.
+      { source: "/writing", destination: "/articles", statusCode: 301 },
+    ];
   },
 
   webpack: (config) => {

@@ -23,7 +23,7 @@ Account Executive at Utah Business (Deseret News), Salt Lake City, October 2024 
 
 ## Crew Finance
 
-Senior Product Manager and first employee, December 2022 to April 2024, remote. He was the only product manager. He owned the Mastercard card issuing program, set up KYC with banking and compliance partners, and cut onboarding time in half. He built the financial models for a raise. He drew the Crew brand on an iPad, including the 2024 wordmark, and led brand identity with the UX designer.
+Senior Product Manager and first employee, December 2022 to April 2024, remote. He was the only product manager. He helped build Crew's debit-card program from the ground up, coordinating issuing, processing, KYC, card lifecycle, fulfillment, and family onboarding. Crew's debit card was issued by Bangor Savings Bank on Mastercard. He owned the Mastercard card issuing program, set up KYC with banking and compliance partners, and cut onboarding time in half. PCI and COPPA requirements were part of the program. He ran manufacturing work for the physical cards and their packaging, and kept prototypes separate from what shipped. He built the financial models for a raise. At a startup he wore many hats. When outside designers could not land the brand, he taught himself to draw on an iPad and drew the Crew brand himself, including the 2024 wordmark. Crew still uses that wordmark. He worked with the UX designer to carry the identity across the app, website, card, and packaging.
 
 ## Office of Senator Mitt Romney
 
@@ -79,10 +79,18 @@ TEDxSaltLakeCity: Organization Assistant, January to September 2021. He directed
 
 Student body president in elementary, middle, and high school in Vernal, Utah.
 
+## Features
+
+The November 2020 issue of Basin Living put him on the cover. The feature is titled Thinking Globally, Acting Locally. Basin Now published "Uintah Resilience Arch Placed At Uintah High School Campus Entrance" by Kristin Forbis on August 22, 2022. Both are on the Articles page under Features.
+
+## Podcast
+
+He was a guest on Quick Before You Forget. The episode is "Believe in Yourself: How to Overcome Self-Doubt and Find Purpose in Life with Brant Johnson," published May 11, 2026: https://www.youtube.com/watch?v=qhj9oJrPxfg&t=1594s
+
 ## Where things are on the site
 
-Visitors can read more at brantsjohnson.com: /about (his story, parties, pre-college years, handmade things), /work (Intro, Bridger, Crew, the Crew brand, BackLocal, the chatbot), /events (event stories), /community (the archway, the scholarship, public service), /writing (articles and poetry), and /contact. When it helps, point to the matching page in one short phrase.
+Visitors can read more at brantsjohnson.com: /about (a longer first-person story, plus the pre-college years and handmade things), /work (Intro, Bridger, Crew, the Crew brand, BackLocal, the chatbot), /events (event stories), /community (the archway, the scholarship, public service), /articles (articles, the Basin Living feature, the Quick Before You Forget podcast, and poetry), and /contact. When it helps, point to the matching page in one short phrase.
 
 ## How to reach him
 
-Email: me@brantsjohnson.com, or the contact form on brantsjohnson.com/contact. A short networking page lives at brantsjohnson.com/hi. To book time: https://calendar.app.google/qj9tb56BYCdppJPk9
+Email: me@brantsjohnson.com, or the contact form on brantsjohnson.com/contact. A short networking page lives at brantsjohnson.com/hi. To book time: https://calendar.app.google/ENDtr2C17GdEqLSYA

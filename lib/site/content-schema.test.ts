@@ -21,6 +21,7 @@ import { workDetails, workGroups } from "../../content/work";
 import { articles } from "../../content/writing/articles";
 import { writingSources } from "../../content/writing/sources";
 import type { Detail } from "../../content/detail";
+import { availablePosts } from "../posts/load";
 import { strings } from "./strings";
 
 const sections: Record<string, Detail[]> = {
@@ -38,6 +39,7 @@ const fixedRoutes = [
   "/work/crew-brand",
   "/events",
   "/community",
+  "/articles",
   "/writing",
   "/writing/poetry",
   "/contact",
@@ -51,6 +53,7 @@ const knownRoutes = new Set<string>([
   ...fixedRoutes,
   ...Object.values(sections).flatMap((list) => list.map((detail) => detail.path)),
   ...poems.map((poem) => `/writing/poetry/${poem.slug}`),
+  ...availablePosts().map((post) => `/writing/${post.slug}`),
 ]);
 
 const publicFile = (src: string) => existsSync(join(process.cwd(), "public", src));
@@ -96,6 +99,16 @@ test("every detail page has a unique slug, a matching path and the fields the pa
       for (const part of detail.sections) {
         assert.ok(!ids.has(part.id), `${detail.path}: duplicate section id ${part.id}`);
         ids.add(part.id);
+        if (part.bullets) {
+          assert.ok(part.bullets.length > 0, `${detail.path}#${part.id}: bullets, if present, cannot be an empty list`);
+          for (const bullet of part.bullets) {
+            assert.ok(bullet.trim().length > 0, `${detail.path}#${part.id}: empty bullet`);
+          }
+        }
+        if (part.modeled) {
+          assert.ok(part.modeled.heading.trim().length > 0, `${detail.path}#${part.id}: modeled heading is required`);
+          assert.ok(part.modeled.items.length > 0, `${detail.path}#${part.id}: modeled items cannot be empty`);
+        }
       }
     }
   }

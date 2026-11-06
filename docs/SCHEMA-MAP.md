@@ -38,12 +38,17 @@ The rows above are the starter-kit draft. These rows name what this repository a
 |---|---|---|
 | `/` | Home | Always |
 | `/work` | Intro, Bridger, then the experience timeline | Always |
+| `/work/crew` | Fuller Crew case study: debit-card program, manufacturing, brand, modeled research, app-design gallery | Always. App-design gallery renders when `appDesignGallery.photos` has files |
+| `Story.bullets` / `Story.modeled` | Optional lists on a detail section | Rendered only when the section supplies items. Other work/event/community pages omit them |
+| `Detail.appDesignGallery` | Optional app-screenshot gallery on a detail page | Hidden when missing or when `photos` is empty. `hasGalleryPhotos()` is the gate |
 | `/about` | Story and service, including the archway and the scholarship | Always |
 | `/contact` | Contact note | Always |
 | `/ask` | Full-page Ask conversation | Always. Linked from the header |
-| `/writing` and `/writing/[slug]` | Essays and letters | At least two real posts |
+| `/writing` and `/writing/[slug]` | On-site posts | Always. Listed posts also appear on `/articles` and Work Read more once `releaseDate` has arrived |
+| `content/posts/*.md` | Local articles | Nine Crew posts, 2026-10-28 through 2026-11-05, about `work/crew`. Titles and bodies are Brant's 2026-11-06 final copy. File names are kebab-case slugs from those titles. |
 | `/hi` | Unlisted event follow-up | Not in the nav |
-| `/cv.pdf` | Public CV file | Linked from Work, About, and /hi |
+| `/cv.pdf` | Public CV file | The footer Full CV link, plus Work, About, and /hi. Footer does not link a Google Doc. |
+| `POST /api/ask` | Ask about me answers | Short topic replies first, then the closest notes section. Instruction lines in the notes are not spoken. |
 | `/admin` and seven sub-pages | Private tool shells | Removed 2026-10-23. They were not part of the public site. |
 | `lib/ai-settings/` | Shared AI call settings | Copied from the starter kit. Ask does not call it yet. |
 

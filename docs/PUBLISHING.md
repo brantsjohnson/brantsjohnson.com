@@ -1,6 +1,6 @@
 # Publishing guide for agents and for Brant
 
-Read this before you add or change anything on brantsjohnson.com. It says **where each kind of thing lives**, **the exact fields**, and **the steps to publish** it. The site is Next.js on Vercel. Content lives in `content/` as plain TypeScript, so a change is a small, reviewable edit.
+Read `docs/SITE-UPDATE-GUIDE.md` first for headers, spacing, motion, mobile, slugs, articles, the chat, and analytics names. This file says **where each kind of thing lives**, **the exact fields**, and **the steps to publish** it. The site is Next.js on Vercel. Content lives in `content/` as plain TypeScript, so a change is a small, reviewable edit.
 
 The motto is "Good things deserve to happen." (set 2026-11-03).
 
@@ -24,7 +24,7 @@ Rules that never change (also in `CLAUDE.md`): first person, plain and warm; no 
 | The menu, footer links, email | `content/site-content.ts` | every page |
 | What the chatbot knows | `content/about-brant.md` (facts), plus articles automatically | `/ask` |
 
-The six menu items are fixed: **About, Work, Events, Community, Writing, Contact**. Do not add a seventh.
+The menu is **Home, About, Experience, Events, Leadership, Articles**. The addresses stay `/work`, `/community`, and `/articles`. Contact is not in that menu. Do not add a menu item. See `docs/SITE-UPDATE-GUIDE.md`.
 
 ## 2. Publish an article
 
@@ -144,8 +144,8 @@ Vercel Web Analytics is also on (`@vercel/analytics`) and works with no setup be
 - **Menu or footer:** `content/site-content.ts` (`primaryNav`, `footerNav`). Update the menu list in `CLAUDE.md` and the test in `lib/site/public-copy.test.ts`.
 - **A new kind of page:** add a content file shaped like `content/events.ts`, a `[slug]` route modeled on `app/(marketing)/events/[slug]/page.tsx`, add its section to `sections` in `lib/site/content-schema.test.ts`, and to `app/sitemap.ts`.
 - **Moving or renaming a page:** add a 301 in `next.config.mjs` from the old address so shared links keep working.
-- **Look and feel:** colors and type are in `styles/tokens.css` and `tailwind.config.ts`. Layout pieces are in `components/editorial/`. Follow `CLAUDE.md` (editorial, white space, gold used sparingly, captions on hover, Crew drawings on the cream ground).
-- **Chatbot behavior:** rules are in `lib/ai/prompt.ts`; facts in `content/about-brant.md`; the no-model fallback answers in `lib/ai/answer-question.ts`. When a fact on the site changes, change it in `content/about-brant.md` too.
+- **Look and feel:** follow `docs/SITE-UPDATE-GUIDE.md`. Colors and type live in `styles/tokens.css` and `tailwind.config.ts`. Layout pieces live in `components/editorial/`.
+- **Chatbot behavior:** follow `docs/SITE-UPDATE-GUIDE.md`. Rules are in `lib/ai/prompt.ts`. Facts are in `content/about-brant.md` and `content/about-me.md`. When a fact on the site changes, change it in those notes too.
 
 ## 9. Open questions for Brant
 

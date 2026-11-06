@@ -16,7 +16,6 @@ import { DefaultChatTransport } from "ai";
 import { useEffect, useRef, useState } from "react";
 import { MessageContent } from "@/components/chatbot/MessageContent";
 import { Button } from "@/components/ui/Button";
-import { PRESET_QUESTIONS } from "@/lib/ai/answer-question";
 
 function textOf(parts: { type: string; text?: string }[]): string {
   return parts
@@ -41,12 +40,22 @@ export function AskAssistant() {
     const last = users[users.length - 1];
     if (!last || fallbacks[last.id] !== undefined) return;
     const question = textOf(last.parts);
-    const earlier = users.slice(0, -1).map((message) => textOf(message.parts));
+    const thread: { role: "user" | "assistant"; text: string }[] = [];
+    for (const message of messages) {
+      if (message.id === last.id) break;
+      const text = textOf(message.parts);
+      if (message.role === "user") {
+        if (text) thread.push({ role: "user", text });
+        if (fallbacks[message.id]) thread.push({ role: "assistant", text: fallbacks[message.id] });
+      } else if (text) {
+        thread.push({ role: "assistant", text });
+      }
+    }
     setFallbacks((current) => ({ ...current, [last.id]: "" }));
     fetch("/api/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question, earlier }),
+      body: JSON.stringify({ question, thread }),
     })
       .then((response) => response.json() as Promise<{ answer?: string; error?: string }>)
       .then((body) =>
@@ -72,11 +81,12 @@ export function AskAssistant() {
   };
 
   return (
-    <div className="shell flex flex-col gap-8 py-8 pb-24">
+    <div className="shell pb-24">
+      <div className="flex flex-col gap-8 rounded-[18px] border border-border-subtle bg-surface px-5 py-6 shadow-glass md:px-8 md:py-8">
       <ol className="flex min-h-[8rem] flex-col gap-5" aria-live="polite">
         {messages.length === 0 && (
           <li className="max-w-[40rem] text-body text-text-secondary">
-            Ask a question. Answers come from my public notes. If a fact is not there, it should say so.
+            Ask any question about Brant.
           </li>
         )}
         {messages.map((message, index) => {
@@ -91,7 +101,7 @@ export function AskAssistant() {
                 className={isUser ? "flex justify-end" : "flex justify-start"}
               >
                 {isUser ? (
-                  <p className="max-w-[36rem] bg-surface-2 px-4 py-3 text-body text-ink">{text}</p>
+                  <p className="max-w-[36rem] rounded-[18px] bg-ink px-4 py-3 text-body text-on-hero">{text}</p>
                 ) : text ? (
                   <div className="max-w-[40rem] text-body text-text-secondary">
                     <MessageContent text={text} />
@@ -118,40 +128,27 @@ export function AskAssistant() {
         <li ref={endRef} aria-hidden="true" />
       </ol>
 
-      {messages.length === 0 && (
-        <div className="flex flex-wrap gap-2" aria-label="Suggested questions">
-          {PRESET_QUESTIONS.map((question) => (
-            <button
-              key={question}
-              type="button"
-              disabled={busy}
-              onClick={() => ask(question)}
-              className="inline-flex min-h-[44px] items-center rounded-full border border-border-subtle px-4 text-left text-body text-ink transition-colors hover:border-accent disabled:opacity-50"
-              data-track="button:preset_question:ask"
-            >
-              {question}
-            </button>
-          ))}
-        </div>
-      )}
-
       <form
         onSubmit={(event) => {
           event.preventDefault();
           ask(input);
         }}
-        className="flex items-center gap-3"
+        className="flex flex-col gap-3 sm:flex-row sm:items-center"
       >
+        <label className="sr-only" htmlFor="ask-question">
+          Your question
+        </label>
         <input
+          id="ask-question"
           value={input}
           onChange={(event) => setInput(event.target.value)}
-          aria-label="Ask a question about Brant"
-          className="min-h-[44px] flex-1 border-b border-ink bg-transparent text-body text-ink outline-none"
+          className="min-h-[52px] flex-1 rounded-[18px] border border-border-subtle bg-bg px-4 text-body text-ink outline-none"
         />
-        <Button type="submit" track="button:send_question:ask" ariaLabel="Send question">
+        <Button type="submit" track="button:send_question:ask" ariaLabel="Send question" className="min-h-[52px] px-8">
           {busy ? "Sending" : "Send"}
         </Button>
       </form>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 # Handoff for Cursor: which parts of the new site to keep, copy or redo
 
-Written for Brant to give to Cursor. Everything below is in the branch `claude/confident-wozniak-0m7vya` (pull request 13). Read `CLAUDE.md` and `docs/PUBLISHING.md` first.
+Written for Brant to give to Cursor. Everything below is in the branch `claude/confident-wozniak-0m7vya` (pull request 13). Read `docs/SITE-UPDATE-GUIDE.md`, `CLAUDE.md`, and `docs/PUBLISHING.md` first. The guide wins on the menu, headers, spacing, and click names.
 
 ## The one rule: do not overwrite this branch
 
@@ -21,7 +21,7 @@ Deploying Cursor's version over this branch would delete the working backend (an
 ### Rules that must survive any restyle
 
 - Keep every link and button's `data-track="type:what:where"` attribute. The analytics and the "never clicked" report depend on them. The `Button` component's `track` prop does this.
-- Six menu items in order: About, Work, Events, Community, Writing, Contact. `content/site-content.ts` (`primaryNav`).
+- Menu order: Home, About, Experience, Events, Leadership, Articles. Addresses stay `/work`, `/community`, and `/articles`. `content/site-content.ts` (`primaryNav`) and `content/narrative.ts` (`storyNav`). See `docs/SITE-UPDATE-GUIDE.md`.
 - Crew drawings stay on the cream ground (`CREW_GROUND` in `content/photos.ts`).
 - Respect `prefers-reduced-motion`. No em dashes, never "actually".
 - Run `npm test`, `npm run typecheck`, `npm run lint`, `npm run build` before asking for review.

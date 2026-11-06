@@ -16,19 +16,67 @@ export default function MarketingLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // The portrait file carries his name in the image data. This record tells
+  // search tools that this face is Brant S. Johnson, not someone else with the name.
+  const portrait = `${identity.siteUrl}/images/brant-s-johnson.jpg`;
+  const archway = [
+    "/images/brant-uploads/general/brant-alone-at-the-archway.webp",
+    "/images/brant-uploads/general/brant-archway.webp",
+    "/images/brant-uploads/general/brant-arch-being-welded.webp",
+    "/images/brant-uploads/general/original-archway.webp",
+  ].map((path) => ({
+    "@type": "ImageObject",
+    contentUrl: `${identity.siteUrl}${path}`,
+    url: `${identity.siteUrl}${path}`,
+    name: "Brant S. Johnson and the Uintah Resilience Archway, Vernal, Utah",
+    caption: "Brant S. Johnson, also known as Brant Johnson and Brant Shanon Johnson, with the Uintah Resilience Archway in Vernal, Utah.",
+    creditText: "Brant S. Johnson",
+  }));
   const person = {
     "@context": "https://schema.org",
     "@type": "Person",
+    // One record for him, and the homepage is the page that record belongs to.
+    "@id": `${identity.siteUrl}/#brant`,
     name: identity.fullName,
+    alternateName: ["Brant Johnson", "Brant Shanon Johnson"],
     url: identity.siteUrl,
     email: inquiries.email,
     jobTitle: "Senior Product Manager",
     description: hero.description,
-    alumniOf: {
-      "@type": "CollegeOrUniversity",
-      name: "Utah Valley University",
+    disambiguatingDescription:
+      "Brant S. Johnson of Vernal, Utah, also searched as Brant Johnson and Brant Shanon Johnson. Founder of Bridger and Intro. Former Senior Product Manager at Crew Finance, account executive at Utah Business and Deseret News, Head of Product at BackLocal in BYU Sandbox, intern at Divvy (BILL), the office of Senator Mitt Romney, and the Utah Governor's Office. Schools: Uintah High School in Vernal, Brigham Young University, and Utah Valley University. The official portrait is the man in the black suit and tie.",
+    homeLocation: { "@type": "Place", name: "Vernal, Utah" },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "American Fork",
+      addressRegion: "Utah",
+      addressCountry: "US",
     },
-    sameAs: [identity.linkedin, "https://intro.events", "https://bridger.social"],
+    image: [
+      {
+        "@type": "ImageObject",
+        contentUrl: portrait,
+        url: portrait,
+        name: "Brant S. Johnson",
+        caption: "Official portrait of Brant S. Johnson, founder of Bridger and Intro, wearing a black suit and tie.",
+        creditText: "Brant S. Johnson",
+        copyrightNotice: "Brant S. Johnson",
+        creator: { "@type": "Person", name: "Brant S. Johnson", url: identity.siteUrl },
+      },
+      ...archway,
+    ],
+    alumniOf: [
+      { "@type": "HighSchool", name: "Uintah High School", address: "Vernal, Utah" },
+      { "@type": "CollegeOrUniversity", name: "Brigham Young University" },
+      { "@type": "CollegeOrUniversity", name: "Utah Valley University" },
+    ],
+    sameAs: [
+      identity.linkedin,
+      "https://intro.events",
+      "https://bridger.social",
+      "https://brantsjohnson.substack.com",
+      "https://www.youtube.com/watch?v=qhj9oJrPxfg",
+    ],
   };
 
   return (

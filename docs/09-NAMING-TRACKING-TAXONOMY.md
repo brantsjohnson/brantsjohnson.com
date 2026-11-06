@@ -1,5 +1,7 @@
 # 09. Element Naming & Tracking Taxonomy
 
+The live click name is `data-track="type:name:place"`, with the types and examples in `docs/SITE-UPDATE-GUIDE.md`. Follow that. Do not introduce the component-identity pattern from this older note.
+
 **Plain English purpose:** This doc exists so that when you look at analytics, you can immediately tell what was clicked, on what page, and whether that same element appears elsewhere. Without a system like this, every developer (or agent) names buttons slightly differently and your data becomes unreadable within a month. This doc is that system.
 
 ---

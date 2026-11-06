@@ -58,7 +58,7 @@ export const identity = {
 
 // THIS SECTION DOES: the meeting link Brant sent. Pages that offer a conversation use it.
 export const booking = {
-  href: "https://calendar.app.google/qj9tb56BYCdppJPk9",
+  href: "https://calendar.app.google/ENDtr2C17GdEqLSYA",
   label: "Book time",
 };
 
@@ -69,10 +69,17 @@ export const inquiries = {
   label: "Inquiries",
 };
 
-// THIS SECTION DOES: the résumé file in public/cv.pdf. The link is the file itself.
+// THIS SECTION DOES: the CV a visitor can read. Clicking it opens the
+// Google Doc. The PDF download is a separate link, public/cv.pdf.
 export const publicCv = {
-  href: "/cv.pdf",
+  href: "https://docs.google.com/document/d/1u6126YTbL8hkDyulzbkoZVtEjJ6MwFXhQjV8-0i42e4/edit?usp=sharing",
   label: "Full CV",
+};
+
+// THIS SECTION DOES: the file a visitor saves when they choose Download CV.
+export const publicCvDownload = {
+  href: "/cv.pdf",
+  label: "Download CV",
 };
 
 // THIS SECTION DOES: the one-page résumé link. public/resume.pdf is not in the
@@ -87,9 +94,10 @@ export const publicResume: { label: string; href: string | null } = {
 
 // THIS SECTION DOES: the footer row on every page, in this order.
 // A null href (the résumé, until the PDF exists) is left out.
+// The CV link is /cv.pdf only. The Google Doc is not a footer item.
 const footerItems: { label: string; href: string | null }[] = [
   publicResume,
-  publicCv,
+  { label: "Full CV", href: "/cv.pdf" },
   { label: "Ask about me", href: "/ask" },
   { label: "LinkedIn", href: identity.linkedin },
   { label: "Substack", href: "https://brantsjohnson.substack.com" },
@@ -99,14 +107,15 @@ export const footerNav: { label: string; href: string }[] = footerItems.filter(
   (item): item is { label: string; href: string } => typeof item.href === "string" && item.href.length > 0
 );
 
-// THIS SECTION DOES: the bar across the top. Six places, in this order. The wordmark is home.
+// THIS SECTION DOES: the bar across the top. The wordmark is home.
+// Contact stays a page, reached from the home buttons and the footer, not from this bar.
 export const primaryNav: NavItem[] = [
+  { label: "Home", kind: "route", href: "/" },
   { label: "About", kind: "route", href: "/about" },
-  { label: "Work", kind: "route", href: "/work" },
+  { label: "Experience", kind: "route", href: "/work" },
   { label: "Events", kind: "route", href: "/events" },
-  { label: "Community", kind: "route", href: "/community" },
-  { label: "Writing", kind: "route", href: "/writing" },
-  { label: "Contact", kind: "route", href: "/contact" },
+  { label: "Leadership", kind: "route", href: "/community" },
+  { label: "Articles", kind: "route", href: "/articles" },
 ];
 
 // THIS SECTION DOES: the home story lives in content/narrative.ts and is re-exported below.
@@ -229,7 +238,7 @@ export const experience: ExperienceRole[] = [
     dates: "Dec 2022 to Apr 2024",
     place: "Remote",
     summary:
-      "I was the first employee and the only product manager. I owned the Mastercard card issuing program, set up KYC with banking and compliance partners, and ran onboarding experiments that cut onboarding time in half. I built the financial models for a raise, and I led the brand identity as lead illustrator.",
+      "I was the first employee and only product manager at Crew, a banking product for families. I worked across customer discovery, card issuing, banking and compliance partners, onboarding experiments, and the parent-and-child product experience. I also led the brand identity and illustrations used across the app, website, card and packaging.",
   },
   {
     org: "Office of Senator Mitt Romney",

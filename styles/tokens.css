@@ -2,8 +2,8 @@
    WHAT THIS FILE DOES (plain English):
    This file holds the shared colors, type, spacing, corners, and
    motion for the whole site. Components use these names instead of
-   typing raw values. The palette is the live Wix look: gold headlines
-   on black, warm paper for reading, and a gray for quiet labels.
+   typing raw values.    The page is warm paper with near-black type. Gold is a quiet
+   accent for a rule, a small label, or a word. A gray is for quiet labels.
    Gold is bright, so small text on paper uses black or a darker gray
    that still passes contrast. Change a value here and the site follows.
    ============================================ */
@@ -33,7 +33,7 @@
   --color-accent-deep: #8a6428; /* gold used as text, dark enough to read on the page */
 
   /* THIS SECTION DOES: name the two typefaces. Next.js fills the file variables. */
-  --font-serif: var(--font-serif-file), "Instrument Serif", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-serif: var(--font-serif-file), "Christea", "Palatino Linotype", Palatino, Georgia, serif;
   --font-sans: var(--font-sans-file), "Hanken Grotesk", "Avenir Next", Avenir, "Segoe UI", sans-serif;
 
   /* THIS SECTION DOES: set the shared spacing steps (8px rhythm) */

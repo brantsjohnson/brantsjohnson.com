@@ -1,29 +1,34 @@
 # BUILD-STATE
 
-Status: public pages recut for a Washington lookup, on top of the four-page site. Admin shells are removed. Not deployed to the production domain. A pull request is not a launch. GitHub Actions is off, so the gates below were run locally.
+Status: Nine on-site Crew articles were replaced with Brant's 2026-11-06 final copy (titles, deks, and bodies verbatim). Addresses are kebab-case slugs from those titles, for example `/writing/designing-crews-metal-card`. Release dates stay. Crew page links that already pointed at those posts use the final titles and new addresses. Positioning is unchanged. Not merged. Not deployed to the production domain. Engineering VP is the merge gate. A pull request is not a launch. GitHub Actions is off, so the gates below were run locally.
 
 ## What this build is
 
-Public pages: Home, Work, About, Contact, Ask, Now, and the unlisted /hi page. Writing stays hidden until at least two real pieces exist. Old routes still redirect. Experience and Projects go to `/work`. Service goes to `/about#service`, which is the collaborations section. `/projects/bridger` goes to `/work#bridger`.
+Public pages: Home, Work, About, Contact, Ask, Now, Articles, and the unlisted /hi page. The nine Crew posts are listed on `/articles` and in Crew Read more. Old routes still redirect. Experience and Projects go to `/work`. Service goes to `/about#service`, which is the collaborations section. `/projects/bridger` goes to `/work#bridger`.
 
 Home leads with "Good things deserve to happen." Intro and Bridger sit together under that, each with a live screenshot. Three checked facts follow (Senate internship, Crew, Utah Business), then an inquiries line. Dollar figures are not shown. Bridger is a socialization app in a beta of about 25 people. Older user counts are not shown.
 
-Photos in `public/photos` are crops of intro.events and bridger.social. The older portraits and project photographs are not shipped. Still missing: a photograph of the Birmingham volunteers. The header is the serif wordmark. The favicon is a square serif B.
+`/work/crew` is an eight-section product case study with sourced bullets covering the debit-card program, manufacturing, integrations, commercial research, and the self-drawn brand. The app-design gallery is on, using Brant's real in-product Crew screens. A clear link from that page goes to `/work/crew-brand` for the drawings. Photos in `public/photos` are crops of intro.events and bridger.social. Still missing: a photograph of the Birmingham volunteers. The header is the serif wordmark. The favicon is a square serif B.
 
 ## Checks
 
-Recorded after removing the admin shells and restoring the starter-kit no-stubs check.
+Recorded on `cursor/crew-articles-final-7a6f` after branching from `origin/main` (includes merged PR #18). Exact commit for the run is the current branch head in the pull request. A pull request is not a launch.
 
-- `npm test` passed. The public headline is the one sentence. Ask answers where he lives the same way About does. The Romney answer names constituent inquiries and the nuclear licensing brief. Public copy has no em dash, en dash, "actually", Israel, or Trump.
+- `npm test` passed (43 tests), including the nine listed Crew articles at title-based slugs, Crew Read more, and Crew page links using those titles and addresses.
 - `npm run typecheck` passed.
-- `npm run lint` passed.
-- `npm run build` passed. The route list has no `/admin`.
-- `python3 tools/ci/no-stubs` passed. `node tools/ci/no-stubs.mjs` passed.
-- `node --test lib/ai-settings/test.mjs` passed.
+- `npm run lint` passed. Existing `ArticleShelf` `<img>` warnings only.
+- `npm run build` passed. Nine `/writing/<slug>` routes use the title-based slugs. Built HTML on `/articles`, `/work/crew`, and `sitemap.xml` use the new addresses and do not mention the earlier draft slugs. Built article pages show the dek under the title, `$` as a plain dollar, `<em>` italics for book titles, and no `ARTICLE 0X OF 09` numbering.
+- `python3 tools/ci/no-stubs` passed.
+- `node tools/ci/no-stubs.mjs` failed on pre-existing `content/about-me.md` lines that mention Marriott School and "business strategy" as corrections, not as public page copy. Same matches exist on `origin/main`. Not changed in this PR.
+- Did not click through a browser in this environment.
 - Search engines are still blocked until `SITE_INDEXABLE=true`.
 
 ## Open work
 
-See `ops/DECISIONS-NEEDED.md`. Writing, the newsletter signup, the CV button, search indexing, and CRM storage stay off until their env values exist.
+See `ops/DECISIONS-NEEDED.md`. Search indexing stays off until `SITE_INDEXABLE=true`. CRM storage stays off until its env values exist.
 
-The one-page résumé PDF (`public/resume.pdf`) is still pending; until it ships, `publicResume.href` stays null and only `/cv.pdf` is linked.
+The one-page résumé PDF (`public/resume.pdf`) is still pending; until it ships, `publicResume.href` stays null.
+
+Crew app-design screenshots are now on `/work/crew` from files in `public/images/brant-uploads/crew-app-design/`. The source stills remain in `crew-illustrations-in-product/`.
+
+Brant supplied final Crew article copy on 2026-11-06. Titles, deks, and bodies are published as written, including vendor names and figures. Do not silently rewrite them. A production merge is still not a launch.

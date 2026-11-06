@@ -1,5 +1,7 @@
 # ANALYTICS TAXONOMY
 
+Click names on the live site are `data-track="type:name:place"`, written in plain words. The rule and the examples are in `docs/SITE-UPDATE-GUIDE.md`. This file is an empty draft. Do not invent a second naming scheme from it.
+
 Purpose: Stable element names and meaningful outcome events.
 Status: Draft. Populate with sourced project-specific decisions. Mark uncertainty [OPEN] and irrelevant topics Not applicable with reason.
 

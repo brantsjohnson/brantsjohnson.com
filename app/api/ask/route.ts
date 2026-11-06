@@ -1,11 +1,13 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the no-model door for Ask about me. A question comes in,
-// we answer from the checked public notes, and we send the sentences
-// back. It works when there is no AI key, and it never invents a fact.
+// This is the no-model door for Ask about me. A question comes in
+// with the thread so far. We find the closest part of the notes
+// and send those sentences back. A follow-up can go deeper because
+// the thread still has the question and the answer before it.
 // ============================================
 
 import { answerFromPublicNotes } from "@/lib/ai/local-answers";
+import type { ChatTurn } from "@/lib/ai/closest-notes";
 import { getClientIp, rateLimit } from "@/lib/utils/rate-limit";
 
 export const runtime = "nodejs";
@@ -21,7 +23,7 @@ export async function POST(request: Request) {
     );
   }
 
-  let body: { question?: string; earlier?: unknown };
+  let body: { question?: string; earlier?: unknown; thread?: unknown };
   try {
     body = await request.json();
   } catch {
@@ -37,8 +39,24 @@ export async function POST(request: Request) {
   }
 
   const earlier = Array.isArray(body.earlier)
-    ? body.earlier.filter((item): item is string => typeof item === "string").slice(-6)
+    ? body.earlier.filter((item): item is string => typeof item === "string").slice(-8)
     : [];
 
-  return Response.json({ answer: answerFromPublicNotes(question, earlier) });
+  // The thread is the whole conversation, including answers, so a follow-up knows what was just said.
+  const thread = Array.isArray(body.thread)
+    ? body.thread
+        .filter((item): item is ChatTurn => {
+          if (!item || typeof item !== "object") return false;
+          const turn = item as ChatTurn;
+          return (
+            (turn.role === "user" || turn.role === "assistant") &&
+            typeof turn.text === "string" &&
+            turn.text.length > 0 &&
+            turn.text.length <= 2000
+          );
+        })
+        .slice(-16)
+    : [];
+
+  return Response.json({ answer: answerFromPublicNotes(question, earlier, thread) });
 }
