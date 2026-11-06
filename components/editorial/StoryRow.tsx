@@ -11,6 +11,7 @@ import { Figure } from "@/components/editorial/Figure";
 import { Prose, type Paragraph } from "@/components/editorial/Prose";
 import { Reveal } from "@/components/editorial/Reveal";
 import { OnwardLinks } from "@/components/editorial/OnwardLinks";
+import { StoryBullets, StoryModeled } from "@/components/editorial/StoryList";
 import type { Photo, Video } from "@/content/photos";
 
 export type StoryLinkItem = { text: string; href: string; track: string };
@@ -20,6 +21,12 @@ export type Story = {
   eyebrow?: string;
   title: string;
   body: Paragraph[];
+  // Optional work list. Other pages leave this off. Crew uses it so each
+  // section can name distinct duties without turning the page into a wall of
+  // paragraphs.
+  bullets?: string[];
+  // Small labeled notes, such as research models. Not the large stat tiles.
+  modeled?: { heading: string; items: string[] };
   stats?: { value: string; label: string }[];
   quote?: string;
   links?: StoryLinkItem[];
@@ -49,7 +56,9 @@ export function StoryRow({ story, flip = false, index }: StoryRowProps) {
               ) : null}
               {story.title}
             </h2>
-            <Prose body={story.body} className="mt-4" />
+            {story.body.length > 0 ? <Prose body={story.body} className="mt-4" /> : null}
+            {story.bullets?.length ? <StoryBullets bullets={story.bullets} /> : null}
+            {story.modeled ? <StoryModeled modeled={story.modeled} /> : null}
 
             {story.stats?.length ? (
               <dl className="mt-10 flex flex-wrap gap-x-12 gap-y-6">

@@ -13,7 +13,7 @@ import { Prose } from "@/components/editorial/Prose";
 import { StoryRow } from "@/components/editorial/StoryRow";
 import { OnwardLinks } from "@/components/editorial/OnwardLinks";
 import { sectionName } from "@/components/editorial/section-name";
-import type { Detail } from "@/content/detail";
+import { hasGalleryPhotos, type Detail } from "@/content/detail";
 import { articleDate } from "@/content/writing/articles";
 import type { RelatedArticle } from "@/lib/writing/related";
 
@@ -103,7 +103,13 @@ export function DetailPage({ detail, articles = [] }: { detail: Detail; articles
         </section>
       ) : null}
 
-      {detail.gallery ? <Gallery title={detail.gallery.title} intro={detail.gallery.intro} photos={detail.gallery.photos} /> : null}
+      {hasGalleryPhotos(detail.gallery) ? (
+        <Gallery title={detail.gallery.title} intro={detail.gallery.intro} photos={detail.gallery.photos} />
+      ) : null}
+
+      {hasGalleryPhotos(detail.appDesignGallery) ? (
+        <Gallery title={detail.appDesignGallery.title} intro={detail.appDesignGallery.intro} photos={detail.appDesignGallery.photos} />
+      ) : null}
 
       <div className="shell border-t border-border-subtle py-12">
         {detail.links?.length ? <OnwardLinks links={detail.links} className="mb-8" /> : null}

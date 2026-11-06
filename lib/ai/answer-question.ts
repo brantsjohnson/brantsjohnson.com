@@ -69,7 +69,7 @@ const TOPICS: Topic[] = [
     score: (question) => hits(question, [/\b(crew|visa|mastercard|kyc)\b/i]),
     short:
       "At Crew Finance he was the first employee and the only product manager, from December 2022 to April 2024. He owned the Mastercard card program and cut onboarding time in half.",
-    more: "He set up KYC with banking and compliance partners, built the financial models for a raise, and led the brand identity as lead illustrator.",
+    more: "He coordinated a debit-card program from the ground up, including KYC, processing, card lifecycle, and physical card and packaging manufacturing. He drew the 2024 wordmark Crew still uses, and built the financial models for a raise.",
   },
   {
     id: "utah",

@@ -365,32 +365,62 @@ export const workDetails: Detail[] = [
     path: "/work/crew",
     title: "Crew Finance",
     metaTitle: "Crew Finance",
-    description: "Product management work on Crew's family banking product, covering card issuing, onboarding, and the parent-and-child experience.",
+    description: "How I built Crew's debit-card program from the ground up: issuing, processing, KYC, card lifecycle, fulfillment, and the brand still in use.",
     crumbs: crumbs("Crew Finance"),
     label: T,
     lead: [
-      "Crew was building a banking product for families. I joined as the first employee and worked across product discovery, card issuing, banking and compliance partners, and the experience parents and children had when they signed up. My job was to connect customer needs, technical requirements and design decisions so the pieces worked as one product.",
+      "Crew was building a banking product for families. I joined as the first employee and the only product manager, and I helped build the debit-card program from the ground up.",
+      "The work ran from customer discovery and KYC through issuing, processing, card lifecycle, fulfillment, and the experience parents and children had when they signed up. My job was to connect those systems so a family could open accounts and receive cards that worked.",
     ],
     glance: [
       { label: "Role", value: "Senior Product Manager" },
       { label: "When", value: "Dec 2022 to Apr 2024" },
+      { label: "Domain", value: "Family fintech, payments and onboarding" },
     ],
     sections: [
       {
-        id: "card-program",
-        title: "Card program and technical dependencies",
+        id: "role-scope",
+        title: "The first product manager",
         body: [
-          "I owned work across card issuing, identity verification, card manufacturing and shipping, and parent-and-child onboarding. The card program required coordination across an issuing partner, network requirements, processing, identity and account rules, manufacturing, personalization and delivery. Each dependency affected what the app could offer and when a design could move into production.",
-          "I worked with banking and compliance partners on KYC, with PCI and COPPA requirements also part of the program. Rather than treating these as handoffs at the end, I mapped the dependencies into the product work so customer-facing choices stayed aligned with the systems underneath them.",
+          "I was Senior Product Manager, the first employee, and the only product manager. The brief was a family product, not a visual-design assignment sitting to the side of the card program.",
+        ],
+        bullets: [
+          "I coordinated the product across parent and child accounts, debit cards, onboarding, and controls, so the app, the card, and the signup flow stayed one program.",
+          "I mapped requirements and dependencies across card issuing, processors, banking partners, identity and account rules, manufacturing, and fulfillment so a customer-facing promise stayed implementable.",
+          "I worked with banking and compliance partners, UX and design, engineering, and suppliers on product direction and operating tradeoffs. I did not write firmware, run the bank, engineer cryptography, or manage a named engineering staff.",
+          "KYC sat in customer onboarding and identity verification. PCI and COPPA were part of the program. I was not the bank's compliance officer, and I did not write a certification or approve regulated accounts.",
+        ],
+      },
+      {
+        id: "card-program",
+        title: "A debit-card program from the ground up",
+        body: [
+          "This was an end-to-end card-program workstream, not a UI initiative. A working debit card needed an issuing bank, a network, processing, identity and account rules, a manufacturer, and a way to personalize and mail cards. I coordinated that program-management workstream so those parties stayed aligned with what the product could promise.",
+        ],
+        bullets: [
+          "Crew's debit card was issued by Bangor Savings Bank on the Mastercard network. A BIN identifies the issuing institution and the card range used to route transactions. I translated those issuer and network requirements into the customer-facing card. I did not operate the bank or the network, and I did not sign a separate sponsor agreement.",
+          "Processing work covered the issuer processor, ledger, fraud controls, authorization, and program controls. I treated a parent-control setting in the app as different from a rule the processor could enforce on a child's card. That was a product-design question, not a claim that a specific control had shipped.",
+          "The payment lifecycle is why the screens have to be careful. A contactless tap uses NFC. For EMV contactless transactions the card can produce transaction-specific cryptographic data. Authorization, clearing, and settlement are different steps, so an approval can stay pending, change, or post at another amount. Product copy and support had to explain holds, refunds, and posting differences. I did not operate settlement rails.",
+          "PIN creation and resets belong with processors, protected key management, and hardware security modules. I mapped who was responsible for those credentials and how a customer would set or reset a PIN. The app team should not see a PIN in plaintext or store it in a customer database. I did not name a final PIN vendor.",
+          "We evaluated Unit and i2c while building, and my January 2023 notes consider i2c as a technology platform that could help us move faster. Later Crew materials name Treasury Prime in the operating stack. Vendor research is not a signed contract, and I do not claim I selected the final processor.",
         ],
         photos: [ph("general/crew-team-photo.webp", "The Crew team piled onto a yellow couch.", "The Crew team", { focus: { x: 0.5, y: 0.55 } })],
+        links: [
+          go("What happens when you tap your card", "/writing/what-happens-when-you-tap-your-card", "link:crew_tap_article:work_crew"),
+          go("The bank integrations nobody mentions", "/writing/the-bank-integrations-nobody-mentions-in-a-startup-pitch", "link:crew_integrations_article:work_crew"),
+        ],
       },
       {
         id: "onboarding",
-        title: "Onboarding and customer discovery",
+        title: "Family accounts, onboarding, and discovery",
         body: [
-          "Customer interviews and hands-on research helped me understand where families hesitated and what they needed from a shared banking product. I used that feedback to inform product direction, onboarding and design decisions.",
-          "We ran experiments to make signup easier. Those changes cut onboarding time by 50% and increased engagement by 20%.",
+          "The question I kept bringing back was what would persuade a family to move a primary banking relationship, not only to download an app.",
+        ],
+        bullets: [
+          "Customer interviews and hands-on research looked at trust, hesitation, and what a family needed from shared accounts. I heard enough concern about giving children access to credit that I wanted us to take it seriously. I do not have a recovered survey percentage for that reaction.",
+          "I advocated for digital pockets, the envelope habit as buckets in the account, as a reason to keep using the product after the card arrived. I was not the only person who could see that, and later Crew materials on pockets do not prove that my advocacy caused the later roadmap.",
+          "We ran experiments to make signup easier for parents and children. Those changes cut onboarding time by 50% and increased engagement by 20%.",
+          "I tested the homepage with parents at a shopping center and revised it five times based on their reactions. Test users also commented positively on the illustrations without being prompted. That is qualitative evidence, not a sample size or a conversion rate.",
         ],
         stats: [
           { value: "50%", label: "faster onboarding" },
@@ -398,22 +428,91 @@ export const workDetails: Detail[] = [
         ],
       },
       {
-        id: "packaging",
-        title: "Packaging and physical card delivery",
+        id: "manufacturing",
+        title: "Physical cards, packaging, and fulfillment",
         body: [
-          "The packaging and supply-chain work belonged to the physical side of a fintech product: getting a family's card designed, manufactured and delivered. I directed packaging design as part of the card experience and coordinated manufacturing and shipping with the rest of the onboarding journey. It connected the digital account a parent opened to the card their family received.",
+          "I ran manufacturing work for the physical cards and their packaging, from early explorations through supplier research, samples, production constraints, and fulfillment planning. Prototypes were labeled separately from what shipped. I did not operate factory equipment, and I do not claim every sample became a customer card.",
         ],
+        bullets: [
+          "I owned physical-card and packaging manufacturing coordination: design specifications, material and finish options, supplier research, physical samples, and how those choices changed production and delivery.",
+          "I researched plastic, metal-core, veneer, and finish options, plus tactile weight and contactless antenna compatibility. Metal can interfere with NFC, so a heavier card is also an antenna problem. Those metal constructions were concepts and samples, not a launched metal card.",
+          "March 2023 notes listed Idemia, Perfect Plastic, CPI, Tag Systems, and CompoSecure among companies we were researching. That list shows the discovery, not that each was hired or that any of them was the production stack.",
+          "Card lifecycle work covered physical design, secure personalization, matching a card to the account holder, carrier attachment, packaging, mailing, activation, replacements, returns, and inventory. A fulfillment matrix across family size, card colors, and replacements was a way to explore those combinations early. I do not claim a documented matrix shipped.",
+          "I drew packaging schematics and made mechanical push-button wallet prototypes and a paper-airplane mailer by hand, then asked how a supplier would manufacture, kit, and mail them. The package was the first physical proof a new bank was real. I have not found a confirmed record that the airplane mailer went into production.",
+          "A rigid case sized for six cards failed as soon as a household had seven people. Four cards of one color plus one of another also broke a fulfillment path that assumed one envelope per color. Those were design constraints, not customer metrics.",
+        ],
+        photos: [crew("packages-still.webp", "A Crew illustration of tumbling packages.", "Packages")],
+        links: [go("Why mailing a debit card can become a manufacturing problem", "/writing/why-mailing-a-debit-card-can-become-a-manufacturing-problem", "link:crew_mailer_article:work_crew")],
       },
       {
-        id: "illustration",
-        title: "Illustration and product design for families",
+        id: "integrations",
+        title: "Banking integrations and money movement",
         body: [
-          "Crew needed to work for parents and children without treating every family as if it looked the same. I developed an illustration system around familiar objects and shared activities, then worked with the UX designer to carry it across onboarding, product explainers, the website, the app, the card and packaging. This made the illustrations part of the product experience, not a one-off campaign.",
-          "I tested the homepage with parents at a shopping center and revised it five times based on their reactions. Test users also commented positively on the illustrations without being prompted.",
+          "Connecting an existing bank is not one feature. The bank, the processor, the network, the compliance system, and the customer's old institution can each have a different idea of when a transaction exists.",
+        ],
+        bullets: [
+          "In August 2023 we created two MX compatibility sheets covering 41 financial institutions, looking at account-owner verification, balance checks, and aggregation. Coverage can support one of those jobs and struggle with another. That was compatibility research, not 41 live integrations.",
+          "I examined ACH processing days, authorization and return states, and what the app could say about transfer availability. If a screen shows money before an incoming transfer has settled, somebody is making a risk and liquidity decision. Same-day ACH had different windows and pricing in early provider conversations.",
+          "I mapped owner verification, PIN support, ATM fees, and disputes to the partners who could perform those jobs, rather than treating an integration as finished because a button existed.",
+          "Those questions came back to a product decision: what the app could promise when a customer connected an existing bank or started a transfer.",
+        ],
+        links: [go("The bank integrations nobody mentions", "/writing/the-bank-integrations-nobody-mentions-in-a-startup-pitch", "link:crew_integrations_article_section:work_crew")],
+      },
+      {
+        id: "commercial",
+        title: "Commercial models and growth experiments",
+        body: [
+          "I modeled costs and growth so a generous idea had to survive the spreadsheet. None of the figures below are achievement KPIs or a published Crew profit-and-loss statement.",
+        ],
+        bullets: [
+          "I built the product-economics model from researched processing costs and household-use assumptions. Changing those inputs changed whether a generous card or a premium package still made sense. The figures were research models, not validated cohort analytics.",
+          "I examined a rewards structure of 1% cashback plus an additional 1% for early payment, and compared how X1, Chase, and Capital One structured rewards, redemption, and restrictions. That was product research, not a live Crew offer.",
+          "I explored photo-friendly family billboards and researched creator-contract models: flat fees, commission, hybrid arrangements, usage rights, and what counted as an attributed conversion. I interviewed someone at Gabb about their influencer program. Homie was a reference for bold local marketing. Neither was a Crew client or a formal partner.",
+          "I wanted us to separate attention, signup, KYC completion, funded accounts, and repeat behavior. A campaign that wins views does not automatically open funded accounts. I do not claim these experiments caused growth or that they shipped.",
+        ],
+        modeled: {
+          heading: "What I modeled",
+          items: [
+            "Processing research: two and a half to four cents per card transaction.",
+            "Early household model: about 3.5 cards per family and 36 transactions a month.",
+            "One comparison household: about 150 to 170 transactions in 30 days, used to stress the model, not as a representative sample.",
+            "Rewards research: 1% cashback plus 1% for paying early, compared with other card programs.",
+          ],
+        },
+      },
+      {
+        id: "brand",
+        title: "The brand I drew, still in use",
+        body: [
+          "I owned brand identity at Crew. When outside creative directions did not meet the brief, I taught myself to draw on an iPad and drew the brand myself.",
+        ],
+        bullets: [
+          "Earlier outside directions did not fit. I learned the drawing approach, started sketching on my iPad, and kept going after the CEO told me to continue. The result became Crew's recognizable brand, not a temporary exercise.",
+          "I built a vocabulary of objects and shared activities so parents and children could see themselves in the product without depicting only one kind of household. I worked with our UX designer to carry that into screens. A 2023 exploratory visual deck is credited to Adam Eastburn and said the images were not final. Those credits do not transfer ownership of the brand I drew.",
+          "I carried the system across onboarding, explainers, the website, the app, the card, and packaging so the identity was part of the product, not a standalone campaign.",
+          "I personally drew the 2024 Crew wordmark and the brand illustrations. Crew still uses that wordmark today on trycrew.com and on the App Store listing, including the six-dot mark on the app icon and on the card face. I do not claim ownership of all later app or product design.",
         ],
         photos: [
           ph("crew-illustrations/img-3719.webp", "A grid of Crew paint swatches in purple, yellow, red and green.", "The palette", { fit: "contain", bg: "#ffffff" }),
           crew("tandem-2-seat-still.webp", "A Crew illustration of a two-seat tandem bike.", "Tandem"),
+        ],
+        links: [go("See the Crew illustrations", "/work/crew-brand", "link:crew_brand_section:work_crew")],
+      },
+      {
+        id: "demonstrates",
+        title: "What this role demonstrates",
+        body: [
+          "This was an early-stage startup role. I wore many hats because the team was small, not because I ran every department.",
+        ],
+        bullets: [
+          "I was the first employee and only product manager, and the work spanned program dependencies, customer discovery, KYC and onboarding, payment operations, economics models, supplier and manufacturing coordination, packaging, growth research, and brand creation.",
+          "The original premium family credit concept required financing the company could not secure. The direction changed to debit. I do not claim I single-handedly drove that decision.",
+          "The useful judgment was joining customer trust, issuer and partner capabilities, regulations, economics, fulfillment, and design into dependencies the product could keep.",
+          "Physical samples and prototypes informed what not to pursue. The unlaunched metal card was a real investigation, not a customer product, and I do not quantify savings I cannot presently verify.",
+        ],
+        links: [
+          go("See the Crew illustrations", "/work/crew-brand", "link:crew_brand_close:work_crew"),
+          go("What happens when you tap your card", "/writing/what-happens-when-you-tap-your-card", "link:crew_tap_close:work_crew"),
         ],
       },
     ],
