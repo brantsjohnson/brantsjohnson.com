@@ -5,7 +5,10 @@
 // the rest of that section, and "Read less" closes it again.
 // The opening paragraph is not repeated inside the longer text.
 // The control is the browser's own disclosure, so it works without
-// extra scripts and stays usable from a keyboard.
+// extra scripts and stays usable from a keyboard. It is not a button
+// box. It is a short gold line with the words and a caret, the way a
+// dropdown is drawn. The caret points down while closed and up while
+// open.
 // ============================================
 
 import { Reveal } from "@/components/editorial/Reveal";
@@ -58,12 +61,27 @@ export function LifeStory({ section, rule = true }: { section: LifeSection; rule
                   </p>
                 ))}
               </div>
+              {/* THIS SECTION DOES: the open and close control. Words and a caret sit on a gold line. There is no box around them. */}
               <summary
                 data-track="button:read_more:about"
-                className="order-2 inline-flex w-fit cursor-pointer list-none items-center justify-center rounded-control border border-border-subtle px-6 py-3 text-body font-semibold text-ink hover:border-accent min-h-[44px] [&::-webkit-details-marker]:hidden"
+                className="order-2 inline-flex w-fit cursor-pointer list-none items-center gap-2 border-b-2 border-accent bg-transparent px-0 py-2 text-body text-ink transition-colors duration-[120ms] ease-brand hover:text-accent-deep min-h-[44px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent [&::-webkit-details-marker]:hidden"
               >
                 <span className="group-open:hidden">Read more</span>
                 <span className="hidden group-open:inline">Read less</span>
+                <svg
+                  viewBox="0 0 16 16"
+                  aria-hidden="true"
+                  className="h-3.5 w-3.5 shrink-0 text-accent-deep transition-transform duration-[220ms] ease-brand group-open:rotate-180"
+                >
+                  <path
+                    d="M3.25 6 8 10.75 12.75 6"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </summary>
             </details>
           </div>
