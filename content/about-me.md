@@ -270,4 +270,4 @@ Startups, technology, fintech, public-interest technology, education, innovation
 
 ## Where to send people
 
-About his longer first-person story, plus the pre-college years and handmade things: /about. Work, including Intro, Bridger, Crew, the Crew brand, BackLocal, and the chatbot experiment: /work. Events: /events. The archway and the scholarship: /community. Writing: /articles (including the Quick Before You Forget podcast) and /writing. Contact: /contact, or me@brantsjohnson.com. A short networking page is at /hi. To book time: https://calendar.app.google/ENDtr2C17GdEqLSYA
+About his longer first-person story, plus the pre-college years and handmade things: /about. Work, including Intro, Bridger, Crew, the Crew brand, BackLocal, and the chatbot experiment: /work. Events: /events. The archway and the scholarship: /community. Writing: /articles (including the November 2020 Basin Living feature, Thinking Globally, Acting Locally, and the Quick Before You Forget podcast) and /writing. Contact: /contact, or me@brantsjohnson.com. A short networking page is at /hi. To book time: https://calendar.app.google/ENDtr2C17GdEqLSYA
