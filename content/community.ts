@@ -31,7 +31,7 @@ export const communityLeads = [
     body: "I helped start a scholarship for graduating seniors dealing with circumstances their transcripts can't show. Funding left over from the arch project helped get it going.",
     linkText: "Read about the scholarship",
     href: "/community/scholarship",
-    photo: ph("general/resilience-scholarship-2023.webp", "Two scholarship recipients with Brant on stage in front of a red and white Utes backdrop.", undefined, { focus: { x: 0.5, y: 0.5 } }),
+    photo: ph("general/resilience-scholarship-25.webp", "Brant on stage with a scholarship recipient in front of balloons shaped like the number 25.", undefined, { position: "58% 58%" }),
   },
 ];
 

@@ -23,7 +23,7 @@ export function photoRecord(src: string): PhotoRecord | null {
   const file = src.split("/").pop()?.toLowerCase() ?? "";
   const folder = src.toLowerCase();
   if (!file || file.endsWith(".svg")) return null;
-  if (file.includes("screenshot") || file.includes("icon") || file.includes("wordmark")) return null;
+  if (file.includes("screenshot") || file.includes("icon") || file.includes("wordmark") || file.includes("scholarship-2023")) return null;
   if (file.includes("blueprint") && !file.includes("archway")) return null;
   if (folder.includes("/crew-illustrations") || folder.includes("/backlocal-icons") || file.startsWith("certificate")) return null;
 
@@ -33,7 +33,7 @@ export function photoRecord(src: string): PhotoRecord | null {
 
   const scene = sceneFor(folder, file);
   if (!scene) return null;
-  const showsHim = !/original-archway|blueprint|scholarship-tara|scholarship-night|scholarship-2023/.test(file);
+  const showsHim = !/original-archway|blueprint|scholarship-tara|scholarship-night/.test(file);
   const lead = showsHim
     ? `Photograph of ${NAMES}, ${FROM}.`
     : `Picture from a Vernal, Utah project led by ${NAMES}, ${FROM}. He is not the person in this frame.`;
