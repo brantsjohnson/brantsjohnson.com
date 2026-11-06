@@ -14,9 +14,10 @@ import { StoryRow } from "@/components/editorial/StoryRow";
 import { OnwardLinks } from "@/components/editorial/OnwardLinks";
 import { sectionName } from "@/components/editorial/section-name";
 import type { Detail } from "@/content/detail";
-import { articleDate, type Article } from "@/content/writing/articles";
+import { articleDate } from "@/content/writing/articles";
+import type { RelatedArticle } from "@/lib/writing/related";
 
-export function DetailPage({ detail, articles = [] }: { detail: Detail; articles?: Article[] }) {
+export function DetailPage({ detail, articles = [] }: { detail: Detail; articles?: RelatedArticle[] }) {
   const [first, ...rest] = detail.lead;
   const lead = typeof first === "string" ? first : undefined;
 
@@ -73,15 +74,26 @@ export function DetailPage({ detail, articles = [] }: { detail: Detail; articles
                 <li key={article.id} className="grid gap-1 border-t border-border-subtle py-5 first:border-t-0 sm:grid-cols-[9rem_1fr] sm:gap-6">
                   <p className="label pt-2 text-[0.68rem] text-text-secondary">{articleDate(article.date)}</p>
                   <div>
-                    <a
-                      href={article.url}
-                      data-track={`link:article:${detail.slug}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-serif text-[1.5rem] leading-tight text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-deep"
-                    >
-                      {article.title}
-                    </a>
+                    {/* On-site posts stay on this site. External articles open in a new tab. */}
+                    {article.internal ? (
+                      <Link
+                        href={article.url}
+                        data-track={`link:article:${detail.slug}`}
+                        className="font-serif text-[1.5rem] leading-tight text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-deep"
+                      >
+                        {article.title}
+                      </Link>
+                    ) : (
+                      <a
+                        href={article.url}
+                        data-track={`link:article:${detail.slug}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-serif text-[1.5rem] leading-tight text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-deep"
+                      >
+                        {article.title}
+                      </a>
+                    )}
                     {article.summary ? <p className="mt-1 text-caption text-text-secondary">{article.summary}</p> : null}
                   </div>
                 </li>

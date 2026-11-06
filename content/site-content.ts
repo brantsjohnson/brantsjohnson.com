@@ -94,10 +94,10 @@ export const publicResume: { label: string; href: string | null } = {
 
 // THIS SECTION DOES: the footer row on every page, in this order.
 // A null href (the résumé, until the PDF exists) is left out.
+// The CV link is /cv.pdf only. The Google Doc is not a footer item.
 const footerItems: { label: string; href: string | null }[] = [
   publicResume,
-  publicCv,
-  publicCvDownload,
+  { label: "Full CV", href: "/cv.pdf" },
   { label: "Ask about me", href: "/ask" },
   { label: "LinkedIn", href: identity.linkedin },
   { label: "Substack", href: "https://brantsjohnson.substack.com" },
@@ -238,7 +238,7 @@ export const experience: ExperienceRole[] = [
     dates: "Dec 2022 to Apr 2024",
     place: "Remote",
     summary:
-      "I was the first employee and the only product manager. I owned the Mastercard card issuing program, set up KYC with banking and compliance partners, and ran onboarding experiments that cut onboarding time in half. I built the financial models for a raise, and I led the brand identity as lead illustrator.",
+      "I was the first employee and only product manager at Crew, a banking product for families. I worked across customer discovery, card issuing, banking and compliance partners, onboarding experiments, and the parent-and-child product experience. I also led the brand identity and illustrations used across the app, website, card and packaging.",
   },
   {
     org: "Office of Senator Mitt Romney",

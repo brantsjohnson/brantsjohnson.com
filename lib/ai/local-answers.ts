@@ -1,14 +1,16 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
 // This is the public Ask answer when no model is required.
-// It reads the notes, finds the section closest to the question,
-// and uses the thread so "go deeper" continues that section.
+// It reads the notes, answers a known topic in a few sentences,
+// and otherwise finds the closest section. The thread lets
+// "go deeper" continue that section.
 // ============================================
 
 import "server-only";
 import { existsSync, readFileSync } from "fs";
 import { join } from "path";
-import { composeAnswer, type ChatTurn } from "@/lib/ai/closest-notes";
+import { type ChatTurn } from "@/lib/ai/closest-notes";
+import { answerFromNotesAndSearch } from "@/lib/ai/public-ask";
 
 // THIS SECTION DOES: read one notes file and drop the editor comments visitors never hear
 function readNotes(fileName: string): string {
@@ -28,5 +30,5 @@ export function answerFromPublicNotes(
     ? thread
     : earlierQuestions.map((text) => ({ role: "user" as const, text }));
   const notes = [readNotes("about-brant.md"), readNotes("about-me.md")].filter(Boolean).join("\n\n");
-  return composeAnswer(notes, question, history);
+  return answerFromNotesAndSearch(notes, question, earlierQuestions, history);
 }

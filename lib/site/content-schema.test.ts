@@ -21,6 +21,7 @@ import { workDetails, workGroups } from "../../content/work";
 import { articles } from "../../content/writing/articles";
 import { writingSources } from "../../content/writing/sources";
 import type { Detail } from "../../content/detail";
+import { availablePosts } from "../posts/load";
 import { strings } from "./strings";
 
 const sections: Record<string, Detail[]> = {
@@ -52,6 +53,7 @@ const knownRoutes = new Set<string>([
   ...fixedRoutes,
   ...Object.values(sections).flatMap((list) => list.map((detail) => detail.path)),
   ...poems.map((poem) => `/writing/poetry/${poem.slug}`),
+  ...availablePosts().map((post) => `/writing/${post.slug}`),
 ]);
 
 const publicFile = (src: string) => existsSync(join(process.cwd(), "public", src));

@@ -7,15 +7,17 @@
 // ============================================
 
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHeader } from "@/components/editorial/PageHeader";
 import { Reveal } from "@/components/editorial/Reveal";
 import { OnwardLinks } from "@/components/editorial/OnwardLinks";
 import { Button } from "@/components/ui/Button";
-import { articleDate, articlesAbout } from "@/content/writing/articles";
+import { articleDate } from "@/content/writing/articles";
 import { workGroups, workIntro } from "@/content/work";
 import { publicCv, publicCvDownload, publicResume } from "@/content/site-content";
 import { sectionCovers } from "@/content/covers";
 import { pageMetadata } from "@/lib/site/page-metadata";
+import { relatedArticles } from "@/lib/writing/related";
 
 export const metadata: Metadata = pageMetadata({
   title: "Experience",
@@ -40,45 +42,58 @@ export default function WorkPage() {
               </h2>
             </Reveal>
             <ol className="lg:col-span-8">
-              {group.items.map((item, index) => (
-                <Reveal as="li" key={item.org} delay={index * 0.04} className="py-8 first:pt-0">
-                  <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-                    <h3 className="font-serif text-h3 text-ink">{item.org}</h3>
-                    {item.dates ? <p className="label text-[0.66rem] text-text-secondary">{item.dates}</p> : null}
-                  </div>
-                  {item.role ? <p className="label mt-2 text-[0.68rem] text-accent-deep">{item.role}</p> : null}
-                  <p className="mt-4 max-w-reading text-body text-text-secondary">{item.summary}</p>
-                  {item.links?.length ? (
-                    <OnwardLinks
-                      className="mt-5"
-                      links={item.links.map((link) => ({
-                        text: link.text,
-                        href: link.href,
-                        track: `link:work_item:${link.href.split("/").pop()}`,
-                      }))}
-                    />
-                  ) : null}
-                  {articlesAbout(`work/${item.id}`).length ? (
-                    <ul className="mt-4 flex flex-col gap-1">
-                      {articlesAbout(`work/${item.id}`).map((article) => (
-                        <li key={article.id} className="text-caption text-text-secondary">
-                          Read more:{" "}
-                          <a
-                            href={article.url}
-                            data-track={`link:article:work_${item.id}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-deep"
-                          >
-                            {article.title}
-                          </a>{" "}
-                          ({articleDate(article.date)})
-                        </li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </Reveal>
-              ))}
+              {group.items.map((item, index) => {
+                const related = relatedArticles(`work/${item.id}`);
+                return (
+                  <Reveal as="li" key={item.org} delay={index * 0.04} className="py-8 first:pt-0">
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                      <h3 className="font-serif text-h3 text-ink">{item.org}</h3>
+                      {item.dates ? <p className="label text-[0.66rem] text-text-secondary">{item.dates}</p> : null}
+                    </div>
+                    {item.role ? <p className="label mt-2 text-[0.68rem] text-accent-deep">{item.role}</p> : null}
+                    <p className="mt-4 max-w-reading text-body text-text-secondary">{item.summary}</p>
+                    {item.links?.length ? (
+                      <OnwardLinks
+                        className="mt-5"
+                        links={item.links.map((link) => ({
+                          text: link.text,
+                          href: link.href,
+                          track: `link:work_item:${link.href.split("/").pop()}`,
+                        }))}
+                      />
+                    ) : null}
+                    {related.length ? (
+                      <ul className="mt-4 flex flex-col gap-1">
+                        {related.map((article) => (
+                          <li key={article.id} className="text-caption text-text-secondary">
+                            Read more:{" "}
+                            {article.internal ? (
+                              <Link
+                                href={article.url}
+                                data-track={`link:article:work_${item.id}`}
+                                className="text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-deep"
+                              >
+                                {article.title}
+                              </Link>
+                            ) : (
+                              <a
+                                href={article.url}
+                                data-track={`link:article:work_${item.id}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-deep"
+                              >
+                                {article.title}
+                              </a>
+                            )}{" "}
+                            ({articleDate(article.date)})
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </Reveal>
+                );
+              })}
             </ol>
           </div>
         </section>

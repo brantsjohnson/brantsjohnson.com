@@ -14,6 +14,7 @@ import "server-only";
 import { articleDate, articles, type Article } from "@/content/writing/articles";
 import { writingSources, type WritingSource } from "@/content/writing/sources";
 import { listedPosts } from "@/lib/posts/load";
+import { isDefaultSubstackPost, isSubstackStarterFeedItem } from "@/lib/writing/feed-filters";
 
 export const WRITING_TAG = "writing";
 
@@ -76,13 +77,6 @@ function pathKey(href: string): string {
   }
 }
 
-// THIS SECTION DOES: skip Substack's starter post. The publication
-// creates one called "Coming soon" before any real article exists,
-// and the feed keeps sending it.
-function isPlaceholder(url: string, title: string): boolean {
-  return pathKey(url).endsWith("/p/coming-soon") || title.trim().toLowerCase() === "coming soon";
-}
-
 // THIS SECTION DOES: read one feed. Any failure returns nothing, never an error.
 async function readFeed(source: WritingSource): Promise<WritingItem[]> {
   try {
@@ -98,7 +92,14 @@ async function readFeed(source: WritingSource): Promise<WritingItem[]> {
       const title = tag(block, "title");
       const url = tag(block, "link");
       const published = new Date(tag(block, "pubDate"));
-      if (!title || !url.startsWith("http") || Number.isNaN(published.getTime()) || isPlaceholder(url, title)) continue;
+      if (
+        !title ||
+        !url.startsWith("http") ||
+        Number.isNaN(published.getTime()) ||
+        isSubstackStarterFeedItem(url, title)
+      ) {
+        continue;
+      }
       const dateIso = published.toISOString().slice(0, 10);
       items.push({
         id: url,
@@ -165,7 +166,9 @@ export async function getWritingGroups(): Promise<WritingGroup[]> {
         : [];
     // If a post is also on Substack, show the site's version once.
     const onSite = new Set(listedPosts().filter((post) => post.substackUrl).map((post) => pathKey(post.substackUrl as string)));
-    const others = [...saved, ...live].filter((item) => !onSite.has(pathKey(item.url)));
+    const others = [...saved, ...live].filter(
+      (item) => !onSite.has(pathKey(item.url)) && !isDefaultSubstackPost(item.url)
+    );
     const items = [...written, ...others].sort((a, b) => (a.dateIso < b.dateIso ? 1 : -1));
     groups.push({ source, items });
   }

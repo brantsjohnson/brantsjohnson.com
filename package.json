@@ -10,7 +10,7 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "check:stubs": "node tools/ci/no-stubs.mjs && python3 tools/ci/no-stubs",
-    "test": "tsx --test lib/ai/answer-question.test.ts lib/site/public-copy.test.ts lib/site/public-env.test.ts lib/site/content-schema.test.ts lib/site/sitemap-data.test.ts lib/analytics/analytics.test.ts lib/posts/posts.test.ts",
+    "test": "tsx --test lib/ai/answer-question.test.ts lib/site/public-copy.test.ts lib/site/public-env.test.ts lib/site/content-schema.test.ts lib/site/sitemap-data.test.ts lib/analytics/analytics.test.ts lib/posts/posts.test.ts lib/writing/feed-filters.test.ts",
     "check:content": "tsx --test lib/site/content-schema.test.ts lib/posts/posts.test.ts"
   },
   "dependencies": {

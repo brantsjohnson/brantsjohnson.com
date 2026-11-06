@@ -6,10 +6,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DetailPage } from "@/components/editorial/DetailPage";
-import { articlesAbout } from "@/content/writing/articles";
 import { detailCover, findDetail } from "@/content/detail";
 import { communityDetails } from "@/content/community";
 import { pageMetadata } from "@/lib/site/page-metadata";
+import { relatedArticles } from "@/lib/writing/related";
 
 type PageProps = { params: { slug: string } };
 
@@ -31,5 +31,5 @@ export function generateMetadata({ params }: PageProps): Metadata {
 export default function CommunityPage({ params }: PageProps) {
   const detail = findDetail(communityDetails, params.slug);
   if (!detail) notFound();
-  return <DetailPage detail={detail} articles={articlesAbout(`community/${detail.slug}`)} />;
+  return <DetailPage detail={detail} articles={relatedArticles(`community/${detail.slug}`)} />;
 }
