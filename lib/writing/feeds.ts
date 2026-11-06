@@ -76,6 +76,13 @@ function pathKey(href: string): string {
   }
 }
 
+// THIS SECTION DOES: skip Substack's starter post. The publication
+// creates one called "Coming soon" before any real article exists,
+// and the feed keeps sending it.
+function isPlaceholder(url: string, title: string): boolean {
+  return pathKey(url).endsWith("/p/coming-soon") || title.trim().toLowerCase() === "coming soon";
+}
+
 // THIS SECTION DOES: read one feed. Any failure returns nothing, never an error.
 async function readFeed(source: WritingSource): Promise<WritingItem[]> {
   try {
@@ -91,7 +98,7 @@ async function readFeed(source: WritingSource): Promise<WritingItem[]> {
       const title = tag(block, "title");
       const url = tag(block, "link");
       const published = new Date(tag(block, "pubDate"));
-      if (!title || !url.startsWith("http") || Number.isNaN(published.getTime())) continue;
+      if (!title || !url.startsWith("http") || Number.isNaN(published.getTime()) || isPlaceholder(url, title)) continue;
       const dateIso = published.toISOString().slice(0, 10);
       items.push({
         id: url,
