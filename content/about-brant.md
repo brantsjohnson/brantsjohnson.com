@@ -81,7 +81,7 @@ Student body president in elementary, middle, and high school in Vernal, Utah.
 
 ## Features
 
-The November 2020 issue of Basin Living put him on the cover. The feature is titled Thinking Globally, Acting Locally. The PDF is on the Articles page under Features.
+The November 2020 issue of Basin Living put him on the cover. The feature is titled Thinking Globally, Acting Locally. Basin Now published "Uintah Resilience Arch Placed At Uintah High School Campus Entrance" by Kristin Forbis on August 22, 2022. Both are on the Articles page under Features.
 
 ## Podcast
 

@@ -11,6 +11,8 @@ export type Feature = {
   title: string;
   publication: string;
   dateLabel: string;
+  published: string; // YYYY-MM or YYYY-MM-DD, for search metadata only
+  author: string;
   href: string;
   // The article's own words. Search metadata uses this. The page does not print it.
   body: string;
@@ -18,10 +20,27 @@ export type Feature = {
 
 export const features: Feature[] = [
   {
+    id: "uintah-resilience-arch",
+    title: "Uintah Resilience Arch Placed At Uintah High School Campus Entrance",
+    publication: "Basin Now",
+    dateLabel: "August 22, 2022",
+    published: "2022-08-22",
+    author: "Kristin Forbis",
+    href: "https://web.archive.org/web/20220823065352/https://basinnow.com/article.php?id=8904",
+    body: [
+      "Thanks to the donation of time and funding by many in the community, a new arch has been raised above the main entrance to the Uintah High School campus. While the current high school students likely won't realize it, the Uintah Resilience Arch is a return to a previous longstanding tradition. For many years, the HOME OF THE UTES arch stood in that place until it had to be removed about a decade ago during construction projects.",
+      "Enter Brant Johnson, the enthusiastic and ambitious Uintah Student Body President of the 2016-2017 school year. Brant remembered the original arch and wanted to see it put back up but the remnants of it were in bad shape and because of the new road size, the old arch just wasn't going to work. Rather than give up, Brant presented a design for a new arch to the Principal and he was told if he could get the funding and resources put together for it, the school would welcome the new addition.",
+      "Fast forward 5 years and the Uintah Resilience Arch was raised in time for the new school year. \"Without our resilient and charitable community, this project wouldn't have been possible,\" shares Brant. \"I decided that it should be called the Uintah Resilience Arch in memory of how incredibly resilient the students at Uintah are and our community. The people here are inspiring and this arch was a sacrifice for many. In addition to that, I created a scholarship for graduating seniors based on the character trait of Resilience.\"",
+      "Donations continue to be accepted for the arch's future maintenance and the Resilience scholarships. All who donate will have their name engraved on a plaque that will go on the archway. Donations can be made by calling the Uintah High School finance secretary. A big thank you to all involved for making this nostalgic addition to Uintah High School possible.",
+    ].join("\n\n"),
+  },
+  {
     id: "basin-living",
     title: "Thinking Globally, Acting Locally",
     publication: "Basin Living",
     dateLabel: "November 2020",
+    published: "2020-11",
+    author: "Teressa Gray",
     href: "/images/brant-uploads/press/bl-feature-2020-11.pdf",
     body: [
       "Brant Shanon Johnson is a Uintah Basin native, born and raised, now attending Brigham Young University (in pursuit of a degree in international relations and entrepreneurship). But it wasn't until he visited Washington, D.C., when he was 16, that he looked at his role as a Vernal resident in a whole new light.",
@@ -49,8 +68,8 @@ export function featureJsonLd(feature: Feature) {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: feature.title,
-    datePublished: "2020-11",
-    author: { "@type": "Person", name: "Teressa Gray" },
+    datePublished: feature.published,
+    author: { "@type": "Person", name: feature.author },
     publisher: { "@type": "Organization", name: feature.publication },
     description: `${feature.title}. ${feature.publication}, ${feature.dateLabel}.`,
     articleBody: feature.body,
