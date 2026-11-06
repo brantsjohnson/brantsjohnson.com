@@ -63,7 +63,7 @@ export const workGroups: WorkGroup[] = [
         role: "Senior Product Manager and first employee",
         dates: "Dec 2022 to Apr 2024",
         summary:
-          "Worked across card issuing, banking integrations, and onboarding for families. Our experiments cut onboarding time 50% and raised engagement 20%.",
+          "I was the first employee and only product manager at Crew, a banking product for families. I worked across customer discovery, card issuing, banking and compliance partners, onboarding experiments, and the parent-and-child product experience. I also led the brand identity and illustrations used across the app, website, card and packaging.",
         links: [
           { text: "Product work", href: "/work/crew" },
           { text: "Crew illustrations", href: "/work/crew-brand" },
@@ -277,7 +277,7 @@ export const workDetails: Detail[] = [
         id: "idea",
         title: "Where the idea came from",
         body: [
-          "At Utah Business, I worked on events and talked with sponsors who had spent real money to be there. They wanted conversations that might lead somewhere. Event organizers wanted people to enjoy the experience and feel it was worth coming back.",
+          "Before starting Intro, I worked at Utah Business on events and talked with sponsors who had spent real money to be there. They wanted conversations that might lead somewhere. Event organizers wanted people to enjoy the experience and feel it was worth coming back.",
           "I kept thinking there should be a better way to help with that, especially as AI became useful for understanding why two people might want to meet.",
         ],
         photos: [
@@ -365,11 +365,11 @@ export const workDetails: Detail[] = [
     path: "/work/crew",
     title: "Crew Finance",
     metaTitle: "Crew Finance",
-    description: "Product management work on Crew's family banking product, card program, and onboarding.",
+    description: "Product management work on Crew's family banking product, covering card issuing, onboarding, and the parent-and-child experience.",
     crumbs: crumbs("Crew Finance"),
     label: T,
     lead: [
-      "Crew was building a banking product for families. I joined as the first employee and worked across card issuing, banking partners, and the experience parents and kids had when they signed up. I liked getting to help turn a big idea into something families could use.",
+      "Crew was building a banking product for families. I joined as the first employee and worked across product discovery, card issuing, banking and compliance partners, and the experience parents and children had when they signed up. My job was to connect customer needs, technical requirements and design decisions so the pieces worked as one product.",
     ],
     glance: [
       { label: "Role", value: "Senior Product Manager" },
@@ -378,27 +378,42 @@ export const workDetails: Detail[] = [
     sections: [
       {
         id: "card-program",
-        title: "The card program",
+        title: "Card program and technical dependencies",
         body: [
-          "I owned work across card issuing, KYC with banking and compliance partners, card manufacturing and shipping, and parent and child onboarding. The program involved eight outside suppliers, with PCI and COPPA requirements to account for.",
+          "I owned work across card issuing, identity verification, card manufacturing and shipping, and parent-and-child onboarding. The card program required coordination across an issuing partner, network requirements, processing, identity and account rules, manufacturing, personalization and delivery. Each dependency affected what the app could offer and when a design could move into production.",
+          "I worked with banking and compliance partners on KYC, with PCI and COPPA requirements also part of the program. Rather than treating these as handoffs at the end, I mapped the dependencies into the product work so customer-facing choices stayed aligned with the systems underneath them.",
         ],
         photos: [ph("general/crew-team-photo.webp", "The Crew team piled onto a yellow couch.", "The Crew team", { focus: { x: 0.5, y: 0.55 } })],
       },
       {
         id: "onboarding",
-        title: "Onboarding",
-        body: ["We ran experiments to make signup easier. Those changes cut onboarding time by 50% and increased engagement by 20%."],
+        title: "Onboarding and customer discovery",
+        body: [
+          "Customer interviews and hands-on research helped me understand where families hesitated and what they needed from a shared banking product. I used that feedback to inform product direction, onboarding and design decisions.",
+          "We ran experiments to make signup easier. Those changes cut onboarding time by 50% and increased engagement by 20%.",
+        ],
         stats: [
           { value: "50%", label: "faster onboarding" },
           { value: "20%", label: "more engagement" },
-          { value: "8", label: "outside suppliers" },
         ],
       },
       {
-        id: "second-job",
-        title: "An unexpected second job",
+        id: "packaging",
+        title: "Packaging and physical card delivery",
         body: [
-          "We couldn't find an outside brand direction that felt right. I started sketching on my iPad and eventually worked on illustrations used throughout the product. That part has a story of its own.",
+          "The packaging and supply-chain work belonged to the physical side of a fintech product: getting a family's card designed, manufactured and delivered. I directed packaging design as part of the card experience and coordinated manufacturing and shipping with the rest of the onboarding journey. It connected the digital account a parent opened to the card their family received.",
+        ],
+      },
+      {
+        id: "illustration",
+        title: "Illustration and product design for families",
+        body: [
+          "Crew needed to work for parents and children without treating every family as if it looked the same. I developed an illustration system around familiar objects and shared activities, then worked with the UX designer to carry it across onboarding, product explainers, the website, the app, the card and packaging. This made the illustrations part of the product experience, not a one-off campaign.",
+          "I tested the homepage with parents at a shopping center and revised it five times based on their reactions. Test users also commented positively on the illustrations without being prompted.",
+        ],
+        photos: [
+          ph("crew-illustrations/img-3719.webp", "A grid of Crew paint swatches in purple, yellow, red and green.", "The palette", { fit: "contain", bg: "#ffffff" }),
+          crew("tandem-2-seat-still.webp", "A Crew illustration of a two-seat tandem bike.", "Tandem"),
         ],
       },
     ],

@@ -41,7 +41,8 @@ The rows above are the starter-kit draft. These rows name what this repository a
 | `/about` | Story and service, including the archway and the scholarship | Always |
 | `/contact` | Contact note | Always |
 | `/ask` | Full-page Ask conversation | Always. Linked from the header |
-| `/writing` and `/writing/[slug]` | Essays and letters | At least two real posts |
+| `/writing` and `/writing/[slug]` | On-site posts | Always. Listed posts also appear on `/articles` and Work Read more once `releaseDate` has arrived |
+| `content/posts/*.md` | Local articles | Nine Crew posts, 2026-10-28 through 2026-11-05, about `work/crew` |
 | `/hi` | Unlisted event follow-up | Not in the nav |
 | `/cv.pdf` | Public CV file | Linked from Work, About, and /hi |
 | `/admin` and seven sub-pages | Private tool shells | Removed 2026-10-23. They were not part of the public site. |

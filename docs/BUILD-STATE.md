@@ -1,6 +1,6 @@
 # BUILD-STATE
 
-Status: public pages recut for a Washington lookup, on top of the four-page site. Admin shells are removed. Not deployed to the production domain. A pull request is not a launch. GitHub Actions is off, so the gates below were run locally.
+Status: Crew experience expansion is on a pull request branch. Nine on-site Crew articles are listed with Brant-approved dates from 2026-10-28 through 2026-11-05. Positioning is unchanged. Not merged. Not deployed to the production domain. Engineering VP is the merge gate. A pull request is not a launch. GitHub Actions is off, so the gates below were run locally.
 
 ## What this build is
 
@@ -12,18 +12,20 @@ Photos in `public/photos` are crops of intro.events and bridger.social. The olde
 
 ## Checks
 
-Recorded after removing the admin shells and restoring the starter-kit no-stubs check.
+Recorded on `cursor/crew-experience-expansion-7de9` after the Crew expansion. A pull request is not a launch.
 
-- `npm test` passed. The public headline is the one sentence. Ask answers where he lives the same way About does. The Romney answer names constituent inquiries and the nuclear licensing brief. Public copy has no em dash, en dash, "actually", Israel, or Trump.
+- `npm test` passed (29 tests), including the nine Crew article dates and Work Read more.
 - `npm run typecheck` passed.
-- `npm run lint` passed.
-- `npm run build` passed. The route list has no `/admin`.
-- `python3 tools/ci/no-stubs` passed. `node tools/ci/no-stubs.mjs` passed.
-- `node --test lib/ai-settings/test.mjs` passed.
+- `npm run lint` passed. Existing `ArticleShelf` `<img>` warnings only.
+- `npm run build` passed. Nine `/writing/<slug>` routes are in the route list.
+- `python3 tools/ci/no-stubs` passed.
+- `node tools/ci/no-stubs.mjs` failed on pre-existing `content/about-me.md` lines that mention Marriott School and "business strategy" as corrections, not as public page copy. Same matches exist on `origin/main`. Not changed in this PR.
 - Search engines are still blocked until `SITE_INDEXABLE=true`.
 
 ## Open work
 
-See `ops/DECISIONS-NEEDED.md`. Writing, the newsletter signup, the CV button, search indexing, and CRM storage stay off until their env values exist.
+See `ops/DECISIONS-NEEDED.md`. Search indexing stays off until `SITE_INDEXABLE=true`. CRM storage stays off until its env values exist.
 
-The one-page résumé PDF (`public/resume.pdf`) is still pending; until it ships, `publicResume.href` stays null and only `/cv.pdf` is linked.
+The one-page résumé PDF (`public/resume.pdf`) is still pending; until it ships, `publicResume.href` stays null.
+
+**PENDING BRANT:** Should vendor names, prices, volume figures, commercial terms, contract structures and operational metrics in the nine Crew article bodies be scrubbed before production, and if so which ones? The bodies are published as written for this preview. Do not silently rewrite them. This is a production-release review item, not permission to launch.

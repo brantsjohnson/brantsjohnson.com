@@ -128,4 +128,6 @@ test("public copy names the headline and Bridger, and does not link a missing r√
   assert.match(joined, /Crew wordmark Brant designed in 2024/);
   assert.doesNotMatch(joined, /I did not own a roadmap/);
   assert.doesNotMatch(joined, /That role ended in September 2021/);
+  assert.doesNotMatch(joined, /eight outside suppliers/i);
+  assert.match(joined, /Before starting Intro, I worked at Utah Business/);
 });

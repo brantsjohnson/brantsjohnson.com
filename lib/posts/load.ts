@@ -53,3 +53,19 @@ export function getPost(slug: string): { post: Post; state: PostState } | null {
   const post = availablePosts().find((item) => item.slug === slug);
   return post ? { post, state: stateOf(post) } : null;
 }
+
+// THIS SECTION DOES: previous and next posts in one series, oldest first, so
+// the Crew articles read 01 then 02 then 03. Only listed posts are linked,
+// so an unlisted neighbor is not revealed early.
+export function seriesNeighbors(
+  slug: string,
+  aboutKey: string,
+  today: string = todayInDenver()
+): { previous?: Post; next?: Post } {
+  const series = listedPosts(today)
+    .filter((post) => post.about.includes(aboutKey))
+    .sort((a, b) => (a.releaseDate === b.releaseDate ? (a.slug < b.slug ? -1 : 1) : a.releaseDate < b.releaseDate ? -1 : 1));
+  const index = series.findIndex((post) => post.slug === slug);
+  if (index < 0) return {};
+  return { previous: series[index - 1], next: series[index + 1] };
+}

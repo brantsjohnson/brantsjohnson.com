@@ -50,6 +50,15 @@ export const articles: Article[] = [
     url: "https://brantsjohnson.substack.com/p/in-an-ai-world-human-connection-will",
     source: "articles",
   },
+  {
+    id: "crew-banking-product-launch",
+    title: "A banking update is LONG overdo! So we created the banking app we've always wanted, it's called Crew.",
+    date: "2024-01-02",
+    url: "https://www.linkedin.com/posts/brantshanonjohnson_a-banking-update-is-long-overdo-so-we-created-activity-7148023863031779328-2yuf",
+    source: "articles",
+    summary: "A launch note on Crew's family banking product and Brant's product management and illustration work.",
+    about: ["work/crew"],
+  },
 ];
 
 // THIS SECTION DOES: find the articles about one page, such as "work/crew", newest first

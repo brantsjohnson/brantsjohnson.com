@@ -17,7 +17,7 @@ import { Markdown } from "@/components/editorial/Markdown";
 import { PageHeader } from "@/components/editorial/PageHeader";
 import { StoryLink } from "@/components/narrative/StoryLink";
 import { writingSources } from "@/content/writing/sources";
-import { availablePosts, getPost } from "@/lib/posts/load";
+import { availablePosts, getPost, seriesNeighbors } from "@/lib/posts/load";
 import { postJsonLd } from "@/lib/posts/jsonld";
 import { postDate } from "@/lib/posts/model";
 import { indexingRobots } from "@/lib/site/indexing";
@@ -71,11 +71,14 @@ export default function WritingPostPage({ params }: PageProps) {
   const { post, state } = found;
   const jsonLd = postJsonLd(post, state, siteOrigin());
   const subscribeUrl = writingSources.find((source) => source.id === "articles")?.subscribeUrl;
+  const crewSeries = post.about.includes("work/crew") ? seriesNeighbors(post.slug, "work/crew") : {};
 
   return (
     <article>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <PageHeader id={post.slug} label={state === "listed" ? `Writing · ${postDate(post.releaseDate)}` : "Writing"} title={post.title} lead={post.summary} />
+      <PageHeader id={post.slug} label="Writing" title={post.title} lead={post.summary}>
+        {state === "listed" ? <p className="label mt-4 text-[0.68rem] text-text-secondary">{postDate(post.releaseDate)}</p> : null}
+      </PageHeader>
       <div className="shell pb-24">
         <div className="max-w-reading">
           <Markdown source={post.body} />
@@ -94,6 +97,30 @@ export default function WritingPostPage({ params }: PageProps) {
               </StoryLink>{" "}
               for the next piece.
             </p>
+          ) : null}
+          {crewSeries.previous || crewSeries.next ? (
+            <nav aria-label="More Crew articles" className="mt-10 flex flex-col gap-3 border-t border-border-subtle pt-6 sm:flex-row sm:justify-between">
+              {crewSeries.previous ? (
+                <Link
+                  href={`/writing/${crewSeries.previous.slug}`}
+                  data-track="link:previous_crew_article:post"
+                  className="label inline-flex min-h-[44px] items-center gap-3 text-ink hover:text-accent-deep"
+                >
+                  <span aria-hidden="true">←</span> Previous: {crewSeries.previous.title}
+                </Link>
+              ) : (
+                <span />
+              )}
+              {crewSeries.next ? (
+                <Link
+                  href={`/writing/${crewSeries.next.slug}`}
+                  data-track="link:next_crew_article:post"
+                  className="label inline-flex min-h-[44px] items-center gap-3 text-ink hover:text-accent-deep sm:ml-auto"
+                >
+                  Next: {crewSeries.next.title} <span aria-hidden="true">→</span>
+                </Link>
+              ) : null}
+            </nav>
           ) : null}
           <p className="mt-10">
             <Link href="/articles" data-track="link:articles_index:post" className="label inline-flex min-h-[44px] items-center gap-3 text-ink hover:text-accent-deep">

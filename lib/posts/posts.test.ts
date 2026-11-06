@@ -18,7 +18,8 @@ import { eventDetails } from "../../content/events";
 import { workDetails } from "../../content/work";
 import { strings } from "../site/strings";
 import { parseFrontmatter } from "./frontmatter";
-import { loadPostsFrom, POSTS_DIR } from "./load";
+import { relatedArticles } from "../writing/related";
+import { loadPostsFrom, POSTS_DIR, seriesNeighbors } from "./load";
 import { parseMarkdown, safeHref, toPlainText } from "./markdown";
 import { readPost, stateOf, todayInDenver } from "./model";
 
@@ -101,8 +102,58 @@ test("every real post file is complete and follows the voice rules", () => {
   ]);
   const { posts, errors } = loadPostsFrom(POSTS_DIR, keys);
   assert.deepEqual(errors, [], `Fix these post files:\n${errors.join("\n")}`);
+  // Site-authored fields follow the voice rules. Authorized imported article
+  // titles and bodies keep their source wording, including names and figures.
   const banned = [/\$/, /—/, /–/, /\bactually\b/i, /\bleverage\b/i, /\bsynergy\b/i, /passionate about/i];
-  for (const text of strings(posts)) for (const pattern of banned) assert.doesNotMatch(text, pattern, text.slice(0, 120));
+  for (const post of posts) {
+    for (const text of strings({ summary: post.summary, tags: post.tags, about: post.about, cover: post.cover })) {
+      for (const pattern of banned) assert.doesNotMatch(text, pattern, text.slice(0, 120));
+    }
+  }
   const slugs = posts.map((post) => post.slug);
   assert.equal(new Set(slugs).size, slugs.length);
+});
+
+test("the nine Crew articles use the approved dates and stay listed", () => {
+  const expected: [string, string][] = [
+    ["i-made-a-metal-credit-card-that-never-launched", "2026-10-28"],
+    ["what-happens-when-you-tap-your-card", "2026-10-29"],
+    ["i-kept-asking-why-anyone-would-switch-banks", "2026-10-30"],
+    ["the-four-cent-problem-what-fintech-taught-me-about-money", "2026-10-31"],
+    ["what-does-it-cost-to-give-a-family-six-debit-cards", "2026-11-01"],
+    ["willow-became-crew-and-the-design-had-to-grow-up", "2026-11-02"],
+    ["how-do-you-advertise-a-bank-nobody-knows-yet", "2026-11-03"],
+    ["the-bank-integrations-nobody-mentions-in-a-startup-pitch", "2026-11-04"],
+    ["why-mailing-a-debit-card-can-become-a-manufacturing-problem", "2026-11-05"],
+  ];
+  const { posts, errors } = loadPostsFrom(POSTS_DIR);
+  assert.deepEqual(errors, []);
+  for (const [slug, date] of expected) {
+    const post = posts.find((item) => item.slug === slug);
+    assert.ok(post, `missing post ${slug}`);
+    assert.equal(post?.releaseDate, date);
+    assert.equal(post?.draft, false);
+    assert.deepEqual(post?.about, ["work/crew"]);
+    assert.equal(stateOf(post!, "2026-11-06"), "listed");
+  }
+  const metal = posts.find((post) => post.slug === "i-made-a-metal-credit-card-that-never-launched");
+  assert.match(metal?.body ?? "", /\$80,000/);
+  assert.match(metal?.body ?? "", /Idemia/);
+  assert.match(metal?.body ?? "", /CompoSecure/);
+  const mailer = posts.find((post) => post.slug === "why-mailing-a-debit-card-can-become-a-manufacturing-problem");
+  assert.match(mailer?.body ?? "", /Private draft, unapproved/);
+  assert.match(mailer?.body ?? "", /\$7,333/);
+});
+
+test("Crew Read more includes the nine listed posts and the LinkedIn launch note", () => {
+  const related = relatedArticles("work/crew", "2026-11-06");
+  assert.equal(related[0]?.id, "post:why-mailing-a-debit-card-can-become-a-manufacturing-problem");
+  assert.equal(related.filter((item) => item.internal).length, 9);
+  const linkedin = related.find((item) => item.id === "crew-banking-product-launch");
+  assert.ok(linkedin);
+  assert.equal(linkedin?.internal, undefined);
+  assert.match(linkedin?.title ?? "", /overdo/);
+  const neighbors = seriesNeighbors("what-happens-when-you-tap-your-card", "work/crew", "2026-11-06");
+  assert.equal(neighbors.previous?.slug, "i-made-a-metal-credit-card-that-never-launched");
+  assert.equal(neighbors.next?.slug, "i-kept-asking-why-anyone-would-switch-banks");
 });
