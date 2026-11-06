@@ -11,7 +11,7 @@ import Link from "next/link";
 import { ArticleShelf } from "@/components/editorial/ArticleShelf";
 import { PageHeader } from "@/components/editorial/PageHeader";
 import { sectionCovers } from "@/content/covers";
-import { features } from "@/content/features";
+import { featureJsonLd, features } from "@/content/features";
 import { poems } from "@/content/poems";
 import { podcasts, youtubeEmbed } from "@/content/podcasts";
 import { articleDate } from "@/content/writing/articles";
@@ -64,6 +64,14 @@ export default async function ArticlesPage() {
           internal: item.internal,
         }))}
       />
+
+      {features.map((feature) => (
+        <script
+          key={feature.id}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(featureJsonLd(feature)) }}
+        />
+      ))}
 
       <section id="features" aria-labelledby="features-title" className="scroll-mt-24 border-t border-border-subtle py-14 md:py-20">
         <div className="shell">
