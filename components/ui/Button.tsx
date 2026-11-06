@@ -60,6 +60,7 @@ export function Button({
           onClick={onClick}
           target={web ? "_blank" : undefined}
           rel={web ? "noopener noreferrer" : undefined}
+          download={file ? "" : undefined}
         >
           {children}
         </a>

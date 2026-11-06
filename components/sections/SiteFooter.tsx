@@ -30,6 +30,7 @@ function FooterLink({ href, label }: { href: string; label: string }) {
       data-track={track}
       target={external ? "_blank" : undefined}
       rel={external ? "noopener noreferrer" : undefined}
+      download={href.endsWith(".pdf") ? "" : undefined}
     >
       {label}
     </a>

@@ -20,10 +20,18 @@ export function TextLink({ href, children, track }: TextLinkProps) {
     </span>
   );
 
-  // A PDF is a file, so the browser opens it directly instead of as a page.
-  if (href.startsWith("http") || href.startsWith("mailto:") || href.endsWith(".pdf")) {
+  // A web address opens in a new tab. A PDF is a file the visitor saves.
+  const file = href.endsWith(".pdf");
+  if (href.startsWith("http") || href.startsWith("mailto:") || file) {
     return (
-      <a href={href} className={className} data-track={track} target="_blank" rel="noopener noreferrer">
+      <a
+        href={href}
+        className={className}
+        data-track={track}
+        target={file ? undefined : "_blank"}
+        rel="noopener noreferrer"
+        download={file ? "" : undefined}
+      >
         {children}
         {arrow}
       </a>

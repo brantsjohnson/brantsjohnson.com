@@ -13,7 +13,7 @@ import { OnwardLinks } from "@/components/editorial/OnwardLinks";
 import { Button } from "@/components/ui/Button";
 import { articleDate, articlesAbout } from "@/content/writing/articles";
 import { workGroups, workIntro } from "@/content/work";
-import { publicCv, publicResume } from "@/content/site-content";
+import { publicCv, publicCvDownload, publicResume } from "@/content/site-content";
 import { sectionCovers } from "@/content/covers";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
@@ -94,7 +94,10 @@ export default function WorkPage() {
               </Button>
             ) : null}
             <Button href={publicCv.href} variant={publicResume.href ? "ghost" : "primary"} track="button:cv:work">
-              Full CV
+              {publicCv.label}
+            </Button>
+            <Button href={publicCvDownload.href} variant="ghost" track="button:download_cv:work">
+              {publicCvDownload.label}
             </Button>
           </div>
         </div>

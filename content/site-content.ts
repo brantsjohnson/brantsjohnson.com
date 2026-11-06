@@ -69,10 +69,17 @@ export const inquiries = {
   label: "Inquiries",
 };
 
-// THIS SECTION DOES: the résumé file in public/cv.pdf. The link is the file itself.
+// THIS SECTION DOES: the CV a visitor can read. Clicking it opens the
+// Google Doc. The PDF download is a separate link, public/cv.pdf.
 export const publicCv = {
-  href: "/cv.pdf",
+  href: "https://docs.google.com/document/d/1u6126YTbL8hkDyulzbkoZVtEjJ6MwFXhQjV8-0i42e4/edit?usp=sharing",
   label: "Full CV",
+};
+
+// THIS SECTION DOES: the file a visitor saves when they choose Download CV.
+export const publicCvDownload = {
+  href: "/cv.pdf",
+  label: "Download CV",
 };
 
 // THIS SECTION DOES: the one-page résumé link. public/resume.pdf is not in the
@@ -90,6 +97,7 @@ export const publicResume: { label: string; href: string | null } = {
 const footerItems: { label: string; href: string | null }[] = [
   publicResume,
   publicCv,
+  publicCvDownload,
   { label: "Ask about me", href: "/ask" },
   { label: "LinkedIn", href: identity.linkedin },
   { label: "Substack", href: "https://brantsjohnson.substack.com" },
