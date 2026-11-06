@@ -40,6 +40,18 @@ export const eventGroups: EventGroup[] = [
     title: "Conferences, summits, and business events",
     items: [
       {
+        title: "AI Teammates at Work",
+        tag: "Upcoming talk",
+        summary: "I will speak online at AICD Virtual on November 10, 2026. The session is on Microsoft Teams.",
+        href: "/events/aicd-virtual",
+        linkText: "See the session",
+        photo: ph(
+          "general/aicd-virtual-2026-poster.webp",
+          "The AICD Virtual speaker poster for AI Teammates at Work, listing Brant Johnson as Founder of Bridger and Intro.",
+          "AICD Virtual"
+        ),
+      },
+      {
         title: "Begin Again",
         tag: "Featured speaker",
         summary: "I was a featured speaker at Begin Again in Salt Lake City, an evening with Utah tech leaders.",
@@ -166,6 +178,46 @@ const back = { href: "/events", label: "All events" };
 const L = "Events";
 
 export const eventDetails: Detail[] = [
+  {
+    slug: "aicd-virtual",
+    path: "/events/aicd-virtual",
+    title: "AI Teammates at Work",
+    metaTitle: "AI Teammates at Work",
+    description: "I will speak at AICD Virtual, AI Teammates at Work, an online conference on November 10, 2026.",
+    crumbs: crumbs("AICD Virtual"),
+    label: L,
+    lead: [
+      "I will be speaking at AICD Virtual: AI Teammates at Work. It is an online conference on Microsoft Teams, put on by AI Community Days.",
+    ],
+    glance: [
+      { label: "Role", value: "Speaker" },
+      { label: "When", value: "November 10, 2026" },
+      { label: "Where", value: "Online, Microsoft Teams" },
+    ],
+    sections: [
+      {
+        id: "the-session",
+        title: "The session",
+        body: [
+          "My session is called Lock It: Running a Small Company With a Team of AI Agents on a Small Budget. It is about how I run Bridger and Intro with AI agents, what broke, and the rules that keep the work in check.",
+          "The program lists it from 12:50 to 1:20 AM Paris time on November 11, which is 4:50 PM in Utah on November 10. The speaker poster names me Founder of Bridger and Intro.",
+        ],
+        photos: [
+          ph(
+            "general/aicd-virtual-2026-poster.webp",
+            "The AICD Virtual speaker poster for AI Teammates at Work, listing Brant Johnson as Founder of Bridger and Intro.",
+            "Speaker poster"
+          ),
+        ],
+      },
+    ],
+    links: [
+      go("The session listing", "https://aicommunitydays.ai/events/aicd-virtual-01", "link:aicd:aicd_virtual"),
+      go("Register", "https://aicommunitydays.ai/events/aicd-virtual-01#register", "link:aicd_register:aicd_virtual"),
+      go("All events", "/events", "link:events:aicd_virtual"),
+    ],
+    back,
+  },
   {
     slug: "begin-again",
     path: "/events/begin-again",

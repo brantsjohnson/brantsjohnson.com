@@ -64,6 +64,7 @@ export const photoSizes: Record<string, [number, number]> = {
   "elf-photos/53362915119-e78ca3062a-o.webp": [2400, 1601],
   "elf-photos/53362926889-1b8b602d64-o.webp": [2400, 1601],
   "elf-photos/7301a6fe-b7f2-4c0e-80bf-d0bf389b6934-1-201-a.webp": [2400, 2046],
+  "general/aicd-virtual-2026-poster.webp": [819, 1024],
   "general/another-angle-of-car-wreck.webp": [1280, 1527],
   "general/backlocal-designs-first-designs.webp": [1108, 1477],
   "general/backlocal-designs.webp": [1280, 1279],

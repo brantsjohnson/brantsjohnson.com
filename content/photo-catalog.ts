@@ -26,6 +26,14 @@ export function photoRecord(src: string): PhotoRecord | null {
   if (file.includes("screenshot") || file.includes("icon") || file.includes("wordmark") || file.includes("certificate") || file.includes("scholarship-2023")) return null;
   if (file.includes("blueprint") && !file.includes("archway")) return null;
   if (folder.includes("/crew-illustrations") || folder.includes("/backlocal-icons") || file.startsWith("certificate")) return null;
+  if (file.includes("aicd-virtual")) {
+    return {
+      src,
+      title: `${NAMES}, speaker at AICD Virtual`,
+      caption: `Speaker poster for AICD Virtual, AI Teammates at Work, online on November 10, 2026. ${NAMES}, ${FROM}, is listed as Founder of Bridger and Intro. His session is Lock It: Running a Small Company With a Team of AI Agents on a Small Budget.`,
+      place: "Online",
+    };
+  }
 
   const place = /arch|vernal|uintah|highschool|high-school|chitty|music-man|magazine|basin/.test(folder + file)
     ? "Vernal, Utah"
@@ -51,6 +59,7 @@ export function photoRecord(src: string): PhotoRecord | null {
 export function pageForPhoto(src: string): string {
   const file = src.split("/").pop()?.toLowerCase() ?? "";
   const folder = src.toLowerCase();
+  if (file.includes("aicd-virtual")) return "/events/aicd-virtual";
   if (file.includes("begin-again")) return "/events/begin-again";
   if (file.includes("brant-s-johnson") || file.includes("brant-headshot")) return "/";
   if (file.includes("brant-about") || file.includes("rainbow")) return "/about";

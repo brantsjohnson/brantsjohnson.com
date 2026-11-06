@@ -1,10 +1,12 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// Magazine features that appear on the Articles page, under the
-// Features heading. Each one is a published piece, with the title,
-// the magazine, and the file a visitor opens to read it.
+// The Features list on the Articles page. A feature is a published
+// piece, or a talk Brant is giving. Each one has a title, a place it
+// appeared, and a link. Article words stay in search metadata.
 // This file only stores those words. The page decides how they look.
 // ============================================
+
+import { identity } from "@/content/site-content";
 
 export type Feature = {
   id: string;
@@ -14,11 +16,23 @@ export type Feature = {
   published: string; // YYYY-MM or YYYY-MM-DD, for search metadata only
   author: string;
   href: string;
-  // The article's own words. Search metadata uses this. The page does not print it.
+  // The article's own words, or a short note about a talk. Search metadata uses this. The page does not print it.
   body: string;
+  kind?: "talk";
 };
 
 export const features: Feature[] = [
+  {
+    id: "aicd-virtual-2026",
+    kind: "talk",
+    title: "Lock It: Running a Small Company With a Team of AI Agents on a Small Budget",
+    publication: "AICD Virtual, AI Teammates at Work",
+    dateLabel: "November 10, 2026",
+    published: "2026-11-10",
+    author: "Brant S. Johnson",
+    href: "https://aicommunitydays.ai/events/aicd-virtual-01",
+    body: "Brant S. Johnson, also known as Brant Johnson and Brant Shanon Johnson, from Vernal, Utah, speaks online at AICD Virtual: AI Teammates at Work on November 10, 2026. The conference is run by AI Community Days on Microsoft Teams. His session, Lock It, is listed from 12:50 to 1:20 AM Paris time. The speaker poster names him Founder of Bridger and Intro.",
+  },
   {
     id: "uintah-resilience-arch",
     title: "Uintah Resilience Arch Placed At Uintah High School Campus Entrance",
@@ -61,9 +75,25 @@ export const features: Feature[] = [
   },
 ];
 
-// THIS SECTION DOES: the search record for one feature. The words live here
-// so a search engine can find the article. The page does not print them.
+// THIS SECTION DOES: the search record for one feature. A talk is an event.
+// A published piece is an article. The page does not print these words.
 export function featureJsonLd(feature: Feature) {
+  if (feature.kind === "talk") {
+    return {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      name: feature.title,
+      startDate: "2026-11-11T00:50:00+01:00",
+      endDate: "2026-11-11T01:20:00+01:00",
+      eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+      eventStatus: "https://schema.org/EventScheduled",
+      description: feature.body,
+      url: feature.href,
+      performer: { "@id": `${identity.siteUrl}/#brant` },
+      organizer: { "@type": "Organization", name: "AI Community Days" },
+      location: { "@type": "VirtualLocation", url: feature.href },
+    };
+  }
   return {
     "@context": "https://schema.org",
     "@type": "Article",
