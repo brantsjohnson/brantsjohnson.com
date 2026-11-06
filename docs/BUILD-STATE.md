@@ -1,10 +1,10 @@
 # BUILD-STATE
 
-Status: Crew app-design gallery is on a pull request branch from latest main (PR #17 merged). Real in-product Crew screens from `public/images/brant-uploads/crew-illustrations-in-product/` are copied into `crew-app-design/` and shown on `/work/crew`. Nine on-site Crew articles stay listed. Positioning is unchanged. Not merged. Not deployed to the production domain. Engineering VP is the merge gate. A pull request is not a launch. GitHub Actions is off, so the gates below were run locally.
+Status: Nine on-site Crew articles were replaced with Brant's 2026-11-06 final copy (titles, deks, and bodies verbatim). Addresses are kebab-case slugs from those titles, for example `/writing/designing-crews-metal-card`. Release dates stay. Crew page links that already pointed at those posts use the final titles and new addresses. Positioning is unchanged. Not merged. Not deployed to the production domain. Engineering VP is the merge gate. A pull request is not a launch. GitHub Actions is off, so the gates below were run locally.
 
 ## What this build is
 
-Public pages: Home, Work, About, Contact, Ask, Now, and the unlisted /hi page. Writing stays hidden until at least two real pieces exist. Old routes still redirect. Experience and Projects go to `/work`. Service goes to `/about#service`, which is the collaborations section. `/projects/bridger` goes to `/work#bridger`.
+Public pages: Home, Work, About, Contact, Ask, Now, Articles, and the unlisted /hi page. The nine Crew posts are listed on `/articles` and in Crew Read more. Old routes still redirect. Experience and Projects go to `/work`. Service goes to `/about#service`, which is the collaborations section. `/projects/bridger` goes to `/work#bridger`.
 
 Home leads with "Good things deserve to happen." Intro and Bridger sit together under that, each with a live screenshot. Three checked facts follow (Senate internship, Crew, Utah Business), then an inquiries line. Dollar figures are not shown. Bridger is a socialization app in a beta of about 25 people. Older user counts are not shown.
 
@@ -12,15 +12,15 @@ Home leads with "Good things deserve to happen." Intro and Bridger sit together 
 
 ## Checks
 
-Recorded on `cursor/crew-app-design-gallery-14e6` after branching from `origin/main` (includes merged PR #17). Exact commit for the run is the current branch head in the pull request. A pull request is not a launch.
+Recorded on `cursor/crew-articles-final-7a6f` after branching from `origin/main` (includes merged PR #18). Exact commit for the run is the current branch head in the pull request. A pull request is not a launch.
 
-- `npm ci` then `npm test` passed (42 tests), including Crew section bullets, app-design gallery photos under `crew-app-design/`, the drawings link to `/work/crew-brand`, modeled-research list, and the nine listed Crew articles.
+- `npm test` passed (43 tests), including the nine listed Crew articles at title-based slugs, Crew Read more, and Crew page links using those titles and addresses.
 - `npm run typecheck` passed.
 - `npm run lint` passed. Existing `ArticleShelf` `<img>` warnings only.
-- `npm run build` passed. `/work/crew` and `/work/crew-brand` are in the route list. Built `/work/crew` HTML includes `App design`, fourteen `crew-app-design` screens, and `See the drawings I made for Crew`.
+- `npm run build` passed. Nine `/writing/<slug>` routes use the title-based slugs. Built HTML on `/articles`, `/work/crew`, and `sitemap.xml` use the new addresses and do not mention the earlier draft slugs. Built article pages show the dek under the title, `$` as a plain dollar, `<em>` italics for book titles, and no `ARTICLE 0X OF 09` numbering.
 - `python3 tools/ci/no-stubs` passed.
 - `node tools/ci/no-stubs.mjs` failed on pre-existing `content/about-me.md` lines that mention Marriott School and "business strategy" as corrections, not as public page copy. Same matches exist on `origin/main`. Not changed in this PR.
-- Local `next start` preview: `/work/crew`, `/work`, and `/work/crew-brand` returned HTTP 200. Playwright loaded all 14 gallery images, hover caption `SIGN IN`, and the gold drawings button to `/work/crew-brand`. Phone width 390px still showed the gallery and a 44px+ drawings link. No "coming soon" or empty slot.
+- Did not click through a browser in this environment.
 - Search engines are still blocked until `SITE_INDEXABLE=true`.
 
 ## Open work
@@ -31,4 +31,4 @@ The one-page résumé PDF (`public/resume.pdf`) is still pending; until it ships
 
 Crew app-design screenshots are now on `/work/crew` from files in `public/images/brant-uploads/crew-app-design/`. The source stills remain in `crew-illustrations-in-product/`.
 
-**PENDING BRANT:** Should vendor names, prices, volume figures, commercial terms, contract structures and operational metrics in the nine Crew article bodies be scrubbed before production, and if so which ones? The bodies are published as written for this preview. Do not silently rewrite them. This is a production-release review item, not permission to launch.
+Brant supplied final Crew article copy on 2026-11-06. Titles, deks, and bodies are published as written, including vendor names and figures. Do not silently rewrite them. A production merge is still not a launch.

@@ -45,7 +45,7 @@ The rows above are the starter-kit draft. These rows name what this repository a
 | `/contact` | Contact note | Always |
 | `/ask` | Full-page Ask conversation | Always. Linked from the header |
 | `/writing` and `/writing/[slug]` | On-site posts | Always. Listed posts also appear on `/articles` and Work Read more once `releaseDate` has arrived |
-| `content/posts/*.md` | Local articles | Nine Crew posts, 2026-10-28 through 2026-11-05, about `work/crew` |
+| `content/posts/*.md` | Local articles | Nine Crew posts, 2026-10-28 through 2026-11-05, about `work/crew`. Titles and bodies are Brant's 2026-11-06 final copy. File names are kebab-case slugs from those titles. |
 | `/hi` | Unlisted event follow-up | Not in the nav |
 | `/cv.pdf` | Public CV file | The footer Full CV link, plus Work, About, and /hi. Footer does not link a Google Doc. |
 | `POST /api/ask` | Ask about me answers | Short topic replies first, then the closest notes section. Instruction lines in the notes are not spoken. |

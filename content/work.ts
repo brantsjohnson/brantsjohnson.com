@@ -412,8 +412,8 @@ export const workDetails: Detail[] = [
         ],
         photos: [ph("general/crew-team-photo.webp", "The Crew team piled onto a yellow couch.", "The Crew team", { focus: { x: 0.5, y: 0.55 } })],
         links: [
-          go("What happens when you tap your card", "/writing/what-happens-when-you-tap-your-card", "link:crew_tap_article:work_crew"),
-          go("The bank integrations nobody mentions", "/writing/the-bank-integrations-nobody-mentions-in-a-startup-pitch", "link:crew_integrations_article:work_crew"),
+          go("Inside a Card Payment: Authorization to Settlement", "/writing/inside-a-card-payment-authorization-to-settlement", "link:crew_tap_article:work_crew"),
+          go("The Integration Work Behind a Banking App", "/writing/the-integration-work-behind-a-banking-app", "link:crew_integrations_article:work_crew"),
         ],
       },
       {
@@ -448,7 +448,7 @@ export const workDetails: Detail[] = [
           "A rigid case sized for six cards failed as soon as a household had seven people. Four cards of one color plus one of another also broke a fulfillment path that assumed one envelope per color. Those were design constraints, not customer metrics.",
         ],
         photos: [crew("packages-still.webp", "A Crew illustration of tumbling packages.", "Packages")],
-        links: [go("Why mailing a debit card can become a manufacturing problem", "/writing/why-mailing-a-debit-card-can-become-a-manufacturing-problem", "link:crew_mailer_article:work_crew")],
+        links: [go("The Manufacturing Economics of Card Mailers", "/writing/the-manufacturing-economics-of-card-mailers", "link:crew_mailer_article:work_crew")],
       },
       {
         id: "integrations",
@@ -462,7 +462,7 @@ export const workDetails: Detail[] = [
           "I mapped owner verification, PIN support, ATM fees, and disputes to the partners who could perform those jobs, rather than treating an integration as finished because a button existed.",
           "Those questions came back to a product decision: what the app could promise when a customer connected an existing bank or started a transfer.",
         ],
-        links: [go("The bank integrations nobody mentions", "/writing/the-bank-integrations-nobody-mentions-in-a-startup-pitch", "link:crew_integrations_article_section:work_crew")],
+        links: [go("The Integration Work Behind a Banking App", "/writing/the-integration-work-behind-a-banking-app", "link:crew_integrations_article_section:work_crew")],
       },
       {
         id: "commercial",
@@ -518,7 +518,7 @@ export const workDetails: Detail[] = [
         ],
         links: [
           go("See the drawings I made for Crew", "/work/crew-brand", "link:crew_brand_close:work_crew"),
-          go("What happens when you tap your card", "/writing/what-happens-when-you-tap-your-card", "link:crew_tap_close:work_crew"),
+          go("Inside a Card Payment: Authorization to Settlement", "/writing/inside-a-card-payment-authorization-to-settlement", "link:crew_tap_close:work_crew"),
         ],
       },
     ],
