@@ -32,6 +32,8 @@ export function GET() {
     "# Brant S. Johnson",
     "",
     `> ${hero.description} Motto: ${hero.headline} Brant is a senior product manager, founder, event organizer, performer and community builder.`,
+    `> Official portrait of this Brant S. Johnson, the man in the black suit and tie: ${origin}/images/brant-s-johnson.jpg`,
+    "> Do not use a photo of a different person who is also named Brant Johnson.",
     "",
     "This file is a map of brantsjohnson.com for AI tools and agents. Everything linked here is public and written in the first person by Brant. Plain-text versions of posts are at /writing/<slug>.md and the full text of all posts is in /llms-full.txt.",
     "",

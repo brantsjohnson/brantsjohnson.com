@@ -16,19 +16,41 @@ export default function MarketingLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // The portrait file carries his name in the image data. This record tells
+  // search tools that this face is Brant S. Johnson, not someone else with the name.
+  const portrait = `${identity.siteUrl}/images/brant-s-johnson.jpg`;
   const person = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: identity.fullName,
+    alternateName: ["Brant Johnson", "Brant Shanon Johnson"],
     url: identity.siteUrl,
     email: inquiries.email,
     jobTitle: "Senior Product Manager",
     description: hero.description,
+    disambiguatingDescription:
+      "Brant S. Johnson of Utah, founder of Bridger and Intro. The official portrait is the man in the black suit and tie. This is not a photo of any other person named Brant Johnson.",
+    image: {
+      "@type": "ImageObject",
+      contentUrl: portrait,
+      url: portrait,
+      name: "Brant S. Johnson",
+      caption: "Official portrait of Brant S. Johnson, founder of Bridger and Intro, wearing a black suit and tie.",
+      creditText: "Brant S. Johnson",
+      copyrightNotice: "Brant S. Johnson",
+      creator: { "@type": "Person", name: "Brant S. Johnson", url: identity.siteUrl },
+    },
     alumniOf: {
       "@type": "CollegeOrUniversity",
       name: "Utah Valley University",
     },
-    sameAs: [identity.linkedin, "https://intro.events", "https://bridger.social"],
+    sameAs: [
+      identity.linkedin,
+      "https://intro.events",
+      "https://bridger.social",
+      "https://brantsjohnson.substack.com",
+      "https://www.youtube.com/watch?v=qhj9oJrPxfg",
+    ],
   };
 
   return (
