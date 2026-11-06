@@ -26,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...eventDetails.map((item) => item.path),
     "/community",
     ...communityDetails.map((item) => item.path),
-    "/writing",
+    "/articles",
     "/writing/poetry",
     "/writing/archive",
     ...posts.map((post) => `/writing/${post.slug}`),

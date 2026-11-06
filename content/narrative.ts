@@ -27,7 +27,7 @@ export const storyNav: StoryNavItem[] = [
   { label: "Experience", href: "/work" },
   { label: "Events", href: "/events" },
   { label: "Leadership", href: "/community" },
-  { label: "Articles", href: "/writing" },
+  { label: "Articles", href: "/articles" },
 ];
 
 // THIS SECTION DOES: the opening of the home page. The large line is the headline and the page's one h1.

@@ -42,7 +42,7 @@ export default function PoemPage({ params }: PoemPageProps) {
     <>
       <div className="shell pt-10">
         <nav aria-label="Breadcrumb" className="label flex flex-wrap items-center gap-3 text-[0.66rem] text-text-secondary">
-          <Link href="/writing" className="text-ink transition-colors hover:text-accent-deep">
+          <Link href="/articles" className="text-ink transition-colors hover:text-accent-deep">
             Articles
           </Link>
           <span aria-hidden="true">/</span>

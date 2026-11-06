@@ -1,5 +1,7 @@
 # 06. Analytics & Tracking
 
+Click names on the live site are in `docs/SITE-UPDATE-GUIDE.md` (`data-track="type:name:place"`). Where tracking is set up, and what the dashboard shows, is in `docs/PUBLISHING.md`. Do not add a second event-name style from this older note.
+
 **Plain English purpose:** This doc defines what gets tracked, where the tracking code lives, and how new tracking gets added consistently instead of scattered ad hoc across pages.
 
 ---

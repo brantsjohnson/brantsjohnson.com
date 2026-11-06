@@ -1,9 +1,9 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// This is the Contact page, and it is the one place the email
-// address is printed. Email, LinkedIn, and Book time are real
-// buttons. The form is the way to send a note. The address comes
-// from the shared inquiries record so it stays one email.
+// This is the Contact page. Email Brant opens the visitor's mail app
+// with me@brantsjohnson.com already in the To line. LinkedIn and Book
+// time open their pages. The form sends a note to that same address.
+// The address comes from the shared inquiries record so it stays one email.
 // ============================================
 
 import type { Metadata } from "next";
@@ -30,7 +30,7 @@ export default function ContactPage() {
           <ul className="mt-5 flex flex-col gap-3">
             <li>
               <Button href={inquiries.href} track="link:inquiries:contact" className="w-full justify-start">
-                Email {inquiries.email}
+                Email Brant
               </Button>
             </li>
             <li>

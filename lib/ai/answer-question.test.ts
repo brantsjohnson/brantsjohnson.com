@@ -6,8 +6,14 @@
 // ============================================
 
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { test } from "node:test";
+import { composeAnswer } from "./closest-notes";
 import { PRESET_QUESTIONS, answerFromNotes } from "./answer-question";
+
+function notesBank(): string {
+  return `${readFileSync("content/about-brant.md", "utf8")}\n${readFileSync("content/about-me.md", "utf8")}`;
+}
 
 function sentences(answer: string): string[] {
   return answer.split(/[.!?]+/).map((part) => part.trim()).filter(Boolean);
@@ -59,6 +65,64 @@ test("the Romney answer says the work in the public notes", () => {
   assert.doesNotMatch(answer, /50 to 200|500 pages/);
 });
 
+test("a fun story comes from the notes instead of the missing-notes line", () => {
+  const answer = answerFromNotes("Tell me a fun story about brant");
+  assert.match(answer, /bees/i);
+  assert.match(answer, /petition/i);
+  assert.doesNotMatch(answer, /don't have that|\$|—/);
+  assert.ok(sentences(answer).length <= 3, answer);
+
+  const more = answerFromNotes("Tell me more", ["Tell me a fun story about brant"]);
+  assert.match(more, /sweater/i);
+  assert.doesNotMatch(more, /petition/i);
+
+  const archway = answerFromNotes("Tell me a fun story about the archway");
+  assert.match(archway, /Archway/i);
+  assert.doesNotMatch(archway, /bees/i);
+});
+
+test("tell me about brant is a story, not the missing-notes line", () => {
+  const notes = notesBank();
+  const about = composeAnswer(notes, "tell me about brant");
+  assert.match(about, /Brant S\. Johnson is a senior product manager/);
+  assert.match(about, /Good things deserve to happen/);
+  assert.ok(about.length > 400, about);
+  assert.doesNotMatch(about, /don't have that|\$/);
+
+  const archway = composeAnswer(notes, "what was it like building the archway");
+  assert.match(archway, /arch/i);
+  assert.doesNotMatch(archway, /Gemini|OpenAI/);
+
+  const building = composeAnswer(notes, "what is he building now");
+  assert.match(building, /Intro|Bridger/);
+  assert.doesNotMatch(building, /Gemini|OpenAI/);
+});
+
+test("any question uses the closest notes, and go deeper stays on that subject", () => {
+  const notes = notesBank();
+  const first = composeAnswer(notes, "Tell me a fun story about brant");
+  assert.match(first, /bees|sweater|petition|costume|science fair|sequins/i);
+  assert.doesNotMatch(first, /don't have that|\$/);
+
+  const deeper = composeAnswer(notes, "go deeper", [
+    { role: "user", text: "Tell me a fun story about brant" },
+    { role: "assistant", text: first },
+  ]);
+  assert.notEqual(deeper, first);
+  assert.doesNotMatch(deeper, /don't have that|\$/);
+
+  const teams = composeAnswer(notes, "How does he think about product teams?");
+  assert.match(teams, /product/i);
+  assert.doesNotMatch(teams, /don't have that|\$/);
+
+  const theater = composeAnswer(notes, "How is a product team like theater?");
+  assert.match(theater, /team|theater|theatre|product/i);
+  assert.doesNotMatch(theater, /don't have that|\$/);
+
+  const missing = composeAnswer(notes, "What is his favorite planet in another galaxy?");
+  assert.match(missing, /don't have that/);
+});
+
 test("public answers skip withheld topics and dollar figures", () => {
   const crewMore = answerFromNotes("Tell me more", ["What did Brant do at Crew?"]);
   assert.match(crewMore, /KYC/i);
@@ -71,5 +135,5 @@ test("public answers skip withheld topics and dollar figures", () => {
   assert.doesNotMatch(bridger, /25 people|1,778|\$|million/);
 
   const reach = answerFromNotes("Tell me more", ["How do I reach Brant?"]);
-  assert.match(reach, /calendar\.app\.google\/qj9tb56BYCdppJPk9/);
+  assert.match(reach, /calendar\.app\.google\/ENDtr2C17GdEqLSYA/);
 });

@@ -26,7 +26,6 @@ const wixToNextRedirects = [
   { old: "/services", next: "/community" },
   { old: "/career", next: "/work" },
   { old: "/cv", next: "/cv.pdf" },
-  { old: "/articles", next: "/writing" },
   { old: "/leadership", next: "/community" },
   { old: "/civic-engagement", next: "/community" },
   { old: "/blank-4", next: "/about" },
@@ -77,11 +76,15 @@ const nextConfig = {
   },
 
   async redirects() {
-    return wixToNextRedirects.map(({ old, next }) => ({
-      source: old,
-      destination: next,
-      statusCode: 301,
-    }));
+    return [
+      ...wixToNextRedirects.map(({ old, next }) => ({
+        source: old,
+        destination: next,
+        statusCode: 301,
+      })),
+      // The articles list used to live at /writing. Poem and post pages stay under /writing.
+      { source: "/writing", destination: "/articles", statusCode: 301 },
+    ];
   },
 
   webpack: (config) => {

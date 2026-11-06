@@ -104,14 +104,14 @@ test("public copy names the headline and Bridger, and does not link a missing rÃ
   );
   assert.deepEqual(
     storyNav.map((item) => item.href),
-    ["/", "/about", "/work", "/events", "/community", "/writing"]
+    ["/", "/about", "/work", "/events", "/community", "/articles"]
   );
   assert.match(joined, /https:\/\/bridger\.social/);
   assert.match(joined, /TestFlight/);
   assert.doesNotMatch(joined, /25 people/);
   assert.match(joined, /BYU Young Ambassadors/);
   assert.match(joined, /Utah Governor's Office and the state's economic development office/);
-  assert.match(joined, /https:\/\/calendar\.app\.google\/qj9tb56BYCdppJPk9/);
+  assert.match(joined, /https:\/\/calendar\.app\.google\/ENDtr2C17GdEqLSYA/);
   assert.match(joined, /\/cv\.pdf/);
   assert.equal(publicResume.href, null);
   assert.doesNotMatch(joined, /resume\.pdf/);

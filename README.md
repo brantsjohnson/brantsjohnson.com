@@ -4,12 +4,11 @@ Personal site for Brant S. Johnson.
 
 ## What this is right now
 
-The public site is a multi-page Next.js app:
+The public site is a multi-page Next.js app. How to change a page, an article, the chat, spacing, a header, a slug, or an analytics name is in `docs/SITE-UPDATE-GUIDE.md`.
 
-- Home, About, Experience, Projects, Service & Leadership, Writing, Contact, and `/hi`
-- Ask about me on every page, answered from `content/about-brant.md`
-- Wix palette and serif headings in `styles/tokens.css`
-- Old Wix URLs redirect. Photography, poetry, civic, skills, and leadership stubs are gone.
+- Menu: Home, About, Experience, Events, Leadership, Articles. Contact is a page, not a menu item.
+- Addresses stay `/work` for Experience, `/community` for Leadership, and `/articles` for the article list.
+- Ask about me answers from `content/about-brant.md` and `content/about-me.md`. It does not use `data/brant-knowledge.json`.
 
 Unconfirmed claims are listed in `VERIFY.md`, not printed as fact. Open follow-ups are in `ops/DECISIONS-NEEDED.md`.
 
@@ -26,10 +25,8 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Docs
 
-Start with `docs/00-MASTER-README.md`. Before connecting Supabase, fill in the open questions in `docs/12-EXISTING-INFRA-MIGRATION.md`.
+Start with `docs/SITE-UPDATE-GUIDE.md` when you are changing the site. Publishing fields are in `docs/PUBLISHING.md`. Facts and voice are in `CLAUDE.md` and `docs/about-brant.md`.
 
-## Chat (BrantChat)
+## Chat
 
-The chat is wired into this site: a floating chat bubble on every marketing page, plus a `/chat` page (and `/chat/[company]` for employer-tailored links). It streams answers from `app/api/chatbot` and reuses BrantChat's own knowledge base and system prompt (the shared "brain") from `lib/ai`, grounded in `data/brant-knowledge.json`.
-
-The original BrantChat app stays in `BrantChat/` and remains live at `brantchat.brantsjohnson.com` as its own deployment; the root build ignores that folder. See `docs/15-CHAT-INTEGRATION.md` for how it is wired and the required environment variables.
+Ask about me is the public assistant. Its facts are `content/about-brant.md` and `content/about-me.md`. Listed articles are added on their own. How to update it is in `docs/SITE-UPDATE-GUIDE.md`.

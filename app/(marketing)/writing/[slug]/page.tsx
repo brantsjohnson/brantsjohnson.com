@@ -16,6 +16,7 @@ import { notFound } from "next/navigation";
 import { Markdown } from "@/components/editorial/Markdown";
 import { PageHeader } from "@/components/editorial/PageHeader";
 import { StoryLink } from "@/components/narrative/StoryLink";
+import { writingSources } from "@/content/writing/sources";
 import { availablePosts, getPost } from "@/lib/posts/load";
 import { postJsonLd } from "@/lib/posts/jsonld";
 import { postDate } from "@/lib/posts/model";
@@ -69,6 +70,7 @@ export default function WritingPostPage({ params }: PageProps) {
   if (!found) notFound();
   const { post, state } = found;
   const jsonLd = postJsonLd(post, state, siteOrigin());
+  const subscribeUrl = writingSources.find((source) => source.id === "articles")?.subscribeUrl;
 
   return (
     <article>
@@ -85,8 +87,16 @@ export default function WritingPostPage({ params }: PageProps) {
               </StoryLink>
             </p>
           ) : null}
+          {subscribeUrl ? (
+            <p className="mt-6 text-body text-text-secondary">
+              <StoryLink href={subscribeUrl} track={`link:subscribe:post_${post.slug}`}>
+                Subscribe on Substack
+              </StoryLink>{" "}
+              for the next piece.
+            </p>
+          ) : null}
           <p className="mt-10">
-            <Link href="/writing" data-track="link:writing_index:post" className="label inline-flex min-h-[44px] items-center gap-3 text-ink hover:text-accent-deep">
+            <Link href="/articles" data-track="link:articles_index:post" className="label inline-flex min-h-[44px] items-center gap-3 text-ink hover:text-accent-deep">
               <span aria-hidden="true">←</span> All articles
             </Link>
           </p>

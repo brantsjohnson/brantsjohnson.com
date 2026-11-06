@@ -1,0 +1,12 @@
+---
+description: How to update the public site without drifting headers, spacing, slugs, motion, chat notes, or analytics names
+alwaysApply: true
+---
+
+# Site updates
+
+Before you add an article, edit a page, change Ask about me, or name a click, follow `docs/SITE-UPDATE-GUIDE.md`.
+
+That guide wins over older notes when they disagree about the menu, the small page label, spacing, motion, mobile, URL slugs, articles, chat notes, or `data-track` names. Empty drafts (`DESIGN-SYSTEM.md`, `ANALYTICS-TAXONOMY.md`, `AI-SYSTEM.md`) do not override it.
+
+Do not restate the guide inside a second doc. If a change needs a new rule, add it to the guide and remove the conflicting sentence.

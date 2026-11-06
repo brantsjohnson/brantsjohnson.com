@@ -1,5 +1,7 @@
 # 15. Chat Integration (BrantChat)
 
+The public chat is Ask about me. Its facts are `content/about-brant.md` and `content/about-me.md`. How to update it is in `docs/SITE-UPDATE-GUIDE.md`. The notes below describe an older wiring. Do not follow them to add a floating chat, a `/chat` page, or edits to `data/brant-knowledge.json`.
+
 **Plain English purpose:** This explains how the chatbot is wired into the main site after integrating the old standalone `BrantChat` app, and lists the environment variables CoS needs to set in Vercel. It follows the architecture in `docs/01` and the security rules in `docs/11`.
 
 ---

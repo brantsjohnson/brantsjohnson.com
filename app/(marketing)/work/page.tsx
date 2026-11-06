@@ -1,7 +1,9 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// The Work page: quick previews of the work, grouped by kind. Each
-// item opens into a longer story. The full CV closes the page.
+// The Work page: quick previews of the work, grouped by kind. The
+// group name is the larger section header. Each job title under it
+// is a smaller heading, so the two levels do not read as the same
+// size. Each item opens into a longer story. The full CV closes the page.
 // ============================================
 
 import type { Metadata } from "next";
@@ -41,7 +43,7 @@ export default function WorkPage() {
               {group.items.map((item, index) => (
                 <Reveal as="li" key={item.org} delay={index * 0.04} className="py-8 first:pt-0">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-                    <h3 className="font-serif text-[1.9rem] leading-tight text-ink">{item.org}</h3>
+                    <h3 className="font-serif text-h3 text-ink">{item.org}</h3>
                     {item.dates ? <p className="label text-[0.66rem] text-text-secondary">{item.dates}</p> : null}
                   </div>
                   {item.role ? <p className="label mt-2 text-[0.68rem] text-accent-deep">{item.role}</p> : null}

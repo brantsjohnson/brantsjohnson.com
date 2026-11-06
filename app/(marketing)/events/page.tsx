@@ -1,9 +1,10 @@
 // ============================================
 // WHAT THIS FILE DOES (plain English):
-// The Events page: an archive of events grouped by kind. Each entry
-// has a small label, a short note and a link to its story. A small
-// photo sits beside entries that have one. New events are added in
-// content/events.ts without changing this page.
+// The Events page: an archive of events grouped by kind. The group
+// name is the section header (the larger serif). Each entry under it
+// is a smaller title, then a small label, a short note, and a link.
+// A small photo sits beside entries that have one. New events are
+// added in content/events.ts without changing this page.
 // ============================================
 
 import type { Metadata } from "next";
@@ -43,7 +44,7 @@ export default function EventsPage() {
                 <Reveal as="li" key={item.href} delay={index * 0.05} className="grid gap-6 border-t border-border-subtle py-8 first:border-t-0 first:pt-0 sm:grid-cols-[1fr_11rem]">
                   <div>
                     <p className="label text-[0.66rem] text-accent-deep">{item.tag}</p>
-                    <h3 className="mt-2 font-serif text-[1.9rem] leading-tight text-ink">{item.title}</h3>
+                    <h3 className="mt-2 font-serif text-h3 text-ink">{item.title}</h3>
                     <p className="mt-3 max-w-reading text-body text-text-secondary">{item.summary}</p>
                     <OnwardLinks
                       className="mt-5"

@@ -3,22 +3,26 @@
 // This is the bar at the top of every public page. It shows Brant's
 // name and the menu: Home, About, Experience, Events, Leadership,
 // and Articles. On a narrow screen the menu opens
-// as a full-screen list of large links. Escape closes it. The bar is
-// quiet paper with a hairline, and a thin gold line fills as you scroll.
+// as a full-screen list of large links. Escape closes it. The list sits
+// beside the bar, not inside it: the bar's frosted blur would otherwise
+// trap that list inside the bar, so the links never cover the page.
+// The bar is quiet paper with a hairline, and a thin gold line fills as you scroll.
 // ============================================
 
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { clsx } from "clsx";
 import { identity, primaryNav } from "@/content/site-content";
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const headerRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [barHeight, setBarHeight] = useState(0);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 140, damping: 28, mass: 0.2 });
@@ -26,6 +30,18 @@ export function SiteHeader() {
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
+
+  // The open menu starts just under the bar. Measure the bar so the list
+  // never covers the Close button, and so it still fits if the bar height changes.
+  useEffect(() => {
+    const bar = headerRef.current;
+    if (!bar) return;
+    const measure = () => setBarHeight(bar.offsetHeight);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(bar);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -43,11 +59,14 @@ export function SiteHeader() {
   const isActive = (href?: string) => {
     if (!href) return false;
     if (href === "/") return pathname === "/";
+    // Poems and on-site posts still live under /writing. They belong to Articles.
+    if (href === "/articles") return pathname === "/articles" || pathname.startsWith("/writing");
     return pathname === href || pathname.startsWith(`${href}/`);
   };
 
   return (
-    <header className="sticky top-0 z-sticky border-b border-border-subtle bg-glass backdrop-blur-glass">
+    <>
+      <header ref={headerRef} className="sticky top-0 z-sticky border-b border-border-subtle bg-glass backdrop-blur-glass">
       <div className="shell flex items-center justify-between gap-6 py-4">
         <Link
           href="/"
@@ -101,12 +120,14 @@ export function SiteHeader() {
           style={{ scaleX }}
         />
       )}
+    </header>
 
       {menuOpen ? (
         <nav
           id="mobile-menu"
           aria-label="Primary mobile"
-          className="fixed inset-x-0 bottom-0 top-[4.4rem] z-sticky overflow-y-auto bg-bg md:hidden"
+          className="fixed inset-x-0 bottom-0 z-overlay overflow-y-auto overscroll-contain bg-bg md:hidden"
+          style={{ top: barHeight }}
         >
           <ul className="shell flex flex-col py-6">
             {primaryNav.map((item, index) => (
@@ -125,6 +146,6 @@ export function SiteHeader() {
           </ul>
         </nav>
       ) : null}
-    </header>
+    </>
   );
 }

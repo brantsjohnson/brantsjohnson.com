@@ -2,6 +2,8 @@
 
 **Plain English purpose:** This doc governs every word that appears on the public site. It exists so the amount of text stays minimal, nothing repeats itself, and the site reads like it was written once, carefully, by one person, rather than generated in bulk.
 
+The small gold label above a page title is specified in `docs/SITE-UPDATE-GUIDE.md`. It is the section name, and it stays when the title is a different phrase. Do not delete it as a repeated label.
+
 ---
 
 ## 1. The absolute rules

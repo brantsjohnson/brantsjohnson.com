@@ -57,7 +57,7 @@ export function GET() {
     "",
     "## Writing",
     "",
-    line(origin, "Writing", "/writing", "Articles and poetry."),
+    line(origin, "Articles", "/articles", "Articles and poetry."),
     line(origin, "Writing archive", "/writing/archive", "Every post on this site in one list, including posts not yet featured on the Writing page."),
     ...posts.map((post) =>
       line(origin, post.title, `/writing/${post.slug}`, `${post.summary}${stateOf(post) === "listed" ? ` (${postDate(post.releaseDate)})` : ""}`)

@@ -38,6 +38,7 @@ const fixedRoutes = [
   "/work/crew-brand",
   "/events",
   "/community",
+  "/articles",
   "/writing",
   "/writing/poetry",
   "/contact",

@@ -25,6 +25,7 @@ export type WritingItem = {
   dateLabel: string;
   source: WritingSource["id"];
   summary?: string;
+  image?: string; // a picture from the article, used on the Articles page
   internal?: boolean; // a post written on this site (opens here, not in a new tab)
 };
 
@@ -52,6 +53,21 @@ function tag(block: string, name: string): string {
   return match ? plain(match[1]) : "";
 }
 
+// THIS SECTION DOES: pull the article picture and the one-sentence description out of a feed item
+function feedImage(block: string): string | undefined {
+  const enclosure = block.match(/<enclosure\b[^>]*\burl="([^"]+)"/i);
+  if (enclosure) return decode(enclosure[1]);
+  const image = block.match(/<img\b[^>]*\bsrc="([^"]+)"/i);
+  return image ? decode(image[1]) : undefined;
+}
+
+function feedSummary(block: string): string | undefined {
+  const text = tag(block, "description").replace(/^TL:?DR\s*/i, "");
+  if (!text) return undefined;
+  const sentence = text.split(/(?<=[.!?])\s/)[0] ?? text;
+  return sentence.length > 220 ? `${sentence.slice(0, 217).trim()}...` : sentence;
+}
+
 function pathKey(href: string): string {
   try {
     return new URL(href).pathname.replace(/\/$/, "");
@@ -77,7 +93,16 @@ async function readFeed(source: WritingSource): Promise<WritingItem[]> {
       const published = new Date(tag(block, "pubDate"));
       if (!title || !url.startsWith("http") || Number.isNaN(published.getTime())) continue;
       const dateIso = published.toISOString().slice(0, 10);
-      items.push({ id: url, title, url, dateIso, dateLabel: articleDate(dateIso), source: source.id });
+      items.push({
+        id: url,
+        title,
+        url,
+        dateIso,
+        dateLabel: articleDate(dateIso),
+        source: source.id,
+        summary: feedSummary(block),
+        image: feedImage(block),
+      });
     }
     return items;
   } catch {
@@ -101,9 +126,22 @@ function fromArticle(article: Article): WritingItem {
 export async function getWritingGroups(): Promise<WritingGroup[]> {
   const groups: WritingGroup[] = [];
   for (const source of writingSources) {
-    const saved = articles.filter((article) => article.source === source.id).map(fromArticle);
+    const liveAll = await readFeed(source);
+    const liveByPath = new Map(liveAll.map((item) => [pathKey(item.url), item]));
+    // Saved details win, but a feed can still supply the picture and the one-sentence summary.
+    const saved = articles
+      .filter((article) => article.source === source.id)
+      .map((article) => {
+        const item = fromArticle(article);
+        const feed = liveByPath.get(pathKey(item.url));
+        return {
+          ...item,
+          summary: item.summary || feed?.summary,
+          image: item.image || feed?.image,
+        };
+      });
     const savedKeys = new Set(saved.map((item) => pathKey(item.url)));
-    const live = (await readFeed(source)).filter((item) => !savedKeys.has(pathKey(item.url)));
+    const live = liveAll.filter((item) => !savedKeys.has(pathKey(item.url)));
     // Posts written on this site join the main Articles list once their release day arrives.
     const written: WritingItem[] =
       source.id === "articles"

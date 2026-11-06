@@ -25,7 +25,7 @@ import { getClientIp, rateLimit } from "@/lib/utils/rate-limit";
 
 export const runtime = "nodejs";
 
-const DEFAULT_PATHS = ["/", "/writing", "/work", "/events"];
+const DEFAULT_PATHS = ["/", "/articles", "/writing", "/work", "/events"];
 
 function sameSecret(given: string, expected: string): boolean {
   const a = Buffer.from(given);

@@ -14,10 +14,8 @@
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { useEffect, useRef, useState } from "react";
-import { AskSuggestions } from "@/components/ask/AskSuggestions";
 import { MessageContent } from "@/components/chatbot/MessageContent";
 import { Button } from "@/components/ui/Button";
-import { PRESET_QUESTIONS } from "@/lib/ai/answer-question";
 
 function textOf(parts: { type: string; text?: string }[]): string {
   return parts
@@ -33,7 +31,6 @@ export function AskAssistant() {
   const [input, setInput] = useState("");
   const [fallbacks, setFallbacks] = useState<Record<string, string>>({});
   const endRef = useRef<HTMLLIElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
   const busy = status === "submitted" || status === "streaming";
 
   // When the model cannot answer, answer the last question from the public notes instead.
@@ -43,12 +40,22 @@ export function AskAssistant() {
     const last = users[users.length - 1];
     if (!last || fallbacks[last.id] !== undefined) return;
     const question = textOf(last.parts);
-    const earlier = users.slice(0, -1).map((message) => textOf(message.parts));
+    const thread: { role: "user" | "assistant"; text: string }[] = [];
+    for (const message of messages) {
+      if (message.id === last.id) break;
+      const text = textOf(message.parts);
+      if (message.role === "user") {
+        if (text) thread.push({ role: "user", text });
+        if (fallbacks[message.id]) thread.push({ role: "assistant", text: fallbacks[message.id] });
+      } else if (text) {
+        thread.push({ role: "assistant", text });
+      }
+    }
     setFallbacks((current) => ({ ...current, [last.id]: "" }));
     fetch("/api/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question, earlier }),
+      body: JSON.stringify({ question, thread }),
     })
       .then((response) => response.json() as Promise<{ answer?: string; error?: string }>)
       .then((body) =>
@@ -73,19 +80,13 @@ export function AskAssistant() {
     setInput("");
   };
 
-  // A suggestion only fills the box. The visitor presses Send.
-  const pick = (question: string) => {
-    setInput(question);
-    inputRef.current?.focus();
-  };
-
   return (
     <div className="shell pb-24">
       <div className="flex flex-col gap-8 rounded-[18px] border border-border-subtle bg-surface px-5 py-6 shadow-glass md:px-8 md:py-8">
       <ol className="flex min-h-[8rem] flex-col gap-5" aria-live="polite">
         {messages.length === 0 && (
           <li className="max-w-[40rem] text-body text-text-secondary">
-            Ask a question. Answers come from my public notes. If a fact is not there, it should say so.
+            Ask any question about Brant.
           </li>
         )}
         {messages.map((message, index) => {
@@ -127,8 +128,6 @@ export function AskAssistant() {
         <li ref={endRef} aria-hidden="true" />
       </ol>
 
-      <AskSuggestions questions={PRESET_QUESTIONS} disabled={busy} onPick={pick} />
-
       <form
         onSubmit={(event) => {
           event.preventDefault();
@@ -141,7 +140,6 @@ export function AskAssistant() {
         </label>
         <input
           id="ask-question"
-          ref={inputRef}
           value={input}
           onChange={(event) => setInput(event.target.value)}
           className="min-h-[52px] flex-1 rounded-[18px] border border-border-subtle bg-bg px-4 text-body text-ink outline-none"

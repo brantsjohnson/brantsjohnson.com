@@ -24,7 +24,7 @@ export async function GET(request: Request) {
     return Response.json({ error: "Not allowed." }, { status: 401 });
   }
   revalidateTag(WRITING_TAG);
-  const paths = ["/", "/writing", "/writing/archive", "/writing/feed.xml", "/llms.txt", "/llms-full.txt", "/sitemap.xml"];
+  const paths = ["/", "/articles", "/writing", "/writing/archive", "/writing/feed.xml", "/llms.txt", "/llms-full.txt", "/sitemap.xml"];
   for (const path of paths) revalidatePath(path);
   const database = await keepAlive(); // a tiny database read; reports if the database is down
   return Response.json({ ok: true, refreshed: paths, database });

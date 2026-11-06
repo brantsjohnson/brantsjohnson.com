@@ -58,7 +58,7 @@ export const identity = {
 
 // THIS SECTION DOES: the meeting link Brant sent. Pages that offer a conversation use it.
 export const booking = {
-  href: "https://calendar.app.google/qj9tb56BYCdppJPk9",
+  href: "https://calendar.app.google/ENDtr2C17GdEqLSYA",
   label: "Book time",
 };
 
@@ -107,7 +107,7 @@ export const primaryNav: NavItem[] = [
   { label: "Experience", kind: "route", href: "/work" },
   { label: "Events", kind: "route", href: "/events" },
   { label: "Leadership", kind: "route", href: "/community" },
-  { label: "Articles", kind: "route", href: "/writing" },
+  { label: "Articles", kind: "route", href: "/articles" },
 ];
 
 // THIS SECTION DOES: the home story lives in content/narrative.ts and is re-exported below.

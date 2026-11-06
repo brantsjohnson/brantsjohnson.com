@@ -42,7 +42,9 @@ body {
   color: var(--color-ink);
 }
 
-/* THIS SECTION DOES: give every heading the display serif so titles feel editorial */
+/* THIS SECTION DOES: give every heading the display serif so titles feel editorial.
+   Size comes from the type scale: a section header (h2) stays larger than
+   the entry title under it (h3). */
 h1,
 h2,
 h3 {
@@ -163,4 +165,42 @@ h3 {
 .has-caption:focus .caption {
   opacity: 1;
   transform: none;
+}
+
+/* THIS SECTION DOES: close the page on the headline ink, with paper type.
+   Gold labels stay the existing gold, which is light enough to read here.
+   A keyboard focus ring uses paper and gold so it does not disappear on the ink. */
+.footer-field {
+  background: var(--color-ink);
+  color: var(--color-bg);
+}
+
+.footer-field a:focus-visible {
+  outline-color: var(--color-bg);
+  box-shadow: 0 0 0 5px var(--color-accent);
+}
+
+/* THIS SECTION DOES: set the name wider than the screen. Christea draws
+   its capitals above the line, so the word is shifted down until the tops
+   sit inside the frame. The window keeps those tops and trims only the
+   lowest feet. There is no animation. */
+.footer-monument {
+  position: relative;
+  overflow: hidden;
+  margin-top: clamp(2.5rem, 5vw, 4.5rem);
+  font-size: clamp(4rem, 17.4vw, 22rem);
+  height: 1.08em;
+}
+
+.footer-monument p {
+  position: absolute;
+  left: 0.015em;
+  top: 0.26em;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  color: var(--color-bg);
 }

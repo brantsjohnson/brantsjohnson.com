@@ -85,4 +85,4 @@ Visitors can read more at brantsjohnson.com: /about (his story, parties, pre-col
 
 ## How to reach him
 
-Email: me@brantsjohnson.com, or the contact form on brantsjohnson.com/contact. A short networking page lives at brantsjohnson.com/hi. To book time: https://calendar.app.google/qj9tb56BYCdppJPk9
+Email: me@brantsjohnson.com, or the contact form on brantsjohnson.com/contact. A short networking page lives at brantsjohnson.com/hi. To book time: https://calendar.app.google/ENDtr2C17GdEqLSYA

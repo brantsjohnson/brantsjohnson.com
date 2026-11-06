@@ -3,7 +3,7 @@
 The site ships without these. Nothing below was invented. Items marked TODO are questions for Brant.
 
 1. **Intro CRM capture.** The /hi form and the contact form post to `INTRO_CRM_CAPTURE_URL` only when `INTRO_CRM_CAPTURE_SECRET` is also set. The secret is sent as the `x-intro-capture-secret` header. Until both are set, submit opens the visitor's email app with the note addressed to me@brantsjohnson.com. A preview submit cannot create a CRM person until that pair is set. TODO(brant): send the capture URL and a shared secret.
-2. **Calendar link.** Resolved. Book time uses https://calendar.app.google/qj9tb56BYCdppJPk9 on /hi, Contact, and the home close.
+2. **Calendar link.** Resolved. Book time uses https://calendar.app.google/ENDtr2C17GdEqLSYA on /hi, Contact, and the home close.
 3. **Photos still needed.** The old speaking, podium, archway, and scholarship photographs are off the site. Intro and Bridger use fresh crops of the live sites. Still missing: a photograph of the Birmingham volunteers. TODO(brant): send that photo if you want it on About. The circle logo is not used.
 4. **Crew drawings.** Not on the site. Do not invent them.
 5. **Substack URL.** Set `SUBSTACK_URL` to the publication root when the feed is real. Writing stays hidden until local posts and feed items together reach two. The signup is that publication's subscribe link, and it stays hidden while the variable is unset. TODO(brant): send the publication URL, or leave Writing off.

@@ -13,14 +13,16 @@ The numbered files in `docs/` (`00` through `15`, plus `HOSTING-AND-DATA.md` and
 
 ## Always-read (Tier 0)
 1. AGENTS.md, which binds every coding assistant.
-2. This INDEX, including the authority and task-specific reading map.
-3. Top of BUILD-STATE.md, which reports verified reality, not intended product state.
-4. Read THE-WHY on first orientation, when altering product behavior, or whenever intent is unclear.
+2. `SITE-UPDATE-GUIDE.md` before any page, article, chat, header, spacing, slug, motion, or analytics-name change. It wins over an empty scaffold and over an older note on those topics.
+3. This INDEX, including the authority and task-specific reading map.
+4. Top of BUILD-STATE.md, which reports verified reality, not intended product state.
+5. Read THE-WHY on first orientation, when altering product behavior, or whenever intent is unclear.
 Do not load every full spec on every session.
 
 ## Permanent document contracts
 | Topic and source of truth | File |
 |---|---|
+| Day-to-day site updates (headers, spacing, slugs, motion, articles, chat, click names) | SITE-UPDATE-GUIDE.md |
 | Founder purpose and values | THE-WHY.md |
 | Product scope, audience, non-goals | PRODUCT-VISION.md |
 | Evidence and assumptions | RESEARCH-AND-VALIDATION.md |

@@ -2,6 +2,8 @@
 
 This is Brant S. Johnson's personal site (Next.js on Vercel). Read this file and `docs/about-brant.md` (which includes fun facts, stories and voice from Brant's info about me doc) before you write or change anything. Use only the facts in those files and in `content/site-content.ts`. If a fact is not there, leave it out and ask Brant. Never invent dates, numbers, titles or quotes.
 
+Headers, spacing, motion, mobile, URL slugs, articles, the chat, and analytics names are in `docs/SITE-UPDATE-GUIDE.md`. Follow that file when it and this one could be read two ways. Do not restate those rules here.
+
 ## Content sources
 - `docs/sources/credentials.md` lists his credentials, with images in `docs/sources/certs/`.
 
@@ -9,12 +11,12 @@ This is Brant S. Johnson's personal site (Next.js on Vercel). Read this file and
 Senior product manager, creator, performer, entrepreneur and activist from Utah. Thesis: "I build technology as a bridge to real human connection." Motto: "Good things deserve to happen."
 
 ## Site structure
-- Six top-level menu items, always in this order: **About, Work, Events, Community, Writing, Contact**. Do not add a seventh.
+- The menu is **Home, About, Experience, Events, Leadership, Articles**, in that order. Contact is a page, reached from the home page and the footer, not from this menu. Do not add a menu item. The addresses stay `/work`, `/community`, and `/articles` even though the menu says Experience, Leadership, and Articles. The pair is listed in `docs/SITE-UPDATE-GUIDE.md`.
 - About: the personal introduction, how he got here, parties, and two deeper pages: `/about/pre-college` and `/about/handmade`. Hobbies do not get their own top-level page.
-- Work: quick previews grouped by kind of work, each opening a longer story at `/work/[slug]` (Intro, Bridger, Crew, Crew brand, BackLocal, A chatbot of me). Full CV at the bottom.
+- Experience (address `/work`): quick previews grouped by kind of work, each opening a longer story at `/work/[slug]` (Intro, Bridger, Crew, Crew brand, BackLocal, A chatbot of me). Full CV at the bottom.
 - Events: an archive grouped by kind (`/events`), with one page per event at `/events/[slug]`. Add a new event as one entry in `content/events.ts`. Do not claim he produced an event alone or that he attended every event in a portfolio.
-- Community: the Archway and the Resilience Scholarship lead, with their own pages. Public service and student government sit beneath them.
-- Writing: simple dated lists of Articles and Poetry. One poem per page under `/writing/poetry`, line breaks kept exactly.
+- Leadership (address `/community`): the Archway and the Resilience Scholarship lead, with their own pages. Public service and student government sit beneath them.
+- Articles: the list is `/articles`. Poetry stays further down that page. One poem per page under `/writing/poetry`, line breaks kept exactly. A post written on this site is `/writing/<slug>`.
 - Posts written on this site live in `content/posts/*.md`. Each is unlisted (page works, in the sitemap, `llms.txt` and the archive, not listed on the site) until its `releaseDate`, then listed automatically. Never show crawlers different content than visitors. Details in `docs/PUBLISHING.md`, section 10.
 - Contact: email and a short form. Footer on every page: email, the menu, Full CV, Ask about me, LinkedIn, Substack. Keep the résumé link hidden until `public/resume.pdf` exists.
 - Home page: the headline "Good things deserve to happen." is the page's one h1, with the headshot, an index of the main places, and four places to start.
@@ -45,7 +47,8 @@ Senior product manager, creator, performer, entrepreneur and activist from Utah.
 - No secrets, API keys or tokens in the repo. The site needs none.
 
 ## How to work
-- Publishing guide for agents: `docs/PUBLISHING.md`. It says where each kind of content lives (articles, events, work stories, poems, CV, photos), the exact fields, how a new Substack article reaches the site, how share previews work, and the analytics and admin setup. Read it first.
+- How a page, article, chat note, header, slug, or analytics name should look: `docs/SITE-UPDATE-GUIDE.md`. Read it first.
+- Where each kind of content lives (articles, events, work stories, poems, CV, photos), the exact fields, share previews, and the analytics setup: `docs/PUBLISHING.md`.
 - Work on a branch and open a pull request. Do not push to `main`.
 - Before asking for review, run locally: `npm ci`, `npm test`, `npm run typecheck`, `npm run lint`, `npm run build`. GitHub Actions is turned off, so local checks are the gate.
 - Also check built pages for em dashes and the word "actually".
