@@ -273,7 +273,7 @@ function closestSentences(sections: Section[], question: string): string | null 
   section.sentences.forEach((sentence, index) => {
     const hay = sentence.toLowerCase();
     let score = 0;
-    for (const word of new Set(words)) {
+    for (const word of Array.from(new Set(words))) {
       if (!new RegExp(`\\b${word}\\b`).test(hay)) continue;
       const count = sectionText.toLowerCase().match(new RegExp(`\\b${word}\\b`, "g"))?.length ?? 1;
       score += 1 + 3 / count;
