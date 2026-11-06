@@ -23,7 +23,7 @@ Account Executive at Utah Business (Deseret News), Salt Lake City, October 2024 
 
 ## Crew Finance
 
-Senior Product Manager and first employee, December 2022 to April 2024, remote. He was the only product manager. He worked across customer discovery, card issuing, banking and compliance partners, onboarding experiments, and the parent-and-child product experience. He owned the Mastercard card issuing program, set up KYC with banking and compliance partners, and cut onboarding time in half. PCI and COPPA requirements were part of the program. He built the financial models for a raise. He drew the Crew brand on an iPad, including the 2024 wordmark, and led brand identity with the UX designer across the app, website, card, and packaging.
+Senior Product Manager and first employee, December 2022 to April 2024, remote. He was the only product manager. He helped build Crew's debit-card program from the ground up, coordinating issuing, processing, KYC, card lifecycle, fulfillment, and family onboarding. Crew's debit card was issued by Bangor Savings Bank on Mastercard. He owned the Mastercard card issuing program, set up KYC with banking and compliance partners, and cut onboarding time in half. PCI and COPPA requirements were part of the program. He ran manufacturing work for the physical cards and their packaging, and kept prototypes separate from what shipped. He built the financial models for a raise. At a startup he wore many hats. When outside designers could not land the brand, he taught himself to draw on an iPad and drew the Crew brand himself, including the 2024 wordmark. Crew still uses that wordmark. He worked with the UX designer to carry the identity across the app, website, card, and packaging.
 
 ## Office of Senator Mitt Romney
 

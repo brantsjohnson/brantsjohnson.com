@@ -9,3 +9,14 @@
 2026-11-06 On cursor/crew-experience-expansion-7de9. Expanded the Crew case study with technical product-management copy (discovery, card-program dependencies, onboarding, packaging, family illustration work). Published nine on-site Crew articles from the authorized attachments, one per day from 2026-10-28 through 2026-11-05, listed rather than hidden. Added the 2024-01-02 LinkedIn Crew post as an external Articles item. Intro Utah Business sentence now starts "Before starting Intro". Positioning line unchanged. Experience-copy still omits vendor names, supplier counts, and dollar figures; article bodies retain source names and figures. Open production question: whether those article-level details should be scrubbed before launch. Not merged. Not a production launch.
 
 2026-11-06 Same branch, follow-up fixes. Ask (POST /api/ask) now answers known topics in a few sentences from the matching section, with a ten-question acceptance test, and strips assistant instruction lines. Articles drops Substack's /p/coming-soon starter post. Footer keeps one CV link, /cv.pdf. Removed "Private draft, unapproved." from the ninth Crew article. Did not edit public/cv.pdf Bridger copy. Not merged. Not a production launch.
+
+2026-11-06 On cursor/crew-case-study-fuller-07ae, branched from main after PR #16 merged. Filled out `/work/crew` as an eight-section case study with sourced bullets: role, debit-card program, onboarding, manufacturing, integrations, commercial models, brand, and what the role demonstrates. Did not edit the nine Crew articles, their dates, or `public/cv.pdf`. App-design gallery stays off until Chief of Staff supplies real screenshots.
+
+How to add Crew app-design screenshots later:
+1. Save authenticated files under `public/images/brant-uploads/crew-app-design/` as WebP, sized to how they display.
+2. Add each file to `content/photo-sizes.ts`.
+3. On the Crew entry in `content/work.ts`, set `appDesignGallery` with a title such as `App design`, factual alt text, and `photos` built with `ph("crew-app-design/<file>.webp", "alt", "caption")`.
+4. Leave `appDesignGallery` unset, or keep `photos` empty, until those files exist. `hasGalleryPhotos()` hides the whole band. Do not add a reserved slot, dashed outline, or "coming soon" line.
+5. Confirm source and ownership with Chief of Staff before committing. Do not generate, download, or relabel an image as Brant's design.
+
+Omitted dollar figures from experience copy (present in the approved articles, left out of `/work/crew` because public copy bans `$`): article 01 researched card prices and run costs; article 04 `$1.44` / `$6.40` and deposit-tier proposals; article 05 historical `$4.85 per customer` estimate, labeled unverified in the article; article 09 hypothetical labor model. Processing research is written as "two and a half to four cents" so the public-copy `2.5` ban does not fire. Not a production launch.
