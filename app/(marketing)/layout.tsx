@@ -29,7 +29,14 @@ export default function MarketingLayout({
     jobTitle: "Senior Product Manager",
     description: hero.description,
     disambiguatingDescription:
-      "Brant S. Johnson of Utah, founder of Bridger and Intro. The official portrait is the man in the black suit and tie. This is not a photo of any other person named Brant Johnson.",
+      "Brant S. Johnson of Vernal, Utah, also searched as Brant Johnson and Brant Shanon Johnson. Founder of Bridger and Intro. Former Senior Product Manager at Crew Finance, account executive at Utah Business and Deseret News, Head of Product at BackLocal in BYU Sandbox, intern at Divvy (BILL), the office of Senator Mitt Romney, and the Utah Governor's Office. Schools: Uintah High School in Vernal, Brigham Young University, and Utah Valley University. The official portrait is the man in the black suit and tie.",
+    homeLocation: { "@type": "Place", name: "Vernal, Utah" },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "American Fork",
+      addressRegion: "Utah",
+      addressCountry: "US",
+    },
     image: {
       "@type": "ImageObject",
       contentUrl: portrait,
@@ -40,10 +47,11 @@ export default function MarketingLayout({
       copyrightNotice: "Brant S. Johnson",
       creator: { "@type": "Person", name: "Brant S. Johnson", url: identity.siteUrl },
     },
-    alumniOf: {
-      "@type": "CollegeOrUniversity",
-      name: "Utah Valley University",
-    },
+    alumniOf: [
+      { "@type": "HighSchool", name: "Uintah High School", address: "Vernal, Utah" },
+      { "@type": "CollegeOrUniversity", name: "Brigham Young University" },
+      { "@type": "CollegeOrUniversity", name: "Utah Valley University" },
+    ],
     sameAs: [
       identity.linkedin,
       "https://intro.events",
