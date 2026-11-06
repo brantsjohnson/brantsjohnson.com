@@ -27,8 +27,8 @@ export type Detail = {
   sections: Story[];
   gallery?: { title: string; intro?: string; photos: Photo[] };
   // App-design screenshots for a work story. Hidden until real photos exist.
-  // Do not put an empty object here. Crew stays without this field until
-  // Chief of Staff supplies authenticated files.
+  // Do not put an empty object here. Crew turns this on with files in
+  // public/images/brant-uploads/crew-app-design/.
   appDesignGallery?: { title: string; intro?: string; photos: Photo[] };
   links?: StoryLinkItem[];
   back: { href: string; label: string };

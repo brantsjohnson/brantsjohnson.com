@@ -146,6 +146,8 @@ function addStoryMedia(pages: Map<string, ImagePage>, path: string, story: Story
 function addDetail(pages: Map<string, ImagePage>, detail: Detail) {
   for (const section of detail.sections) addStoryMedia(pages, detail.path, section);
   for (const photo of detail.gallery?.photos ?? []) addImage(pages, detail.path, photo);
+  // App-design screens belong on the same story page once they are shown.
+  for (const photo of detail.appDesignGallery?.photos ?? []) addImage(pages, detail.path, photo);
 }
 
 function videoFromFile(video: Video): ListedVideo {

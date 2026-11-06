@@ -2,7 +2,7 @@
 // WHAT THIS FILE DOES (plain English):
 // Checks the Crew case study stays full, sourced, and gated: every
 // section has real bullets, required terms are present, the app-design
-// gallery stays hidden without photos, and the bullet list renders.
+// gallery uses real in-product screens, and the bullet list renders.
 // ============================================
 
 import assert from "node:assert/strict";
@@ -67,9 +67,32 @@ test("Crew page keeps the approved lead facts and sourced program language", () 
   assert.match(text, /Unit/);
   assert.match(text, /i2c/);
   assert.doesNotMatch(text, /coming soon/i);
-  assert.doesNotMatch(text, /App design/);
   assert.equal(crew?.gallery, undefined);
-  assert.equal(crew?.appDesignGallery, undefined);
+  assert.match(text, /See the drawings I made for Crew/);
+  assert.ok((crew?.links ?? []).some((link) => link.href === "/work/crew-brand"));
+});
+
+test("Crew app-design gallery uses real in-product screens and stays hidden without photos", () => {
+  const gallery = crew?.appDesignGallery;
+  assert.ok(gallery, "Crew app-design gallery should be on now that screenshots exist");
+  assert.equal(gallery?.title, "App design");
+  assert.match(gallery?.intro ?? "", /my own drawings for Crew/);
+  assert.match(gallery?.intro ?? "", /still used today/);
+  const photos = gallery?.photos ?? [];
+  assert.ok(photos.length >= 8, "gallery needs a set of real screens, not a single placeholder");
+  const files = new Set(photos.map((photo) => photo.src));
+  assert.equal(files.size, photos.length, "gallery screens should not repeat");
+  for (const photo of photos) {
+    assert.match(photo.src, /\/images\/brant-uploads\/crew-app-design\/img-\d+\.webp$/);
+    assert.ok((photo.alt?.length ?? 0) > 40, `thin alt: ${photo.alt}`);
+    assert.ok((photo.caption?.length ?? 0) > 0, `missing caption: ${photo.src}`);
+    assert.match(photo.alt, /drawn|drawing/i);
+    assert.doesNotMatch(photo.alt, /coming soon/i);
+    assert.equal(photo.fit, "contain");
+  }
+  assert.equal(hasGalleryPhotos(gallery), true);
+  assert.equal(hasGalleryPhotos(undefined), false);
+  assert.equal(hasGalleryPhotos({ photos: [] }), false);
 });
 
 test("Crew modeled figures stay in the small research list, not as vanity stats", () => {

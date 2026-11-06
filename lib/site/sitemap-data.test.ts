@@ -42,6 +42,7 @@ test("photographs are filed under the page that shows them", () => {
   const on = (path: string) => images.find((page) => page.path === path)?.images.map((image) => image.src) ?? [];
   assert.ok(on("/").includes("/images/brant-s-johnson.jpg"));
   assert.ok(on("/about").includes("/images/brant-about.webp"));
+  assert.ok(on("/work/crew").some((src) => src.includes("crew-app-design")));
   assert.ok(on("/community").includes("/images/brant-uploads/general/brant-alone-at-the-archway.webp"));
   assert.ok(on("/community/archway").some((src) => src.includes("arch")));
   assert.equal(on("/community/archway").some((src) => src.includes("scholarship-2023")), false);
