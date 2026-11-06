@@ -19,6 +19,19 @@ export default function MarketingLayout({
   // The portrait file carries his name in the image data. This record tells
   // search tools that this face is Brant S. Johnson, not someone else with the name.
   const portrait = `${identity.siteUrl}/images/brant-s-johnson.jpg`;
+  const archway = [
+    "/images/brant-uploads/general/brant-alone-at-the-archway.webp",
+    "/images/brant-uploads/general/brant-archway.webp",
+    "/images/brant-uploads/general/brant-arch-being-welded.webp",
+    "/images/brant-uploads/general/original-archway.webp",
+  ].map((path) => ({
+    "@type": "ImageObject",
+    contentUrl: `${identity.siteUrl}${path}`,
+    url: `${identity.siteUrl}${path}`,
+    name: "Brant S. Johnson and the Uintah Resilience Archway, Vernal, Utah",
+    caption: "Brant S. Johnson, also known as Brant Johnson and Brant Shanon Johnson, with the Uintah Resilience Archway in Vernal, Utah.",
+    creditText: "Brant S. Johnson",
+  }));
   const person = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -37,16 +50,19 @@ export default function MarketingLayout({
       addressRegion: "Utah",
       addressCountry: "US",
     },
-    image: {
-      "@type": "ImageObject",
-      contentUrl: portrait,
-      url: portrait,
-      name: "Brant S. Johnson",
-      caption: "Official portrait of Brant S. Johnson, founder of Bridger and Intro, wearing a black suit and tie.",
-      creditText: "Brant S. Johnson",
-      copyrightNotice: "Brant S. Johnson",
-      creator: { "@type": "Person", name: "Brant S. Johnson", url: identity.siteUrl },
-    },
+    image: [
+      {
+        "@type": "ImageObject",
+        contentUrl: portrait,
+        url: portrait,
+        name: "Brant S. Johnson",
+        caption: "Official portrait of Brant S. Johnson, founder of Bridger and Intro, wearing a black suit and tie.",
+        creditText: "Brant S. Johnson",
+        copyrightNotice: "Brant S. Johnson",
+        creator: { "@type": "Person", name: "Brant S. Johnson", url: identity.siteUrl },
+      },
+      ...archway,
+    ],
     alumniOf: [
       { "@type": "HighSchool", name: "Uintah High School", address: "Vernal, Utah" },
       { "@type": "CollegeOrUniversity", name: "Brigham Young University" },
