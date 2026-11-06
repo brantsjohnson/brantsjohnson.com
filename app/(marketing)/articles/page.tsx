@@ -12,7 +12,7 @@ import { ArticleShelf } from "@/components/editorial/ArticleShelf";
 import { PageHeader } from "@/components/editorial/PageHeader";
 import { sectionCovers } from "@/content/covers";
 import { poems } from "@/content/poems";
-import { podcasts } from "@/content/podcasts";
+import { podcasts, youtubeEmbed } from "@/content/podcasts";
 import { articleDate } from "@/content/writing/articles";
 import { getWritingGroups } from "@/lib/writing/feeds";
 import { pageMetadata } from "@/lib/site/page-metadata";
@@ -67,21 +67,37 @@ export default async function ArticlesPage() {
             Podcasts
           </h2>
           <ul className="mt-8">
-            {podcasts.map((episode) => (
-              <li key={episode.id} className="border-t border-border-subtle py-6 first:border-t-0 first:pt-0">
-                <a
-                  href={episode.url}
-                  data-track={`link:${episode.id.replace(/-/g, "_")}:articles`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-serif text-[1.7rem] leading-tight text-ink underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:decoration-accent"
-                >
-                  {episode.title}
-                </a>
-                <p className="mt-1 text-caption text-text-secondary">{episode.show}</p>
-                <p className="label mt-2 text-[0.68rem] text-text-secondary">{articleDate(episode.date)}</p>
-              </li>
-            ))}
+            {podcasts.map((episode) => {
+              const embed = youtubeEmbed(episode.url);
+              return (
+                <li key={episode.id} className="border-t border-border-subtle py-6 first:border-t-0 first:pt-0">
+                  <a
+                    href={episode.url}
+                    data-track={`link:${episode.id.replace(/-/g, "_")}:articles`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-serif text-[1.7rem] leading-tight text-ink underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:decoration-accent"
+                  >
+                    {episode.title}
+                  </a>
+                  <p className="mt-1 text-caption text-text-secondary">{episode.show}</p>
+                  <p className="label mt-2 text-[0.68rem] text-text-secondary">{articleDate(episode.date)}</p>
+                  {embed ? (
+                    <div className="mt-6 aspect-video w-full max-w-reading overflow-hidden bg-bg-deep">
+                      <iframe
+                        src={embed}
+                        title={episode.title}
+                        className="h-full w-full"
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                        referrerPolicy="strict-origin-when-cross-origin"
+                      />
+                    </div>
+                  ) : null}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>

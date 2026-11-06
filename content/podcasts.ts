@@ -23,3 +23,19 @@ export const podcasts: Podcast[] = [
     url: "https://www.youtube.com/watch?v=qhj9oJrPxfg&t=1594s",
   },
 ];
+
+// THIS SECTION DOES: turn a YouTube watch link into the address the page
+// uses to show the player. A start time in the link is kept.
+export function youtubeEmbed(url: string): string | null {
+  try {
+    const parsed = new URL(url);
+    const id = parsed.searchParams.get("v");
+    if (!id || !/^[a-zA-Z0-9_-]{11}$/.test(id)) return null;
+    const start = parsed.searchParams.get("t")?.replace(/s$/, "");
+    const embed = new URL(`https://www.youtube-nocookie.com/embed/${id}`);
+    if (start && /^\d+$/.test(start)) embed.searchParams.set("start", start);
+    return embed.toString();
+  } catch {
+    return null;
+  }
+}
