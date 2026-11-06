@@ -40,6 +40,19 @@ export const eventGroups: EventGroup[] = [
     title: "Conferences, summits, and business events",
     items: [
       {
+        title: "Begin Again",
+        tag: "Featured speaker",
+        summary: "I was a featured speaker at Begin Again in Salt Lake City, an evening with Utah tech leaders.",
+        href: "/events/begin-again",
+        linkText: "See Begin Again",
+        photo: ph(
+          "general/begin-again-speaking.webp",
+          "Brant speaking into a microphone on the Begin Again panel in Salt Lake City.",
+          "Begin Again",
+          { focus: { x: 0.58, y: 0.32 } }
+        ),
+      },
+      {
         title: "Utah Business events",
         tag: "Event production + sponsorships",
         summary:
@@ -153,6 +166,72 @@ const back = { href: "/events", label: "All events" };
 const L = "Events";
 
 export const eventDetails: Detail[] = [
+  {
+    slug: "begin-again",
+    path: "/events/begin-again",
+    title: "Begin Again",
+    metaTitle: "Begin Again",
+    description: "I was a featured speaker at Begin Again in Salt Lake City, an evening with Utah tech leaders.",
+    crumbs: crumbs("Begin Again"),
+    label: L,
+    lead: [
+      "I was a featured speaker at Begin Again in Salt Lake City. It was an evening of conversation with tech leaders, and I was glad to be one of the voices on the panel.",
+    ],
+    glance: [
+      { label: "Role", value: "Featured speaker" },
+      { label: "When", value: "June 1, 2026" },
+      { label: "Where", value: "Salt Lake City" },
+    ],
+    sections: [
+      {
+        id: "the-evening",
+        title: "The evening",
+        body: [
+          "The full name was Begin Again: An Evening of Networking and Inspiration with Tech Leaders. Silicon Slopes listed it. The AI Collective hosted it with Women Tech Council and ElizaChat, at HAVN.",
+          "The speaker card named me as CEO and Founder of Intro. I spoke from the podium and sat on the panel with a microphone.",
+        ],
+        photos: [
+          ph(
+            "general/begin-again-speaking.webp",
+            "Brant speaking into a microphone on the Begin Again panel in Salt Lake City.",
+            "On the panel",
+            { focus: { x: 0.58, y: 0.32 } }
+          ),
+          ph(
+            "general/begin-again-podium.webp",
+            "Brant at the podium during Begin Again in Salt Lake City.",
+            "At the podium",
+            { focus: { x: 0.68, y: 0.36 } }
+          ),
+          ph(
+            "general/begin-again-panel.webp",
+            "The Begin Again panel on stage in Salt Lake City, with Brant seated in a teal turtleneck.",
+            "The panel",
+            { focus: { x: 0.72, y: 0.4 } }
+          ),
+        ],
+      },
+    ],
+    gallery: {
+      title: "The speaker card",
+      photos: [
+        ph(
+          "general/begin-again-speaker-card.webp",
+          "The Begin Again speaker card naming Brant Johnson, CEO and Founder of Intro, as a featured speaker.",
+          "Featured speaker"
+        ),
+      ],
+    },
+    links: [
+      go(
+        "The Silicon Slopes listing",
+        "https://www.siliconslopes.com/c/events/begin-again-an-evening-of-networking-inspiration-with-tech-leaders",
+        "link:silicon_slopes:begin_again"
+      ),
+      go("All events", "/events", "link:events:begin_again"),
+    ],
+    back,
+  },
   {
     slug: "utah-business",
     path: "/events/utah-business",

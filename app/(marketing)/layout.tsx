@@ -35,6 +35,8 @@ export default function MarketingLayout({
   const person = {
     "@context": "https://schema.org",
     "@type": "Person",
+    // One record for him, and the homepage is the page that record belongs to.
+    "@id": `${identity.siteUrl}/#brant`,
     name: identity.fullName,
     alternateName: ["Brant Johnson", "Brant Shanon Johnson"],
     url: identity.siteUrl,

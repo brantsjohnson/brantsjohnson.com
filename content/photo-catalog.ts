@@ -51,6 +51,7 @@ export function photoRecord(src: string): PhotoRecord | null {
 export function pageForPhoto(src: string): string {
   const file = src.split("/").pop()?.toLowerCase() ?? "";
   const folder = src.toLowerCase();
+  if (file.includes("begin-again")) return "/events/begin-again";
   if (file.includes("brant-s-johnson") || file.includes("brant-headshot")) return "/";
   if (file.includes("brant-about") || file.includes("rainbow")) return "/about";
   if (file.includes("arch") || file.includes("blueprint")) return "/community/archway";
@@ -66,6 +67,10 @@ export function pageForPhoto(src: string): string {
 }
 
 function sceneFor(folder: string, file: string): string | null {
+  if (file.includes("begin-again-speaking")) return "Speaking into a microphone on the Begin Again panel in Salt Lake City, where he was a featured speaker.";
+  if (file.includes("begin-again-podium")) return "At the podium during Begin Again in Salt Lake City, where he was a featured speaker.";
+  if (file.includes("begin-again-panel")) return "On the Begin Again panel in Salt Lake City, where he was a featured speaker.";
+  if (file.includes("begin-again-speaker-card")) return "The Begin Again speaker card, naming him CEO and Founder of Intro.";
   if (file.includes("brant-s-johnson") || file.includes("brant-headshot")) return "Official portrait in a black suit and tie.";
   if (file.includes("brant-about") || file.includes("rainbow")) return "Standing on a road in Utah under a double rainbow.";
   if (folder.includes("chitty")) return "In Chitty Chitty Bang Bang at Uintah High School in Vernal, Utah.";

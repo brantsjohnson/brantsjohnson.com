@@ -11,10 +11,11 @@ import localFont from "next/font/local";
 import { Hanken_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
+import { hero } from "@/content/narrative";
 import { identity } from "@/content/site-content";
 
-const description =
-  "I'm Brant Johnson. I help people get their ideas built, put on events, and work on software that makes it easier for people to connect.";
+// The homepage sentence. Other pages replace it with their own description.
+const description = hero.description;
 
 // THIS SECTION DOES: point share images at the preview while a preview is open,
 // and at the public domain everywhere else.

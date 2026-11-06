@@ -12,10 +12,10 @@ import { aboutPhoto, ph, type Photo } from "@/content/photos";
 export const sectionCovers: Record<"about" | "work" | "events" | "community" | "writing", Photo> = {
   about: aboutPhoto,
   work: ph(
-    "general/pitching-to-vcs.webp",
-    "Brant presenting a BackLocal slide to a small room, pointing at a screen that reads Problem: local companies do not have a large online presence.",
+    "general/begin-again-speaking.webp",
+    "Brant speaking into a microphone on the Begin Again panel in Salt Lake City.",
     undefined,
-    { focus: { x: 0.49, y: 0.6 } }
+    { focus: { x: 0.58, y: 0.32 } }
   ),
   events: ph(
     "general/tedxsaltlakecity.webp",

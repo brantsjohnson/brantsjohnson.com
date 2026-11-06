@@ -29,7 +29,9 @@ const wixToNextRedirects = [
   { old: "/leadership", next: "/community" },
   { old: "/civic-engagement", next: "/community" },
   { old: "/blank-4", next: "/about" },
-  { old: "/about-1", next: "/about" },
+  // Google still shows this old Wix address. Send it home, so the result
+  // people see for Brant's name is the homepage.
+  { old: "/about-1", next: "/" },
   { old: "/skills", next: "/about" },
   { old: "/blog", next: "/writing" },
   { old: "/blog/:slug", next: "/writing/:slug" },
