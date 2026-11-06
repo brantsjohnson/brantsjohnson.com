@@ -2,8 +2,8 @@
 // WHAT THIS FILE DOES (plain English):
 // The Articles page. The newest piece is the large story
 // at the top. Older pieces are a full-width list under it.
-// Poetry stays further down. Subscribe lives on the article
-// the reader opens, not on this list.
+// Podcasts and poetry stay further down, each under its own
+// heading. Subscribe lives on the article the reader opens.
 // ============================================
 
 import type { Metadata } from "next";
@@ -12,12 +12,14 @@ import { ArticleShelf } from "@/components/editorial/ArticleShelf";
 import { PageHeader } from "@/components/editorial/PageHeader";
 import { sectionCovers } from "@/content/covers";
 import { poems } from "@/content/poems";
+import { podcasts } from "@/content/podcasts";
+import { articleDate } from "@/content/writing/articles";
 import { getWritingGroups } from "@/lib/writing/feeds";
 import { pageMetadata } from "@/lib/site/page-metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "Articles",
-  description: "Articles and poetry collected on Brant Johnson's website.",
+  description: "Articles, a podcast conversation, and poetry collected on Brant Johnson's website.",
   path: "/articles",
   image: { photo: sectionCovers.writing },
 });
@@ -38,6 +40,9 @@ export default async function ArticlesPage() {
           <a href="#articles" className="label inline-flex min-h-[44px] items-center text-ink hover:text-accent-deep">
             Articles
           </a>
+          <a href="#podcasts" className="label inline-flex min-h-[44px] items-center text-ink hover:text-accent-deep">
+            Podcasts
+          </a>
           <a href="#poetry" className="label inline-flex min-h-[44px] items-center text-ink hover:text-accent-deep">
             Poetry
           </a>
@@ -55,6 +60,31 @@ export default async function ArticlesPage() {
           internal: item.internal,
         }))}
       />
+
+      <section id="podcasts" aria-labelledby="podcasts-title" className="scroll-mt-24 border-t border-border-subtle py-14 md:py-20">
+        <div className="shell">
+          <h2 id="podcasts-title" className="font-serif text-h2 text-ink">
+            Podcasts
+          </h2>
+          <ul className="mt-8">
+            {podcasts.map((episode) => (
+              <li key={episode.id} className="border-t border-border-subtle py-6 first:border-t-0 first:pt-0">
+                <a
+                  href={episode.url}
+                  data-track={`link:${episode.id.replace(/-/g, "_")}:articles`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-serif text-[1.7rem] leading-tight text-ink underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:decoration-accent"
+                >
+                  {episode.title}
+                </a>
+                <p className="mt-1 text-caption text-text-secondary">{episode.show}</p>
+                <p className="label mt-2 text-[0.68rem] text-text-secondary">{articleDate(episode.date)}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       <section id="poetry" aria-labelledby="poetry-title" className="scroll-mt-24 border-t border-border-subtle py-14 md:py-20">
         <div className="shell">

@@ -79,9 +79,13 @@ TEDxSaltLakeCity: Organization Assistant, January to September 2021. He directed
 
 Student body president in elementary, middle, and high school in Vernal, Utah.
 
+## Podcast
+
+He was a guest on Quick Before You Forget. The episode is "Believe in Yourself: How to Overcome Self-Doubt and Find Purpose in Life with Brant Johnson," published May 11, 2026: https://www.youtube.com/watch?v=qhj9oJrPxfg&t=1594s
+
 ## Where things are on the site
 
-Visitors can read more at brantsjohnson.com: /about (a longer first-person story, plus the pre-college years and handmade things), /work (Intro, Bridger, Crew, the Crew brand, BackLocal, the chatbot), /events (event stories), /community (the archway, the scholarship, public service), /writing (articles and poetry), and /contact. When it helps, point to the matching page in one short phrase.
+Visitors can read more at brantsjohnson.com: /about (a longer first-person story, plus the pre-college years and handmade things), /work (Intro, Bridger, Crew, the Crew brand, BackLocal, the chatbot), /events (event stories), /community (the archway, the scholarship, public service), /articles (articles, the Quick Before You Forget podcast, and poetry), and /contact. When it helps, point to the matching page in one short phrase.
 
 ## How to reach him
 

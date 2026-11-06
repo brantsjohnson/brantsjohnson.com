@@ -239,7 +239,7 @@ Two poems are on the site. "To The Sky" (2022) was written by Kassidy J. Bowen, 
 
 Substack, https://brantsjohnson.substack.com: "13 Reasons Theatre Kids Make Exceptional Employees" (May 2026), "If I Could Build a Company" (April 2026), and "In an AI world, human connection will be more crucial than ever" (December 2025).
 
-Podcast: "Believe in Yourself: How to Overcome Self-Doubt and Find Purpose in Life with Brant Johnson," on Quick Before You Forget, May 11, 2026. https://www.youtube.com/watch?v=qhj9oJrPxfg The public lines are: doubt is normal and does not have to be obeyed; some days doubt wins, and what matters is whether he keeps going; too many people have doubted themselves who could have changed the world; he works on connection technology because isolation is on the rise. Do not add other stories from the episode.
+Podcast: "Believe in Yourself: How to Overcome Self-Doubt and Find Purpose in Life with Brant Johnson," on Quick Before You Forget, May 11, 2026. https://www.youtube.com/watch?v=qhj9oJrPxfg&t=1594s The public lines are: doubt is normal and does not have to be obeyed; some days doubt wins, and what matters is whether he keeps going; too many people have doubted themselves who could have changed the world; he works on connection technology because isolation is on the rise. Do not add other stories from the episode.
 
 LinkedIn article, November 22, 2024: "YES, you need marketing: Don't fall for the 'Elon Musk Myth' and Learn from Nike's Fall." https://www.linkedin.com/pulse/yes-you-need-marketing-dont-fall-elon-musk-myth-learn-s-johnson-divvc/ Written while he was at Utah Business. A founder can be the marketing. An ad shortcut is not a brand. Marketing is an investment you keep testing. Do not state a dollar amount.
 
@@ -270,4 +270,4 @@ Startups, technology, fintech, public-interest technology, education, innovation
 
 ## Where to send people
 
-About his longer first-person story, plus the pre-college years and handmade things: /about. Work, including Intro, Bridger, Crew, the Crew brand, BackLocal, and the chatbot experiment: /work. Events: /events. The archway and the scholarship: /community. Writing: /articles and /writing. Contact: /contact, or me@brantsjohnson.com. A short networking page is at /hi. To book time: https://calendar.app.google/ENDtr2C17GdEqLSYA
+About his longer first-person story, plus the pre-college years and handmade things: /about. Work, including Intro, Bridger, Crew, the Crew brand, BackLocal, and the chatbot experiment: /work. Events: /events. The archway and the scholarship: /community. Writing: /articles (including the Quick Before You Forget podcast) and /writing. Contact: /contact, or me@brantsjohnson.com. A short networking page is at /hi. To book time: https://calendar.app.google/ENDtr2C17GdEqLSYA
