@@ -9,6 +9,7 @@ import { test } from "node:test";
 import { aboutDetails, aboutGallery, aboutIntro, aboutStories } from "../../content/about";
 import { communityDetails, communityIntro, communityLeads, publicService, serviceGallery, studentGovernment } from "../../content/community";
 import { eventDetails, eventGroups, eventsIntro } from "../../content/events";
+import { homeIndex, homeStarts } from "../../content/home-media";
 import { contactBlock, hero, publishedWriting, storyNav } from "../../content/narrative";
 import { poems } from "../../content/poems";
 import { crewBrandMedia, crewBrandPage, workDetails, workGroups, workIntro } from "../../content/work";
@@ -64,6 +65,8 @@ const publicCopy = strings({
   about,
   booking,
   building,
+  homeIndex,
+  homeStarts,
   contactBlock,
   contactIntro,
   experience,

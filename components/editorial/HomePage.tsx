@@ -21,9 +21,9 @@ import { Figure } from "@/components/editorial/Figure";
 import { Reveal } from "@/components/editorial/Reveal";
 import { AskPanel } from "@/components/ask/AskPanel";
 import { Button } from "@/components/ui/Button";
+import { homeIndex, homeStarts } from "@/content/home-media";
 import { hero } from "@/content/narrative";
-import { sectionCovers } from "@/content/covers";
-import { crew, headshot, objectPositionFor, ph, type Photo } from "@/content/photos";
+import { headshot, objectPositionFor } from "@/content/photos";
 import { publicResume } from "@/content/site-content";
 
 const hashRoutes: Record<string, string> = {
@@ -40,96 +40,6 @@ const hashRoutes: Record<string, string> = {
   "#poetry": "/writing/poetry",
   "#writing": "/articles",
 };
-
-type IndexRow = { href: string; title: string; line: string; linkText: string; photo: Photo; track: string };
-
-const rows: IndexRow[] = [
-  {
-    href: "/about",
-    title: "About",
-    line: "The longer introduction, plus a few stories I'd have trouble fitting into a résumé.",
-    linkText: "Meet me",
-    photo: sectionCovers.about,
-    track: "link:index_about:home",
-  },
-  {
-    href: "/work",
-    title: "Experience",
-    line: "Products I've built, teams I've worked with, and what I learned doing it.",
-    linkText: "See the experience",
-    photo: sectionCovers.work,
-    track: "link:index_work:home",
-  },
-  {
-    href: "/events",
-    title: "Events",
-    line: "Conferences I've helped put on, community events, parties, and performances.",
-    linkText: "Explore events",
-    photo: sectionCovers.events,
-    track: "link:index_events:home",
-  },
-  {
-    href: "/community",
-    title: "Leadership",
-    line: "Service, the archway, the scholarship, and the other work I stayed with.",
-    linkText: "See leadership",
-    photo: sectionCovers.community,
-    track: "link:index_community:home",
-  },
-  {
-    href: "/articles",
-    title: "Articles",
-    line: "Articles and poetry. No elaborate introduction required.",
-    linkText: "Read the articles",
-    photo: sectionCovers.writing,
-    track: "link:index_writing:home",
-  },
-];
-
-type StartCard = { title: string; tag: string; line: string; href: string; linkText: string; photo: Photo; ratio: string; track: string };
-
-const starts: StartCard[] = [
-  {
-    title: "Bridger",
-    tag: "Social software",
-    line: "I'm building it to help people form friendships through the things they love and give third places better ways to bring people together.",
-    href: "/work/bridger",
-    linkText: "The Bridger story",
-    photo: { src: "/photos/bridger-live.webp", alt: "The live Bridger waitlist window.", width: 900, height: 989, position: "50% 0%" },
-    ratio: "4 / 5",
-    track: "link:start_bridger:home",
-  },
-  {
-    title: "Intro",
-    tag: "Events + AI",
-    line: "A tool I'm building for event organizers who want people to leave having met somebody useful, interesting, or worth seeing again.",
-    href: "/work/intro",
-    linkText: "How Intro started",
-    photo: { src: "/photos/intro-live.webp", alt: "The live Intro site, with the attendee experience on a phone.", width: 1200, height: 750, position: "30% 0%" },
-    ratio: "4 / 5",
-    track: "link:start_intro:home",
-  },
-  {
-    title: "Events I've helped put on",
-    tag: "Event work",
-    line: "Business conferences, community gatherings, and a few events that needed a lot of convincing before they happened.",
-    href: "/events",
-    linkText: "See the events",
-    photo: ph("general/brant-planning-conference-founder-friday.webp", "A group selfie at Founder Friday in front of a bright stage."),
-    ratio: "4 / 5",
-    track: "link:start_events:home",
-  },
-  {
-    title: "Crew",
-    tag: "Product + illustration",
-    line: "I helped build a banking product for families. I also ended up drawing a large part of its brand.",
-    href: "/work/crew",
-    linkText: "See Crew",
-    photo: crew("door-summer.webp", "A Crew illustration of a blue front door with a wreath and two shrubs."),
-    ratio: "4 / 5",
-    track: "link:start_crew:home",
-  },
-];
 
 export function HomePage() {
   const router = useRouter();
@@ -220,7 +130,7 @@ export function HomePage() {
           <div className="lg:col-span-7">
             <p className="label pt-10 text-text-secondary">Take a look around</p>
             <ul onMouseLeave={() => setActive(0)}>
-              {rows.map((row, index) => (
+              {homeIndex.map((row, index) => (
                 <li key={row.href} className="border-b border-border-subtle">
                   <Link
                     href={row.href}
@@ -252,7 +162,7 @@ export function HomePage() {
           <div aria-hidden="true" className="hidden lg:col-span-5 lg:block">
             <div className="sticky top-28 pt-10">
               <div className="relative aspect-[4/5] overflow-hidden bg-surface-2">
-                {rows.map((row, index) => (
+                {homeIndex.map((row, index) => (
                   <div
                     key={row.href}
                     className="absolute inset-0 transition-opacity duration-700 ease-brand"
@@ -288,7 +198,7 @@ export function HomePage() {
             A few places to start
           </h2>
           <ul className="mt-14 grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
-            {starts.map((item, index) => (
+            {homeStarts.map((item, index) => (
               <Reveal as="li" key={item.href} delay={index * 0.08} className={index % 2 === 1 ? "lg:mt-16" : undefined}>
                 <Link href={item.href} data-track={item.track} className="group block">
                   <Figure photo={item.photo} ratio={item.ratio} sizes="(min-width: 1024px) 22vw, 46vw" />

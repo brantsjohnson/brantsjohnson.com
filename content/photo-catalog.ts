@@ -23,7 +23,7 @@ export function photoRecord(src: string): PhotoRecord | null {
   const file = src.split("/").pop()?.toLowerCase() ?? "";
   const folder = src.toLowerCase();
   if (!file || file.endsWith(".svg")) return null;
-  if (file.includes("screenshot") || file.includes("icon") || file.includes("wordmark") || file.includes("scholarship-2023")) return null;
+  if (file.includes("screenshot") || file.includes("icon") || file.includes("wordmark") || file.includes("certificate") || file.includes("scholarship-2023")) return null;
   if (file.includes("blueprint") && !file.includes("archway")) return null;
   if (folder.includes("/crew-illustrations") || folder.includes("/backlocal-icons") || file.startsWith("certificate")) return null;
 
@@ -44,6 +44,25 @@ export function photoRecord(src: string): PhotoRecord | null {
     caption: `${lead} ${scene} Schools: Uintah High School in Vernal, Utah; Brigham Young University; Utah Valley University. Work includes Bridger, Intro, Crew Finance, Utah Business, Deseret News, BackLocal, BYU Sandbox, Divvy (BILL), the office of Senator Mitt Romney, and the Utah Governor's Office.`,
     place,
   };
+}
+
+// THIS SECTION DOES: the page a photo belongs on, so the search file
+// lists each picture under a real page instead of one catch-all address.
+export function pageForPhoto(src: string): string {
+  const file = src.split("/").pop()?.toLowerCase() ?? "";
+  const folder = src.toLowerCase();
+  if (file.includes("brant-s-johnson") || file.includes("brant-headshot")) return "/";
+  if (file.includes("brant-about") || file.includes("rainbow")) return "/about";
+  if (file.includes("arch") || file.includes("blueprint")) return "/community/archway";
+  if (file.includes("scholarship") || file.includes("resilience")) return "/community/scholarship";
+  if (folder.includes("chitty") || folder.includes("something-rotten") || folder.includes("elf") || file.includes("music-man") || file.includes("mermaid") || file.includes("ya-group") || file.includes("young-ambassador")) return "/events/theater";
+  if (folder.includes("tedx") || file.includes("tedx")) return "/events/tedx";
+  if (file.includes("utah-business") || file.includes("planning-conference") || file.includes("founder-friday") || file.includes("chamber") || file.includes("green-business") || file.includes("20s-in-their-20s") || file.includes("20-in-their-20s") || file.includes("women-to-watch") || file.includes("executive-excellence")) return "/events/utah-business";
+  if (file.includes("sandbox") || file.includes("backlocal") || file.includes("pitching")) return "/work/backlocal";
+  if (file.includes("crew")) return "/work/crew";
+  if (file.includes("romney") || file.includes("herbert") || file.includes("white-house") || file.includes("capitol") || file.includes("kamala") || file.includes("motorcade") || file.includes("fbla")) return "/community";
+  if (file.includes("magazine") || file.includes("cover") || file.includes("podcast")) return "/articles";
+  return "/about";
 }
 
 function sceneFor(folder: string, file: string): string | null {
